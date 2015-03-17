@@ -1,9 +1,5 @@
 package controllers;
 
-
-
-import java.util.Date;
-
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,81 +17,60 @@ import services.UserService;
 @RequestMapping("/register/user")
 public class UserController extends AbstractController  
 {
-// Supporting services ----------------------------------------------------
 
-		@Autowired
-		UserService userService;
+	@Autowired
+	UserService userService;
 
+	@RequestMapping("/register")
+	public ModelAndView register() 
+{
 
-// Register ----------------------------------------------------------
+	ModelAndView result;
 
-		@RequestMapping("/register")
-		public ModelAndView register() 
-		{
+	User user = userService.create();
 
-			ModelAndView result;
+	result = new ModelAndView("register/registerUser");
+	result.addObject("user", user);
 
-			User user = userService.create();
+return result;
+}
+	
+	@RequestMapping(value = "/register", method = RequestMethod.POST, params = "save")
+	public ModelAndView save(@Valid User user, BindingResult binding) 
+{
 
-			result = new ModelAndView("register/registerUser");
-			result.addObject("user", user);
+	ModelAndView result = new ModelAndView();
+	if (binding.hasErrors()) {
+		result = createEditModelAndView(user);
+		} else {		
+		userService.save(user);
+		result = new ModelAndView("redirect:/security/login.do");					
+}
+return result;
+}
+	@RequestMapping("/registerFailure")
+	public ModelAndView failure() 
+{
+	ModelAndView result;
 
-			return result;
-		}
+	result = new ModelAndView("redirect:register.do?showError=true");
 
-		// Save ---------------------------------------------------------------
+return result;
+}
+	protected ModelAndView createEditModelAndView(User user) 
+{
+	ModelAndView result;
+	result = createEditModelAndView(user, null);
+return result;
+}
+	protected ModelAndView createEditModelAndView(User user, String message) 
+{
 
-		@SuppressWarnings("deprecation")
-		@RequestMapping(value = "/register", method = RequestMethod.POST, params = "save")
-		public ModelAndView save(@Valid User user, BindingResult binding) 
-		{
+	ModelAndView result;
+	result = new ModelAndView("register/registerUser");
+	result.addObject("user", user);
+	result.addObject("message", message);
+return result;
+}
 
-			ModelAndView result = new ModelAndView();
-
-			if (binding.hasErrors()) {
-				result = createEditModelAndView(user);
-			} else {
-				
-					userService.save(user);
-					result = new ModelAndView("redirect:/security/login.do");					
-			}
-			
-			
-			return result;
-		}
-			
-		
-
-		// RegisterFailure -------------------------------------------------------
-
-		@RequestMapping("/registerFailure")
-		public ModelAndView failure() 
-		{
-			ModelAndView result;
-
-			result = new ModelAndView("redirect:register.do?showError=true");
-
-			return result;
-		}
-
-		// Ancillary methods ------------------------------------------------------
-
-		protected ModelAndView createEditModelAndView(User user) 
-		{
-			ModelAndView result;
-			result = createEditModelAndView(user, null);
-			return result;
-		}
-
-		protected ModelAndView createEditModelAndView(User user, String message) 
-		{
-
-			ModelAndView result;
-
-			result = new ModelAndView("register/registerUser");
-			result.addObject("user", user);
-			result.addObject("message", message);
-			return result;
-		}
-
-	}
+}
