@@ -35,8 +35,8 @@ public class UserController extends AbstractController
 return result;
 }
 	
-	@RequestMapping(value = "/register", method = RequestMethod.POST, params = "save")
-	public ModelAndView save(@Valid User user, BindingResult binding) 
+@RequestMapping(value = "/register", method = RequestMethod.POST, params = "save")
+public ModelAndView save(@Valid User user, BindingResult binding) 
 {
 
 	ModelAndView result = new ModelAndView();
