@@ -4,11 +4,10 @@ import java.util.Collection;
 import java.util.Date;
 
 import javax.persistence.Access;
-import javax.persistence.Entity;
 import javax.persistence.AccessType;
+import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -34,7 +33,7 @@ public class Match extends DomainEntity{
 	private String title;
 	private Date creationMoment;
 	private Date startMoment;
-	private Date finshMoment;
+	private Date finishMoment;
 	private String description;	
 	
 	@NotBlank
@@ -75,13 +74,13 @@ public class Match extends DomainEntity{
 	@NotNull
 	@Temporal(TemporalType.TIMESTAMP)
 	@DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")
-	public Date getFinshMoment() 
+	public Date getFinishMoment() 
 	{
-		return finshMoment;
+		return finishMoment;
 	}
-	public void setFinshMoment(Date finshMoment)
+	public void setFinishMoment(Date finishMoment)
 	{
-		this.finshMoment = finshMoment;
+		this.finishMoment = finishMoment;
 	}
 	
 	@NotBlank
@@ -125,7 +124,7 @@ public class Match extends DomainEntity{
 	
 	@Valid
 	@NotNull
-	@OneToOne(optional=false)
+	@ManyToOne(optional=false)
 	public Tournament getTournament() 
 	{
 		return tournament;

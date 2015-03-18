@@ -9,7 +9,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.Valid;
@@ -39,7 +39,7 @@ public class Tournament extends DomainEntity{
 	private Sport sport;
 	private String place;
 	private int numberOfTeams;
-	private Double price;
+	private Double prize;
 	
 	public boolean isAdvertised() 
 	{
@@ -74,7 +74,6 @@ public class Tournament extends DomainEntity{
 	}
 	
 	@NotNull
-	@Past
 	@Temporal(TemporalType.TIMESTAMP)
 	@DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")
 	public Date getStartMoment() 
@@ -86,8 +85,7 @@ public class Tournament extends DomainEntity{
 		this.startMoment = startMoment;
 	}
 	
-	@NotNull
-	@Past
+	@NotNull	
 	@Temporal(TemporalType.TIMESTAMP)
 	@DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")
 	public Date getFinishMoment()
@@ -139,31 +137,31 @@ public class Tournament extends DomainEntity{
 	}
 	
 	
-	public Double getPrice() 
+	public Double getPrize() 
 	{
-		return price;
+		return prize;
 	}
-	public void setPrice(Double price) 
+	public void setPrize(Double prize) 
 	{
-		this.price = price;
+		this.prize = prize;
 	}	
 		
 	//Relationships-------------------------------------------------------------------------
-	private Match match;
+	private Collection<Match> matches;
 	private User user;
 	private Customer customer;
 	private Collection<Team> teams;	
 
 	@Valid
 	@NotNull
-	@OneToOne(cascade=CascadeType.ALL, optional=false)
-	public Match getMatch() 
+	@OneToMany(cascade=CascadeType.ALL)
+	public Collection<Match> getMatches() 
 	{
-		return match;
+		return matches;
 	}
-	public void setMatch(Match match) 
+	public void setMatches(Collection<Match> matches) 
 	{
-		this.match = match;
+		this.matches = matches;
 	}
 	
 	@Valid

@@ -25,20 +25,20 @@ public class Friendship extends DomainEntity{
 	
 	
 	//Attributes-------------------------------------------------------------------------
-	private Date data;
+	private Date date;
 
 	@NotNull
 	@Past
 	@Temporal(TemporalType.TIMESTAMP)
 	@DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")
-	public Date getData() 
+	public Date getDate() 
 	{
-		return data;
+		return date;
 	}
 
-	public void setData(Date data) 
+	public void setDate(Date date) 
 	{
-		this.data = data;
+		this.date = date;
 	}	
 		
 	//Relationships-------------------------------------------------------------------------

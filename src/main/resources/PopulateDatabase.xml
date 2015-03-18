@@ -1,21 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<!-- 
- * PopulateDatabase.xml
- *
- * Copyright (C) 2014 Universidad de Sevilla
- * 
- * The use of this project is hereby constrained to the conditions of the 
- * TDG Licence, a copy of which you may download from 
- * http://www.tdg-seville.info/License.html
- -->
+<!-- * PopulateDatabase.xml * * Copyright (C) 2014 Universidad de Sevilla 
+	* * The use of this project is hereby constrained to the conditions of the 
+	* TDG Licence, a copy of which you may download from * http://www.tdg-seville.info/License.html -->
 
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 	">
-	
+
 	<!-- User accounts -->
 
 	<bean id="userAccount1" class="security.UserAccount">
@@ -31,8 +25,8 @@
 	</bean>
 
 	<bean id="userAccount2" class="security.UserAccount">
-		<property name="username" value="customer" />
-		<property name="password" value="91ec1f9324753048c0096d036a694f86" />
+		<property name="username" value="customer1" />
+		<property name="password" value="ffbc4675f864e0e9aab8bdf7a0437010" />
 		<property name="authorities">
 			<list>
 				<bean class="security.Authority">
@@ -43,20 +37,838 @@
 	</bean>
 
 	<bean id="userAccount3" class="security.UserAccount">
-		<property name="username" value="super" />
-		<property name="password" value="1b3231655cebb7a1f783eddf27d254ca" />
+		<property name="username" value="customer2" />
+		<property name="password" value="5ce4d191fd14ac85a1469fb8c29b7a7b" />
 		<property name="authorities">
 			<list>
-				<bean class="security.Authority">
-					<property name="authority" value="ADMIN" />
-				</bean>
 				<bean class="security.Authority">
 					<property name="authority" value="CUSTOMER" />
 				</bean>
 			</list>
 		</property>
 	</bean>
-	
-	<!-- Other domain beans come here -->	
-	
+
+	<bean id="userAccount4" class="security.UserAccount">
+		<property name="username" value="user1" />
+		<property name="password" value="24c9e15e52afc47c225b757e7bee1f9d" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="USER" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="userAccount5" class="security.UserAccount">
+		<property name="username" value="user2" />
+		<property name="password" value="7e58d63b60197ceb55a1c487989a3720" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="USER" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+
+	<!-- Other domain beans come here -->
+	<!-- ADMINISTRATOR -->
+
+	<bean id="admin" class="domain.Administrator">
+		<property name="userAccount" ref="userAccount1" />
+		<property name="name" value="Jorge" />
+		<property name="surname" value="Ramos Rivas" />
+		<property name="email" value="jorge@gmail.com" />
+		<property name="phone" value="698635987" />
+		<property name="folders">
+			<list>
+				<ref bean="folder1" />
+				<ref bean="folder2" />
+			</list>
+		</property>
+	</bean>
+
+	<!-- CUSTOMER -->
+
+	<bean id="customer1" class="domain.Customer">
+		<property name="userAccount" ref="userAccount2" />
+		<property name="name" value="Francisco" />
+		<property name="surname" value="Gonzalez Perez" />
+		<property name="email" value="fran@gmail.com" />
+		<property name="phone" value="668135842" />
+		<property name="cif" value="411885100" />
+		<property name="creditCard">
+			<bean class="domain.CreditCard">
+				<property name="holderName" value="Francisco Gonzalez" />
+				<property name="brandName" value="Mastercard" />
+				<property name="number" value="5347386217926470" />
+				<property name="expirationMonth" value="07" />
+				<property name="expirationYear" value="2015" />
+				<property name="cvv" value="308" />
+			</bean>
+		</property>
+		<property name="street" value="Calle paraguas 44" />
+		<property name="zip" value="41100" />
+		<property name="provinceCenter" value="Sevilla" />
+		<property name="city" value="Sevilla" />
+		<property name="nameCenter" value="IndorClub" />
+		<property name="phoneCenter" value="698451742" />
+		<property name="emailCenter" value="IndorClub@gmail.com" />
+		<property name="web" value="http:\\www.IndorClub.es" />
+		<property name="votes">
+			<list>
+			</list>
+		</property>
+		<property name="folders">
+			<list>
+				<ref bean="folder3" />
+				<ref bean="folder4" />
+			</list>
+		</property>
+
+		<property name="invoices">
+			<list>
+			</list>
+		</property>
+
+		<property name="events">
+			<list>
+				<ref bean="event1" />
+				<ref bean="event2" />
+			</list>
+		</property>
+
+		<property name="tournaments">
+			<list>
+			</list>
+		</property>
+
+	</bean>
+
+	<bean id="customer2" class="domain.Customer">
+		<property name="userAccount" ref="userAccount3" />
+		<property name="name" value="Pedro" />
+		<property name="surname" value="Hernandez Dominguez" />
+		<property name="email" value="Pedro@gmail.com" />
+		<property name="phone" value="698587412" />
+		<property name="cif" value="411800100" />
+		<property name="creditCard">
+			<bean class="domain.CreditCard">
+				<property name="holderName" value="Pedro Hernandez" />
+				<property name="brandName" value="Visa" />
+				<property name="number" value="5347386217926470" />
+				<property name="expirationMonth" value="12" />
+				<property name="expirationYear" value="2015" />
+				<property name="cvv" value="158" />
+			</bean>
+		</property>
+		<property name="street" value="Calle falsa 123" />
+		<property name="zip" value="41000" />
+		<property name="provinceCenter" value="Sevilla" />
+		<property name="city" value="Sevilla" />
+		<property name="nameCenter" value="SportsClub" />
+		<property name="phoneCenter" value="698417412" />
+		<property name="emailCenter" value="SportsClub@gmail.com" />
+		<property name="web" value="http:\\www.SportsClub.com" />
+		<property name="votes">
+			<list>
+			</list>
+		</property>
+		<property name="folders">
+			<list>
+				<ref bean="folder5" />
+				<ref bean="folder6" />
+			</list>
+		</property>
+
+		<property name="invoices">
+			<list>
+			</list>
+		</property>
+
+		<property name="events">
+			<list>
+				<ref bean="event3" />
+				<ref bean="event4" />
+				<ref bean="event5" />
+				<ref bean="event6" />
+				<ref bean="event7" />
+				<ref bean="event8" />
+			</list>
+		</property>
+
+		<property name="tournaments">
+			<list>
+			</list>
+		</property>
+	</bean>
+
+	<!-- USER -->
+
+	<bean id="user1" class="domain.User">
+		<property name="userAccount" ref="userAccount4" />
+		<property name="name" value="Monica" />
+		<property name="surname" value="Guzman Ramirez" />
+		<property name="email" value="monica@gmail.com" />
+		<property name="phone" value="698651477" />
+		<property name="folders">
+			<list>
+				<ref bean="folder7" />
+				<ref bean="folder8" />
+			</list>
+		</property>
+
+		<property name="teamsCreated">
+			<list>
+				<ref bean="team1" />
+			</list>
+		</property>
+
+		<property name="teams">
+			<list>
+			</list>
+		</property>
+
+		<property name="events">
+			<list>
+			</list>
+		</property>
+
+		<property name="eventsCreated">
+			<list>
+				<ref bean="event1" />
+				<ref bean="event2" />
+				<ref bean="event3" />
+				<ref bean="event5" />
+				<ref bean="event6" />
+				<ref bean="event7" />
+			</list>
+		</property>
+
+		<property name="tournaments">
+			<list>
+			</list>
+		</property>
+
+		<property name="shipsUser">
+			<list>
+			</list>
+		</property>
+
+		<property name="shipsUserFriend">
+			<list>
+			</list>
+		</property>
+
+		<property name="votes">
+			<list>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="user2" class="domain.User">
+		<property name="userAccount" ref="userAccount5" />
+		<property name="name" value="Maria" />
+		<property name="surname" value="Naranjo flores" />
+		<property name="email" value="maria@gmail.com" />
+		<property name="phone" value="698258963" />
+		<property name="folders">
+			<list>
+				<ref bean="folder9" />
+				<ref bean="folder10" />
+			</list>
+		</property>
+
+		<property name="teamsCreated">
+			<list>
+				<ref bean="team2" />
+			</list>
+		</property>
+
+		<property name="teams">
+			<list>
+			</list>
+		</property>
+
+		<property name="events">
+			<list>
+			</list>
+		</property>
+
+		<property name="eventsCreated">
+			<list>
+				<ref bean="event4" />
+				<ref bean="event8" />
+			</list>
+		</property>
+
+		<property name="tournaments">
+			<list>
+			</list>
+		</property>
+
+		<property name="shipsUser">
+			<list>
+			</list>
+		</property>
+
+		<property name="shipsUserFriend">
+			<list>
+			</list>
+		</property>
+
+		<property name="votes">
+			<list>
+			</list>
+		</property>
+	</bean>
+
+	<!-- FOLDER -->
+	<bean id="folder1" class="domain.Folder">
+		<property name="name" value="Inbox" />
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+		<property name="actor" ref="admin" />
+
+	</bean>
+
+	<bean id="folder2" class="domain.Folder">
+		<property name="name" value="Outbox" />
+		<property name="messages">
+			<list>
+				<ref bean="message1" />
+				<ref bean="message2" />
+				<ref bean="message3" />
+				<ref bean="message4" />
+				<ref bean="message7" />
+				<ref bean="message8" />
+			</list>
+		</property>
+		<property name="actor" ref="admin" />
+	</bean>
+
+	<bean id="folder3" class="domain.Folder">
+		<property name="name" value="Inbox" />
+		<property name="messages">
+			<list>
+
+			</list>
+		</property>
+		<property name="actor" ref="customer1" />
+	</bean>
+
+	<bean id="folder4" class="domain.Folder">
+		<property name="name" value="Outbox" />
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+		<property name="actor" ref="customer1" />
+
+	</bean>
+
+	<bean id="folder5" class="domain.Folder">
+		<property name="name" value="Inbox" />
+		<property name="messages">
+			<list>
+				<ref bean="message4" />
+			</list>
+		</property>
+		<property name="actor" ref="customer2" />
+	</bean>
+
+	<bean id="folder6" class="domain.Folder">
+		<property name="name" value="Outbox" />
+		<property name="messages">
+			<list>
+
+			</list>
+		</property>
+		<property name="actor" ref="customer2" />
+	</bean>
+
+	<bean id="folder7" class="domain.Folder">
+		<property name="name" value="Inbox" />
+		<property name="messages">
+			<list>
+
+			</list>
+		</property>
+		<property name="actor" ref="user1" />
+
+	</bean>
+
+	<bean id="folder8" class="domain.Folder">
+		<property name="name" value="Outbox" />
+		<property name="messages">
+			<list>
+
+			</list>
+		</property>
+		<property name="actor" ref="user1" />
+	</bean>
+
+	<bean id="folder9" class="domain.Folder">
+		<property name="name" value="Inbox" />
+		<property name="messages">
+			<list>
+				<ref bean="message6" />
+			</list>
+		</property>
+		<property name="actor" ref="user2" />
+	</bean>
+
+	<bean id="folder10" class="domain.Folder">
+		<property name="name" value="Outbox" />
+		<property name="messages">
+			<list>
+
+			</list>
+		</property>
+		<property name="actor" ref="user2" />
+
+	</bean>
+
+	<!-- MESSAGE -->
+	<bean id="message1" class="domain.Message">
+		<property name="sentMoment" value="10/10/2013 09:00" />
+		<property name="subject" value="Mensaje de prueba" />
+		<property name="message" value="Mensaje para probar el sistema de mensajería" />
+		<property name="sender" ref="admin" />
+		<property name="recipient" ref="user1" />
+		<property name="folder" ref="folder2" />
+	</bean>
+
+	<bean id="message2" class="domain.Message">
+		<property name="sentMoment" value="10/10/2013 9:00" />
+		<property name="subject" value="Mensaje de prueba" />
+		<property name="message" value="Mensaje para probar el sistema de mensajería" />
+		<property name="sender" ref="admin" />
+		<property name="recipient" ref="customer1" />
+		<property name="folder" ref="folder2" />
+	</bean>
+
+	<bean id="message3" class="domain.Message">
+		<property name="sentMoment" value="12/12/2014 09:00" />
+		<property name="subject" value="Mensaje de prueba" />
+		<property name="message" value="Mensaje para probar el sistema de mensajería" />
+		<property name="sender" ref="admin" />
+		<property name="recipient" ref="user2" />
+		<property name="folder" ref="folder2" />
+	</bean>
+
+	<bean id="message4" class="domain.Message">
+		<property name="sentMoment" value="12/12/2014 09:00" />
+		<property name="subject" value="Mensaje de prueba" />
+		<property name="message" value="Mensaje para probar el sistema de mensajería" />
+		<property name="sender" ref="admin" />
+		<property name="recipient" ref="customer1" />
+		<property name="folder" ref="folder2" />
+	</bean>
+
+	<bean id="message5" class="domain.Message">
+		<property name="sentMoment" value="10/10/2013 09:00" />
+		<property name="subject" value="Mensaje de prueba" />
+		<property name="message" value="Mensaje para probar el sistema de mensajería" />
+		<property name="sender" ref="customer1" />
+		<property name="recipient" ref="user1" />
+		<property name="folder" ref="folder4" />
+	</bean>
+
+	<bean id="message6" class="domain.Message">
+		<property name="sentMoment" value="10/10/2013 9:00" />
+		<property name="subject" value="Mensaje de prueba" />
+		<property name="message" value="Mensaje para probar el sistema de mensajería" />
+		<property name="sender" ref="user1" />
+		<property name="recipient" ref="user2" />
+		<property name="folder" ref="folder9" />
+	</bean>
+
+	<bean id="message7" class="domain.Message">
+		<property name="sentMoment" value="12/12/2014 09:00" />
+		<property name="subject" value="Mensaje de prueba" />
+		<property name="message" value="Mensaje para probar el sistema de mensajería" />
+		<property name="sender" ref="admin" />
+		<property name="recipient" ref="customer1" />
+		<property name="folder" ref="folder2" />
+	</bean>
+
+	<bean id="message8" class="domain.Message">
+		<property name="sentMoment" value="12/12/2014 09:00" />
+		<property name="subject" value="Mensaje de prueba" />
+		<property name="message" value="Mensaje para probar el sistema de mensajería" />
+		<property name="sender" ref="admin" />
+		<property name="recipient" ref="user1" />
+		<property name="folder" ref="folder2" />
+	</bean>
+
+	<!-- FRIENDSHIP -->
+	<bean id="friendship1" class="domain.Friendship">
+		<property name="date" value="10/10/2013 09:00" />
+		<property name="user" ref="user1" />
+		<property name="userFriend" ref="user2" />
+	</bean>
+
+	<!-- EVENT -->
+	<bean id="event1" class="domain.Event">
+		<property name="title" value="Padel en IndorClub" />
+		<property name="creationMoment" value="01/03/2015 09:00" />
+		<property name="startMoment" value="20/10/2015 09:00" />
+		<property name="finishMoment" value="20/10/2015 10:30" />
+		<property name="description" value="Partido de padel" />
+		<property name="numberMaxParticipant" value="4" />
+		<property name="sport" value="PADDLE" />
+		<property name="place" value="IndorClub" />
+		<property name="owner" ref="user1" />
+		<property name="customer" ref="customer1" />
+		<property name="users">
+			<list>
+
+			</list>
+		</property>
+	</bean>
+
+	<bean id="event2" class="domain.Event">
+		<property name="title" value="Tenis en IndorClub" />
+		<property name="creationMoment" value="02/03/2015 09:00" />
+		<property name="startMoment" value="20/03/2015 11:00" />
+		<property name="finishMoment" value="20/03/2015 13:00" />
+		<property name="description" value="Partido de tenis" />
+		<property name="numberMaxParticipant" value="2" />
+		<property name="sport" value="TENNIS" />
+		<property name="place" value="IndorClub" />
+		<property name="owner" ref="user1" />
+		<property name="customer" ref="customer1" />
+		<property name="users">
+			<list>
+
+			</list>
+		</property>
+	</bean>
+
+	<bean id="event3" class="domain.Event">
+		<property name="title" value="Futbol en IndorClub" />
+		<property name="creationMoment" value="03/03/2015 09:00" />
+		<property name="startMoment" value="24/07/2015 17:00" />
+		<property name="finishMoment" value="24/07/2015 19:30" />
+		<property name="description" value="Partido de futbol" />
+		<property name="numberMaxParticipant" value="30" />
+		<property name="sport" value="FOOTBALL" />
+		<property name="place" value="IndorClub" />
+		<property name="owner" ref="user1" />
+		<property name="customer" ref="customer2" />
+		<property name="users">
+			<list>
+
+			</list>
+		</property>
+	</bean>
+
+	<bean id="event4" class="domain.Event">
+		<property name="title" value="Padel en IndorClub" />
+		<property name="creationMoment" value="01/20/2014 09:00" />
+		<property name="startMoment" value="14/10/2015 11:00" />
+		<property name="finishMoment" value="14/10/2015 12:30" />
+		<property name="description" value="Partido de padel" />
+		<property name="numberMaxParticipant" value="4" />
+		<property name="sport" value="PADDLE" />
+		<property name="place" value="IndorClub" />
+		<property name="owner" ref="user2" />
+		<property name="customer" ref="customer2" />
+		<property name="users">
+			<list>
+
+			</list>
+		</property>
+	</bean>
+
+	<bean id="event5" class="domain.Event">
+		<property name="title" value="Carrera en SportClub" />
+		<property name="creationMoment" value="02/16/2013 09:00" />
+		<property name="startMoment" value="25/06/2015 16:00" />
+		<property name="finishMoment" value="25/06/2015 18:00" />
+		<property name="description" value="Carrera obstaculos" />
+		<property name="numberMaxParticipant" value="8" />
+		<property name="sport" value="RACE" />
+		<property name="place" value="SportClub" />
+		<property name="owner" ref="user1" />
+		<property name="customer" ref="customer2" />
+		<property name="users">
+			<list>
+
+			</list>
+		</property>
+	</bean>
+
+	<bean id="event6" class="domain.Event">
+		<property name="title" value="Futbol7 en IndorClub" />
+		<property name="creationMoment" value="01/03/2014 09:00" />
+		<property name="startMoment" value="20/11/2015 10:00" />
+		<property name="finishMoment" value="20/11/2015 11:30" />
+		<property name="description" value="Partido de futbol7" />
+		<property name="numberMaxParticipant" value="30" />
+		<property name="sport" value="FOOTBALL_7" />
+		<property name="place" value="IndorClub" />
+		<property name="owner" ref="user1" />
+		<property name="customer" ref="customer2" />
+		<property name="users">
+			<list>
+
+			</list>
+		</property>
+	</bean>
+
+	<bean id="event7" class="domain.Event">
+		<property name="title" value="Padel en IndorClub" />
+		<property name="creationMoment" value="01/03/2013 09:00" />
+		<property name="startMoment" value="20/10/2015 09:00" />
+		<property name="finishMoment" value="20/10/2015 10:30" />
+		<property name="description" value="Partido de padel" />
+		<property name="numberMaxParticipant" value="4" />
+		<property name="sport" value="PADDLE" />
+		<property name="place" value="IndorClub" />
+		<property name="owner" ref="user1" />
+		<property name="customer" ref="customer2" />
+		<property name="users">
+			<list>
+
+			</list>
+		</property>
+	</bean>
+
+	<bean id="event8" class="domain.Event">
+		<property name="title" value="Basketball en IndorClub" />
+		<property name="creationMoment" value="15/02/2014 09:00" />
+		<property name="startMoment" value="10/04/2015 20:00" />
+		<property name="finishMoment" value="10/04/2015 21:30" />
+		<property name="description" value="Partido de padel" />
+		<property name="numberMaxParticipant" value="16" />
+		<property name="sport" value="BASKETBALL" />
+		<property name="place" value="IndorClub" />
+		<property name="owner" ref="user2" />
+		<property name="customer" ref="customer2" />
+		<property name="users">
+			<list>
+
+			</list>
+		</property>
+	</bean>
+
+	<!-- TEAM -->
+	<bean id="team1" class="domain.Team">
+		<property name="name" value="Team user1" />
+		<property name="maxNumber" value="20" />
+		<property name="captain" ref="user1" />
+		<property name="users">
+			<list>
+			</list>
+		</property>
+		<property name="tournaments">
+			<list>
+
+			</list>
+		</property>
+		<property name="matchs">
+			<list>
+
+			</list>
+		</property>
+		<property name="winners">
+			<list>
+
+			</list>
+		</property>
+	</bean>
+
+	<bean id="team2" class="domain.Team">
+		<property name="name" value="Team user4" />
+		<property name="maxNumber" value="4" />
+		<property name="captain" ref="user2" />
+		<property name="users">
+			<list>
+			</list>
+		</property>
+		<property name="tournaments">
+			<list>
+
+			</list>
+		</property>
+		<property name="matchs">
+			<list>
+
+			</list>
+		</property>
+		<property name="winners">
+			<list>
+
+			</list>
+		</property>
+	</bean>
+
+	<!-- TOURNAMENT -->
+	<bean id="tournament1" class="domain.Tournament">
+		<property name="title" value="The amazing tournament1 " />
+		<property name="creationMoment" value="01/02/2014 09:00" />
+		<property name="startMoment" value="10/04/2014 20:00" />
+		<property name="finishMoment" value="12/14/2015 20:00" />
+		<property name="description" value="Torneo de padel" />
+		<property name="advertised" value="true" />
+		<property name="sport" value="PADDLE" />
+		<property name="numberOfTeams" value="8" />
+		<property name="prize" value="100" />
+		<property name="place" value="IndorClub" />
+		<property name="user" ref="user1" />
+		<property name="customer" ref="customer1" />
+		<property name="teams">
+			<list>
+			</list>
+		</property>
+		<property name="matches">
+			<list>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="tournament2" class="domain.Tournament">
+		<property name="title" value="The amazing tournament2 " />
+		<property name="creationMoment" value="01/02/2014 09:00" />
+		<property name="startMoment" value="04/04/2015 20:00" />
+		<property name="finishMoment" value="08/14/2016 20:00" />
+		<property name="description" value="Torneo de Tennis" />
+		<property name="advertised" value="true" />
+		<property name="sport" value="TENNIS" />
+		<property name="numberOfTeams" value="6" />
+		<property name="prize" value="50" />
+		<property name="place" value="IndorClub" />
+		<property name="user" ref="user2" />
+		<property name="customer" ref="customer1" />
+		<property name="teams">
+			<list>
+			</list>
+		</property>
+		<property name="matches">
+			<list>
+			</list>
+		</property>
+	</bean>
+
+	<!-- MATCH -->
+
+	<bean id="match1" class="domain.Match">
+		<property name="title" value="The incredible match1 " />
+		<property name="creationMoment" value="01/02/2014 09:00" />
+		<property name="startMoment" value="10/04/2014 20:00" />
+		<property name="finishMoment" value="10/04/2015 21:30" />
+		<property name="description" value="Partido de padel" />
+		<property name="winner" ref="team1" />
+		<property name="tournament" ref="tournament1" />
+		<property name="teams">
+			<list>
+				<ref bean="team1" />
+				<ref bean="team2" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="match2" class="domain.Match">
+		<property name="title" value="The incredible match2 " />
+		<property name="creationMoment" value="05/02/2014 09:00" />
+		<property name="startMoment" value="15/04/2014 16:00" />
+		<property name="finishMoment" value="15/04/2015 17:30" />
+		<property name="description" value="Partido de padel" />
+		<property name="winner" ref="team2" />
+		<property name="tournament" ref="tournament1" />
+		<property name="teams">
+			<list>
+				<ref bean="team1" />
+				<ref bean="team2" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="match3" class="domain.Match">
+		<property name="title" value="The incredible match3 " />
+		<property name="creationMoment" value="06/03/2014 09:00" />
+		<property name="startMoment" value="02/04/2014 18:00" />
+		<property name="finishMoment" value="02/04/2014 20:30" />
+		<property name="description" value="Partido de padel" />
+		<property name="winner" ref="team2" />
+		<property name="tournament" ref="tournament1" />
+		<property name="teams">
+			<list>
+				<ref bean="team1" />
+				<ref bean="team2" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="match4" class="domain.Match">
+		<property name="title" value="The incredible match4 " />
+		<property name="creationMoment" value="01/02/2014 09:00" />
+		<property name="startMoment" value="10/04/2014 10:00" />
+		<property name="finishMoment" value="10/04/2014 11:30" />
+		<property name="description" value="Partido de padel" />
+		<property name="winner" ref="team1" />
+		<property name="tournament" ref="tournament1" />
+		<property name="teams">
+			<list>
+				<ref bean="team1" />
+				<ref bean="team2" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="match5" class="domain.Match">
+		<property name="title" value="The incredible match5 " />
+		<property name="creationMoment" value="10/02/2014 09:00" />
+		<property name="startMoment" value="11/04/2014 22:00" />
+		<property name="finishMoment" value="11/04/2014 23:30" />
+		<property name="description" value="Partido de padel" />
+		<property name="winner" ref="team2" />
+		<property name="tournament" ref="tournament1" />
+		<property name="teams">
+			<list>
+				<ref bean="team1" />
+				<ref bean="team2" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="match6" class="domain.Match">
+		<property name="title" value="The incredible match6 " />
+		<property name="creationMoment" value="01/02/2014 09:00" />
+		<property name="startMoment" value="01/04/2014 20:00" />
+		<property name="finishMoment" value="01/04/2014 21:30" />
+		<property name="description" value="Partido de padel" />
+		<property name="winner" ref="team1" />
+		<property name="tournament" ref="tournament1" />
+		<property name="teams">
+			<list>
+				<ref bean="team1" />
+				<ref bean="team2" />
+			</list>
+		</property>
+	</bean>
+
+
+
+	<!-- INVOICE -->
+
+	<bean id="invoice1" class="domain.Invoice">
+		<property name="fee" value="15" />
+		<property name="datePay" value="01/02/2014 09:00" />
+		<property name="deadLine" value="04/04/2015 20:00" />
+		<property name="customer" ref="customer1" />
+	</bean>
+
+	<bean id="invoice2" class="domain.Invoice">
+		<property name="fee" value="15" />
+		<property name="deadLine" value="04/04/2016 16:00" />
+		<property name="customer" ref="customer2" />
+	</bean>
+
+
 </beans>
