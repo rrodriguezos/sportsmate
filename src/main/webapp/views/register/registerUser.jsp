@@ -7,7 +7,7 @@
 <%@taglib prefix="security"	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 
-<form:form action="register/supplier/register.do" modelAttribute="${user}Form">
+<form:form action="register/user/register.do" modelAttribute="${user}Form">
 
 	<fieldset>
 	
