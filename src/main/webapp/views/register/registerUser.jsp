@@ -19,12 +19,6 @@
 
 <form:form action="register/user/register.do" modelAttribute="user">
 
-
-		
-		
-
-	
-	
 		<legend>
 			<spring:message code="register.useraccount" />
 		</legend>

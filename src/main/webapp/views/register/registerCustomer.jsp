@@ -35,13 +35,7 @@
 			<form:password path="userAccount.password" />
 			<form:errors class="error" path="userAccount.password" />
 			<br />
-			
-			<form:label path="userAccount.password2">
-				<spring:message code="register.password2" />
-			</form:label>
-			<form:password path="userAccount.password2" />
-			<form:errors class="error" path="userAccount.password2" />
-			<br />
+		
 		
 	</fieldset>
 	<hr />
