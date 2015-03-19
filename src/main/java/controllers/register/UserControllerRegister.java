@@ -9,13 +9,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import controllers.AbstractController;
 import domain.User;
-
 import services.UserService;
 
 @Controller
 @RequestMapping("/register/user")
-public class UserController extends AbstractController  
+public class UserControllerRegister extends AbstractController  
 {
 
 	@Autowired

@@ -14,7 +14,7 @@ import domain.User;
 import services.UserService;
 
 @Controller
-@RequestMapping("/register/user")
+@RequestMapping("/user")
 public class UserController extends AbstractController  
 {
 
