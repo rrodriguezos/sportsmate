@@ -9,6 +9,12 @@
 
 <form:form action="register/user/register.do" modelAttribute="${user}Form">
 
+
+		<form:hidden path="id" />
+		<form:hidden path="version" />
+		<form:hidden path="userAccount.id" />
+		<form:hidden path="userAccount.authorities" />
+
 	<fieldset>
 	
 		<legend>
