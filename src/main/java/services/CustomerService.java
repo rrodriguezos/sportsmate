@@ -1,18 +1,24 @@
 
 package services;
 import java.util.Collection;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
 import repositories.CustomerRepository;
 import security.Authority;
+import security.LoginService;
 import security.UserAccount;
 import domain.Customer;
+import domain.Invoice;
 @Service
 @Transactional
 public class CustomerService {
-@Autowired
+	@Autowired
 	private CustomerRepository customerRepository;
+	@Autowired 
+	private LoginService loginService;
 public Collection<Customer>  findAll(){
 return customerRepository.findAll();
 }
@@ -33,5 +39,11 @@ public Customer create()
 	customer.setUserAccount(useraccount);
 
 return customer;
+}
+public Collection<Invoice> getAllInvoices() {
+	// TODO Auto-generated method stub
+	
+	int id=customerRepository.getIdFromUserAccount(loginService.getPrincipal().getId());
+	return customerRepository.getAllInvoices(id);
 }
 }

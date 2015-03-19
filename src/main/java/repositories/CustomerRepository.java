@@ -1,7 +1,17 @@
 package repositories;
+import java.util.Collection;
+
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
+
 import domain.Customer;
+import domain.Invoice;
 @Repository
 public interface CustomerRepository extends JpaRepository<Customer, Integer> {
+
+	@Query("select p.invoices from Customer p where p.id=?1")
+	Collection<Invoice> getAllInvoices(int id);
+	@Query("select p.id from Customer p where p.userAccount.id=?1")
+	int getIdFromUserAccount(int id);
 }
