@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import repositories.UserRepository;
 import security.Authority;
+import security.LoginService;
 import security.UserAccount;
 import domain.User;
 import forms.UserForm;
@@ -70,7 +71,22 @@ public 	User reconstruct(UserForm form)
     
     return result;
 }
-    
+
+	//Other business methods ------------------------------------------------
+	public User findByPrincipal()
+	{
+		
+		User user;
+		UserAccount userAccount;
+		int userAccountId;
+		
+		userAccount = LoginService.getPrincipal();
+		userAccountId= userAccount.getId();		
+		user = userRepository.findUserByUserAccountId(userAccountId);
+		
+		return user;
+		
+	}
 
 }
 

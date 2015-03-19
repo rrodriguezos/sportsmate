@@ -12,6 +12,10 @@ public interface CustomerRepository extends JpaRepository<Customer, Integer> {
 
 	@Query("select p.invoices from Customer p where p.id=?1")
 	Collection<Invoice> getAllInvoices(int id);
+	
 	@Query("select p.id from Customer p where p.userAccount.id=?1")
 	int getIdFromUserAccount(int id);
+	
+	@Query("select c from Customer c where c.userAccount.id =?1")
+	Customer findCustomerByUserAccountId(int userAccountId);
 }

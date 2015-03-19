@@ -12,6 +12,7 @@ import security.LoginService;
 import security.UserAccount;
 import domain.Customer;
 import domain.Invoice;
+import domain.User;
 @Service
 @Transactional
 public class CustomerService {
@@ -46,4 +47,20 @@ public Collection<Invoice> getAllInvoices() {
 	int id=customerRepository.getIdFromUserAccount(loginService.getPrincipal().getId());
 	return customerRepository.getAllInvoices(id);
 }
+
+	//Other business methods ------------------------------------------------
+	public Customer findByPrincipal()
+	{
+	
+		Customer customer;
+		UserAccount userAccount;
+		int userAccountId;
+	
+		userAccount = LoginService.getPrincipal();
+		userAccountId= userAccount.getId();		
+		customer = customerRepository.findCustomerByUserAccountId(userAccountId);
+	
+		return customer;
+	
+	}
 }

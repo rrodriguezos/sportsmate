@@ -34,7 +34,7 @@ public class Event extends DomainEntity{
 	private Date finishMoment;
 	private String description;
 	private int numberMaxParticipant;
-	private Sport sport;
+	private String sport;
 	private String place;
 	
 	@NotBlank
@@ -101,11 +101,11 @@ public class Event extends DomainEntity{
 	}
 	
 	@Valid
-	public Sport getSport() 
+	public String getSport() 
 	{
 		return sport;
 	}
-	public void setSport(Sport sport) 
+	public void setSport(String sport) 
 	{
 		this.sport = sport;
 	}
@@ -127,7 +127,7 @@ public class Event extends DomainEntity{
 
 	@Valid
 	@NotNull
-	@ManyToOne(optional=false)
+	@ManyToOne(optional=true)
 	public User getOwner() {
 		return owner;
 	}
@@ -150,7 +150,7 @@ public class Event extends DomainEntity{
 	
 	@Valid
 	@NotNull
-	@ManyToOne(optional=false)
+	@ManyToOne(optional=true)
 	public Customer getCustomer() 
 	{
 		return customer;
