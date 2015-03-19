@@ -11,6 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import controllers.AbstractController;
 import domain.User;
+import forms.UserForm;
 import services.UserService;
 
 @Controller
@@ -28,9 +29,10 @@ public class UserControllerRegister extends AbstractController
 	ModelAndView result;
 
 	User user = userService.create();
+	UserForm userForm=new UserForm();
 
 	result = new ModelAndView("register/registerUser");
-	result.addObject("user", user);
+	result.addObject("user", userForm);
 
 return result;
 }
