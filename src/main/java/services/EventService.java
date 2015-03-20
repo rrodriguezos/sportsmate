@@ -133,6 +133,21 @@ public class EventService {
 		return result;
 		
 	}
+	
+	public Collection<Event> findAllEventsByUserId()
+	{
+		
+		Collection<Event> all;
+		User user;
+		int userId;
+		
+		user = userService.findByPrincipal();
+		userId = user.getId();
+		all = eventRepository.findAllEventsByUserId(userId);
+		
+		return all;
+		
+	}
 }
 
 

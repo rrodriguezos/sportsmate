@@ -29,6 +29,7 @@
 		<value>/views/profile/messages</value>
 		<value>/views/conditions/messages</value>
 		<value>/views/register/messages</value>
+		<value>/views/event/messages</value>
 	</util:list>
 
 </beans>
