@@ -35,9 +35,8 @@
 		<security:authorize access="hasRole('CUSTOMER')">
 			<li><a class="fNiv"><spring:message	code="master.page.customer" /></a>
 				<ul>
-					<li class="arrow"></li>
-					<li><a href="customer/action-1.do"><spring:message code="master.page.customer.action.1" /></a></li>
-					<li><a href="customer/action-2.do"><spring:message code="master.page.customer.action.2" /></a></li>	
+					<li class="arrow"></li>					
+					<li><a href="event/customer/list.do"><spring:message code="master.page.customer.events" /></a></li>	
 					<li><a href="customer/seeInvoices.do"><spring:message code="master.page.customer.seeInvoices" /></a></li>				
 				</ul>
 			</li>

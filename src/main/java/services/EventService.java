@@ -148,6 +148,21 @@ public class EventService {
 		return all;
 		
 	}
+	
+	public Collection<Event> findAllEventsByCustomerId()
+	{
+		
+		Collection<Event> all;
+		Customer customer;
+		int customerId;
+		
+		customer = customerService.findByPrincipal();
+		customerId = customer.getId();
+		all = eventRepository.findAllEventsByCustomerId(customerId);
+		
+		return all;
+		
+	}
 }
 
 

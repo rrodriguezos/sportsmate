@@ -18,4 +18,7 @@ public interface EventRepository extends JpaRepository<Event, Integer> {
 	
 	@Query("select u.eventsCreated from User u where u.id=?1")
 	Collection<Event> findAllEventsByUserId(int userId);
+	
+	@Query("select c.events from Customer c where c.id=?1")
+	Collection<Event> findAllEventsByCustomerId(int customerId);
 }
