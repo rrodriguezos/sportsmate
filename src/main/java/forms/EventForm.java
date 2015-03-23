@@ -9,13 +9,26 @@ import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.format.annotation.DateTimeFormat;
 
 public class EventForm {
+	
+	private int id;
 	private String title;
 	private Date startMoment;
 	private Date finishMoment;
 	private String description;
 	private int numberMaxParticipant;
 	private String sport;
-	private String place;
+	private String place;	
+	
+	private String otherSport;	
+	
+	public int getId() 
+	{		
+		return id;		
+	}
+	public void setId(int id) 
+	{		
+		this.id = id;		
+	}
 	
 	@NotBlank
 	public String getTitle() 
@@ -87,6 +100,22 @@ public class EventForm {
 	public void setPlace(String place) 
 	{
 		this.place = place;
+	}
+	
+	public String getOtherSport() 
+	{
+		
+		return otherSport;
+		
+	}
+	public void setOtherSport(String otherSport) 
+	{
+		
+		this.otherSport = otherSport;
+		
 	}	
+	
+	
+	
 }
 

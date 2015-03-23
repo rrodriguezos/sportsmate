@@ -1,16 +1,20 @@
 package services;
+
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
-
 import repositories.EventRepository;
 import security.LoginService;
 import security.UserAccount;
+import domain.Actor;
 import domain.Customer;
 import domain.Event;
 import domain.User;
+import forms.EventForm;
 
 @Service
 @Transactional
@@ -27,7 +31,8 @@ public class EventService {
 	@Autowired
 	private CustomerService customerService;
 	
-	
+	@Autowired
+	private ActorService actorService;
 	
 	// Constructors-----------------------------------------------------------
 	public EventService()
@@ -61,14 +66,50 @@ public class EventService {
 		
 	}
 	
+	public Event create()
+	{
+		
+		Event event;
+		Actor actor;
+		User owner;
+		Customer customer;
+		Date creationMoment;
+		long miliseconds;
+		
+		event = new Event();
+		actor = actorService.findByPrincipal();
+		miliseconds = System.currentTimeMillis()-3;
+		creationMoment = new Date(miliseconds);
+		
+		if(actor instanceof User){
+			
+			owner = (User)actor;
+			
+			event.setOwner(owner);
+			
+		}else if(actor instanceof Customer){
+			
+			customer = (Customer)actor;
+			
+			event.setCustomer(customer);
+		}
+		
+		event.setCreationMoment(creationMoment);
+		
+		return event;
+		
+	}
+	
 	public void save(Event event)
 	{
 		
 		Assert.notNull(event);
+		Assert.isTrue(event.getStartMoment().compareTo(event.getFinishMoment()) < 0);
 		
 		eventRepository.save(event);
 		
 	}
+	
 	//Other business methods ------------------------------------------------
 	
 	public void checkPrincipalByUser(Event event){
@@ -97,6 +138,20 @@ public class EventService {
 		userAccountId2 = customer.getUserAccount().getId();
 		
 		Assert.isTrue(userAccountId1 == userAccountId2);
+		
+	}
+	
+	public void checkPrincipalByActor(Event event)
+	{
+		
+		Actor actor;
+		int actorId;
+		
+		actor = actorService.findByPrincipal();
+		actorId = actor.getId();
+		
+		Assert.isTrue(event.getOwner().getId() == actorId || 
+				      event.getCustomer().getId() == actorId);		
 		
 	}
 	
@@ -161,6 +216,63 @@ public class EventService {
 		all = eventRepository.findAllEventsByCustomerId(customerId);
 		
 		return all;
+		
+	}
+	
+	public Collection<String> sports(){
+		Collection<String> all;
+		
+		all = new ArrayList<String>();
+		
+		all.add("FOOTBALL"); all.add("TENNIS"); all.add("BASKETBALL"); all.add("FUTSAL");
+		all.add("RACE"); all.add("PADDLE"); all.add("FOOTBALL"); 
+		
+		return all;
+	}
+	
+	public EventForm construct(Event event)
+	{
+		
+		EventForm result;
+		
+		result = new EventForm();
+		
+		result.setId(event.getId());
+		result.setTitle(event.getTitle());
+		result.setStartMoment(event.getStartMoment());
+		result.setFinishMoment(event.getFinishMoment());
+		result.setDescription(event.getDescription());
+		result.setNumberMaxParticipant(event.getNumberMaxParticipant());
+		result.setSport(event.getSport());
+		result.setPlace(event.getPlace());
+		
+		return result;
+		
+	}
+	
+	public Event reconstructor(EventForm eventForm)
+	{
+		
+		Event event;
+		
+		if(eventForm.getId() != 0){
+			event = eventRepository.findOne(eventForm.getId());
+			
+			checkPrincipalByActor(event);
+		}else{
+			event = this.create();
+		}
+		
+		event.setId(eventForm.getId());
+		event.setStartMoment(eventForm.getStartMoment());
+		event.setFinishMoment(eventForm.getFinishMoment());
+		event.setTitle(eventForm.getTitle());
+		event.setDescription(eventForm.getDescription());
+		event.setNumberMaxParticipant(eventForm.getNumberMaxParticipant());
+		event.setSport(eventForm.getSport());
+		event.setPlace(eventForm.getPlace());	
+		
+		return event;
 		
 	}
 }

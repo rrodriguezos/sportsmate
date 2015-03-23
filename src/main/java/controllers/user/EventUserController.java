@@ -1,17 +1,16 @@
 package controllers.user;
 
 import java.util.Collection;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-
 import services.EventService;
 import controllers.AbstractController;
 import domain.Event;
+import forms.EventForm;
 
 @Controller
 @RequestMapping("/event/user")
@@ -67,6 +66,56 @@ public class EventUserController extends AbstractController{
 		return result;
 		
 	}
+	
+	// Creation-----------------------------------------------
+
+	@RequestMapping(value = "/create", method = RequestMethod.GET)
+	public ModelAndView create() 
+	{
+		
+		ModelAndView result;
+		Event event;
+		EventForm eventForm;
+
+		event = eventService.create();
+		eventForm = eventService.construct(event);
+
+		result = createEditModelAndView(eventForm);
+			
+		return result;
+		
+	}
+	
+	// Ancillary methods---------------------------------------
+
+	protected ModelAndView createEditModelAndView(EventForm eventForm) 
+	{
+		
+		ModelAndView result;
+		
+		result = createEditModelAndView(eventForm, null);
+		
+		return result;
+		
+	}
+
+	protected ModelAndView createEditModelAndView(EventForm eventForm, String message) 
+	{
+		
+		ModelAndView result;
+		Collection<String> sports;
+			
+		sports = eventService.sports();
+
+		result = new ModelAndView("event/edit");
+			
+		result.addObject("eventForm", eventForm);
+		result.addObject("sports", sports);
+		result.addObject("message", message);
+		
+
+		return result;
+	}		
 	
 }
 

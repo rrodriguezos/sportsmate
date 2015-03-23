@@ -23,50 +23,34 @@
 
 	<form:hidden path="id" />
 	
-	<security:authorize access="hasRole('INNKEEPER')">
-		<form:hidden path="status" />
-	</security:authorize>
+	<acme:textbox code="event.title" path="title"/>
+	<br/>
 	
-	<jstl:choose>
-		<jstl:when test="${requestForm.id == 0}">	
-			<acme:textbox code="request.title" path="title"/>		
-			<br />
-			
-			<acme:textarea code="request.description" path="description"/>
-			<br />					
-		</jstl:when>
-		<jstl:when test="${requestForm.id != 0}">	
-			<acme:textbox code="request.title" path="title" readonly="true"/>		
-			<br />
-			
-			<acme:textarea code="request.description" path="description" readonly="true"/>
-			<br />					
-		</jstl:when>
-	</jstl:choose>
+	<acme:textbox code="event.startMoment" path="startMoment"/>
+	<br/>
 	
-	<security:authorize access="hasRole('ADMIN')">
-		<form:label path="status"><spring:message code="request.status"/></form:label>
-		<form:select path="status" >			
-			<form:options items="${allStatus}" />
+	<acme:textbox code="event.finishMoment" path="finishMoment"/>
+	<br/>
+	
+	<acme:textarea code="event.description" path="description"/>
+	<br/>
+	
+	<acme:textbox code="event.numberMaxParticipant" path="numberMaxParticipant"/>
+	<br/>
+	
+	<form:label path="sport"><spring:message code="event.sport"/></form:label>
+		<form:select path="sport" >
+			<form:option label="------" value="0"/>
+			<form:options items="${sports}" itemLabel="name" itemValue="id"/>
 		</form:select>
-		<form:errors cssClass="error" path="status" />
-		<br />
-		<br />
-		
-		<acme:textarea code="request.comments" path="comments"/>	
-		<br />		
-		<br />			
-	</security:authorize>
+		<form:errors cssClass="error" path="sport" />
+	<br />
 	
-	<acme:submit code="request.save" name="save" />&nbsp;	
-		
-	<security:authorize access="hasRole('INNKEEPER')">				
-		<acme:cancel code="request.cancel" url="request/innkeeper/list.do"/>
-	</security:authorize>
+	<acme:textbox code="event.otherSport" path="otherSport"/>
+	<br/>
 	
-	<security:authorize access="hasRole('ADMIN')">		
-		<acme:cancel code="request.cancel" url="request/administrator/list.do"/>
-	</security:authorize>
+	<acme:textbox code="event.place" path="place"/>
+	<br/>
 	
 </form:form>
 
