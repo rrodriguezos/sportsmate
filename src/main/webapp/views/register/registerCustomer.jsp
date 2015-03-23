@@ -133,7 +133,7 @@
 			<form:label path="emailCenter">
 				<spring:message code="register.emailCenter" />
 			</form:label>
-			<form:input path="phone" />
+			<form:input path="emailCenter" />
 			<form:errors class="emailCenter" path="emailCenter" />
 			<br />
 			
@@ -153,13 +153,11 @@
 		</div>
 	</jstl:if>
 
-	<input type="submit" name="save"
-		value="<spring:message code="register.save" />" />
-		&nbsp;
 	
-	<input type="button" name="cancel"
+	<input type="submit" name="save"
+		value="<spring:message code="register.save" />" />&nbsp;
+	<input type="button" name="return"
 		value="<spring:message code="register.cancel" />"
-		onclick="javascript: relativeRedir('');" />
-	<br />
+		onclick="javascript: window.location.replace('welcome/index.do')" />
 
 </form:form>

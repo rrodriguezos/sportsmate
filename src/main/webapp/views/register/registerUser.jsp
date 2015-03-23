@@ -19,6 +19,9 @@
 
 <form:form action="register/user/register.do" modelAttribute="user">
 
+		<form:hidden path="id" />
+		<form:hidden path="version" />
+
 		<legend>
 			<spring:message code="register.useraccount" />
 		</legend>

@@ -1,32 +1,28 @@
-package domain;
+package forms;
 
-import java.util.Collection;
+
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
-import javax.persistence.ElementCollection;
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
-import javax.persistence.Transient;
-import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
+
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
+
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.Range;
+import org.hibernate.validator.constraints.SafeHtml;
 import org.hibernate.validator.constraints.URL;
 
-@Entity
+
+
 @Access(AccessType.PROPERTY)
-public class Customer extends Actor{
-	//Constructors----------------------------------------------------------------------
-	public Customer(){
-		super();
-	}	
+public class CustomerForm 
+{
 	
-	//Attributes-------------------------------------------------------------------------
-	private String cif;
+	private String name,surname,email;
+	private Integer phone;
+    private String cif;
 	private String street;
 	private int zip;
 	private String provinceCenter;
@@ -35,7 +31,66 @@ public class Customer extends Actor{
 	private String phoneCenter;
 	private String emailCenter;
 	private String web;
-	private Collection<Vote> votes;
+	
+	private String password;
+	private String password2;
+	private String username;
+    
+    @NotBlank
+    @SafeHtml
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	@NotBlank
+    @SafeHtml
+	public String getSurname() {
+		return surname;
+	}
+	public void setSurname(String surname) {
+		this.surname = surname;
+	}
+	@NotBlank
+    @SafeHtml
+    @Email
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
+    @Pattern(regexp = "^[9|6|7][0-9]{8}")
+	public Integer getPhone() {
+		return phone;
+	}
+	public void setPhone(Integer phone) {
+		this.phone = phone;
+	}
+	 @Size(min = 5, max = 32)
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
+	}
+	 @Size(min = 5, max = 32)
+	public String getPassword2() {
+		return password2;
+	}
+	public void setPassword2(String password2) {
+		this.password2 = password2;
+	}
+	
+	@NotBlank
+	@SafeHtml
+	public String getUsername() {
+		return username;
+	}
+	public void setUsername(String username) {
+		this.username = username;
+	}
 	
 	@NotBlank
 	@Size(min=9, max=9)
@@ -123,64 +178,9 @@ public class Customer extends Actor{
 		this.web = web;
 	}
 	
-	@Valid
-	@NotNull
-	@ElementCollection
-	public Collection<Vote> getVotes() {
-		return votes;
-	}
-	public void setVotes(Collection<Vote> votes) {
-		this.votes = votes;
-	}
 	
-	@Transient
-	public Double getRating(){
-		Double rating = 0.0;
-		
-		for(Vote itero : getVotes()){
-			rating+=itero.getScore();
-		}
-		
-		rating = rating/getVotes().size();
-		
-		return rating;
-	}
 	
-	//Relationships-------------------------------------------------------------------------	
-	private Collection<Event> events;
-	private Collection<Tournament> tournaments;
-	private Collection<Invoice> invoices;
+	
 
-	@Valid
-	@NotNull
-	@OneToMany(mappedBy="customer")
-	public Collection<Event> getEvents() {
-		return events;
-	}
-	public void setEvents(Collection<Event> events) {
-		this.events = events;
-	}
-	
-	@Valid
-	@NotNull
-	@OneToMany(mappedBy="customer")
-	public Collection<Tournament> getTournaments() {
-		return tournaments;
-	}
-	public void setTournaments(Collection<Tournament> tournaments) {
-		this.tournaments = tournaments;
-	}
-	
-	@Valid
-	@NotNull
-	@OneToMany(mappedBy="customer")
-	public Collection<Invoice> getInvoices() {
-		return invoices;
-	}
-	public void setInvoices(Collection<Invoice> invoices) {
-		this.invoices = invoices;
-	}
-	
-	
 	
 }
