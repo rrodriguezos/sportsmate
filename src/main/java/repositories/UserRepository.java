@@ -9,4 +9,7 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 	@Query("select u from User u where u.userAccount.id =?1")
 	User findUserByUserAccountId(int userAccountId);
 	
+	@Query("Select u from User a where u.userAccount.username=?1")
+	User isRegistered(String username);
+	
 }

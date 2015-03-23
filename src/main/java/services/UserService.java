@@ -87,6 +87,15 @@ public 	User reconstruct(UserForm form)
 		return user;
 		
 	}
+	
+public boolean userRegistered(String username) 
+{
+	Boolean res = true;
+		if (userRepository.isRegistered(username) == null) {
+			res = false;
+		}
+		return res;
+	}
 
 }
 
