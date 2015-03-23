@@ -1,8 +1,12 @@
 package controllers.user;
 
 import java.util.Collection;
+
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -81,9 +85,33 @@ public class EventUserController extends AbstractController{
 		eventForm = eventService.construct(event);
 
 		result = createEditModelAndView(eventForm);
+		result.addObject("requestURI", "event/user/edit.do");
 			
 		return result;
 		
+	}
+	
+	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
+	public ModelAndView save(@Valid EventForm eventForm, BindingResult binding){
+		ModelAndView result;
+		Event event;
+			
+		if(binding.hasErrors()){
+			result = createEditModelAndView(eventForm);
+		} else {
+			try{
+				
+				event = eventService.reconstruct(eventForm);							
+				
+				eventService.save(event);	
+				
+				result = new ModelAndView("redirect:list.do");
+			}catch(Throwable oops){
+					
+				result = createEditModelAndView(eventForm,"event.commit.error");			
+			}
+		}
+		return result;				
 	}
 	
 	// Ancillary methods---------------------------------------
@@ -104,13 +132,15 @@ public class EventUserController extends AbstractController{
 		
 		ModelAndView result;
 		Collection<String> sports;
-			
+		Collection<String> places;
 		sports = eventService.sports();
+		places = eventService.places();
 
 		result = new ModelAndView("event/edit");
 			
 		result.addObject("eventForm", eventForm);
 		result.addObject("sports", sports);
+		result.addObject("places", places);
 		result.addObject("message", message);
 		
 

@@ -100,7 +100,7 @@ public class Event extends DomainEntity{
 		this.numberMaxParticipant = numberMaxParticipant;
 	}
 	
-	@Valid
+	@NotNull
 	public String getSport() 
 	{
 		return sport;
@@ -110,7 +110,7 @@ public class Event extends DomainEntity{
 		this.sport = sport;
 	}
 	
-	@NotBlank
+	@NotNull
 	public String getPlace()
 	{
 		return place;
@@ -126,7 +126,6 @@ public class Event extends DomainEntity{
 	private Customer customer;
 
 	@Valid
-	@NotNull
 	@ManyToOne(optional=true)
 	public User getOwner() {
 		return owner;
@@ -149,7 +148,6 @@ public class Event extends DomainEntity{
 	}
 	
 	@Valid
-	@NotNull
 	@ManyToOne(optional=true)
 	public Customer getCustomer() 
 	{
