@@ -59,8 +59,8 @@
 			<li><a class="fNiv"><spring:message code="master.page.register" /></a>
 				<ul>
 					<li class="arrow"></li>
-					<li><a href="register/customer/register.do"><spring:message code="master.page.register.customer" /></a></li>
-					<li><a href="register/user/register.do"><spring:message code="master.page.register.user" /></a></li>
+					<li><a href="register/registerCustomer.do"><spring:message code="master.page.register.customer" /></a></li>
+					<li><a href="register/registerUser.do"><spring:message code="master.page.register.user" /></a></li>
 				</ul>
 			</li>
 			
