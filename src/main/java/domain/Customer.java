@@ -36,7 +36,15 @@ public class Customer extends Actor{
 	private String emailCenter;
 	private String web;
 	private Collection<Vote> votes;
+	private CreditCard creditCard;
 	
+	@NotNull
+	public CreditCard getCreditCard() {
+		return creditCard;
+	}
+	public void setCreditCard(CreditCard creditCard) {
+		this.creditCard = creditCard;
+	}
 	@NotBlank
 	@Size(min=9, max=9)
 	public String getCif() 
