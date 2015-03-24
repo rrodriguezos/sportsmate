@@ -67,6 +67,7 @@ public Collection<Invoice> getAllInvoices() {
 	}
 	public Customer reconstruct(CustomerForm customerForm) {
 		Customer result = new Customer();
+		result.setCreditCard(customerForm.getCreditCard());
 		result.setCif(customerForm.getCif());
 		result.setStreet(customerForm.getStreet());
 		result.setZip(customerForm.getZip());
@@ -101,7 +102,7 @@ public Collection<Invoice> getAllInvoices() {
 
 	}
 	
-	public boolean customerRegistered(String username) {
+	public boolean userRegistered(String username) {
 		Boolean res = true;
 		if (customerRepository.getCustomerByUserName(username) == null) {
 			res = false;
