@@ -1,7 +1,7 @@
 package domain;
 
 import java.util.Collection;
-import java.util.List;
+
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
@@ -37,7 +37,7 @@ public class User extends Actor{
 		return votes;
 	}
 
-	public void setVotes(List<Vote> votes) 
+	public void setVotes(Collection<Vote> votes) 
 	{
 		this.votes = votes;
 	}

@@ -12,7 +12,12 @@ import repositories.UserRepository;
 import security.Authority;
 import security.LoginService;
 import security.UserAccount;
+import domain.Event;
+import domain.Friendship;
+import domain.Team;
+import domain.Tournament;
 import domain.User;
+import domain.Vote;
 import forms.UserForm;
 @Service
 @Transactional
@@ -36,12 +41,38 @@ public User save(User user)
 public User create()
 {
 	User user= new User();
+	Collection<Vote> votes;
+	Collection<Friendship> shipsUser;
+	Collection<Friendship> shipsUserFriend;
+	Collection<Event> events;
+	Collection<Event> eventsCreated;
+	Collection<Team> teams;
+	Collection<Team> teamsCreated;
+	Collection<Tournament> tournaments;
 	
+
+	votes = new ArrayList<Vote>();
+	shipsUser = new ArrayList<Friendship>();
+	shipsUserFriend = new ArrayList<Friendship>();
+	events = new ArrayList<Event>();
+	eventsCreated = new ArrayList<Event>();
+	teams = new ArrayList<Team>();
+	teamsCreated = new ArrayList<Team>();
+	tournaments = new ArrayList<Tournament>();
 	UserAccount useraccount = new UserAccount();
 	Authority authority = new Authority();
+	
 	authority.setAuthority("USER");
 	useraccount.addAuthority(authority);
 	user.setUserAccount(useraccount);
+	user.setEventsCreated(eventsCreated);
+	user.setEvents(events);
+	user.setShipsUser(shipsUser);
+	user.setShipsUserFriend(shipsUserFriend);
+	user.setTeams(teams);
+	user.setTeamsCreated(teamsCreated);
+	user.setTournaments(tournaments);
+	user.setVotes(votes);
 	
 return user;
 }
