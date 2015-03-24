@@ -73,11 +73,13 @@ public class EventService {
 		Actor actor;
 		User owner;
 		Customer customer;
+		Collection<User> users;
 		Date creationMoment;
 		long miliseconds;
 		
 		event = new Event();
 		actor = actorService.findByPrincipal();
+		users = new ArrayList<User>();
 		miliseconds = System.currentTimeMillis()-3;
 		creationMoment = new Date(miliseconds);
 		
@@ -95,6 +97,7 @@ public class EventService {
 		}
 		
 		event.setCreationMoment(creationMoment);
+		event.setUsers(users);
 		
 		return event;
 		
@@ -102,11 +105,25 @@ public class EventService {
 	
 	public void save(Event event)
 	{
+		User owner;
+		Customer customer;
 		
 		Assert.notNull(event);
 		Assert.isTrue(event.getStartMoment().compareTo(event.getFinishMoment()) < 0);
 		
 		eventRepository.save(event);
+		
+		if(actorService.findByPrincipal() instanceof User){
+			owner = (User)actorService.findByPrincipal();
+			owner.getEventsCreated().add(event);
+			userService.save(owner);
+			
+		}else if(actorService.findByPrincipal() instanceof Customer){
+			customer = (Customer)actorService.findByPrincipal();
+			customer.getEvents().add(event);
+			customerService.save(customer);
+		}	
+		
 		
 	}
 	
@@ -219,7 +236,9 @@ public class EventService {
 		
 	}
 	
-	public Collection<String> sports(){
+	public Collection<String> sports()
+	{
+		
 		Collection<String> all;
 		
 		all = new ArrayList<String>();
@@ -228,6 +247,22 @@ public class EventService {
 		all.add("RACE"); all.add("PADDLE"); all.add("FOOTBALL"); 
 		
 		return all;
+		
+	}
+	
+	public Collection<String> places()
+	{
+		
+		Collection<String> all;
+		
+		all = new ArrayList<String>();
+		
+		all.add("Place 1"); all.add("Place 2"); all.add("Place 3"); all.add("Place 4"); all.add("Place 5");
+		all.add("Place 6"); all.add("Place 7"); all.add("Place 8"); all.add("Place 9"); all.add("Place 10");
+		
+		
+		return all;
+		
 	}
 	
 	public EventForm construct(Event event)
@@ -250,7 +285,7 @@ public class EventService {
 		
 	}
 	
-	public Event reconstructor(EventForm eventForm)
+	public Event reconstruct(EventForm eventForm)
 	{
 		
 		Event event;
@@ -270,7 +305,12 @@ public class EventService {
 		event.setDescription(eventForm.getDescription());
 		event.setNumberMaxParticipant(eventForm.getNumberMaxParticipant());
 		event.setSport(eventForm.getSport());
-		event.setPlace(eventForm.getPlace());	
+		
+		if(!eventForm.getOtherSport().isEmpty()){
+			event.setPlace(eventForm.getOtherSport());
+		}else{
+			event.setPlace(eventForm.getPlace());	
+		}		
 		
 		return event;
 		

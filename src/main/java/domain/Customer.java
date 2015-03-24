@@ -9,6 +9,8 @@ import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.Transient;
 import javax.validation.Valid;
+import javax.persistence.Table;
+import javax.persistence.Index;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
@@ -19,6 +21,7 @@ import org.hibernate.validator.constraints.URL;
 
 @Entity
 @Access(AccessType.PROPERTY)
+@Table(indexes={@Index(columnList="name"),@Index(columnList="surname"),@Index(columnList="email")})
 public class Customer extends Actor{
 	//Constructors----------------------------------------------------------------------
 	public Customer(){
