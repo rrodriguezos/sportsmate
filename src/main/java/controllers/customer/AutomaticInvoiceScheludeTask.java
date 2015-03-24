@@ -20,7 +20,7 @@ public class AutomaticInvoiceScheludeTask {
 	InvoiceService invoiceService;
 	
     @SuppressWarnings("deprecation")
-	@Scheduled(cron="*/5 * * * * ?")
+	@Scheduled(cron="*/20 * * * * ?")
     public void automaticScheludeGenerator()
     {    	
     	

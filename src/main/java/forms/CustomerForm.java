@@ -2,6 +2,8 @@ package forms;
 
 
 
+import java.util.Collection;
+
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.validation.constraints.NotNull;
@@ -14,7 +16,11 @@ import org.hibernate.validator.constraints.Range;
 import org.hibernate.validator.constraints.SafeHtml;
 import org.hibernate.validator.constraints.URL;
 
+import antlr.debug.Event;
 import domain.CreditCard;
+import domain.Folder;
+import domain.Tournament;
+import domain.Vote;
 
 
 
@@ -23,7 +29,7 @@ public class CustomerForm
 {
 	
 	private String name,surname,email;
-	private Integer phone;
+	private int phone;
     private String cif;
 	private String street;
 	private int zip;
@@ -38,8 +44,36 @@ public class CustomerForm
 	private String password;
 	private String password2;
 	private String username;
+	private Collection<Folder> folders;
+	private Collection<Event> events;
+	private Collection<Tournament> tournaments;
+	private Collection<Vote> votes;
     
-    @NotBlank
+    public Collection<Vote> getVotes() {
+		return votes;
+	}
+	public void setVotes(Collection<Vote> votes) {
+		this.votes = votes;
+	}
+	public Collection<Folder> getFolders() {
+		return folders;
+	}
+	public void setFolders(Collection<Folder> folders) {
+		this.folders = folders;
+	}
+	public Collection<Event> getEvents() {
+		return events;
+	}
+	public void setEvents(Collection<Event> events) {
+		this.events = events;
+	}
+	public Collection<Tournament> getTournaments() {
+		return tournaments;
+	}
+	public void setTournaments(Collection<Tournament> tournaments) {
+		this.tournaments = tournaments;
+	}
+	@NotBlank
     @SafeHtml
 	public String getName() {
 		return name;
@@ -64,11 +98,11 @@ public class CustomerForm
 	public void setEmail(String email) {
 		this.email = email;
 	}
-    @Pattern(regexp = "^[9|6|7][0-9]{8}")
-	public Integer getPhone() {
+    //@Pattern(regexp = "^[9|6|7][0-9]{8}")
+	public int getPhone() {
 		return phone;
 	}
-	public void setPhone(Integer phone) {
+	public void setPhone(int phone) {
 		this.phone = phone;
 	}
 	 @Size(min = 5, max = 32)

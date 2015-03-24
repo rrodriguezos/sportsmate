@@ -9,9 +9,9 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
-<form:form action="register/customer/register.do" modelAttribute="customerForm">
+<form:form action="register/registerCustomer.do" modelAttribute="customerForm">
 
-<form:hidden path="id" />
+
 	<fieldset>
 		<legend>
 			<spring:message code="register.useraccount" />

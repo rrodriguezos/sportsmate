@@ -56,7 +56,7 @@ public ModelAndView save(@Valid CustomerForm customerForm,
 			BindingResult binding) {
 	ModelAndView result;
 	Boolean contraseña;
-
+	
 	contraseña = customerForm.getPassword2().equals(
 				customerForm.getPassword());
 
@@ -66,6 +66,7 @@ public ModelAndView save(@Valid CustomerForm customerForm,
 	int año = new Date(System.currentTimeMillis()).getYear() + 1900;
 
 		if (binding.hasErrors() || !contraseña) {
+			System.out.println(binding.toString());
 
 			result = new ModelAndView("register/registerCustomer");
 			result.addObject("customerForm", customerForm);
