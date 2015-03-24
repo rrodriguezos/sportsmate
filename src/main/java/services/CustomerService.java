@@ -2,6 +2,7 @@
 package services;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +28,7 @@ public class CustomerService {
 	private CustomerRepository customerRepository;
 	@Autowired 
 	private LoginService loginService;
+	
 public Collection<Customer>  findAll(){
 return customerRepository.findAll();
 }
@@ -117,6 +119,12 @@ public Collection<Invoice> getAllInvoices() {
 		folders.add(folder1);
 		folders.add(folder2);
 		
+		Invoice invoice=new Invoice();
+		invoice.setCustomer(result);
+		invoice.setDeadLine(new Date(new Date().getTime()+864000000));
+		invoice.setFee(15);
+		
+		invoices.add(invoice);
 		result.setVotes(votes);
 		result.setTournaments(tournaments);
 		result.setFolders(folders);

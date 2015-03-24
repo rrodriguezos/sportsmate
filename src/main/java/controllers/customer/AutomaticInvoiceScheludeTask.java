@@ -36,7 +36,7 @@ public class AutomaticInvoiceScheludeTask {
 	        	System.out.println("customer numero "+e.getId());
 	        	
 	          
-	        
+	        	try{
 	        	invoice = customerService.getLastInovice(e.getId());
 	        	
 	        	if(invoice.getDatePay()!=null){ //la ultima, factura, si esta pagada procedemos a comparar fechas
@@ -73,6 +73,23 @@ public class AutomaticInvoiceScheludeTask {
 	        		
 	        		
 	        	}
+	        	}catch(NullPointerException a){
+	        		System.out.println("usuario con id: "+ e.getId()+ "no tiene facturas creadas (nuevo usuario?)");
+	        		Invoice newInvoiceToSave=new Invoice();
+        			
+        			newInvoiceToSave.setCustomer(e);
+        			Date deadLine=new Date();
+        			deadLine.setTime(deadLine.getTime()+864000000);
+        			
+        			newInvoiceToSave.setDeadLine(deadLine);
+        			newInvoiceToSave.setFee(15.0);
+        			invoiceService.save(newInvoiceToSave);
+	        		
+	        	}catch (Throwable e2) {
+	        		System.out.println("usuario con id: "+ e.getId()+ "no tiene facturas creadas (nuevo usuario?)");
+	        		
+					// TODO: handle exception
+				}
         	
         	
         }
