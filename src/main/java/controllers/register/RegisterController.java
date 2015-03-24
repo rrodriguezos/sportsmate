@@ -183,7 +183,8 @@ public ModelAndView saveUser(@Valid UserForm userForm,
 				userService.save(user);
 				result = new ModelAndView("redirect:../welcome/index.do");
 			} catch (Throwable oops) {
-
+				System.out.println("exceptcion");
+				System.out.println(oops.toString());
 				result = new ModelAndView("register/registerUser");
 				result.addObject("userForm", userForm);
 				result.addObject("actor", "user");

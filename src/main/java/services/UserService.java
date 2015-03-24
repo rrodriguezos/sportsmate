@@ -13,6 +13,7 @@ import security.Authority;
 import security.LoginService;
 import security.UserAccount;
 import domain.Event;
+import domain.Folder;
 import domain.Friendship;
 import domain.Team;
 import domain.Tournament;
@@ -49,6 +50,7 @@ public User create()
 	Collection<Team> teams;
 	Collection<Team> teamsCreated;
 	Collection<Tournament> tournaments;
+	
 	
 
 	votes = new ArrayList<Vote>();
@@ -99,6 +101,30 @@ public 	User reconstruct(UserForm form)
     authorities.add(authority);
     userAccount.setAuthorities(authorities);
     result.setUserAccount(userAccount);
+    
+    Collection<Folder> folders=new ArrayList<Folder>();
+	Folder recibidos=new Folder();
+	Folder enviados=new Folder();
+	enviados.setActor(result);
+	recibidos.setActor(result);
+	recibidos.setName("Recibidos");
+	enviados.setActor(result);
+	enviados.setName("Enviados");
+	folders.add(enviados);
+	folders.add(recibidos);
+	result.setFolders(folders);
+	
+	result.setPhone(form.getPhone());
+	
+	result.setEvents(new ArrayList<Event>());
+	result.setTeamsCreated(new ArrayList<Team>());
+	result.setShipsUserFriend(new ArrayList<Friendship>());
+	result.setShipsUser(new ArrayList<Friendship>());
+	result.setTournaments(new ArrayList<Tournament>());
+	result.setVotes(new ArrayList<Vote>());
+	result.setEventsCreated(new ArrayList<Event>());
+	result.setTeams(new ArrayList<Team>());
+	
     
     return result;
 }
