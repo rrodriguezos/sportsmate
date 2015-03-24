@@ -32,8 +32,20 @@ requestURI="customer/seeInvoices.do"
 pagesize="5" class="displaytag" >
 
 <display:column title="${fee}" >${row.fee}</display:column>
-<display:column title="${datePay}">${row.datePay}</display:column>
-<display:column title="${deadLine}">${row.deadLine }</display:column>>
+<display:column title="${datePay}">
+
+	<jstl:if test="${row.datePay == null}">
+		<spring:message code="customer.invoice.unPaid" />
+		
+	</jstl:if>
+	
+	<jstl:if test="${row.datePay !=null}">
+		<spring:message code="customer.invoice.payMaked" /> 
+		<jstl:out value="---> ${row.datePay}"></jstl:out>
+	</jstl:if>
+
+</display:column>
+<%-- <display:column title="${deadLine}">${row.deadLine }</display:column>> --%>
 
 <display:column title="${details}"> <a href="customer/invoiceDetails.do?id=${row.id}">${details }</a></display:column>
 

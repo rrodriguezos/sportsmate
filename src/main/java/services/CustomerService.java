@@ -63,4 +63,17 @@ public Collection<Invoice> getAllInvoices() {
 		return customer;
 	
 	}
+	public Invoice getLastInovice(int id) 
+	{
+		// TODO Auto-generated method stub
+		Invoice i;
+		
+		i=customerRepository.getlastInvoice(id);
+		if(i==null){
+			new Throwable().printStackTrace();
+		}
+		return i;
+	}
+
 }
+

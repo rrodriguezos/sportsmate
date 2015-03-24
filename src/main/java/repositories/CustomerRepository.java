@@ -18,4 +18,7 @@ public interface CustomerRepository extends JpaRepository<Customer, Integer> {
 	
 	@Query("select c from Customer c where c.userAccount.id =?1")
 	Customer findCustomerByUserAccountId(int userAccountId);
+	
+	@Query("select max(c) from Invoice c where c.customer.id=?1 ORDER BY deadLine DESC")
+	Invoice getlastInvoice(int id);
 }
