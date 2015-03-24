@@ -26,10 +26,10 @@
 	<acme:textbox code="event.title" path="title"/>
 	<br/>
 	
-	<acme:textbox code="event.startMoment" path="startMoment"/>
+	<acme:textbox code="event.startMoment" path="startMoment"/><spring:message code="event.start"/><br/>
 	<br/>
 	
-	<acme:textbox code="event.finishMoment" path="finishMoment"/>
+	<acme:textbox code="event.finishMoment" path="finishMoment"/><spring:message code="event.finish"/><br/>
 	<br/>
 	
 	<acme:textarea code="event.description" path="description"/>
@@ -41,16 +41,32 @@
 	<form:label path="sport"><spring:message code="event.sport"/></form:label>
 		<form:select path="sport" >
 			<form:option label="------" value="0"/>
-			<form:options items="${sports}" itemLabel="name" itemValue="id"/>
+			<form:options items="${sports}"  />
 		</form:select>
 		<form:errors cssClass="error" path="sport" />
+	<br />
+	<br />	
+	<form:label path="place"><spring:message code="event.place"/></form:label>
+		<form:select path="place" >
+			<form:option label="------" value="0"/>
+			<form:options items="${places}"  />
+		</form:select>
+		<form:errors cssClass="error" path="place" />
+	<br />
 	<br />
 	
 	<acme:textbox code="event.otherSport" path="otherSport"/>
 	<br/>
 	
-	<acme:textbox code="event.place" path="place"/>
-	<br/>
+	<acme:submit code="event.save" name="save" />&nbsp;
+	
+	<security:authorize access="hasRole('USER')">
+		<acme:cancel code="event.cancel" url="event/user/list.do" />
+	</security:authorize>
+	
+	<security:authorize access="hasRole('CUSTOMER')">
+		<acme:cancel code="event.cancel" url="event/customer/list.do" />
+	</security:authorize>
 	
 </form:form>
 

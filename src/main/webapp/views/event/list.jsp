@@ -27,10 +27,10 @@
 	<display:column property="title" title="${titleHeader}" />	
 	
 	<spring:message code="event.startMoment" var="startMomentHeader"/>
-	<display:column property="startMoment" title="${startMomentHeader}" />
+	<display:column property="startMoment" title="${startMomentHeader}" format="{0,date,dd/MM/yyyy HH:mm}"/>
 
 	<spring:message code="event.finishMoment" var="finishMomentHeader"/>
-	<display:column property="finishMoment" title="${finishMomentHeader}" />
+	<display:column property="finishMoment" title="${finishMomentHeader}" format="{0,date,dd/MM/yyyy HH:mm}"/>
 	
 	<spring:message code="event.numberMaxParticipant" var="numberMaxParticipantHeader"/>
 	<display:column property="numberMaxParticipant" title="${numberMaxParticipantHeader}" />
