@@ -13,7 +13,7 @@ import org.hibernate.validator.constraints.SafeHtml;
 public class UserForm {
 
 	private String name,surname,email;
-	private Integer phone;
+	private String phone;
     private String password;
 	private String password2;
     private String username;
@@ -44,10 +44,10 @@ public class UserForm {
 		this.email = email;
 	}
     @Pattern(regexp = "^[9|6|7][0-9]{8}")
-	public Integer getPhone() {
+	public String getPhone() {
 		return phone;
 	}
-	public void setPhone(Integer phone) {
+	public void setPhone(String phone) {
 		this.phone = phone;
 	}
 	 @Size(min = 5, max = 32)

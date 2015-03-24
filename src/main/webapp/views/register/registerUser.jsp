@@ -9,14 +9,14 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
-<form:form action="register/user/register.do" modelAttribute="userForm">
+<form:form action="register/registerUser.do" modelAttribute="userForm">
 
-<form:hidden path="id" />
+
 	<fieldset>
 		<legend>
 			<spring:message code="register.useraccount" />
 		</legend>
-		<acme:textbox code="register.userName" path="username" />
+		<acme:textbox code="register.username" path="username" />
 		<acme:password code="register.password" path="password" />
 		<acme:password code="register.password2" path="password2" />
 	</fieldset>
