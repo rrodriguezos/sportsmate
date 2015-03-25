@@ -8,6 +8,73 @@
  * 
  */
 
+@font-face {
+    font-family: geosans;
+    src: url(../fonts/GeosansLight.ttf);
+}
+
+body {
+
+	background: url(../images/stadium.jpg) no-repeat center center fixed;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+}
+
+/* Sportsmate logotype */
+#header_image{
+	margin: 0 auto;
+	text-align: center;
+	margin-top: 3em;
+}
+
+/* The menu bar below the logotype */
+#header_menubar{
+	margin: 0 auto;
+	width: 80%;
+	background-color: #322f32;
+	border-radius: 0.4em;
+	margin-top: 1em;
+	margin-bottom: 0.2em;
+	padding: 0em 2em;
+		
+}
+
+#header_languagebar{
+	margin: 0 auto;
+	width: 80%;
+	border-radius: 0.4em;
+	padding: 0.2em 2em;
+	background-color: rgba(128,128,128,0.8);
+	
+}
+
+/* Main area where contents are written */
+#content_area{
+	margin: 0 auto;
+	width: 80%;
+	background-color: rgba(255,255,255,0.9);
+	border-radius: 0.4em;
+	padding: 0.7em 2em 2em 2em;
+	border: thin solid lightgray;
+	margin-top: 0.2em;
+}
+
+
+#footer_area{
+	margin: 0 auto;
+	width: 80%;
+	background-color: rgba(0,0,0,0.6);
+	color: #ffffff;
+	border-radius: 0.4em;
+	padding: 1em 2em;
+	text-align: center;
+	margin-top: 0.5em;
+	clear: both;
+	font-family: sans-serif;
+	border: thin solid black;
+}
 .error {
 	color: red;
 	font-weight: bolder;

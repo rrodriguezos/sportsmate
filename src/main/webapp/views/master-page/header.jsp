@@ -13,11 +13,11 @@
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
 
-<div>
-	<img src="images/logo.png" alt="SportsMate Co., Inc." />
+<div id="header_image"> 
+	<img src="images/logotrans.png" alt="SportsMate Co., Inc." />
 </div>
 
-<div>
+<div id="header_menubar">
 	<ul id="jMenu">
 		<!-- Do not forget the "fNiv" class for the first level links !! -->
 			
@@ -101,7 +101,7 @@
 	
 </div>
 
-<div>
+<div id="header_languagebar">
 	<a href="?language=en">en</a> | <a href="?language=es">es</a>
 	
 	

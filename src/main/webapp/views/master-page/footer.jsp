@@ -14,6 +14,7 @@
 
 <jsp:useBean id="date" class="java.util.Date" />
 
-<hr />
+<!--  <hr />   -->
+
 
 <b>Copyright &copy; <fmt:formatDate value="${date}" pattern="yyyy" /> SportsMate Co., Inc.</b>
