@@ -13,18 +13,20 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import services.CustomerService;
+
 import services.EventService;
 import services.FriendshipService;
-import services.InvoiceService;
+
 import services.TeamService;
 import services.TournamentService;
 import services.UserService;
 import controllers.AbstractController;
-import domain.CreditCard;
-import domain.Customer;
+
+
 import domain.Event;
-import domain.Invoice;
+import domain.Friendship;
+
+import domain.Team;
 import domain.Tournament;
 import domain.User;
 
@@ -86,6 +88,14 @@ return result;
 @RequestMapping( value = "/edit", method = RequestMethod.GET)
 public ModelAndView edit(@RequestParam int userId)
 {
+	
+	User profile = userService.findByPrincipal();
+	profile = userService.findOne(profile.getId());
+	
+	if (!profile.equals(userService.findOne(userId))) {
+		
+		throw new IllegalArgumentException("Not Principal");
+	}
 	ModelAndView result;
 	User user;
 	

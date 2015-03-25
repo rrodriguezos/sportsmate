@@ -13,6 +13,9 @@ public interface TournamentRepository extends JpaRepository<Tournament, Integer>
 	
 	@Query("select c.tournaments from Customer c where c.id=?1")
 	Collection<Tournament> findAllTournamentsByCustomerId(int customerId);
+	
+	@Query("select u.tournaments from User u where u.id=?1")
+	Collection<Tournament> findAllTournamentsByUserId(int userId);
 
 	
 }

@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import repositories.TournamentRepository;
 import domain.Customer;
 import domain.Tournament;
+import domain.User;
 @Service
 @Transactional
 public class TournamentService {
@@ -16,6 +17,8 @@ public class TournamentService {
 	private TournamentRepository tournamentRepository;
 @Autowired
 	private CustomerService customerService;
+@Autowired
+	private UserService userService;
 public Collection<Tournament>  findAll(){
 return tournamentRepository.findAll();
 }
@@ -37,5 +40,16 @@ public Collection<Tournament> findAllTournamentsByCustomerId()
 	
 	return all;
 	
+}
+public Collection<Tournament> findAllTournamentsByUserId() {
+	Collection<Tournament> all;
+	User user;
+	int userId;
+	
+	user = userService.findByPrincipal();
+	userId = user.getId();
+	all = tournamentRepository.findAllTournamentsByUserId(userId);
+	
+	return all;
 }
 }

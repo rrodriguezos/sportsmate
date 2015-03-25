@@ -77,6 +77,15 @@ return result;
 @RequestMapping( value = "/edit", method = RequestMethod.GET)
 public ModelAndView edit(@RequestParam int customerId)
 {
+	
+	Customer profile = customerService.findByPrincipal();
+	profile = customerService.findOne(profile.getId());
+	
+	if (!profile.equals(customerService.findOne(customerId))) {
+		
+		throw new IllegalArgumentException("Not Principal");
+	}
+
 	ModelAndView result;
 	Customer customer;
 	
@@ -90,6 +99,8 @@ public ModelAndView edit(@RequestParam int customerId)
 @RequestMapping( value = "/edit", method = RequestMethod.POST, params= "save")
 public ModelAndView save(@Valid Customer customer, BindingResult binding)
 {
+	
+	
 	ModelAndView result;
 	
 	if(binding.hasErrors()){
