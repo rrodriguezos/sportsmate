@@ -10,6 +10,6 @@ import domain.Friendship;
 public interface FriendshipRepository extends JpaRepository<Friendship, Integer> {
 	
 	
-	@Query("select u.friendships from User u where u.id=?1")
+	@Query("select u.shipsUserFriend from User u where u.id=?1")
 	Collection<Friendship> findAllFriendshisByUserId(int userId);
 }
