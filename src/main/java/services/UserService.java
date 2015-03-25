@@ -153,6 +153,11 @@ public boolean userRegistered(String username)
 		}
 		return res;
 	}
+public void delete(User user) 
+{
+	userRepository.delete(user.getId());
+	
+}
 
 }
 

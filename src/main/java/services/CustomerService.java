@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.Assert;
 
 import repositories.CustomerRepository;
 import security.Authority;
@@ -160,5 +161,15 @@ public Collection<Invoice> getAllInvoices() {
 		}
 		return res;
 	}
-}
+	public Customer findOneToEdit(int customerId) {
+		Assert.notNull(customerId);
+
+		return customerRepository.findOne(customerId);
+	}
+	public void delete(Customer customer) {
+		customerRepository.delete(customer.getId());
+		
+	}
+	}
+
 
