@@ -91,7 +91,6 @@ public Collection<Invoice> getAllInvoices() {
 
 	public Customer reconstruct(CustomerForm customerForm) {
 		Customer result = new Customer();
-		result.setCreditCard(customerForm.getCreditCard());
 		result.setCif(customerForm.getCif());
 		result.setStreet(customerForm.getStreet());
 		result.setZip(customerForm.getZip());
@@ -163,6 +162,7 @@ public Collection<Invoice> getAllInvoices() {
 	}
 	public Customer findOneToEdit(int customerId) {
 		Assert.notNull(customerId);
+		//comprobar aqui que el customerId de findOne es el mismo que el findPrincipal
 
 		return customerRepository.findOne(customerId);
 	}

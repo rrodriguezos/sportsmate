@@ -49,22 +49,7 @@
 		<acme:textbox code="register.web" path="web" />
 	
 	</fieldset>
-	<hr />
-
-	<fieldset>
-			<legend>
-				<spring:message code="register.creditCard" />
-			</legend>
-		<acme:textbox code="register.holdername" path="creditCard.holderName" />
-		<acme:textbox code="register.brandname" path="creditCard.brandName" />
-		<acme:textbox code="register.number" path="creditCard.number" />
-		<acme:textbox code="register.expirationMonth"
-				path="creditCard.expirationMonth" />
-		<acme:textbox code="register.expirationYear"
-				path="creditCard.expirationYear" />
-		<acme:textbox code="register.cvv" path="creditCard.cvv" />
-	</fieldset>
-	
+	<hr />	
 	
 	<br />
 	<acme:submit name="save" code="register.save" />

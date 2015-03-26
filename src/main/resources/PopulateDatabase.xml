@@ -98,16 +98,6 @@
 		<property name="email" value="fran@gmail.com" />
 		<property name="phone" value="668135842" />
 		<property name="cif" value="411885100" />
-		<property name="creditCard">
-			<bean class="domain.CreditCard">
-				<property name="holderName" value="Francisco Gonzalez" />
-				<property name="brandName" value="Mastercard" />
-				<property name="number" value="5347386217926470" />
-				<property name="expirationMonth" value="07" />
-				<property name="expirationYear" value="2015" />
-				<property name="cvv" value="308" />
-			</bean>
-		</property>
 		<property name="street" value="Calle paraguas 44" />
 		<property name="zip" value="41100" />
 		<property name="provinceCenter" value="Sevilla" />
@@ -153,16 +143,6 @@
 		<property name="email" value="Pedro@gmail.com" />
 		<property name="phone" value="698587412" />
 		<property name="cif" value="411800100" />
-		<property name="creditCard">
-			<bean class="domain.CreditCard">
-				<property name="holderName" value="Pedro Hernandez" />
-				<property name="brandName" value="Visa" />
-				<property name="number" value="5347386217926470" />
-				<property name="expirationMonth" value="12" />
-				<property name="expirationYear" value="2015" />
-				<property name="cvv" value="158" />
-			</bean>
-		</property>
 		<property name="street" value="Calle falsa 123" />
 		<property name="zip" value="41000" />
 		<property name="provinceCenter" value="Sevilla" />

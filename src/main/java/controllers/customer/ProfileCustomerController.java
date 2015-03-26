@@ -18,7 +18,6 @@ import services.EventService;
 import services.InvoiceService;
 import services.TournamentService;
 import controllers.AbstractController;
-import domain.CreditCard;
 import domain.Customer;
 import domain.Event;
 import domain.Invoice;
@@ -151,7 +150,6 @@ protected ModelAndView createEditModelAndView(Customer customer, String message)
 	String phone;
 	
 	String cif;
-	CreditCard creditCard;
 	String street;
 	Integer zip;
 	String provinceCenter;
@@ -166,7 +164,6 @@ protected ModelAndView createEditModelAndView(Customer customer, String message)
 	email = customer.getEmail();
 	phone = customer.getPhone();
 	cif = customer.getCif();
-	creditCard = customer.getCreditCard();
 	street = customer.getStreet();
 	zip = customer.getZip();
 	provinceCenter = customer.getProvinceCenter();
@@ -183,7 +180,6 @@ protected ModelAndView createEditModelAndView(Customer customer, String message)
 	result.addObject("email",email );
 	result.addObject("phone",phone );
 	result.addObject("cif",cif );
-	result.addObject("creditCard",creditCard );
 	result.addObject("street",street );
 	result.addObject("zip", zip);
 	result.addObject("provinceCenter",provinceCenter );

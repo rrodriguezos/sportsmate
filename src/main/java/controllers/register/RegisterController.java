@@ -2,7 +2,6 @@ package controllers.register;
 
 
 
-import java.sql.Date;
 
 import javax.validation.Valid;
 
@@ -50,7 +49,7 @@ public ModelAndView register()
 	return result;
 }
 	
-@SuppressWarnings("deprecation")
+
 @RequestMapping(value = "/registerCustomer", method = RequestMethod.POST, params = "save")
 public ModelAndView save(@Valid CustomerForm customerForm,
 			BindingResult binding) {
@@ -60,38 +59,13 @@ public ModelAndView save(@Valid CustomerForm customerForm,
 	contraseña = customerForm.getPassword2().equals(
 				customerForm.getPassword());
 
-	int mescc = customerForm.getCreditCard().getExpirationMonth();
-	int añocc = customerForm.getCreditCard().getExpirationYear();
-	int mes = new Date(System.currentTimeMillis()).getMonth() + 1;
-	int año = new Date(System.currentTimeMillis()).getYear() + 1900;
-
 		if (binding.hasErrors() || !contraseña) {
 			System.out.println(binding.toString());
 
 			result = new ModelAndView("register/registerCustomer");
 			result.addObject("customerForm", customerForm);
 			result.addObject("actor", "customer");
-			if (mescc < mes) {
-				if (!(añocc > año)) {
-					result.addObject("message",
-							"register.commit.error.creditCard");
-				}
-			} else if (mescc == mes) {
-				if (!(añocc >= año)) {
-					result.addObject("message",
-							"register.commit.error.creditCard");
-				}
-
-			} else if (mescc > mes) {
-				if (!(añocc >= año)) {
-					result.addObject("message",
-							"register.commit.error.creditCard");
-				}
-
-			}
-			if (!contraseña) {
-				result.addObject("message", "register.commit.password");
-			}
+		
 
 		} else {
 			try {
@@ -107,24 +81,7 @@ public ModelAndView save(@Valid CustomerForm customerForm,
 				result.addObject("actor", "customer");
 
 
-				if (mescc < mes) {
-					if (!(añocc > año)) {
-						result.addObject("message",
-								"register.commit.error.creditCard");
-					}
-				} else if (mescc == mes) {
-					if (!(añocc >= año)) {
-						result.addObject("message",
-								"register.commit.error.creditCard");
-					}
-
-				} else if (mescc > mes) {
-					if (!(añocc >= año)) {
-						result.addObject("message",
-								"register.commit.error.creditCard");
-					}
-
-				}
+				
 				System.out.println(customerService.userRegistered(customerForm
 						.getUsername())
 						|| userService.userRegistered(customerForm

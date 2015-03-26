@@ -6,7 +6,6 @@ import java.util.Collection;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
@@ -17,7 +16,6 @@ import org.hibernate.validator.constraints.SafeHtml;
 import org.hibernate.validator.constraints.URL;
 
 import antlr.debug.Event;
-import domain.CreditCard;
 import domain.Folder;
 import domain.Tournament;
 import domain.Vote;
@@ -39,7 +37,6 @@ public class CustomerForm
 	private String phoneCenter;
 	private String emailCenter;
 	private String web;
-	private CreditCard creditCard;
 	
 	private String password;
 	private String password2;
@@ -129,13 +126,6 @@ public class CustomerForm
 		this.username = username;
 	}
 	
-	@NotNull
-	public CreditCard getCreditCard() {
-		return creditCard;
-	}
-	public void setCreditCard(CreditCard creditCard) {
-		this.creditCard = creditCard;
-	}
 	
 	@NotBlank
 	@Size(min=9, max=9)
