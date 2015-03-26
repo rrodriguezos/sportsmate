@@ -34,7 +34,7 @@ public class CustomerForm
 	private String provinceCenter;
 	private String city;
 	private String nameCenter;
-	private String phoneCenter;
+	private int phoneCenter;
 	private String emailCenter;
 	private String web;
 	
@@ -189,10 +189,10 @@ public class CustomerForm
 	
 	@NotBlank
 	@Pattern(regexp = "^([+-]\\d+\\s+)?(\\([0-9]+\\)\\s+)?([\\d\\w\\s-]+)$")
-	public String getPhoneCenter() {
+	public int getPhoneCenter() {
 		return phoneCenter;
 	}
-	public void setPhoneCenter(String phoneCenter) {
+	public void setPhoneCenter(int phoneCenter) {
 		this.phoneCenter = phoneCenter;
 	}
 	

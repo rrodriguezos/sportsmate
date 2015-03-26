@@ -30,7 +30,7 @@ public abstract class Actor extends DomainEntity{
 	private String name;
 	private String surname;
 	private String email;
-	private String phone;
+	private int phone;
 
 	@NotBlank
 	public String getName() 
@@ -65,10 +65,10 @@ public abstract class Actor extends DomainEntity{
 
 	@NotBlank
 	@Pattern(regexp = "^([+-]\\d+\\s+)?(\\([0-9]+\\)\\s+)?([\\d\\w\\s-]+)$")
-	public String getPhone() {
+	public int getPhone() {
 		return phone;
 	}
-	public void setPhone(String phone) 
+	public void setPhone(int phone) 
 	{
 		this.phone = phone;
 	}

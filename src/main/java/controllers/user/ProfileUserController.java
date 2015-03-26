@@ -6,7 +6,6 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -14,9 +13,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 
+
 import services.EventService;
 import services.FriendshipService;
-
 import services.TeamService;
 import services.TournamentService;
 import services.UserService;
@@ -25,13 +24,13 @@ import controllers.AbstractController;
 
 import domain.Event;
 import domain.Friendship;
-
 import domain.Team;
 import domain.Tournament;
 import domain.User;
+import forms.UserForm;
 
 @Controller
-@RequestMapping("/profile/user/")
+@RequestMapping("/profile/user")
 public class ProfileUserController extends AbstractController {
 	
 	@Autowired
@@ -52,7 +51,7 @@ public class ProfileUserController extends AbstractController {
 	
 // List------------------------------------------------------------------------
 
-@RequestMapping(value = "/profile", method = RequestMethod.GET)
+@RequestMapping(value = "/list", method = RequestMethod.GET)
 public ModelAndView list() 
 {
 
@@ -73,7 +72,7 @@ public ModelAndView list()
 		result = new ModelAndView("profile/list");
 		result.addObject("profile", profile);
 		result.addObject("actor", "/user");
-		result.addObject("requestURI", "profile/user/profile.do");
+		result.addObject("requestURI", "profile/user/list.do");
 		result.addObject("events", events);
 		result.addObject("tournaments", tournaments);
 		result.addObject("friendship", friendships);
@@ -98,43 +97,51 @@ public ModelAndView edit(@RequestParam int userId)
 	}
 	ModelAndView result;
 	User user;
+	UserForm userForm;
 	
 	user = userService.findOne(userId);
-	Assert.notNull(user);
-	result = createEditModelAndView(user);
+	userForm= userService.construct(user);
+	
+	result = createEditModelAndView(userForm);
 	
 	return result;
 }
 
 @RequestMapping( value = "/edit", method = RequestMethod.POST, params= "save")
-public ModelAndView save(@Valid User user, BindingResult binding)
+public ModelAndView save(@Valid UserForm userForm, BindingResult binding)
 {
 	ModelAndView result;
+	User user;
 	
 	if(binding.hasErrors()){
-		result = createEditModelAndView(user);
+		result = createEditModelAndView(userForm);
 	}else{
-		try{
+		try {
+			user = userService.reconstruct(userForm);
 			userService.save(user);
-			result= new ModelAndView("redirect:profile.do");
-		}catch(Throwable oops){
-			result = createEditModelAndView(user, "user.commit.error");
+			result = new ModelAndView("redirect:list.do");
+		} catch (Throwable oops) {
+			result = createEditModelAndView(userForm, "user.commit.error");
 		}
 }
 	return result;
 }
 
+//Delete-----------------------------------------------------------------------
+
 @RequestMapping( value ="/edit", method = RequestMethod.POST , params = "delete")
-public ModelAndView delete(User user, BindingResult binding)
+public ModelAndView delete(UserForm userForm, BindingResult binding)
 {
 	ModelAndView result;
+	User user;
 	
-	try{
+	try {
+		user = userService.reconstruct(userForm);
 		userService.delete(user);
-		result = new ModelAndView("redirect:login.do");
-	}catch(Throwable oops){
-		result = createEditModelAndView(user, "user.commit.error");
-}
+		result = new ModelAndView("redirect:list.do");
+	} catch (Throwable oops) {
+		result = createEditModelAndView(userForm, "user.commit.error");
+	}
 	return result;
 
 
@@ -142,31 +149,31 @@ public ModelAndView delete(User user, BindingResult binding)
 
 //The ancillary methods--------------------------------------------------------
 
-protected ModelAndView createEditModelAndView(User user){
+protected ModelAndView createEditModelAndView(UserForm userForm){
 	ModelAndView result;
 	
-	result = createEditModelAndView(user, null);
+	result = createEditModelAndView(userForm, null);
 	
 	return result;
 }
 
-protected ModelAndView createEditModelAndView(User user, String message)
+protected ModelAndView createEditModelAndView(UserForm userForm, String message)
 {
 	ModelAndView result;
 	String name;
 	String surname;
 	String email;
-	String phone;
+	int phone;
 	
 	
-	name = user.getName();
-	surname = user.getSurname();
-	email = user.getEmail();
-	phone = user.getPhone();
+	name = userForm.getName();
+	surname = userForm.getSurname();
+	email = userForm.getEmail();
+	phone = userForm.getPhone();
 	
 	
 	result = new ModelAndView("user/edit");
-	result.addObject("user", user );
+	result.addObject("userForm", userForm );
 	result.addObject("name",name );
 	result.addObject("surname",surname );
 	result.addObject("email",email );

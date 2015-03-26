@@ -11,12 +11,26 @@ import org.hibernate.validator.constraints.SafeHtml;
 
 @Access(AccessType.PROPERTY)
 public class UserForm {
+	private int id;
 
 	private String name,surname,email;
-	private String phone;
+	private int phone;
     private String password;
 	private String password2;
     private String username;
+    
+    
+    
+    
+    
+    public int getId() {
+		return id;
+	}
+	
+	public void setId(int id) {
+		this.id = id;
+	}
+    
     
     @NotBlank
     @SafeHtml
@@ -44,10 +58,10 @@ public class UserForm {
 		this.email = email;
 	}
     @Pattern(regexp = "^[9|6|7][0-9]{8}")
-	public String getPhone() {
+	public int getPhone() {
 		return phone;
 	}
-	public void setPhone(String phone) {
+	public void setPhone(int phone) {
 		this.phone = phone;
 	}
 	 @Size(min = 5, max = 32)
