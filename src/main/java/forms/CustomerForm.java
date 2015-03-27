@@ -27,14 +27,14 @@ public class CustomerForm
 {
 	
 	private String name,surname,email;
-	private int phone;
+	private String phone;
     private String cif;
 	private String street;
 	private int zip;
 	private String provinceCenter;
 	private String city;
 	private String nameCenter;
-	private int phoneCenter;
+	private String phoneCenter;
 	private String emailCenter;
 	private String web;
 	
@@ -96,10 +96,10 @@ public class CustomerForm
 		this.email = email;
 	}
     //@Pattern(regexp = "^[9|6|7][0-9]{8}")
-	public int getPhone() {
+	public String getPhone() {
 		return phone;
 	}
-	public void setPhone(int phone) {
+	public void setPhone(String phone) {
 		this.phone = phone;
 	}
 	 @Size(min = 5, max = 32)
@@ -189,10 +189,10 @@ public class CustomerForm
 	
 	@NotBlank
 	@Pattern(regexp = "^([+-]\\d+\\s+)?(\\([0-9]+\\)\\s+)?([\\d\\w\\s-]+)$")
-	public int getPhoneCenter() {
+	public String getPhoneCenter() {
 		return phoneCenter;
 	}
-	public void setPhoneCenter(int phoneCenter) {
+	public void setPhoneCenter(String phoneCenter) {
 		this.phoneCenter = phoneCenter;
 	}
 	

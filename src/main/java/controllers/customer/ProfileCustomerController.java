@@ -155,7 +155,7 @@ protected ModelAndView createEditModelAndView(CustomerForm customerForm, String 
 	String name;
 	String surname;
 	String email;
-	int phone;
+	String phone;
 	
 	String cif;
 	String street;
@@ -163,7 +163,7 @@ protected ModelAndView createEditModelAndView(CustomerForm customerForm, String 
 	String provinceCenter;
 	String city;
 	String nameCenter;
-	int phoneCenter;
+	String phoneCenter;
 	String emailCenter;
 	String web;
 	

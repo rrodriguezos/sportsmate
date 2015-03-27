@@ -35,7 +35,7 @@ public class Customer extends Actor{
 	private String provinceCenter;
 	private String city;
 	private String nameCenter;
-	private int phoneCenter;
+	private String phoneCenter;
 	private String emailCenter;
 	private String web;
 	private Collection<Vote> votes;
@@ -104,10 +104,10 @@ public class Customer extends Actor{
 	
 	@NotBlank
 	@Pattern(regexp = "^([+-]\\d+\\s+)?(\\([0-9]+\\)\\s+)?([\\d\\w\\s-]+)$")
-	public int getPhoneCenter() {
+	public String getPhoneCenter() {
 		return phoneCenter;
 	}
-	public void setPhoneCenter(int phoneCenter) {
+	public void setPhoneCenter(String phoneCenter) {
 		this.phoneCenter = phoneCenter;
 	}
 	

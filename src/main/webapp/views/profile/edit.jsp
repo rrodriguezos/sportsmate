@@ -22,7 +22,7 @@
 	
 	<fieldset>
 			<legend>
-				<spring:message code="customer.useraccount" />
+				<spring:message code="actor.useraccount" />
 			</legend>
 			<acme:textbox code="useraccount.name" path="username" />
 			<acme:password code="useraccount.password" path="password" />
@@ -30,7 +30,7 @@
 		</fieldset>
 		<fieldset>
 			<legend>
-				<spring:message code="customer.actor" />
+				<spring:message code="personal.actor" />
 			</legend>
 		<acme:textbox code="actor.name" path="name" />
 		<acme:textbox code="actor.surname" path="surname" />
@@ -54,19 +54,19 @@
 		</fieldset>
 
 	
-		<acme:submit name="save" code="customer.save" />&nbsp;
+		<acme:submit name="save" code="actor.save" />&nbsp;
 		
 			<input type="submit" name="delete"
-				value="<spring:message code="customer.delete"/>"
-				onclick="return confirm('<spring:message code="customer.confirm.delete" />')" />&nbsp;
+				value="<spring:message code="actor.delete"/>"
+				onclick="window.location.href='j_spring_security_logout'" />&nbsp;
 		
 		<acme:cancel url="welcome/index.do" code="customer.cancel" />&nbsp;
-</form:form>		
-</security:authorize>
+	</form:form>		
+	</security:authorize>
 
-<security:authorize access="hasRole('USER')">
+	<security:authorize access="hasRole('USER')">
 
-<form:form action="profile/user/edit.do" modelAttribute="userForm">
+	<form:form action="profile/user/edit.do" modelAttribute="userForm">
 	<form:hidden path="id" />
 	<form:hidden path="version" />
 	<form:hidden path="events" />
@@ -75,7 +75,7 @@
 	
 	<fieldset>
 		<legend>
-			<spring:message code="user.useraccount" />
+			<spring:message code="actor.useraccount" />
 		</legend>
 		<acme:textbox code="actor.name" path="name" />
 		<acme:password code="actor.password" path="password" />
@@ -84,7 +84,7 @@
 	<hr />
 
 		<legend>
-			<spring:message code="register.user" />
+			<spring:message code="personal.actor" />
 		</legend>
 		<acme:textbox code="actor.name" path="name" />
 		<acme:textbox code="actor.surname" path="surname" />
@@ -93,13 +93,13 @@
 	
 			
 		
-		<acme:submit name="save" code="user.save" />&nbsp;
+		<acme:submit name="save" code="actor.save" />&nbsp;
 		
 			<input type="submit" name="delete"
 				value="<spring:message code="user.delete"/>"
-				onclick="return confirm('<spring:message code="user.confirm.delete" />')" />&nbsp;
+				onclick="window.location.href='j_spring_security_logout'" />&nbsp;
 		
-		<acme:cancel url="welcome/index.do" code="user.cancel" />&nbsp;
+		<acme:cancel url="welcome/index.do" code="actor.cancel" />&nbsp;
 	
 	
 

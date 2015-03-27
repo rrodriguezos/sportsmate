@@ -14,7 +14,7 @@ public class UserForm {
 	private int id;
 
 	private String name,surname,email;
-	private int phone;
+	private String phone;
     private String password;
 	private String password2;
     private String username;
@@ -58,10 +58,10 @@ public class UserForm {
 		this.email = email;
 	}
     @Pattern(regexp = "^[9|6|7][0-9]{8}")
-	public int getPhone() {
+	public String getPhone() {
 		return phone;
 	}
-	public void setPhone(int phone) {
+	public void setPhone(String phone) {
 		this.phone = phone;
 	}
 	 @Size(min = 5, max = 32)

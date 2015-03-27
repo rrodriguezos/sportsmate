@@ -163,7 +163,7 @@ protected ModelAndView createEditModelAndView(UserForm userForm, String message)
 	String name;
 	String surname;
 	String email;
-	int phone;
+	String phone;
 	
 	
 	name = userForm.getName();

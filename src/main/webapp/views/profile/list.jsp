@@ -60,6 +60,7 @@
 		<a href="profile/user/edit.do?userId=${profile.id}"><spring:message code="user.edit" /></a>
 		</display:column>
 		
+		
 </display:table>
 </security:authorize>
 
