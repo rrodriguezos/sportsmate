@@ -24,11 +24,11 @@
 <br/>
 
 <b><spring:message code="event.startMoment" />: </b> 
-	<fmt:formatDate value="${event.startMoment}" pattern="dd/MM/yyyy "/>	
+	<fmt:formatDate value="${event.startMoment}" pattern="dd/MM/yyyy HH:mm"/>	
 <br/>
 
 <b><spring:message code="event.finishMoment" />: </b> 
-	<fmt:formatDate value="${event.finishMoment}" pattern="dd/MM/yyyy "/>	
+	<fmt:formatDate value="${event.finishMoment}" pattern="dd/MM/yyyy HH:mm"/>	
 <br/>
 
 <b><spring:message code="event.numberMaxParticipant" />: </b> 
@@ -49,8 +49,26 @@
 <br/>
 <security:authorize access="hasRole('USER')">
 	<acme:cancel code="event.back" url="event/user/list.do" />
+	
+	<input type="button" name="create" value="<spring:message code="event.edit"/>" 
+	   		onclick="javascript: window.location.replace('event/user/edit.do?eventId= ${event.id}')" /> 
+	   		
+	<jstl:if test="${event.id != 0}"> 			
+		<input type="submit" name="delete" value="<spring:message code="event.delete" />"
+			   onclick="return confirm('<spring:message code="event.confirm.delete" />')" />
+	</jstl:if> 
 </security:authorize>
 
 <security:authorize access="hasRole('CUSTOMER')">
 	<acme:cancel code="event.back" url="event/customer/list.do" />
+	
+	<input type="button" name="create" value="<spring:message code="event.edit"/>" 
+	   		onclick="javascript: window.location.replace('event/customer/edit.do?eventId= ${event.id}')" /> 
+	   		
+	<jstl:if test="${event.id != 0}"> 			
+		<input type="submit" name="delete" value="<spring:message code="event.delete" />"
+			   onclick="return confirm('<spring:message code="event.confirm.delete" />')" />
+	</jstl:if> 
+	
 </security:authorize>
+

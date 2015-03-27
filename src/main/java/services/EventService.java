@@ -8,8 +8,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 import repositories.EventRepository;
-import security.LoginService;
-import security.UserAccount;
 import domain.Actor;
 import domain.Customer;
 import domain.Event;
@@ -105,6 +103,7 @@ public class EventService {
 	
 	public void save(Event event)
 	{
+		
 		User owner;
 		Customer customer;
 		
@@ -114,97 +113,80 @@ public class EventService {
 		eventRepository.save(event);
 		
 		if(actorService.findByPrincipal() instanceof User){
+			
 			owner = (User)actorService.findByPrincipal();
 			owner.getEventsCreated().add(event);
 			userService.save(owner);
 			
 		}else if(actorService.findByPrincipal() instanceof Customer){
+			
 			customer = (Customer)actorService.findByPrincipal();
 			customer.getEvents().add(event);
 			customerService.save(customer);
-		}	
+		}		
 		
+	}
+	
+	public void delete(Event event)
+	{
+		User owner;
+		Customer customer;
+		
+		Assert.notNull(event);
+		checkPrincipalByActor(event);
+		Assert.isTrue(event.getUsers().size()==1);
+		
+		if(actorService.findByPrincipal() instanceof User){
+			
+			owner = (User)actorService.findByPrincipal();
+			owner.getEventsCreated().remove(event);
+			userService.save(owner);
+			
+		}else if(actorService.findByPrincipal() instanceof Customer){
+			
+			customer = (Customer)actorService.findByPrincipal();
+			customer.getEvents().remove(event);
+			customerService.save(customer);			
+		}
+		
+		eventRepository.delete(event);
 		
 	}
 	
 	//Other business methods ------------------------------------------------
 	
-	public void checkPrincipalByUser(Event event){
-		UserAccount userAccount;
-		int userAccountId1;		
-		User user;
-		int userAccountId2;
-		
-		userAccount = LoginService.getPrincipal();
-		userAccountId1 = userAccount.getId();
-		user = event.getOwner();
-		userAccountId2 = user.getUserAccount().getId();
-		
-		Assert.isTrue(userAccountId1 == userAccountId2);
-	}
-	
-	public void checkPrincipalByCustomer(Event event){
-		UserAccount userAccount;
-		int userAccountId1;		
-		Customer customer;
-		int userAccountId2;
-		
-		userAccount = LoginService.getPrincipal();
-		userAccountId1 = userAccount.getId();
-		customer = event.getCustomer();
-		userAccountId2 = customer.getUserAccount().getId();
-		
-		Assert.isTrue(userAccountId1 == userAccountId2);
-		
-	}
-	
 	public void checkPrincipalByActor(Event event)
 	{
 		
 		Actor actor;
-		int actorId;
+		User owner;
+		Customer customer;
 		
 		actor = actorService.findByPrincipal();
-		actorId = actor.getId();
 		
-		Assert.isTrue(event.getOwner().getId() == actorId || 
-				      event.getCustomer().getId() == actorId);		
-		
-	}
-	
-	public Event findOneToEditByUserId()
-	{
-		
-		Event result;
-		User user;
-		int userId;
-		
-		user = userService.findByPrincipal();
-		userId = user.getId();
-		result = eventRepository.findUserToEditByUserId(userId);	
-		
-		checkPrincipalByUser(result);
-		
-		return result;
+		if(actor instanceof User){
+			owner = (User)actor;
+			Assert.isTrue(event.getOwner().equals(owner));
+		}else if(actor instanceof Customer){
+			customer = (Customer)actor;
+			Assert.isTrue(event.getCustomer().equals(customer));
+		}		
 		
 	}
 	
-	public Event findOneToEditByCustomerId()
+	public Event findOneToEdit(int eventId)
 	{
 		
-		Event result;
-		Customer customer;
-		int customerId;
+		Event event;
 		
-		customer = customerService.findByPrincipal();
-		customerId = customer.getId();
-		result = eventRepository.findCustomerToEditByCustomerId(customerId);	
+		event = eventRepository.findOne(eventId);	
 		
-		checkPrincipalByCustomer(result);
+		checkPrincipalByActor(event);
 		
-		return result;
+		return event;
 		
-	}
+	}	
+
 	
 	public Collection<Event> findAllEventsByUserId()
 	{
@@ -244,7 +226,7 @@ public class EventService {
 		all = new ArrayList<String>();
 		
 		all.add("FOOTBALL"); all.add("TENNIS"); all.add("BASKETBALL"); all.add("FUTSAL");
-		all.add("RACE"); all.add("PADDLE"); all.add("FOOTBALL"); 
+		all.add("RACE"); all.add("PADDLE"); all.add("FOOTBALL_7"); 
 		
 		return all;
 		
@@ -257,8 +239,8 @@ public class EventService {
 		
 		all = new ArrayList<String>();
 		
-		all.add("Place 1"); all.add("Place 2"); all.add("Place 3"); all.add("Place 4"); all.add("Place 5");
-		all.add("Place 6"); all.add("Place 7"); all.add("Place 8"); all.add("Place 9"); all.add("Place 10");
+		all.add("IndorClub"); all.add("SportClub"); all.add("Place 3"); all.add("Place 4"); all.add("Place 5");
+		all.add("Place 6"); all.add("Place 7"); all.add("Place 8"); all.add("Place 9"); all.add("Other center");
 		
 		
 		return all;
