@@ -11,12 +11,26 @@ import org.hibernate.validator.constraints.SafeHtml;
 
 @Access(AccessType.PROPERTY)
 public class UserForm {
+	private int id;
 
 	private String name,surname,email;
 	private String phone;
     private String password;
 	private String password2;
     private String username;
+    
+    
+    
+    
+    
+    public int getId() {
+		return id;
+	}
+	
+	public void setId(int id) {
+		this.id = id;
+	}
+    
     
     @NotBlank
     @SafeHtml

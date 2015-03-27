@@ -30,9 +30,14 @@ public Collection<User>  findAll()
 {
 	return userRepository.findAll();
 }
-public User findOne(Integer valueOf) 
+public User findOne(Integer userId) 
 {
-		return userRepository.findOne(valueOf);
+	
+	User result;
+	
+	result = userRepository.findOne(userId);
+	
+	return result;
 }
 public User save(User user)
 {
@@ -79,17 +84,17 @@ public User create()
 return user;
 }
 
-public 	User reconstruct(UserForm form)
+public 	User reconstruct(UserForm userForm)
 {
 	User result=new User();
-	result.setName(form.getName());
-	result.setSurname(form.getSurname());
-	result.setEmail(form.getEmail());
+	result.setName(userForm.getName());
+	result.setSurname(userForm.getSurname());
+	result.setEmail(userForm.getEmail());
 	
 	 UserAccount userAccount = new UserAccount();
-     userAccount.setUsername(form.getUsername());
+     userAccount.setUsername(userForm.getUsername());
 
-    String password = form.getPassword();
+    String password = userForm.getPassword();
 
     Md5PasswordEncoder encoder = new Md5PasswordEncoder();
     String md5 = encoder.encodePassword(password, null);
@@ -114,7 +119,7 @@ public 	User reconstruct(UserForm form)
 	folders.add(recibidos);
 	result.setFolders(folders);
 	
-	result.setPhone(form.getPhone());
+	result.setPhone(userForm.getPhone());
 	
 	result.setEvents(new ArrayList<Event>());
 	result.setTeamsCreated(new ArrayList<Team>());
@@ -127,6 +132,20 @@ public 	User reconstruct(UserForm form)
 	
     
     return result;
+}
+
+public UserForm construct (User user){
+	UserForm userForm = new UserForm();
+	
+	userForm.setUsername(user.getUserAccount().getUsername());
+	userForm.setPassword(user.getUserAccount().getPassword());
+	
+	userForm.setName(user.getName());
+	userForm.setSurname(user.getSurname());
+	userForm.setEmail(user.getEmail());
+	userForm.setPhone(user.getPhone());
+	
+	return userForm;
 }
 
 	//Other business methods ------------------------------------------------

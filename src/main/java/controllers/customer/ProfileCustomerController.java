@@ -6,7 +6,6 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -22,10 +21,11 @@ import domain.Customer;
 import domain.Event;
 import domain.Invoice;
 import domain.Tournament;
+import forms.CustomerForm;
 
 
 @Controller
-@RequestMapping("/profile/customer/")
+@RequestMapping("/profile/customer")
 public class ProfileCustomerController extends AbstractController {
 	
 	@Autowired
@@ -43,7 +43,7 @@ public class ProfileCustomerController extends AbstractController {
 	
 // List------------------------------------------------------------------------
 
-@RequestMapping(value = "/profile", method = RequestMethod.GET)
+@RequestMapping(value = "/list", method = RequestMethod.GET)
 public ModelAndView list() 
 {
 
@@ -62,7 +62,7 @@ public ModelAndView list()
 		result = new ModelAndView("profile/list");
 		result.addObject("profile", profile);
 		result.addObject("actor", "/customer");
-		result.addObject("requestURI", "profile/customer/profile.do");
+		result.addObject("requestURI", "profile/customer/list.do");
 		result.addObject("events", events);
 		result.addObject("tournaments", tournaments);
 		result.addObject("invoices", invoices);
@@ -74,58 +74,58 @@ return result;
 //Edition----------------------------------------------------------------------
 
 @RequestMapping( value = "/edit", method = RequestMethod.GET)
-public ModelAndView edit(@RequestParam int customerId)
+public ModelAndView edit()
 {
-	
-	Customer profile = customerService.findByPrincipal();
-	profile = customerService.findOne(profile.getId());
-	
-	if (!profile.equals(customerService.findOne(customerId))) {
-		
-		throw new IllegalArgumentException("Not Principal");
-	}
 
 	ModelAndView result;
 	Customer customer;
+	CustomerForm customerForm;
 	
-	customer = customerService.findOne(customerId);
-	Assert.notNull(customer);
-	result = createEditModelAndView(customer);
+	customer = customerService.findByPrincipal();
+	customerForm = customerService.construct(customer);
+	
+	result = createEditModelAndView(customerForm);
 	
 	return result;
 }
 
 @RequestMapping( value = "/edit", method = RequestMethod.POST, params= "save")
-public ModelAndView save(@Valid Customer customer, BindingResult binding)
+public ModelAndView save(@Valid CustomerForm customerForm, BindingResult binding)
 {
 	
 	
 	ModelAndView result;
+	Customer customer;
 	
 	if(binding.hasErrors()){
-		result = createEditModelAndView(customer);
+		result = createEditModelAndView(customerForm);
 	}else{
-		try{
+		try {
+			customer = customerService.reconstruct(customerForm);
 			customerService.save(customer);
-			result= new ModelAndView("redirect:profile.do");
-		}catch(Throwable oops){
-			result = createEditModelAndView(customer, "customer.commit.error");
+			result = new ModelAndView("redirect:list.do");
+		} catch (Throwable oops) {
+			result = createEditModelAndView(customerForm, "customer.commit.error");
 		}
 }
 	return result;
 }
 
+//Delete-----------------------------------------------------------------------
+
 @RequestMapping( value ="/edit", method = RequestMethod.POST , params = "delete")
-public ModelAndView delete(Customer customer, BindingResult binding)
+public ModelAndView delete(CustomerForm customerForm, BindingResult binding)
 {
 	ModelAndView result;
+	Customer customer;
 	
-	try{
+	try {
+		customer = customerService.reconstruct(customerForm);
 		customerService.delete(customer);
-		result = new ModelAndView("redirect:login.do");
-	}catch(Throwable oops){
-		result = createEditModelAndView(customer, "customer.commit.error");
-}
+		result = new ModelAndView("redirect:list.do");
+	} catch (Throwable oops) {
+		result = createEditModelAndView(customerForm, "customer.commit.error");
+	}
 	return result;
 
 
@@ -133,15 +133,15 @@ public ModelAndView delete(Customer customer, BindingResult binding)
 
 //The ancillary methods--------------------------------------------------------
 
-protected ModelAndView createEditModelAndView(Customer customer){
+protected ModelAndView createEditModelAndView(CustomerForm customerForm){
 	ModelAndView result;
 	
-	result = createEditModelAndView(customer, null);
+	result = createEditModelAndView(customerForm, null);
 	
 	return result;
 }
 
-protected ModelAndView createEditModelAndView(Customer customer, String message)
+protected ModelAndView createEditModelAndView(CustomerForm customerForm, String message)
 {
 	ModelAndView result;
 	String name;
@@ -159,22 +159,22 @@ protected ModelAndView createEditModelAndView(Customer customer, String message)
 	String emailCenter;
 	String web;
 	
-	name = customer.getName();
-	surname = customer.getSurname();
-	email = customer.getEmail();
-	phone = customer.getPhone();
-	cif = customer.getCif();
-	street = customer.getStreet();
-	zip = customer.getZip();
-	provinceCenter = customer.getProvinceCenter();
-	city = customer.getCity();
-	nameCenter = customer.getNameCenter();
-	phoneCenter = customer.getPhoneCenter();
-	emailCenter = customer.getEmailCenter();
-	web = customer.getWeb();
+	name = customerForm.getName();
+	surname = customerForm.getSurname();
+	email = customerForm.getEmail();
+	phone = customerForm.getPhone();
+	cif = customerForm.getCif();
+	street = customerForm.getStreet();
+	zip = customerForm.getZip();
+	provinceCenter = customerForm.getProvinceCenter();
+	city = customerForm.getCity();
+	nameCenter = customerForm.getNameCenter();
+	phoneCenter = customerForm.getPhoneCenter();
+	emailCenter = customerForm.getEmailCenter();
+	web = customerForm.getWeb();
 	
 	result = new ModelAndView("customer/edit");
-	result.addObject("customer", customer );
+	result.addObject("customeForrm", customerForm );
 	result.addObject("name",name );
 	result.addObject("surname",surname );
 	result.addObject("email",email );

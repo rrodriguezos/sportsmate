@@ -27,7 +27,7 @@ public class CustomerForm
 {
 	
 	private String name,surname,email;
-	private int phone;
+	private String phone;
     private String cif;
 	private String street;
 	private int zip;
@@ -96,10 +96,10 @@ public class CustomerForm
 		this.email = email;
 	}
     //@Pattern(regexp = "^[9|6|7][0-9]{8}")
-	public int getPhone() {
+	public String getPhone() {
 		return phone;
 	}
-	public void setPhone(int phone) {
+	public void setPhone(String phone) {
 		this.phone = phone;
 	}
 	 @Size(min = 5, max = 32)

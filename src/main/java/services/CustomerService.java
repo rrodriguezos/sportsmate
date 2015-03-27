@@ -33,8 +33,13 @@ public class CustomerService {
 public Collection<Customer>  findAll(){
 return customerRepository.findAll();
 }
-public Customer findOne(Integer valueOf) {
-return customerRepository.findOne(valueOf);
+public Customer findOne(Integer customerId) {
+
+	Customer result;
+	
+	result = customerRepository.findOne(customerId);
+	
+	return result;
 }
 public Customer save(Customer customer){
 return customerRepository.save(customer);
@@ -85,6 +90,29 @@ public Collection<Invoice> getAllInvoices() {
 		}
 		return i;
 	}
+	
+	public CustomerForm construct (Customer customer){
+		CustomerForm customerForm = new CustomerForm();
+		
+		customerForm.setUsername(customer.getUserAccount().getUsername());
+		customerForm.setPassword(customer.getUserAccount().getPassword());
+		
+		customerForm.setName(customer.getName());
+		customerForm.setSurname(customer.getSurname());
+		customerForm.setCif(customer.getCif());
+		customerForm.setStreet(customer.getStreet());
+		customerForm.setZip(customer.getZip());
+		customerForm.setProvinceCenter(customer.getProvinceCenter());
+		customerForm.setCity(customer.getCity());
+		customerForm.setNameCenter(customer.getNameCenter());
+		customerForm.setPhoneCenter(customer.getPhoneCenter());
+		customerForm.setEmailCenter(customer.getEmailCenter());
+		customerForm.setWeb(customer.getWeb());
+		customerForm.setPhone(customer.getPhone());
+
+		
+		return customerForm;
+	}
 
 
 
@@ -100,7 +128,7 @@ public Collection<Invoice> getAllInvoices() {
 		result.setPhoneCenter(customerForm.getPhoneCenter());
 		result.setEmailCenter(customerForm.getEmailCenter());
 		result.setWeb(customerForm.getWeb());
-		result.setPhone(String.valueOf(customerForm.getPhone()));
+		result.setPhone(customerForm.getPhone());
 		
 		result.setName(customerForm.getName());
 		result.setSurname(customerForm.getSurname());
