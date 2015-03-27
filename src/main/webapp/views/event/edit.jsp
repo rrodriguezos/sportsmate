@@ -37,10 +37,10 @@
 	
 	<acme:textbox code="event.numberMaxParticipant" path="numberMaxParticipant"/>
 	<br/>
-	
+
 	<form:label path="sport"><spring:message code="event.sport"/></form:label>
 		<form:select path="sport" >
-			<form:option label="------" value="0"/>
+			<form:option value="------"/>
 			<form:options items="${sports}"  />
 		</form:select>
 		<form:errors cssClass="error" path="sport" />
@@ -48,7 +48,7 @@
 	<br />	
 	<form:label path="place"><spring:message code="event.place"/></form:label>
 		<form:select path="place" >
-			<form:option label="------" value="0"/>
+			<form:option value="------"/>
 			<form:options items="${places}"  />
 		</form:select>
 		<form:errors cssClass="error" path="place" />

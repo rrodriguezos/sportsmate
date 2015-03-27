@@ -92,6 +92,8 @@ public class EventService {
 			customer = (Customer)actor;
 			
 			event.setCustomer(customer);
+			event.setPlace(event.getCustomer().getNameCenter());
+		
 		}
 		
 		event.setCreationMoment(creationMoment);
@@ -109,13 +111,15 @@ public class EventService {
 		
 		Assert.notNull(event);
 		Assert.isTrue(event.getStartMoment().compareTo(event.getFinishMoment()) < 0);
+		Assert.isTrue(!event.getSport().equals("------"));
+		Assert.isTrue(!event.getPlace().equals("------"));
 		
 		eventRepository.save(event);
 		
 		if(actorService.findByPrincipal() instanceof User){
 			
 			owner = (User)actorService.findByPrincipal();
-			owner.getEventsCreated().add(event);
+			owner.getEventsCreated().add(event);			
 			userService.save(owner);
 			
 		}else if(actorService.findByPrincipal() instanceof Customer){

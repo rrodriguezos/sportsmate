@@ -97,9 +97,16 @@ public class EventUserController extends AbstractController{
 		ModelAndView result;
 		Event event;
 		EventForm eventForm;	
+		Collection<String> places;
 		
-		event = eventService.findOneToEdit(eventId);
+		places = eventService.places();
+		event = eventService.findOneToEdit(eventId);	
+		
 		eventForm = eventService.construct(event);
+		if(!places.contains(event.getPlace())){
+			
+			eventForm.setOtherSport(event.getPlace());
+		}
 
 		result = createEditModelAndView(eventForm);
 
@@ -120,7 +127,9 @@ public class EventUserController extends AbstractController{
 		} else {
 			try{
 				
-				event = eventService.reconstruct(eventForm);							
+				event = eventService.reconstruct(eventForm);	
+				
+				event.getUsers().add(event.getOwner());
 				
 				eventService.save(event);	
 				
