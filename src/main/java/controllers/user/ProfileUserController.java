@@ -85,22 +85,14 @@ return result;
 //Edition----------------------------------------------------------------------
 
 @RequestMapping( value = "/edit", method = RequestMethod.GET)
-public ModelAndView edit(@RequestParam int userId)
+public ModelAndView edit()
 {
-	
-	User profile = userService.findByPrincipal();
-	profile = userService.findOne(profile.getId());
-	
-	if (!profile.equals(userService.findOne(userId))) {
-		
-		throw new IllegalArgumentException("Not Principal");
-	}
 	ModelAndView result;
 	User user;
 	UserForm userForm;
 	
-	user = userService.findOne(userId);
-	userForm= userService.construct(user);
+	user = userService.findByPrincipal();
+	userForm = userService.construct(user);
 	
 	result = createEditModelAndView(userForm);
 	

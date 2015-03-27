@@ -33,8 +33,13 @@ public class CustomerService {
 public Collection<Customer>  findAll(){
 return customerRepository.findAll();
 }
-public Customer findOne(Integer valueOf) {
-return customerRepository.findOne(valueOf);
+public Customer findOne(Integer customerId) {
+
+	Customer result;
+	
+	result = customerRepository.findOne(customerId);
+	
+	return result;
 }
 public Customer save(Customer customer){
 return customerRepository.save(customer);

@@ -30,9 +30,14 @@ public Collection<User>  findAll()
 {
 	return userRepository.findAll();
 }
-public User findOne(Integer valueOf) 
+public User findOne(Integer userId) 
 {
-		return userRepository.findOne(valueOf);
+	
+	User result;
+	
+	result = userRepository.findOne(userId);
+	
+	return result;
 }
 public User save(User user)
 {

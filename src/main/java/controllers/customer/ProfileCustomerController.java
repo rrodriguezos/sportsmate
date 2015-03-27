@@ -74,14 +74,14 @@ return result;
 //Edition----------------------------------------------------------------------
 
 @RequestMapping( value = "/edit", method = RequestMethod.GET)
-public ModelAndView edit(@RequestParam int customerId)
+public ModelAndView edit()
 {
 
 	ModelAndView result;
 	Customer customer;
 	CustomerForm customerForm;
 	
-	customer = customerService.findOne(customerId);
+	customer = customerService.findByPrincipal();
 	customerForm = customerService.construct(customer);
 	
 	result = createEditModelAndView(customerForm);
