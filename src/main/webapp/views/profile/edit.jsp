@@ -12,7 +12,7 @@
 
 <security:authorize access="hasRole('CUSTOMER')">
 
-<form:form action="profile/customer/edit.do" modelAttribute="customerForm">
+<form:form action="${requestURI}" modelAttribute="customerForm">
 	<form:hidden path="id" />
 	<form:hidden path="version" />
 	<form:hidden path="events" />
@@ -66,7 +66,7 @@
 
 	<security:authorize access="hasRole('USER')">
 
-	<form:form action="profile/user/edit.do" modelAttribute="userForm">
+	<form:form action="${requestURI}" modelAttribute="userForm">
 	<form:hidden path="id" />
 	<form:hidden path="version" />
 	<form:hidden path="events" />

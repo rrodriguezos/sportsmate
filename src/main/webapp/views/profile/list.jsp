@@ -14,7 +14,7 @@
 
 <div>
 	<security:authorize access="hasRole('CUSTOMER')">
-	<display:table name="profile"	requestURI="profile/customer/list.do" id="profile"
+	<display:table name="profile"	requestURI="${requestURI}" id="profile"
 		pagesize="5" class="displayTag">
 		
 			<h1>
@@ -45,7 +45,7 @@
 </display:table>
 </security:authorize>
 	<security:authorize access="hasRole('USER')">
-	<display:table name="profile"	requestURI="profile/user/list.do" id="profile"
+	<display:table name="profile"	requestURI="${requestURI}" id="profile"
 		pagesize="5" class="displayTag">
 		
 		<h1>
