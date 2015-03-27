@@ -68,6 +68,7 @@
 	
 	
 		<security:intercept-url pattern="/conditions/laws.do" access="permitAll" />
+		<security:intercept-url pattern="/conditions/cookies.do" access="permitAll" />
 		
 		<security:intercept-url pattern="/**" access="hasRole('NONE')" />
 		

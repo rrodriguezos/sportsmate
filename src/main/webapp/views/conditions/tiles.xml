@@ -21,6 +21,11 @@
 		<put-attribute name="body" value="/views/conditions/laws.jsp" />
 	</definition>
 	
+	<definition name="conditions/cookies" extends="master.page">
+		<put-attribute name="title" value="Cookies" />
+		<put-attribute name="body" value="/views/conditions/cookies.jsp" />
+	</definition>
+	
 	
 		
 </tiles-definitions>
