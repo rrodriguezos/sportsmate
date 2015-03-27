@@ -76,14 +76,6 @@ return result;
 @RequestMapping( value = "/edit", method = RequestMethod.GET)
 public ModelAndView edit(@RequestParam int customerId)
 {
-	
-	Customer profile = customerService.findByPrincipal();
-	profile = customerService.findOne(profile.getId());
-	
-	if (!profile.equals(customerService.findOne(customerId))) {
-		
-		throw new IllegalArgumentException("Not Principal");
-	}
 
 	ModelAndView result;
 	Customer customer;
