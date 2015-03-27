@@ -59,5 +59,10 @@
 	   	   onclick="javascript: window.location.replace('event/user/create.do');" />
 </security:authorize>
 
+<security:authorize access="hasRole('CUSTOMER')">
+	<input type="button" name="create" value="<spring:message code="event.create"/>" 
+	   	   onclick="javascript: window.location.replace('event/customer/create.do');" />
+</security:authorize>
+
 <acme:cancel code="event.back" url="welcome/index.do" />
 

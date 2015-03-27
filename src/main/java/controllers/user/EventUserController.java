@@ -1,9 +1,7 @@
 package controllers.user;
 
 import java.util.Collection;
-
 import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -52,7 +50,8 @@ public class EventUserController extends AbstractController{
 		
 	}
 	
-	//Display------------------------------------------------------------------
+	//Display-----------------------------------------------------------------
+	
 	@RequestMapping(value = "/display", method = RequestMethod.GET)
 	public ModelAndView display(@RequestParam int eventId)
 	{
@@ -71,7 +70,7 @@ public class EventUserController extends AbstractController{
 		
 	}
 	
-	// Creation-----------------------------------------------
+	// Creation---------------------------------------------------------------
 
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public ModelAndView create() 
@@ -91,8 +90,28 @@ public class EventUserController extends AbstractController{
 		
 	}
 	
+	// Edition---------------------------------------------------------------
+	
+	@RequestMapping(value = "/edit", method = RequestMethod.GET)
+	public ModelAndView edit(@RequestParam int eventId) {
+		ModelAndView result;
+		Event event;
+		EventForm eventForm;	
+		
+		event = eventService.findOneToEdit(eventId);
+		eventForm = eventService.construct(event);
+
+		result = createEditModelAndView(eventForm);
+
+		return result;
+	}
+
+	// Save-----------------------------------------------------------------
+	
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
-	public ModelAndView save(@Valid EventForm eventForm, BindingResult binding){
+	public ModelAndView save(@Valid EventForm eventForm, BindingResult binding)
+	{
+		
 		ModelAndView result;
 		Event event;
 			
@@ -111,10 +130,36 @@ public class EventUserController extends AbstractController{
 				result = createEditModelAndView(eventForm,"event.commit.error");			
 			}
 		}
-		return result;				
+		
+		return result;		
+		
+	}	
+	
+	// Delete---------------------------------------------------------------
+	
+	@RequestMapping(value = "/display", method = RequestMethod.POST, params = "delete")
+	public ModelAndView delete(@Valid EventForm eventForm, BindingResult binding) 
+	{
+		
+		ModelAndView result;
+		Event event;
+		try {
+			
+			event = eventService.reconstruct(eventForm);
+			
+			eventService.delete(event);
+			
+			result = new ModelAndView("redirect:list.do");
+			
+		} catch (Throwable oops) {
+			result = createEditModelAndView(eventForm, "event.commit.error");
+		}
+		return result;
+		
 	}
 	
-	// Ancillary methods---------------------------------------
+	
+	// Ancillary methods---------------------------------------------------
 
 	protected ModelAndView createEditModelAndView(EventForm eventForm) 
 	{
@@ -141,11 +186,11 @@ public class EventUserController extends AbstractController{
 		result.addObject("eventForm", eventForm);
 		result.addObject("sports", sports);
 		result.addObject("places", places);
-		result.addObject("message", message);
-		
+		result.addObject("message", message);		
 
 		return result;
 	}		
 	
 }
+
 
