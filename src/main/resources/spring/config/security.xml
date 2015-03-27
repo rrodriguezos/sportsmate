@@ -55,15 +55,16 @@
 		<security:intercept-url pattern="/event/customer/edit.do" access="hasRole('CUSTOMER')" />
 		<security:intercept-url pattern="/customer/seeInvoices.do" access="hasRole('CUSTOMER')" />
 		<security:intercept-url pattern="/customer/invoiceDetails.do" access="hasRole('CUSTOMER')" />
+		<security:intercept-url pattern="/profile/customer/edit.do" access="hasRole('CUSTOMER')" />
+		<security:intercept-url pattern="/profile/customer/list.do" access="hasRole('CUSTOMER')" />
 		
 		<security:intercept-url pattern="/event/user/list.do" access="hasRole('USER')" />
 		<security:intercept-url pattern="/event/user/display.do" access="hasRole('USER')" />
 		<security:intercept-url pattern="/event/user/create.do" access="hasRole('USER')" />
 		<security:intercept-url pattern="/event/user/edit.do" access="hasRole('USER')" />
-
-		<security:intercept-url pattern="/profile/action-1.do" access="isAuthenticated()" /> 
-		<security:intercept-url pattern="/profile/action-2.do" access="isAuthenticated()" /> 
-		<security:intercept-url pattern="/profile/action-3.do" access="isAuthenticated()" /> 
+		<security:intercept-url pattern="/profile/user/edit.do" access="hasRole('USER')" />
+		<security:intercept-url pattern="/profile/user/list.do" access="hasRole('USER')" />
+		 
 	
 	
 		<security:intercept-url pattern="/conditions/laws.do" access="permitAll" />
