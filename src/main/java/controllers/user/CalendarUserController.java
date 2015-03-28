@@ -1,10 +1,14 @@
 package controllers.user;
 
 import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang.builder.CompareToBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -81,8 +85,18 @@ public class CalendarUserController extends AbstractController
 		
 		result.addObject("customer", c);
 		
-		Collection<Event> events=eventService.findAllEventsCalendar(c.getId());
+		List<Event> events=(List<Event>) eventService.findAllEventsCalendar(c.getId());
 		Collection<Tournament> tournaments =tournamentService.findAllTournamentsCalendar(c.getId());
+		
+		Collections.sort(events, new Comparator<Event>() {
+		    public int compare(Event m1, Event m2) {
+		        return m1.getStartMoment().compareTo(m2.getStartMoment());
+		    }
+		});
+		
+	
+		
+		
 		
 		
 		result.addObject("events", c.getEvents());
