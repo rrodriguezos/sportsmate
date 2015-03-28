@@ -32,13 +32,17 @@
 
 
 
+
+
+
 <h1> <jstl:out value="${events }"></jstl:out> </h1>
 
 <display:table name="events" id="row"
 
 requestURI="event/user/calendar/seeSportCenterCalendar.do"
-pagesize="5" class="displaytag" >
+pagesize="20" class="displaytag" defaultsort="1" defaultorder="ascending" >
 
+<display:column property="startMoment"  format="{0,date,dd-MM-yyyy}" />
 
 
 </display:table>
