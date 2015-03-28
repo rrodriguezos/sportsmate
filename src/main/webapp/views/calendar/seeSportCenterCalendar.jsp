@@ -19,28 +19,37 @@
 
 
 
+
 <spring:message code="sportCenter.name" var="name"/>
 <spring:message code="sportCenter.seeCalendar" var="seeCalendar"/>
 <spring:message code="sportCenter.city" var="city"/>
 <spring:message code="sportCenter.street" var="street"/>
-<spring:message code="sportCenter.CalendarOfEvents" var="calendarOfEvents"/>
+<spring:message code="sportCenter.events" var="events"/>
+<spring:message code="sportCenter.tournaments" var="tournaments"/>
 
 
-<display:table name="centers" id="row"
 
-requestURI="event/user/calendar/seeSportCenters.do"
+
+
+
+<h1> <jstl:out value="${events }"></jstl:out> </h1>
+
+<display:table name="events" id="row"
+
+requestURI="event/user/calendar/seeSportCenterCalendar.do"
 pagesize="5" class="displaytag" >
 
 
 
+</display:table>
 
-	<display:column title="${name }">  <jstl:out value="${row.nameCenter }"></jstl:out> </display:column>
-	<display:column title="${city }"> <jstl:out value="${row.city }"></jstl:out> </display:column>
-	<display:column title="${street }"> <jstl:out value="${row.street }"></jstl:out> </display:column>
-	<display:column title="${seeCalendar }"> <a href="event/user/calendar/seeSportCenterCalendar.do?id=${row.id }">
-		<jstl:out value="${calendarOfEvents}"></jstl:out>
-	</a></display:column>
+<h1> <jstl:out value="${tournaments }"></jstl:out> </h1>
 
+
+<display:table name="tournaments" id="row"
+
+requestURI="event/user/calendar/seeSportCenterCalendar.do"
+pagesize="5" class="displaytag" >
 
 
 

@@ -30,6 +30,7 @@
 		<value>/views/conditions/messages</value>
 		<value>/views/register/messages</value>
 		<value>/views/event/messages</value>
+		<value>/views/calendar/messages</value>
 	</util:list>
 
 </beans>

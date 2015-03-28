@@ -3,10 +3,12 @@ package services;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
+
 import repositories.EventRepository;
 import domain.Actor;
 import domain.Customer;
@@ -300,6 +302,23 @@ public class EventService {
 		
 		return event;
 		
+	}
+
+	public Collection<Event> findAllEventsCalendar(int id) {
+		// TODO Auto-generated method stub
+		
+		Collection<Event> result;
+		
+		if ( id < 0)
+			new Throwable("Bad id customer");
+		result=eventRepository.finAllEventsCalendar(id);
+		
+		if(result==null)
+			new Throwable("Bad events from customer");
+		
+		
+		
+		return result;
 	}
 }
 

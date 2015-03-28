@@ -21,4 +21,9 @@ public interface EventRepository extends JpaRepository<Event, Integer> {
 	
 	@Query("select c.events from Customer c where c.id=?1")
 	Collection<Event> findAllEventsByCustomerId(int customerId);
+
+	@Query(" select c from Event c where c.startMoment > CURRENT_TIMESTAMP  and c.customer.id=?1 ORDER BY startMoment ASC")
+	Collection<Event> finAllEventsCalendar(int id);
+
+	
 }

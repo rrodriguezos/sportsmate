@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import repositories.TournamentRepository;
 import domain.Customer;
+import domain.Event;
 import domain.Tournament;
 import domain.User;
 @Service
@@ -51,5 +52,23 @@ public Collection<Tournament> findAllTournamentsByUserId() {
 	all = tournamentRepository.findAllTournamentsByUserId(userId);
 	
 	return all;
+}
+public Collection<Tournament> findAllTournamentsCalendar(int id) {
+	
+	
+	Collection<Tournament> result;
+	
+	if ( id < 0)
+		new Throwable("Bad id customer");
+	
+	result=tournamentRepository.finAllEventsCalendar(id);
+	
+	if(result==null)
+		new Throwable("Bad Tournaments from customer");
+	
+	
+	
+	return result;
+
 }
 }

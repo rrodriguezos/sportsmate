@@ -21,6 +21,11 @@
 		<put-attribute name="body" value="/views/calendar/seeSportCenters.jsp" />
 	</definition>
 	
+	<definition name="event/user/calendar/seeSportCenterCalendar" extends="master.page">
+		<put-attribute name="title" value="Calendar of events and tournaments" />
+		<put-attribute name="body" value="/views/calendar/seeSportCenterCalendar.jsp" />
+	</definition>
+	
 	
 		
 </tiles-definitions>
