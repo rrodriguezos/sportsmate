@@ -51,7 +51,8 @@
 					<li class="arrow"></li>
 					<li><a href="event/user/list.do"><spring:message code="master.page.user.events" /></a></li>	
 					<li><a href="profile/user/list.do"><spring:message code="master.page.user.listProfile" /></a></li>
-					<li><a href="profile/user/edit.do"><spring:message code="master.page.user.editProfile" /></a></li>			
+					<li><a href="profile/user/edit.do"><spring:message code="master.page.user.editProfile" /></a></li>
+					<li><a href="event/user/calendar/seeSportCenters"><spring:message code="master.page.user.seeSportCenters" /></a></li>			
 				</ul>
 			</li>
 				

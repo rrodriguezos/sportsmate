@@ -57,6 +57,8 @@
 		<security:intercept-url pattern="/customer/invoiceDetails.do" access="hasRole('CUSTOMER')" />
 		<security:intercept-url pattern="/profile/customer/edit.do" access="hasRole('CUSTOMER')" />
 		<security:intercept-url pattern="/profile/customer/list.do" access="hasRole('CUSTOMER')" />
+		<security:intercept-url pattern="/profile/customer/list.do" access="hasRole('CUSTOMER')" />
+		
 		
 		<security:intercept-url pattern="/event/user/list.do" access="hasRole('USER')" />
 		<security:intercept-url pattern="/event/user/display.do" access="hasRole('USER')" />
@@ -64,6 +66,7 @@
 		<security:intercept-url pattern="/event/user/edit.do" access="hasRole('USER')" />
 		<security:intercept-url pattern="/profile/user/edit.do" access="hasRole('USER')" />
 		<security:intercept-url pattern="/profile/user/list.do" access="hasRole('USER')" />
+		<security:intercept-url pattern="/event/user/user/calendar/seeSportCenters.do" access="hasRole('USER')" />
 		 
 	
 	
