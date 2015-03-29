@@ -26,7 +26,21 @@
 <spring:message code="sportCenter.street" var="street"/>
 <spring:message code="sportCenter.events" var="events"/>
 <spring:message code="sportCenter.tournaments" var="tournaments"/>
+<spring:message code="sportCenter.description" var="description"/>
 
+
+
+
+
+
+
+<spring:message code="sportCenter.startMoment" var="startMoment"/>
+<spring:message code="sportCenter.place" var="place"/>
+<spring:message code="sportCenter.sport" var="sport"/>
+<spring:message code="sportCenter.maxParticipant" var="maxParticipant"/>
+<spring:message code="sportCenter.participants" var="participants"/>
+<spring:message code="sportCenter.join" var="join"/>
+<spring:message code="sportCenter.full" var="full"/>
 
 
 
@@ -42,7 +56,62 @@
 requestURI="event/user/calendar/seeSportCenterCalendar.do"
 pagesize="20" class="displaytag" defaultsort="1" defaultorder="ascending" >
 
-<display:column property="startMoment"  format="{0,date,dd-MM-yyyy}" />
+<display:column title="${startMoment }"  format="{0,date,dd-MM-yyyy}"> 
+	<jstl:out value="${row.startMoment}"/>
+</display:column>
+
+<display:column title="${place }">
+	<jstl:out value="${row.place }"/>
+</display:column>
+
+<display:column title="${sport }">
+	<jstl:out value="${ row.sport}"/>	
+</display:column>
+
+<display:column title="${maxParticipant }">
+
+	<jstl:out value="${ row.numberMaxParticipant}"/>	
+	
+
+</display:column>
+
+
+<display:column title="${description }">
+
+	<jstl:out value="${ row.description}"/>	
+	
+
+</display:column>
+
+
+<display:column title="${participants }">
+
+	<jstl:out value="${ row.users.size()}"/>	
+	
+
+</display:column>
+
+
+<display:column title="${join }">
+
+	<jstl:if test="${row.users.size() == row.numberMaxParticipant }">
+	
+		<jstl:out value="${full }"></jstl:out>
+	</jstl:if>
+	
+	
+	<jstl:if test="${row.users.size() < row.numberMaxParticipant }">
+	
+		<a href=""><jstl:out value="${join }"></jstl:out></a>
+	</jstl:if>
+	
+	
+	
+	
+
+</display:column>
+
+
 
 
 </display:table>
@@ -54,6 +123,45 @@ pagesize="20" class="displaytag" defaultsort="1" defaultorder="ascending" >
 
 requestURI="event/user/calendar/seeSportCenterCalendar.do"
 pagesize="5" class="displaytag" >
+
+
+
+<display:column title="${startMoment }"  format="{0,date,dd-MM-yyyy}"> 
+	<jstl:out value="${row.startMoment}"/>
+</display:column>
+
+<display:column title="${place }">
+	<jstl:out value="${row.place }"/>
+</display:column>
+
+<display:column title="${sport }">
+	<jstl:out value="${ row.sport}"/>	
+</display:column>
+
+
+
+
+<display:column title="${description }">
+
+	<jstl:out value="${ row.description}"/>	
+	
+
+</display:column>
+
+
+
+
+
+
+	
+	
+	
+	
+	
+	
+	
+
+
 
 
 
