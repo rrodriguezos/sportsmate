@@ -1,9 +1,8 @@
-package controllers;
+package controllers.customer;
 
 
 
 import java.util.Collection;
-
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,14 +16,21 @@ import org.springframework.web.servlet.ModelAndView;
 
 
 
+
+
+
+
+
+import controllers.AbstractController;
 import services.CustomerService;
 import services.InvoiceService;
+import domain.Customer;
 import domain.Invoice;
 
 
 @Controller
 @RequestMapping("/customer")
-public class CustomerController extends AbstractController 
+public class InvoiceCustomerController extends AbstractController 
 {
 	
 	@Autowired
@@ -57,6 +63,34 @@ public ModelAndView invoiceDetails(@RequestParam int id)
 	result=new ModelAndView("customer/invoiceDetails");
 	result.addObject("invoice", invoice);
 	return result;
+	
+}
+
+@RequestMapping("/makePay")
+public ModelAndView makePay(@RequestParam int id)
+{
+	
+	ModelAndView result;
+	
+	if( id < 0)
+		new Throwable("Bad id for invoice");
+	
+	
+	Invoice invoice =invoiceService.findOne(id);
+	Customer customer =customerService.findByPrincipal();
+	
+	if(customer != null)
+		new Throwable("Bad customer");
+	if(invoice != null)
+		new Throwable("Bad invoice");
+	
+	result = new ModelAndView("customer/makePay");
+	result.addObject("invoice", invoice);
+	result.addObject("customer", customer);
+	
+	return result;
+	
+	
 	
 }
 

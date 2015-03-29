@@ -26,14 +26,6 @@
 		<put-attribute name="body" value="/views/customer/action-2.jsp" />
 	</definition>
 	
-	<definition name="customer/seeInvoices" extends="master.page">	
-		<put-attribute name="title" value="Ver facturas" />
-		<put-attribute name="body" value="/views/customer/seeInvoices.jsp" />
-	</definition>
 	
-	<definition name="customer/invoiceDetails" extends="master.page">	
-		<put-attribute name="title" value="Detalle factura" />
-		<put-attribute name="body" value="/views/customer/invoiceDetails.jsp" />
-	</definition>
 	
 </tiles-definitions>
