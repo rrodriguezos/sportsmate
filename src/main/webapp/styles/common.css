@@ -20,6 +20,7 @@ body {
 	-moz-background-size: cover;
 	-o-background-size: cover;
 	background-size: cover;
+	word-wrap: break-word;
 }
 
 /* Sportsmate logotype */
@@ -48,7 +49,6 @@ body {
 	padding: 0.2em 2em;
 	background-color: rgba(128,128,128,0.8);
 	overflow: auto;
-	
 }
 
 .flagdiv{
@@ -56,12 +56,19 @@ body {
 	float: left;
 	margin-right: 0.8em;
 	margin-left: -0.6em; /* recovers from 0.3 + 0.3 em */
-	padding: 0.2em 0.7em;
+	padding: 0.3em 0.7em 0.2em 0.7em;
 	border-radius: 0.4em;
 	font-family: sans-serif;
 	font-size: 0.8em;
 	font-decoration: none;
 	color: #FFFFFF;
+	vertical-align: baseline;
+	
+	/* Effect */
+	-webkit-transition: all .3s ease-in-out;
+	-moz-transition: all .3s ease-in-out;
+	-o-transition: all .3s ease-in-out;
+	transition: all .3s ease-in-out;
 }
 
 .flagdiv:hover{
@@ -91,7 +98,7 @@ body {
 	border-radius: 0.4em;
 	padding: 1em 2em;
 	text-align: center;
-	margin-top: 0.5em;
+	margin-top: 0.2em;
 	clear: both;
 	font-family: sans-serif;
 	border: thin solid black;
@@ -105,3 +112,84 @@ body {
 	color: red;
 	font-weight: bolder;
 }
+
+
+
+/***********************************/
+/* Here starts RESPONSIVE commands */
+/***********************************/
+
+/* taking 800px width as break point */
+
+@media (max-width: 800px){
+
+	body, h1{
+		padding: 0;
+		margin: 0;
+	}
+
+	#header_image{
+		margin: 1em 2em;
+		clear: both;
+	
+	}
+	
+	#header_image img {
+ 		max-width: 100%;
+ 		height: auto;
+	}
+	
+	#header_menubar{
+		margin: 0;
+		width: 100%;
+		border-radius: 0;
+		padding: 0em 0em;
+	}
+	
+	#header_languagebar{
+		margin: 0 ;
+		width: 100%;
+		border-radius: 0;
+		padding: 0.4em 0em;
+		background-color: rgba(128,128,128,0.8);
+		overflow: auto;
+	}
+	
+	.flagdiv{
+
+	padding: 0.5em 0.7em 0.4em 0.7em;
+	border-radius: 0.2em;
+	font-size: 1em;
+	margin-left: 0.5em;
+	}
+	
+	#content_area{
+		margin: 0;
+		width: 100%;
+		background-color: rgba(255,255,255,0.9);
+		border-radius: 0;
+		border: 0;
+		padding: 0;
+		overflow: auto;
+	}
+	
+	.innercontent_area{
+		padding: 0em 2em 2em 2em;
+	}
+	
+	.innercontent_area h1{
+		padding: 0.7em 0em 0.5em 0em;
+	}
+	
+	#footer_area{
+		margin: 0;
+		width: 100%;
+		border-radius: 0;
+		border: 0;
+		padding: 1em 0em;
+		font-size: 0.8em;
+	}
+	
+}
+
+

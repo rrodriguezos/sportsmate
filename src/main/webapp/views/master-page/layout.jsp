@@ -15,7 +15,7 @@
 <%@taglib prefix="jstl" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"%>
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
 
@@ -30,10 +30,11 @@
 <script type="text/javascript" src="scripts/jquery-ui.js"></script>
 <script type="text/javascript" src="scripts/jmenu.js"></script>
 
-<link rel="stylesheet" href="styles/common.css" type="text/css">
-<link rel="stylesheet" href="styles/jmenu.css" media="screen"
-	type="text/css" />
-<link rel="stylesheet" href="styles/displaytag.css" type="text/css">
+<link rel="stylesheet" media="all" href="styles/common.css" type="text/css" />
+
+<link rel="stylesheet" media="all" href="styles/jmenu.css" media="screen" type="text/css" />
+	
+<link rel="stylesheet" media="all" href="styles/displaytag.css" type="text/css" />
 
 <title><tiles:insertAttribute name="title" ignore="true" /></title>
 
@@ -68,6 +69,7 @@
 		<tiles:insertAttribute name="header" />
 	</div>
 	<div id="content_area">
+		<div class="innercontent_area">
 		<h1>
 			<tiles:insertAttribute name="title" />
 		</h1>
@@ -76,6 +78,7 @@
 			<br />
 			<span class="message"><spring:message code="${message}" /></span>
 		</jstl:if>	
+		</div>
 	</div>
 	<div id="footer_area">
 		<tiles:insertAttribute name="footer" />
