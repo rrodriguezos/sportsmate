@@ -40,6 +40,8 @@
 <spring:message code="sportCenter.maxParticipant" var="maxParticipant"/>
 <spring:message code="sportCenter.participants" var="participants"/>
 <spring:message code="sportCenter.join" var="join"/>
+<spring:message code="sportCenter.joined" var="joined"/>
+
 <spring:message code="sportCenter.full" var="full"/>
 
 
@@ -100,11 +102,30 @@ pagesize="20" class="displaytag" defaultsort="1" defaultorder="ascending" >
 	</jstl:if>
 	
 	
-	<jstl:if test="${row.users.size() < row.numberMaxParticipant }">
 	
-		<a href="event/user/calendar/joinEvent.do?id=${row.id }"><jstl:out value="${join }"></jstl:out></a>
+	 	<jstl:set var="contains" value="false" />
+	    
+	<jstl:if test="${userEvents.size() > 0 }">
+	
+	<jstl:forEach var="item" items="${userEvents}">
+	
+	  <jstl:if test="${item.id eq row.id}">
+	    <jstl:set var="contains" value="true" />
+	  
+	  </jstl:if>
+	</jstl:forEach>
+	
 	</jstl:if>
-	
+		
+		<jstl:if test="${row.users.size() < row.numberMaxParticipant }">
+			<jstl:if test="${contains == false}">
+				<a href="event/user/calendar/joinEvent.do?id=${row.id }"><jstl:out value="${join }"></jstl:out></a>
+			</jstl:if>
+			
+			<jstl:if test="${contains == true}">
+				<jstl:out value="${joined }"></jstl:out>
+			</jstl:if>
+		</jstl:if>
 	
 	
 	

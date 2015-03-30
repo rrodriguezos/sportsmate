@@ -78,6 +78,9 @@ public class CalendarUserController extends AbstractController
 		
 		ModelAndView result;
 		Customer c;
+		User u;
+		
+		
 		
 		if( id < 0 )
 			new Throwable("Bad id");
@@ -86,6 +89,13 @@ public class CalendarUserController extends AbstractController
 		
 		if(c==null)
 			new Throwable("Bad customer");
+		
+		u=userService.findByPrincipal();
+		
+		
+		if(c == null )
+			new Throwable("Bad user");
+			
 		
 		result = new ModelAndView("event/user/calendar/seeSportCenterCalendar");
 		
@@ -107,6 +117,7 @@ public class CalendarUserController extends AbstractController
 		
 		result.addObject("events", c.getEvents());
 		result.addObject("tournaments", c.getTournaments());
+		result.addObject("userEvents", u.getEvents());
 		
 		return result;
 	}
@@ -131,9 +142,9 @@ public class CalendarUserController extends AbstractController
 		if(u == null )
 			new Throwable("bad user from DB");
 		
-		Collection<Event> events=eventService.findAllEventsByUserId();
+		Collection<Event> events=u.getEvents();
 		
-		if(events.contains(events))
+		if(events.contains(e))
 			new Throwable("The user is joined to this event, can't rejoint");
 		
 		Collection<User> users=e.getUsers();
@@ -148,7 +159,7 @@ public class CalendarUserController extends AbstractController
 		
 		userService.save(u);
 		
-		return null;
+		return seeCostumerList();
 			
 		
 		
