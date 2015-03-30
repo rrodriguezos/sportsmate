@@ -11,6 +11,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -26,6 +27,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+
 
 
 
@@ -223,7 +225,25 @@ public ModelAndView makePayPaypal(@RequestParam String PayerID, @RequestParam St
 	paymentExecute.setPayerId(PayerID);
 	payment.execute(apiContext, paymentExecute);
 	
-	return null;
+	Collection<Invoice> invoices=invoiceService.findAllInvoicesByCustomerId();
+	
+	Invoice invoice=null;
+	
+	
+	for (Invoice c :invoices){
+		
+		
+		if(c.getDatePay()==null){
+			
+			invoice=c;
+		}
+	}
+	
+	invoice.setDatePay(new Date());
+	invoiceService.save(invoice);
+	
+	ModelAndView result =seeInvoices();
+	return result;
 	
 	
 	
