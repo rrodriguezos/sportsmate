@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.lang.builder.CompareToBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
@@ -19,9 +20,11 @@ import controllers.AbstractController;
 import services.CustomerService;
 import services.EventService;
 import services.TournamentService;
+import services.UserService;
 import domain.Customer;
 import domain.Event;
 import domain.Tournament;
+import domain.User;
 @Controller
 @RequestMapping("/event/user/calendar")
 public class CalendarUserController extends AbstractController
@@ -34,6 +37,9 @@ public class CalendarUserController extends AbstractController
 	
 	@Autowired
 	private EventService eventService;
+	
+	@Autowired
+	private UserService userService;
 	
 	@Autowired
 	private TournamentService tournamentService;
@@ -103,6 +109,50 @@ public class CalendarUserController extends AbstractController
 		result.addObject("tournaments", c.getTournaments());
 		
 		return result;
+	}
+	
+	@RequestMapping("joinEvent")
+	public ModelAndView joinEvent(@RequestParam int id)
+	{
+		
+		ModelAndView result;
+		
+		if(id < 0 )
+			new Throwable("bad id for event");
+		
+		Event e=eventService.findOne(id);
+		
+		if(e==null)
+			new Throwable("bad event from DB");
+			
+		
+		User u=userService.findByPrincipal();
+		
+		if(u == null )
+			new Throwable("bad user from DB");
+		
+		Collection<Event> events=eventService.findAllEventsByUserId();
+		
+		if(events.contains(events))
+			new Throwable("The user is joined to this event, can't rejoint");
+		
+		Collection<User> users=e.getUsers();
+		users.add(u);
+		e.setUsers(users);
+		eventService.save(e);
+		
+		events.add(e);
+		
+		
+		u.setEvents(events);
+		
+		userService.save(u);
+		
+		return null;
+			
+		
+		
+		
 	}
 
 	

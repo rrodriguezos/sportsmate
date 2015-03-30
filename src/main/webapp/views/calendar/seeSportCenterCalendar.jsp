@@ -102,7 +102,7 @@ pagesize="20" class="displaytag" defaultsort="1" defaultorder="ascending" >
 	
 	<jstl:if test="${row.users.size() < row.numberMaxParticipant }">
 	
-		<a href=""><jstl:out value="${join }"></jstl:out></a>
+		<a href="event/user/calendar/joinEvent.do?id=${row.id }"><jstl:out value="${join }"></jstl:out></a>
 	</jstl:if>
 	
 	

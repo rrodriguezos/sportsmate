@@ -73,6 +73,7 @@
 		<security:intercept-url pattern="/profile/user/list.do" access="hasRole('USER')" />
 		<security:intercept-url pattern="/event/user/calendar/seeSportCenters.do" access="hasRole('USER')" />
 		<security:intercept-url pattern="/event/user/calendar/seeSportCenterCalendar.do" access="hasRole('USER')" />
+		<security:intercept-url pattern="/event/user/calendar/joinEvent.do" access="hasRole('USER')" />
 		 
 	
 	

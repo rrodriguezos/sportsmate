@@ -176,7 +176,7 @@ public ModelAndView makePayPaypal(@RequestParam int id) throws IOException, PayP
 
 	Amount amount = new Amount();
 	amount.setCurrency("EUR");
-	amount.setTotal("50");
+	amount.setTotal("15");
 
 	Transaction transaction = new Transaction();
 	transaction.setDescription("creating a payment");
