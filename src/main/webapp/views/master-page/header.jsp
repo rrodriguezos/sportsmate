@@ -107,9 +107,18 @@
 </div>
 
 <div id="header_languagebar">
-	<a href="?language=en">en</a> | <a href="?language=es">es</a>
-	
-	
+	<a href="?language=en">
+		<div class="flagdiv">
+			<img src="images/en_flag.jpg" alt="English" />
+			<span>EN</span>
+		</div>
+	</a>
+	<a href="?language=es">
+		<div class="flagdiv">
+			<img src="images/es_flag.jpg" alt="Espanol" />
+			<span>ES</span>
+		</div>
+	</a>	
 
 </div>
 
