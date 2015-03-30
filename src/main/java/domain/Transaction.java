@@ -1,6 +1,6 @@
 package domain;
 
-public class Transactions
+public class Transaction
 {
     private Amount amount;
 

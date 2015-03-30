@@ -1,10 +1,12 @@
 package domain;
 
-public class PaymentStatus
+import java.util.List;
+
+public class Payment
 {
     private String id;
 
-    private Transactions[] transactions;
+    private List<Transaction> transactions;
 
     private String update_time;
 
@@ -14,7 +16,7 @@ public class PaymentStatus
 
     private String create_time;
 
-    private Links[] links;
+    private RedirectUrls redirectUrls;
 
     private String intent;
 
@@ -28,17 +30,17 @@ public class PaymentStatus
         this.id = id;
     }
 
-    public Transactions[] getTransactions ()
-    {
-        return transactions;
-    }
+   
 
-    public void setTransactions (Transactions[] transactions)
-    {
-        this.transactions = transactions;
-    }
+    public List<Transaction> getTransactions() {
+		return transactions;
+	}
 
-    public String getUpdate_time ()
+	public void setTransactions(List<Transaction> transactions) {
+		this.transactions = transactions;
+	}
+
+	public String getUpdate_time ()
     {
         return update_time;
     }
@@ -78,17 +80,17 @@ public class PaymentStatus
         this.create_time = create_time;
     }
 
-    public Links[] getLinks ()
-    {
-        return links;
-    }
+    
 
-    public void setLinks (Links[] links)
-    {
-        this.links = links;
-    }
+    public RedirectUrls getRedirectUrls() {
+		return redirectUrls;
+	}
 
-    public String getIntent ()
+	public void setRedirectUrls(RedirectUrls redirectUrls) {
+		this.redirectUrls = redirectUrls;
+	}
+
+	public String getIntent ()
     {
         return intent;
     }
@@ -98,9 +100,5 @@ public class PaymentStatus
         this.intent = intent;
     }
 
-    @Override
-    public String toString()
-    {
-        return "ClassPojo [id = "+id+", transactions = "+transactions+", update_time = "+update_time+", payer = "+payer+", state = "+state+", create_time = "+create_time+", links = "+links+", intent = "+intent+"]";
-    }
+   
 }

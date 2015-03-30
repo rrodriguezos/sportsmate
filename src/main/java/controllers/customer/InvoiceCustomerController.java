@@ -2,9 +2,26 @@ package controllers.customer;
 
 
 
+import java.io.BufferedReader;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
+import org.apache.commons.codec.binary.Base64;
+import org.codehaus.jackson.map.ObjectMapper;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Node;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -21,11 +38,62 @@ import org.springframework.web.servlet.ModelAndView;
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+import com.lowagie.text.Element;
+import com.paypal.api.payments.Amount;
+import com.paypal.api.payments.Links;
+import com.paypal.api.payments.Payer;
+import com.paypal.api.payments.Payment;
+import com.paypal.api.payments.PaymentExecution;
+import com.paypal.api.payments.RedirectUrls;
+import com.paypal.api.payments.Transaction;
+import com.paypal.base.rest.APIContext;
+import com.paypal.base.rest.OAuthTokenCredential;
+import com.paypal.base.rest.PayPalRESTException;
+
 import controllers.AbstractController;
-import services.CustomerService;
-import services.InvoiceService;
 import domain.Customer;
 import domain.Invoice;
+import services.CustomerService;
+import services.InvoiceService;
 
 
 @Controller
@@ -94,6 +162,74 @@ public ModelAndView makePay(@RequestParam int id)
 	
 }
 
+@RequestMapping("/makePayPaypal")
+public ModelAndView makePayPaypal(@RequestParam int id) throws IOException, PayPalRESTException
+{
+	Map<String, String> sdkConfig = new HashMap<String, String>();
+	sdkConfig.put("mode", "sandbox");
 
+	String accessToken = new OAuthTokenCredential("ASEA9iFHqo5dyXBCszPMOEcO7MqbddtDY_CCKdNvWWVqHKYVstl_zISqOT9ZhdPv_8WLHble8L4PQ5H6", "EOIJoOYXdZXCBo4LPXepLL1KursXAFRzaAWqFov0H9nOP_u14UHpZe5lqXPMtY9sZWhyLzOOmb4NoVkP", sdkConfig).getAccessToken();
+	APIContext apiContext = new APIContext(accessToken);
+	apiContext.setConfigurationMap(sdkConfig);
 
+	Amount amount = new Amount();
+	amount.setCurrency("EUR");
+	amount.setTotal("50");
+
+	Transaction transaction = new Transaction();
+	transaction.setDescription("creating a payment");
+	transaction.setAmount(amount);
+
+	List<Transaction> transactions = new ArrayList<Transaction>();
+	transactions.add(transaction);
+
+	Payer payer = new Payer();
+	payer.setPaymentMethod("paypal");
+
+	Payment payment = new Payment();
+	payment.setIntent("sale");
+	payment.setPayer(payer);
+	payment.setTransactions(transactions);
+	RedirectUrls redirectUrls = new RedirectUrls();
+	redirectUrls.setCancelUrl("https://devtools-paypal.com/guide/pay_paypal?cancel=true");
+	redirectUrls.setReturnUrl("http://localhost:8080/SportsMate/customer/executePayment.do");
+	payment.setRedirectUrls(redirectUrls);
+
+	Payment createdPayment = payment.create(apiContext);	
+	
+	ModelAndView redirect=new ModelAndView("redirect:"+createdPayment.getLinks().get(1).getHref());
+	
+		return redirect;
+	
+	
+	}
+
+@RequestMapping("/executePayment")
+public ModelAndView makePayPaypal(@RequestParam String PayerID, @RequestParam String paymentId) throws IOException, PayPalRESTException
+{
+	Map<String, String> sdkConfig = new HashMap<String, String>();
+	sdkConfig.put("mode", "sandbox");
+	String accessToken = new OAuthTokenCredential("ASEA9iFHqo5dyXBCszPMOEcO7MqbddtDY_CCKdNvWWVqHKYVstl_zISqOT9ZhdPv_8WLHble8L4PQ5H6", "EOIJoOYXdZXCBo4LPXepLL1KursXAFRzaAWqFov0H9nOP_u14UHpZe5lqXPMtY9sZWhyLzOOmb4NoVkP", sdkConfig).getAccessToken();
+	APIContext apiContext = new APIContext(accessToken);
+	
+	apiContext.setConfigurationMap(sdkConfig);
+	Payer payer = new Payer();
+	payer.setPaymentMethod("paypal");
+	Payment payment = new Payment();
+	payment.setId(paymentId);
+	
+	
+	PaymentExecution paymentExecute = new PaymentExecution();
+	paymentExecute.setPayerId(PayerID);
+	payment.execute(apiContext, paymentExecute);
+	
+	return null;
+	
+	
+	
+	
 }
+}
+
+
+

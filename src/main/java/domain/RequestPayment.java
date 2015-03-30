@@ -2,20 +2,20 @@ package domain;
 
 public class RequestPayment
 {
-    private Transactions[] transactions;
+    private Transaction[] transactions;
 
     private Payer payer;
 
-    private Redirect_urls redirect_urls;
+    private RedirectUrls redirect_urls;
 
     private String intent;
 
-    public Transactions[] getTransactions ()
+    public Transaction[] getTransactions ()
     {
         return transactions;
     }
 
-    public void setTransactions (Transactions[] transactions)
+    public void setTransactions (Transaction[] transactions)
     {
         this.transactions = transactions;
     }
@@ -30,12 +30,12 @@ public class RequestPayment
         this.payer = payer;
     }
 
-    public Redirect_urls getRedirect_urls ()
+    public RedirectUrls getRedirect_urls ()
     {
         return redirect_urls;
     }
 
-    public void setRedirect_urls (Redirect_urls redirect_urls)
+    public void setRedirect_urls (RedirectUrls redirect_urls)
     {
         this.redirect_urls = redirect_urls;
     }

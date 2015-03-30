@@ -29,7 +29,7 @@
 
 <display:table name="invoice" id="row"
 
-requestURI="customer/ownItemList.do"
+requestURI="customer/makePay.do"
 pagesize="5" class="displaytag" >
 
 
@@ -45,7 +45,7 @@ pagesize="5" class="displaytag" >
 
 
 <display:column title="${pay}"> 
-	<spring:message code="customer.invoice.makePay" />
+	<a href="customer/makePayPaypal.do?id=${row.id }"><jstl:out value="${ pay}"></jstl:out></a>
 </display:column>
 
 

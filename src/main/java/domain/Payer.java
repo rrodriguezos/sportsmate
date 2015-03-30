@@ -2,21 +2,22 @@ package domain;
 
 public class Payer
 {
-    private String payment_method;
+    private String paymentMethod;
 
-    public String getPayment_method ()
-    {
-        return payment_method;
-    }
+ 
+    public String getPaymentMethod() {
+		return paymentMethod;
+	}
 
-    public void setPayment_method (String payment_method)
-    {
-        this.payment_method = payment_method;
-    }
 
-    @Override
+	public void setPaymentMethod(String paymentMethod) {
+		this.paymentMethod = paymentMethod;
+	}
+
+
+	@Override
     public String toString()
     {
-        return "ClassPojo [payment_method = "+payment_method+"]";
+        return "ClassPojo [payment_method = "+paymentMethod+"]";
     }
 }
