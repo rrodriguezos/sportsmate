@@ -13,11 +13,6 @@
 <security:authorize access="hasRole('CUSTOMER')">
 
 <form:form action="${requestURI}" modelAttribute="customerForm">
-	<form:hidden path="id" />
-	<form:hidden path="version" />
-	<form:hidden path="events" />
-	<form:hidden path="tournaments" />
-	<form:hidden path="invoices" />
 	
 	
 	<fieldset>
@@ -67,11 +62,8 @@
 	<security:authorize access="hasRole('USER')">
 
 	<form:form action="${requestURI}" modelAttribute="userForm">
-	<form:hidden path="id" />
-	<form:hidden path="version" />
-	<form:hidden path="events" />
-	<form:hidden path="tournaments" />
-	<form:hidden path="teams" />
+	
+	
 	
 	<fieldset>
 		<legend>
