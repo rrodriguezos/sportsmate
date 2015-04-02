@@ -26,6 +26,8 @@ import domain.Vote;
 public class CustomerForm 
 {
 	
+	private int id;
+	
 	private String name,surname,email;
 	private String phone;
     private String cif;
@@ -45,6 +47,15 @@ public class CustomerForm
 	private Collection<Event> events;
 	private Collection<Tournament> tournaments;
 	private Collection<Vote> votes;
+	
+	
+	public int getId() {
+		return id;
+	}
+	
+	public void setId(int id) {
+		this.id = id;
+	}
     
     public Collection<Vote> getVotes() {
 		return votes;

@@ -137,17 +137,18 @@ public 	User reconstruct(UserForm userForm)
 }
 
 public UserForm construct (User user){
-	UserForm userForm = new UserForm();
+	UserForm result;
+	result = new UserForm();
 	
-	userForm.setUsername(user.getUserAccount().getUsername());
-	userForm.setPassword(user.getUserAccount().getPassword());
+	result.setUsername(user.getUserAccount().getUsername());
+	result.setPassword(user.getUserAccount().getPassword());
 	
-	userForm.setName(user.getName());
-	userForm.setSurname(user.getSurname());
-	userForm.setEmail(user.getEmail());
-	userForm.setPhone(user.getPhone());
+	result.setName(user.getName());
+	result.setSurname(user.getSurname());
+	result.setEmail(user.getEmail());
+	result.setPhone(user.getPhone());
 	
-	return userForm;
+	return result;
 }
 
 	//Other business methods ------------------------------------------------
@@ -176,7 +177,7 @@ public boolean userRegistered(String username)
 	}
 public void delete(User user) 
 {
-	userRepository.delete(user.getId());
+	userRepository.delete(user);
 	
 }
 

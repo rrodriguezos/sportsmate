@@ -1,13 +1,23 @@
-<%@page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+<%--
+ * edit.jsp
+ *
+ * Copyright (C) 2014 Universidad de Sevilla
+ * 
+ * The use of this project is hereby constrained to the conditions of the 
+ * TDG Licence, a copy of which you may download from 
+ * http://www.tdg-seville.info/License.html
+ --%>
+
+<%@page language="java" contentType="text/html; charset=ISO-8859-1"	pageEncoding="ISO-8859-1"%>
 
 <%@taglib prefix="jstl" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"%>
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-<%@taglib prefix="security"
-	uri="http://www.springframework.org/security/tags"%>
+<%@taglib prefix="security"	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
-<%@taglib prefix="acme" tagdir="/WEB-INF/tags"%>
+<%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
 
 <security:authorize access="hasRole('CUSTOMER')">
@@ -55,7 +65,7 @@
 				value="<spring:message code="actor.delete"/>"
 				onclick="window.location.href='j_spring_security_logout'" />&nbsp;
 		
-		<acme:cancel url="welcome/index.do" code="customer.cancel" />&nbsp;
+		<acme:cancel url="welcome/index.do" code="actor.cancel" />&nbsp;
 	</form:form>		
 	</security:authorize>
 
@@ -63,16 +73,16 @@
 
 	<form:form action="${requestURI}" modelAttribute="userForm">
 	
-	
+	<form:hidden path="id" />
 	
 	<fieldset>
-		<legend>
-			<spring:message code="actor.useraccount" />
-		</legend>
-		<acme:textbox code="actor.name" path="name" />
-		<acme:password code="actor.password" path="password" />
-		<acme:password code="actor.password2" path="password2" />
-	</fieldset>
+			<legend>
+				<spring:message code="actor.useraccount" />
+			</legend>
+			<acme:textbox code="useraccount.name" path="username" />
+			<acme:password code="useraccount.password" path="password" />
+			<acme:password code="useraccount.password2" path="password2" />
+		</fieldset>
 	<hr />
 
 		<legend>
@@ -85,7 +95,7 @@
 	
 			
 		
-		<acme:submit name="save" code="actor.save" />&nbsp;
+		<acme:submit code="actor.save" name="save" />&nbsp;
 		
 			<input type="submit" name="delete"
 				value="<spring:message code="user.delete"/>"

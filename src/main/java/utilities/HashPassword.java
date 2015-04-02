@@ -42,5 +42,15 @@ public class HashPassword {
 			//oops.printStackTrace(System.out);			
 		}
 	}
+	public static String encode(String password){
+		Md5PasswordEncoder encoder;
+		String result;
+		
+		encoder = new Md5PasswordEncoder();
+		
+		result = encoder.encodePassword(password, null);
+		
+		return result;
+}
 
 }

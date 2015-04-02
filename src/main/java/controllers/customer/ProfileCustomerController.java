@@ -9,7 +9,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.CustomerService;
@@ -88,6 +87,7 @@ public ModelAndView edit()
 	
 	return result;
 }
+//Save --------------------------------------------------------------------
 
 @RequestMapping( value = "/edit", method = RequestMethod.POST, params= "save")
 public ModelAndView save(@Valid CustomerForm customerForm, BindingResult binding)
@@ -144,50 +144,9 @@ protected ModelAndView createEditModelAndView(CustomerForm customerForm){
 protected ModelAndView createEditModelAndView(CustomerForm customerForm, String message)
 {
 	ModelAndView result;
-	String name;
-	String surname;
-	String email;
-	String phone;
-	
-	String cif;
-	String street;
-	Integer zip;
-	String provinceCenter;
-	String city;
-	String nameCenter;
-	String phoneCenter;
-	String emailCenter;
-	String web;
-	
-	name = customerForm.getName();
-	surname = customerForm.getSurname();
-	email = customerForm.getEmail();
-	phone = customerForm.getPhone();
-	cif = customerForm.getCif();
-	street = customerForm.getStreet();
-	zip = customerForm.getZip();
-	provinceCenter = customerForm.getProvinceCenter();
-	city = customerForm.getCity();
-	nameCenter = customerForm.getNameCenter();
-	phoneCenter = customerForm.getPhoneCenter();
-	emailCenter = customerForm.getEmailCenter();
-	web = customerForm.getWeb();
-	
+
 	result = new ModelAndView("customer/edit");
-	result.addObject("customeForrm", customerForm );
-	result.addObject("name",name );
-	result.addObject("surname",surname );
-	result.addObject("email",email );
-	result.addObject("phone",phone );
-	result.addObject("cif",cif );
-	result.addObject("street",street );
-	result.addObject("zip", zip);
-	result.addObject("provinceCenter",provinceCenter );
-	result.addObject("city", city);
-	result.addObject("nameCenter",nameCenter );
-	result.addObject("phoneCenter", phoneCenter);
-	result.addObject("emailCenter",emailCenter );
-	result.addObject("web",web );
+	result.addObject("customerForm", customerForm );	
 	result.addObject("message", message);
 	
 	return result;

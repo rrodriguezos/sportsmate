@@ -9,8 +9,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+
 
 
 
@@ -32,6 +32,7 @@ import forms.UserForm;
 @Controller
 @RequestMapping("/profile/user")
 public class ProfileUserController extends AbstractController {
+// Services -------------------------------------------------------------------
 	
 	@Autowired
 	private UserService userService;
@@ -98,24 +99,29 @@ public ModelAndView edit()
 	
 	return result;
 }
+//Save --------------------------------------------------------------------
 
 @RequestMapping( value = "/edit", method = RequestMethod.POST, params= "save")
 public ModelAndView save(@Valid UserForm userForm, BindingResult binding)
 {
 	ModelAndView result;
 	User user;
-	
-	if(binding.hasErrors()){
+
+	if (binding.hasErrors()) {
 		result = createEditModelAndView(userForm);
-	}else{
+	} else {
 		try {
+
 			user = userService.reconstruct(userForm);
+
 			userService.save(user);
+
 			result = new ModelAndView("redirect:list.do");
 		} catch (Throwable oops) {
+
 			result = createEditModelAndView(userForm, "user.commit.error");
 		}
-}
+	}
 	return result;
 }
 
@@ -152,24 +158,10 @@ protected ModelAndView createEditModelAndView(UserForm userForm){
 protected ModelAndView createEditModelAndView(UserForm userForm, String message)
 {
 	ModelAndView result;
-	String name;
-	String surname;
-	String email;
-	String phone;
-	
-	
-	name = userForm.getName();
-	surname = userForm.getSurname();
-	email = userForm.getEmail();
-	phone = userForm.getPhone();
-	
 	
 	result = new ModelAndView("user/edit");
-	result.addObject("userForm", userForm );
-	result.addObject("name",name );
-	result.addObject("surname",surname );
-	result.addObject("email",email );
-	result.addObject("phone",phone );
+	
+	result.addObject("userForm", userForm);;
 	result.addObject("message", message);
 	
 	return result;
