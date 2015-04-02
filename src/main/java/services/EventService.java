@@ -113,8 +113,6 @@ public class EventService {
 		
 		Assert.notNull(event);
 		Assert.isTrue(event.getStartMoment().compareTo(event.getFinishMoment()) < 0);
-		Assert.isTrue(!event.getSport().equals("------"));
-		Assert.isTrue(!event.getPlace().equals("------"));
 		
 		eventRepository.save(event);
 		
@@ -294,8 +292,8 @@ public class EventService {
 		event.setNumberMaxParticipant(eventForm.getNumberMaxParticipant());
 		event.setSport(eventForm.getSport());
 		
-		if(!eventForm.getOtherSport().isEmpty()){
-			event.setPlace(eventForm.getOtherSport());
+		if(!eventForm.getOtherSportCenter().isEmpty()){
+			event.setPlace(eventForm.getOtherSportCenter());
 		}else{
 			event.setPlace(eventForm.getPlace());	
 		}		

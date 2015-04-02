@@ -2,6 +2,8 @@ package services;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
@@ -177,6 +179,14 @@ public void delete(User user)
 	userRepository.delete(user.getId());
 	
 }
+
+	public Collection<User> findAllUsersByEventId(int eventId){
+		Set<User> all;
+		
+		all = new HashSet<User>(userRepository.findAllUsersByEventId(eventId));
+		
+		return all;
+	}
 
 }
 

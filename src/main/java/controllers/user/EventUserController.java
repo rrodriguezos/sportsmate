@@ -10,8 +10,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import services.EventService;
+import services.UserService;
 import controllers.AbstractController;
 import domain.Event;
+import domain.User;
 import forms.EventForm;
 
 @Controller
@@ -22,6 +24,8 @@ public class EventUserController extends AbstractController{
 	@Autowired 
 	private EventService eventService;
 
+	@Autowired
+	private UserService userService;
 
 	// Constructors -----------------------------------------------------------
 	public EventUserController()
@@ -58,13 +62,15 @@ public class EventUserController extends AbstractController{
 		
 		ModelAndView result;
 		Event event;
+		Collection<User> users;
 		
 		event = eventService.findOne(eventId);
+		users = userService.findAllUsersByEventId(eventId);
 		
 		result = new ModelAndView("event/display");
 		
 		result.addObject("event", event);
-		
+		result.addObject("users", users);		
 		
 		return result;
 		
@@ -105,7 +111,7 @@ public class EventUserController extends AbstractController{
 		eventForm = eventService.construct(event);
 		if(!places.contains(event.getPlace())){
 			
-			eventForm.setOtherSport(event.getPlace());
+			eventForm.setOtherSportCenter(event.getPlace());
 		}
 
 		result = createEditModelAndView(eventForm);
@@ -127,13 +133,29 @@ public class EventUserController extends AbstractController{
 		} else {
 			try{
 				
-				event = eventService.reconstruct(eventForm);	
+				event = eventService.reconstruct(eventForm);
 				
-				event.getUsers().add(event.getOwner());
+				if(event.getOwner() != null){
+					event.getUsers().add(event.getOwner());
+				}			
 				
-				eventService.save(event);	
+				String defectValue = "------";
 				
-				result = new ModelAndView("redirect:list.do");
+				if(event.getSport().equals(defectValue)){
+					
+					result = createEditModelAndView(eventForm, "event.sport.null");
+					
+				}else if(event.getPlace().equals(defectValue)){
+					
+					result = createEditModelAndView(eventForm, "event.place.null");
+					
+				}else{
+					eventService.save(event);	
+					
+					result = new ModelAndView("redirect:list.do");
+				}
+				
+				
 			}catch(Throwable oops){
 					
 				result = createEditModelAndView(eventForm,"event.commit.error");			

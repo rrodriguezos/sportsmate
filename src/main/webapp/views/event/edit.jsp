@@ -46,17 +46,23 @@
 		<form:errors cssClass="error" path="sport" />
 	<br />
 	<br />	
-	<form:label path="place"><spring:message code="event.place"/></form:label>
-		<form:select path="place" >
-			<form:option value="------"/>
-			<form:options items="${places}"  />
-		</form:select>
-		<form:errors cssClass="error" path="place" />
-	<br />
-	<br />
+	<security:authorize access="hasRole('CUSTOMER')">
+		<acme:textbox code="event.place" path="place" readonly="true"/>
+	</security:authorize>
 	
-	<acme:textbox code="event.otherSport" path="otherSport"/>
-	<br/>
+	<security:authorize access="hasRole('USER')">
+		<form:label path="place"><spring:message code="event.place"/></form:label>
+			<form:select path="place" >
+				<form:option value="------"/>
+				<form:options items="${places}"  />
+			</form:select>
+			<form:errors cssClass="error" path="place" />
+		<br />
+		<br />
+	
+		<acme:textbox code="event.otherSportCenter" path="otherSportCenter"/>
+		<br/>
+	</security:authorize>	
 	
 	<acme:submit code="event.save" name="save" />&nbsp;
 	
@@ -66,7 +72,7 @@
 	
 	<security:authorize access="hasRole('CUSTOMER')">
 		<acme:cancel code="event.cancel" url="event/customer/list.do" />
-	</security:authorize>
+	</security:authorize>	
 	
 </form:form>
 

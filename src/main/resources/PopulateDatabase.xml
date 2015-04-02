@@ -212,15 +212,14 @@
 
 		<property name="events">
 			<list>
+				
 			</list>
 		</property>
 
 		<property name="eventsCreated">
 			<list>
 				<ref bean="event1" />
-				<ref bean="event2" />
-				<ref bean="event3" />
-				<ref bean="event5" />
+				<ref bean="event2" />				
 				<ref bean="event6" />
 				<ref bean="event7" />
 			</list>
@@ -503,10 +502,9 @@
 		<property name="sport" value="PADDLE" />
 		<property name="place" value="IndorClub" />
 		<property name="owner" ref="user1" />
-		<property name="customer" ref="customer1" />
 		<property name="users">
 			<list>
-
+				<ref bean="user1" />
 			</list>
 		</property>
 	</bean>
@@ -521,10 +519,9 @@
 		<property name="sport" value="TENNIS" />
 		<property name="place" value="IndorClub" />
 		<property name="owner" ref="user1" />
-		<property name="customer" ref="customer1" />
 		<property name="users">
 			<list>
-
+				<ref bean="user1" />
 			</list>
 		</property>
 	</bean>
@@ -538,7 +535,6 @@
 		<property name="numberMaxParticipant" value="30" />
 		<property name="sport" value="FOOTBALL" />
 		<property name="place" value="IndorClub" />
-		<property name="owner" ref="user1" />
 		<property name="customer" ref="customer2" />
 		<property name="users">
 			<list>
@@ -557,10 +553,9 @@
 		<property name="sport" value="PADDLE" />
 		<property name="place" value="IndorClub" />
 		<property name="owner" ref="user2" />
-		<property name="customer" ref="customer2" />
 		<property name="users">
 			<list>
-
+				<ref bean="user2" />
 			</list>
 		</property>
 	</bean>
@@ -574,7 +569,6 @@
 		<property name="numberMaxParticipant" value="8" />
 		<property name="sport" value="RACE" />
 		<property name="place" value="SportClub" />
-		<property name="owner" ref="user1" />
 		<property name="customer" ref="customer2" />
 		<property name="users">
 			<list>
@@ -593,10 +587,9 @@
 		<property name="sport" value="FOOTBALL_7" />
 		<property name="place" value="IndorClub" />
 		<property name="owner" ref="user1" />
-		<property name="customer" ref="customer2" />
 		<property name="users">
 			<list>
-
+				<ref bean="user1" />
 			</list>
 		</property>
 	</bean>
@@ -611,10 +604,9 @@
 		<property name="sport" value="PADDLE" />
 		<property name="place" value="IndorClub" />
 		<property name="owner" ref="user1" />
-		<property name="customer" ref="customer2" />
 		<property name="users">
 			<list>
-
+				<ref bean="user1" />
 			</list>
 		</property>
 	</bean>
@@ -628,7 +620,6 @@
 		<property name="numberMaxParticipant" value="16" />
 		<property name="sport" value="BASKETBALL" />
 		<property name="place" value="IndorClub" />
-		<property name="owner" ref="user2" />
 		<property name="customer" ref="customer2" />
 		<property name="users">
 			<list>

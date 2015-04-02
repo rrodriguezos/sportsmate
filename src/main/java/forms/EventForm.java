@@ -19,7 +19,7 @@ public class EventForm {
 	private String sport;
 	private String place;	
 	
-	private String otherSport;	
+	private String otherSportCenter;	
 	
 	public int getId() 
 	{		
@@ -102,16 +102,16 @@ public class EventForm {
 		this.place = place;
 	}
 	
-	public String getOtherSport() 
+	public String getOtherSportCenter() 
 	{
 		
-		return otherSport;
+		return otherSportCenter;
 		
 	}
-	public void setOtherSport(String otherSport) 
+	public void setOtherSportCenter(String otherSportCenter) 
 	{
 		
-		this.otherSport = otherSport;
+		this.otherSportCenter = otherSportCenter;
 		
 	}	
 	

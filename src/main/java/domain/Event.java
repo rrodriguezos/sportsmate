@@ -100,7 +100,7 @@ public class Event extends DomainEntity{
 		this.numberMaxParticipant = numberMaxParticipant;
 	}
 	
-	@NotNull
+	@NotBlank
 	public String getSport() 
 	{
 		return sport;
@@ -110,7 +110,7 @@ public class Event extends DomainEntity{
 		this.sport = sport;
 	}
 	
-	@NotNull
+	@NotBlank
 	public String getPlace()
 	{
 		return place;
