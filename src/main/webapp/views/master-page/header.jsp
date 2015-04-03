@@ -27,6 +27,7 @@
 					<li class="arrow"></li>
 					<li><a href="administrator/action-1.do"><spring:message code="master.page.administrator.action.1" /></a></li>
 					<li><a href="administrator/action-2.do"><spring:message code="master.page.administrator.action.2" /></a></li>					
+					<li><a href="folder/actor/list.do"><spring:message code="master.page.folders" /></a></li>
 				</ul>
 			</li>
 				
@@ -40,6 +41,7 @@
 					<li><a href="customer/seeInvoices.do"><spring:message code="master.page.customer.seeInvoices" /></a></li>
 					<li><a href="profile/customer/list.do"><spring:message code="master.page.customer.listProfile" /></a></li>
 					<li><a href="profile/customer/edit.do"><spring:message code="master.page.customer.editProfile" /></a></li>				
+					<li><a href="folder/actor/list.do"><spring:message code="master.page.folders" /></a></li>
 				</ul>
 			</li>
 				
@@ -53,6 +55,7 @@
 					<li><a href="profile/user/list.do"><spring:message code="master.page.user.listProfile" /></a></li>
 					<li><a href="profile/user/edit.do"><spring:message code="master.page.user.editProfile" /></a></li>
 					<li><a href="event/user/calendar/seeSportCenters.do"><spring:message code="master.page.user.seeSportCenters" /></a></li>			
+					<li><a href="folder/actor/list.do"><spring:message code="master.page.folders" /></a></li>
 				</ul>
 			</li>
 				

@@ -24,9 +24,16 @@ public class ActorService {
 		super();
 			
 	}
-public Collection<Actor>  findAll(){
-return actorRepository.findAll();
-}
+	public Collection<Actor>  findAll()
+	{
+		
+		Collection<Actor> all;
+		
+		all = actorRepository.findAll();
+		
+		return all;
+		
+	}
 public Actor findOne(Integer valueOf) {
 return actorRepository.findOne(valueOf);
 }

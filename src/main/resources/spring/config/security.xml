@@ -57,13 +57,10 @@
 		<security:intercept-url pattern="/customer/invoiceDetails.do" access="hasRole('CUSTOMER')" />
 		<security:intercept-url pattern="/customer/makePay.do" access="hasRole('CUSTOMER')" />
 		<security:intercept-url pattern="/customer/makePayPaypal.do" access="hasRole('CUSTOMER')" />
-		<security:intercept-url pattern="/customer/executePayment.do" access="hasRole('CUSTOMER')" />
-		
+		<security:intercept-url pattern="/customer/executePayment.do" access="hasRole('CUSTOMER')" />		
 		
 		<security:intercept-url pattern="/profile/customer/edit.do" access="hasRole('CUSTOMER')" />
-		<security:intercept-url pattern="/profile/customer/list.do" access="hasRole('CUSTOMER')" />
-		<security:intercept-url pattern="/profile/customer/list.do" access="hasRole('CUSTOMER')" />
-		
+		<security:intercept-url pattern="/profile/customer/list.do" access="hasRole('CUSTOMER')" />		
 		
 		<security:intercept-url pattern="/event/user/list.do" access="hasRole('USER')" />
 		<security:intercept-url pattern="/event/user/display.do" access="hasRole('USER')" />
@@ -75,8 +72,12 @@
 		<security:intercept-url pattern="/event/user/calendar/seeSportCenterCalendar.do" access="hasRole('USER')" />
 		<security:intercept-url pattern="/event/user/calendar/joinEvent.do" access="hasRole('USER')" />
 		 
-	
-	
+		<security:intercept-url pattern="/folder/actor/**" access="hasAnyRole('CUSTOMER','ADMIN', 'USER')" />
+		<security:intercept-url pattern="/message/actor/list.do" access="hasAnyRole('CUSTOMER','ADMIN', 'USER')" />	
+		<security:intercept-url pattern="/message/actor/display.do" access="hasAnyRole('CUSTOMER','ADMIN', 'USER')" />	
+		<security:intercept-url pattern="/message/actor/edit.do" access="hasAnyRole('CUSTOMER','ADMIN', 'USER')" />	
+		<security:intercept-url pattern="/message/actor/create.do" access="hasAnyRole('CUSTOMER','ADMIN', 'USER')" />	
+		
 		<security:intercept-url pattern="/conditions/laws.do" access="permitAll" />
 		<security:intercept-url pattern="/conditions/cookies.do" access="permitAll" />
 		

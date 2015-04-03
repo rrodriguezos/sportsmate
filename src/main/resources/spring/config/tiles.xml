@@ -25,7 +25,9 @@
 		<value>/views/register/tiles.xml</value> 
 		<value>/views/event/tiles.xml</value> 
 		<value>/views/calendar/tiles.xml</value> 
-		<value>/views/invoice/tiles.xml</value> 
+		<value>/views/invoice/tiles.xml</value>
+		<value>/views/folder/tiles.xml</value>  
+		<value>/views/message/tiles.xml</value>
 		
 	</util:list>
 
