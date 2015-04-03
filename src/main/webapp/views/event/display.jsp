@@ -19,72 +19,83 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
-<b><spring:message code="event.title" />: </b> 
-	<jstl:out value="${event.title}" />
-<br/>
+<form:form action="${requestURI}" modelAttribute="eventForm">
 
-<b><spring:message code="event.startMoment" />: </b> 
-	<fmt:formatDate value="${event.startMoment}" pattern="dd/MM/yyyy HH:mm"/>	
-<br/>
+	<form:hidden path="id" />
+	
+	
+	<b><spring:message code="event.creationMoment" />: </b> 
+	<fmt:formatDate value="${creationMoment}" pattern="dd/MM/yyyy"/>	
+	<br/>
+	<br/>
+	<b><spring:message code="event.title" />: </b> 
+		<form:input path="title" readonly="true"/>
+	<br/>
+	<br/>
+	<b><spring:message code="event.startMoment" />: </b> 
+		<form:input path="startMoment" readonly="true" format="{0,date,dd/MM/yyyy HH:mm}"/>&nbsp;	
 
-<b><spring:message code="event.finishMoment" />: </b> 
-	<fmt:formatDate value="${event.finishMoment}" pattern="dd/MM/yyyy HH:mm"/>	
-<br/>
+	<b><spring:message code="event.finishMoment" />: </b> 
+		<form:input path="finishMoment" readonly="true" format="{0,date,dd/MM/yyyy HH:mm}"/>
+	<br/>
+	<br/>	
+	<b><spring:message code="event.sport" />: </b> 
+		<form:input path="sport" readonly="true"/>&nbsp;	
+	
+	<b><spring:message code="event.numberMaxParticipant" />: </b> 
+		<form:input path="numberMaxParticipant" readonly="true"/>
+	<br/>
+	<br/>	
+	<b><spring:message code="event.place" />: </b> 
+		<form:input path="place" readonly="true"/>
+	<br/>
+	<br/>
+	<b><spring:message code="event.description" />: </b> 
+		<form:textarea path="description" readonly="true"/>
+	<br/>
 
-<b><spring:message code="event.numberMaxParticipant" />: </b> 
-	<jstl:out value="${event.numberMaxParticipant}" />
-<br/>
-
-<b><spring:message code="event.sport" />: </b> 
-	<jstl:out value="${event.sport}" />
-<br/>
-
-<b><spring:message code="event.place" />: </b> 
-	<jstl:out value="${event.place}" />
-<br/>
-
-<b><spring:message code="event.description" />: </b> 
-	<jstl:out value="${event.description}" />
-<br/>
-
-<h1><spring:message code="event.participants"/></h1>
-<display:table name="users" id="row" pagesize="5" class="displaytag">
-			   
+	<h1><spring:message code="event.participants"/></h1>
+	<display:table name="users" id="row" pagesize="5" class="displaytag">
+	
 		<spring:message code="event.user.name" var="nameHeader"/>
 		<display:column property="name" title="${nameHeader}" />
-		
+			
 		<spring:message code="event.user.surname" var="surnameHeader"/>
 		<display:column property="surname" title="${surnameHeader}" />
-		
+			
 		<spring:message code="event.user.email" var="emailHeader"/>
 		<display:column property="email" title="${nameHeader}" />
-		
+			
 		<spring:message code="event.user.phone" var="phoneHeader"/>
 		<display:column property="phone" title="${phoneHeader}" />
 			   
-</display:table>
+	</display:table>
 
-<security:authorize access="hasRole('USER')">
-	<acme:cancel code="event.back" url="event/user/list.do" />
+	<security:authorize access="hasRole('CUSTOMER')">
+		<acme:cancel code="event.back" url="event/customer/list.do" />
 	
-	<input type="button" name="create" value="<spring:message code="event.edit"/>" 
-	   		onclick="javascript: window.location.replace('event/user/edit.do?eventId= ${event.id}')" /> 
+		<input type="button" name="edit" value="<spring:message code="event.edit"/>" 
+	   		   onclick="javascript: window.location.replace('event/customer/edit.do?eventId= ${eventForm.id}')" /> 
 	   		
-	<jstl:if test="${event.id != 0}and ${users.size()==0}"> 			
-		<input type="submit" name="delete" value="<spring:message code="event.delete" />"
-			   onclick="return confirm('<spring:message code="event.confirm.delete" />')" />
-	</jstl:if> 
-</security:authorize>
+		<jstl:if test="${eventForm.id != 0 && users.size()==0}"> 			
+			<input type="submit" name="deleteEC" value="<spring:message code="event.delete" />"
+			   	onclick="return confirm('<spring:message code="event.confirm.delete" />')" />
+		</jstl:if>
+	
+	</security:authorize>
+	
+	<security:authorize access="hasRole('USER')">
+		<acme:cancel code="event.back" url="event/user/list.do" />
+	
+		<input type="button" name="edit" value="<spring:message code="event.edit"/>" 
+	   		   onclick="javascript: window.location.replace('event/user/edit.do?eventId= ${eventForm.id}')" /> 
+	   		
+		<jstl:if test="${eventForm.id != 0 && users.size()==1}"> 			
+			<input type="submit" name="deleteEU" value="<spring:message code="event.delete" />"
+			       onclick="return confirm('<spring:message code="event.confirm.delete" />')" />
+		</jstl:if> 
+	</security:authorize>
 
-<security:authorize access="hasRole('CUSTOMER')">
-	<acme:cancel code="event.back" url="event/customer/list.do" />
-	
-	<input type="button" name="create" value="<spring:message code="event.edit"/>" 
-	   		onclick="javascript: window.location.replace('event/customer/edit.do?eventId= ${event.id}')" /> 
-	   		
-	<jstl:if test="${event.id != 0}"> 			
-		<input type="submit" name="delete" value="<spring:message code="event.delete" />"
-			   onclick="return confirm('<spring:message code="event.confirm.delete" />')" />
-	</jstl:if> 
-	
-</security:authorize>
+</form:form>
+
+

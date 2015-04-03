@@ -85,11 +85,14 @@ public class EventService {
 		
 		if(actor instanceof User){
 			
-			owner = (User)actor;
+			owner = (User)actor;			
 			
 			event.setOwner(owner);
+			users.add(owner);
+			event.setUsers(users);			
 			
-		}else if(actor instanceof Customer){
+		}else 
+			if(actor instanceof Customer){
 			
 			customer = (Customer)actor;
 			
@@ -99,6 +102,7 @@ public class EventService {
 		}
 		
 		event.setCreationMoment(creationMoment);
+		event.setNumberMaxParticipant(2);
 		event.setUsers(users);
 		
 		return event;
@@ -110,22 +114,23 @@ public class EventService {
 		
 		User owner;
 		Customer customer;
+		Event aux;
 		
 		Assert.notNull(event);
 		Assert.isTrue(event.getStartMoment().compareTo(event.getFinishMoment()) < 0);
 		
-		eventRepository.save(event);
+		aux = eventRepository.save(event);
 		
 		if(actorService.findByPrincipal() instanceof User){
 			
 			owner = (User)actorService.findByPrincipal();
-			owner.getEventsCreated().add(event);			
+			owner.getEventsCreated().add(aux);			
 			userService.save(owner);
 			
 		}else if(actorService.findByPrincipal() instanceof Customer){
 			
 			customer = (Customer)actorService.findByPrincipal();
-			customer.getEvents().add(event);
+			customer.getEvents().add(aux);
 			customerService.save(customer);
 		}		
 		
@@ -138,23 +143,30 @@ public class EventService {
 		
 		Assert.notNull(event);
 		checkPrincipalByActor(event);
-		Assert.isTrue(event.getUsers().size()==1);
 		
 		if(actorService.findByPrincipal() instanceof User){
+
+			Assert.isTrue(event.getUsers().size()==1);
 			
 			owner = (User)actorService.findByPrincipal();
+			
 			owner.getEventsCreated().remove(event);
-			userService.save(owner);
+			
+			eventRepository.delete(event);
+			
+			userService.save(owner);			
 			
 		}else if(actorService.findByPrincipal() instanceof Customer){
 			
 			customer = (Customer)actorService.findByPrincipal();
+			
 			customer.getEvents().remove(event);
-			customerService.save(customer);			
+			
+			eventRepository.delete(event);
+			
+			customerService.save(customer);				
 		}
-		
-		eventRepository.delete(event);
-		
+	
 	}
 	
 	//Other business methods ------------------------------------------------
@@ -292,11 +304,17 @@ public class EventService {
 		event.setNumberMaxParticipant(eventForm.getNumberMaxParticipant());
 		event.setSport(eventForm.getSport());
 		
-		if(!eventForm.getOtherSportCenter().isEmpty()){
-			event.setPlace(eventForm.getOtherSportCenter());
-		}else{
-			event.setPlace(eventForm.getPlace());	
-		}		
+		if(event.getOwner() instanceof User){
+			if(!eventForm.getOtherSportCenter().isEmpty()){
+				event.setPlace(eventForm.getOtherSportCenter());
+			}else{
+				event.setPlace(eventForm.getPlace());	
+			}
+		}
+		
+		if(event.getCustomer() instanceof Customer){
+			event.setPlace(eventForm.getPlace());
+		}	
 		
 		return event;
 		

@@ -62,15 +62,18 @@ public class EventUserController extends AbstractController{
 		
 		ModelAndView result;
 		Event event;
+		EventForm eventForm;
 		Collection<User> users;
 		
 		event = eventService.findOne(eventId);
+		eventForm = eventService.construct(event);
 		users = userService.findAllUsersByEventId(eventId);
 		
 		result = new ModelAndView("event/display");
 		
-		result.addObject("event", event);
-		result.addObject("users", users);		
+		result.addObject("eventForm", eventForm);
+		result.addObject("users", users);
+		result.addObject("creationMoment", event.getCreationMoment());
 		
 		return result;
 		
@@ -121,7 +124,7 @@ public class EventUserController extends AbstractController{
 
 	// Save-----------------------------------------------------------------
 	
-	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
+	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "saveEU")
 	public ModelAndView save(@Valid EventForm eventForm, BindingResult binding)
 	{
 		
@@ -133,28 +136,11 @@ public class EventUserController extends AbstractController{
 		} else {
 			try{
 				
-				event = eventService.reconstruct(eventForm);
+				event = eventService.reconstruct(eventForm);							
 				
-				if(event.getOwner() != null){
-					event.getUsers().add(event.getOwner());
-				}			
-				
-				String defectValue = "------";
-				
-				if(event.getSport().equals(defectValue)){
+				eventService.save(event);	
 					
-					result = createEditModelAndView(eventForm, "event.sport.null");
-					
-				}else if(event.getPlace().equals(defectValue)){
-					
-					result = createEditModelAndView(eventForm, "event.place.null");
-					
-				}else{
-					eventService.save(event);	
-					
-					result = new ModelAndView("redirect:list.do");
-				}
-				
+				result = new ModelAndView("redirect:list.do");				
 				
 			}catch(Throwable oops){
 					
@@ -168,7 +154,7 @@ public class EventUserController extends AbstractController{
 	
 	// Delete---------------------------------------------------------------
 	
-	@RequestMapping(value = "/display", method = RequestMethod.POST, params = "delete")
+	@RequestMapping(value = "display", method = RequestMethod.POST, params = "deleteEU")
 	public ModelAndView delete(@Valid EventForm eventForm, BindingResult binding) 
 	{
 		
@@ -209,9 +195,9 @@ public class EventUserController extends AbstractController{
 		ModelAndView result;
 		Collection<String> sports;
 		Collection<String> places;
+		
 		sports = eventService.sports();
 		places = eventService.places();
-
 		result = new ModelAndView("event/edit");
 			
 		result.addObject("eventForm", eventForm);

@@ -10,8 +10,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import services.EventService;
+import services.UserService;
 import controllers.AbstractController;
 import domain.Event;
+import domain.User;
 import forms.EventForm;
 
 @Controller
@@ -20,6 +22,9 @@ public class EventCustomerController extends AbstractController{
 	// Services ---------------------------------------------------------------	
 	@Autowired
 	private EventService eventService;
+	
+	@Autowired
+	private UserService userService;
 
 	// Constructors -----------------------------------------------------------
 	public EventCustomerController() {
@@ -52,12 +57,20 @@ public class EventCustomerController extends AbstractController{
 
 		ModelAndView result;
 		Event event;
+		EventForm eventForm;
+		Collection<User> users;
 
 		event = eventService.findOne(eventId);
-
+		eventForm = eventService.construct(event);
+		users = userService.findAllUsersByEventId(eventId);
+		
 		result = new ModelAndView("event/display");
+		
+		
 
-		result.addObject("event", event);
+		result.addObject("eventForm", eventForm);
+		result.addObject("users", users);
+		result.addObject("creationMoment", event.getCreationMoment());
 
 		return result;
 
@@ -100,8 +113,10 @@ public class EventCustomerController extends AbstractController{
 
 	// Save-----------------------------------------------------------------
 	
-	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
-	public ModelAndView save(@Valid EventForm eventForm, BindingResult binding) {
+	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "saveEC")
+	public ModelAndView save(@Valid EventForm eventForm, BindingResult binding) 
+	{
+		
 		ModelAndView result;
 		Event event;
 
@@ -111,16 +126,40 @@ public class EventCustomerController extends AbstractController{
 			try {
 
 				event = eventService.reconstruct(eventForm);
-
+				
 				eventService.save(event);
 
-				result = new ModelAndView("redirect:list.do");
+				result = new ModelAndView("redirect:list.do");				
+				
 			} catch (Throwable oops) {
 
 				result = createEditModelAndView(eventForm, "event.commit.error");
 			}
 		}
 		return result;
+	}
+	
+	// Delete---------------------------------------------------------------
+	
+	@RequestMapping(value = "/display", method = RequestMethod.POST, params = "deleteEC")
+	public ModelAndView delete(@Valid EventForm eventForm, BindingResult binding) 
+	{
+		
+		ModelAndView result;
+		Event event;
+		try {
+			
+			event = eventService.reconstruct(eventForm);
+			
+			eventService.delete(event);
+			
+			result = new ModelAndView("redirect:list.do");
+			
+		} catch (Throwable oops) {
+			result = createEditModelAndView(eventForm, "event.commit.error");
+		}
+		return result;
+		
 	}
 
 	// Ancillary methods---------------------------------------
@@ -135,20 +174,17 @@ public class EventCustomerController extends AbstractController{
 
 	}
 
-	protected ModelAndView createEditModelAndView(EventForm eventForm,
-			String message) {
+	protected ModelAndView createEditModelAndView(EventForm eventForm, String message) 
+	{
 
 		ModelAndView result;
 		Collection<String> sports;
-		Collection<String> places;
+		
 		sports = eventService.sports();
-		places = eventService.places();
-
 		result = new ModelAndView("event/edit");
 
 		result.addObject("eventForm", eventForm);
 		result.addObject("sports", sports);
-		result.addObject("places", places);
 		result.addObject("message", message);
 
 		return result;

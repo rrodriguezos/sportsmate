@@ -40,39 +40,40 @@
 
 	<form:label path="sport"><spring:message code="event.sport"/></form:label>
 		<form:select path="sport" >
-			<form:option value="------"/>
 			<form:options items="${sports}"  />
 		</form:select>
 		<form:errors cssClass="error" path="sport" />
 	<br />
 	<br />	
-	<security:authorize access="hasRole('CUSTOMER')">
-		<acme:textbox code="event.place" path="place" readonly="true"/>
-	</security:authorize>
 	
 	<security:authorize access="hasRole('USER')">
 		<form:label path="place"><spring:message code="event.place"/></form:label>
 			<form:select path="place" >
-				<form:option value="------"/>
 				<form:options items="${places}"  />
 			</form:select>
 			<form:errors cssClass="error" path="place" />
 		<br />
-		<br />
-	
-		<acme:textbox code="event.otherSportCenter" path="otherSportCenter"/>
-		<br/>
-	</security:authorize>	
-	
-	<acme:submit code="event.save" name="save" />&nbsp;
-	
-	<security:authorize access="hasRole('USER')">
-		<acme:cancel code="event.cancel" url="event/user/list.do" />
+		<br />	
+		<acme:textbox code="event.otherSportCenter" path="otherSportCenter"/>		
 	</security:authorize>
+			
 	
 	<security:authorize access="hasRole('CUSTOMER')">
+		<acme:textbox code="event.place" path="place" readonly="true"/>
+	</security:authorize>
+	<br />
+		
+	
+	<security:authorize access="hasRole('CUSTOMER')">
+		<acme:submit code="event.save" name="saveEC" />&nbsp;
+		
 		<acme:cancel code="event.cancel" url="event/customer/list.do" />
 	</security:authorize>	
+	
+	<security:authorize access="hasRole('USER')">
+		<acme:submit code="event.save" name="saveEU" />&nbsp;
+		<acme:cancel code="event.cancel" url="event/user/list.do" />
+	</security:authorize>
 	
 </form:form>
 

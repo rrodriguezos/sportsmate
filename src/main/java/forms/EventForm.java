@@ -82,7 +82,7 @@ public class EventForm {
 		this.numberMaxParticipant = numberMaxParticipant;
 	}
 	
-	@NotNull
+	@NotBlank
 	public String getSport() 
 	{
 		return sport;
@@ -92,7 +92,7 @@ public class EventForm {
 		this.sport = sport;
 	}	
 	
-	@NotNull
+	@NotBlank
 	public String getPlace()
 	{
 		return place;
