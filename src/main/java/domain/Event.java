@@ -11,11 +11,11 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.Valid;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 
 import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.Range;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
@@ -90,7 +90,7 @@ public class Event extends DomainEntity{
 		this.description = description;
 	}
 	
-	@Min(2)
+	@Range(min=2, max=300)
 	public int getNumberMaxParticipant() 
 	{
 		return numberMaxParticipant;

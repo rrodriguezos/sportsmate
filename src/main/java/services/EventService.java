@@ -305,7 +305,7 @@ public class EventService {
 		event.setSport(eventForm.getSport());
 		
 		if(event.getOwner() instanceof User){
-			if(!eventForm.getOtherSportCenter().isEmpty()){
+			if(eventForm.getOtherSportCenter()!= null){
 				event.setPlace(eventForm.getOtherSportCenter());
 			}else{
 				event.setPlace(eventForm.getPlace());	
