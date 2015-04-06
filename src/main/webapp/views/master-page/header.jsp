@@ -37,7 +37,8 @@
 			<li><a class="fNiv"><spring:message	code="master.page.customer" /></a>
 				<ul>
 					<li class="arrow"></li>					
-					<li><a href="event/customer/list.do"><spring:message code="master.page.customer.events" /></a></li>	
+					<li><a href="event/customer/list.do"><spring:message code="master.page.customer.events" /></a></li>
+					<li><a href="tournament/customer/list.do"><spring:message code="master.page.customer.tournaments" /></a></li>	
 					<li><a href="customer/seeInvoices.do"><spring:message code="master.page.customer.seeInvoices" /></a></li>
 					<li><a href="profile/customer/list.do"><spring:message code="master.page.customer.listProfile" /></a></li>
 					<li><a href="profile/customer/edit.do"><spring:message code="master.page.customer.editProfile" /></a></li>				
@@ -52,6 +53,7 @@
 				<ul>
 					<li class="arrow"></li>
 					<li><a href="event/user/list.do"><spring:message code="master.page.user.events" /></a></li>	
+					<li><a href="tournament/user/list.do"><spring:message code="master.page.user.tournaments" /></a></li>
 					<li><a href="profile/user/list.do"><spring:message code="master.page.user.listProfile" /></a></li>
 					<li><a href="profile/user/edit.do"><spring:message code="master.page.user.editProfile" /></a></li>
 					<li><a href="event/user/calendar/seeSportCenters.do"><spring:message code="master.page.user.seeSportCenters" /></a></li>			

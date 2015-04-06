@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import repositories.TeamRepository;
 import domain.Team;
 import domain.User;
+import forms.TournamentForm;
 @Service
 @Transactional
 public class TeamService {
@@ -36,4 +37,19 @@ public Collection<Team> findAllTeamsByUserId() {
 	
 	return all;
 }
+public Collection<Team> findAllTeamsByTournament(TournamentForm tournamentForm) {
+	Collection<Team> all;
+
+	all = tournamentForm.getTeams();	
+	
+	return all;
+}
+public Collection<Team> findAllTeamsByTournamentId(int tournamentId) {
+	Collection<Team> all;
+	
+	all = teamRepository.findAllTeamsByTournamentId(tournamentId);
+	
+	return all;
+}
+
 }

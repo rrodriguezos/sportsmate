@@ -117,7 +117,8 @@ public Collection<Invoice> getAllInvoices() {
 
 
 
-	public Customer reconstruct(CustomerForm customerForm) {
+public Customer reconstruct(CustomerForm customerForm) 
+{
 		Customer result = new Customer();
 		result.setCif(customerForm.getCif());
 		result.setStreet(customerForm.getStreet());
@@ -181,8 +182,8 @@ public Collection<Invoice> getAllInvoices() {
 
 	}
 	
-	public Customer reconstructEdit(CustomerForm customerForm) 
-	{
+public Customer reconstructEdit(CustomerForm customerForm) 
+{
 		Customer result = findByPrincipal();
 		result.setCif(customerForm.getCif());
 		result.setStreet(customerForm.getStreet());
