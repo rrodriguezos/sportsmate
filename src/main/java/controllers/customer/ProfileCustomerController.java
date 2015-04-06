@@ -101,7 +101,8 @@ public ModelAndView save(@Valid CustomerForm customerForm, BindingResult binding
 		result = createEditModelAndView(customerForm);
 	}else{
 		try {
-			customer = customerService.reconstruct(customerForm);
+			
+			customer = customerService.reconstructEdit(customerForm);
 			customerService.save(customer);
 			result = new ModelAndView("redirect:list.do");
 		} catch (Throwable oops) {
