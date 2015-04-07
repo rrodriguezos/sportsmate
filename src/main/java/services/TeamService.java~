@@ -17,7 +17,6 @@ import domain.Tournament;
 import domain.User;
 import forms.EventForm;
 import forms.TeamForm;
-import forms.TournamentForm;
 
 @Service
 @Transactional
@@ -177,6 +176,17 @@ public class TeamService {
 	}
 
 
+public Collection<Team> findAllTeamsByUserId() {
+	Collection<Team> all;
+	User user;
+	int userId;
+	
+	user = userService.findByPrincipal();
+	userId = user.getId();
+	all = teamRepository.findAllTeamsByUserId(userId);
+	
+	return all;
+}
 public Collection<Team> findAllTeamsByTournament(TournamentForm tournamentForm) {
 	Collection<Team> all;
 

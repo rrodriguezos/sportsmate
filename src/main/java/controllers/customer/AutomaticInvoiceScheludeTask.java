@@ -7,10 +7,10 @@ import java.util.Date;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 
-import domain.Customer;
-import domain.Invoice;
 import services.CustomerService;
 import services.InvoiceService;
+import domain.Customer;
+import domain.Invoice;
 
 public class AutomaticInvoiceScheludeTask {
 	

@@ -26,16 +26,19 @@
 		
 		<value>/views/administrator/messages</value>
 		<value>/views/customer/messages</value>
+		
 		<value>/views/profile/messages</value>
 		<value>/views/conditions/messages</value>
 		<value>/views/register/messages</value>
 		<value>/views/event/messages</value>
-		<value>/views/tournament/messages</value>
 		<value>/views/calendar/messages</value>
 		<value>/views/invoice/messages</value>
 		<value>/views/folder/messages</value>
 		<value>/views/message/messages</value>
+		<value>/views/team/messages</value>
+		
 		
 	</util:list>
+
 
 </beans>

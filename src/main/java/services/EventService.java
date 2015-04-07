@@ -1,3 +1,4 @@
+
 package services;
 
 import java.util.ArrayList;
@@ -335,6 +336,50 @@ public class EventService {
 		
 		
 		return result;
+	}
+
+
+	public void joinEvent(Event event)
+	{
+		
+		User user;
+		
+		user = userService.findByPrincipal();
+		
+		event.getUsers().add(user);
+		user.getEvents().add(event);
+		
+		save(event);
+		userService.save(user);
+		
+	}
+	
+	public void DisjoinEvent(Event event)
+	{
+		
+		User user;
+		
+		checkPrincipalByJoinedUser(event);
+		
+		user = userService.findByPrincipal();
+		
+		event.getUsers().remove(user);
+		user.getEvents().remove(event);
+		
+		save(event);
+		userService.save(user);
+		
+	}
+
+public void checkPrincipalByJoinedUser(Event event)
+	{
+		
+		User user;
+		
+		user = userService.findByPrincipal();
+		
+		Assert.isTrue(event.getUsers().contains(user));		
+		
 	}
 }
 
