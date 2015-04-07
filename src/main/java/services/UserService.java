@@ -28,10 +28,15 @@ public class UserService {
 @Autowired
 private UserRepository userRepository;
 
-public Collection<User>  findAll()
-{
-	return userRepository.findAll();
-}
+	public Collection<User>  findAll()
+	{
+		
+		Collection<User> all;
+		
+		all = userRepository.findAll();
+		
+		return all;
+	}
 public User findOne(Integer userId) 
 {
 	

@@ -279,6 +279,12 @@ public class EventService {
 		result.setSport(event.getSport());
 		result.setPlace(event.getPlace());
 		
+		if(event.getOwner() instanceof User){
+			result.setOwner(event.getOwner());
+		}else if(event.getCustomer() instanceof Customer){
+			result.setCustomer(event.getCustomer());
+		}
+		
 		return result;
 		
 	}

@@ -1,7 +1,9 @@
 package controllers.user;
 
 import java.util.Collection;
+
 import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -9,9 +11,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+
+import services.ActorService;
 import services.EventService;
 import services.UserService;
 import controllers.AbstractController;
+import domain.Actor;
+import domain.Customer;
 import domain.Event;
 import domain.User;
 import forms.EventForm;
@@ -26,7 +32,10 @@ public class EventUserController extends AbstractController{
 
 	@Autowired
 	private UserService userService;
-
+	
+	@Autowired
+	private ActorService actorService;
+	
 	// Constructors -----------------------------------------------------------
 	public EventUserController()
 	{
@@ -64,16 +73,26 @@ public class EventUserController extends AbstractController{
 		Event event;
 		EventForm eventForm;
 		Collection<User> users;
+		Actor actor;
 		
 		event = eventService.findOne(eventId);
 		eventForm = eventService.construct(event);
-		users = userService.findAllUsersByEventId(eventId);
+		users = userService.findAllUsersByEventId(eventId);	
+		actor = actorService.findByPrincipal();
 		
 		result = new ModelAndView("event/display");
 		
 		result.addObject("eventForm", eventForm);
 		result.addObject("users", users);
-		result.addObject("creationMoment", event.getCreationMoment());
+		result.addObject("creationMoment", event.getCreationMoment());	
+		
+		if(actor instanceof User){
+			User user = (User)actor;
+			result.addObject("user", user);
+		}else if(actor instanceof Customer){
+			Customer customer = (Customer)actor;
+			result.addObject("customer", customer);
+		}
 		
 		return result;
 		

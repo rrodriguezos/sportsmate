@@ -4,11 +4,15 @@ import java.util.Date;
 
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.Range;
 import org.springframework.format.annotation.DateTimeFormat;
+
+import domain.Customer;
+import domain.User;
 
 public class EventForm {
 	
@@ -19,9 +23,11 @@ public class EventForm {
 	private String description;
 	private int numberMaxParticipant;
 	private String sport;
-	private String place;	
+	private String place;		
 	
 	private String otherSportCenter;	
+	private Customer customer;
+	private User owner;
 	
 	public int getId() 
 	{		
@@ -115,7 +121,24 @@ public class EventForm {
 		
 		this.otherSportCenter = otherSportCenter;
 		
+	}
+	
+	@Valid
+	public Customer getCustomer() {
+		return customer;
+	}
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
+	}
+	
+	@Valid
+	public User getOwner() {
+		return owner;
+	}
+	public void setOwner(User owner) {
+		this.owner = owner;
 	}	
+	
 	
 	
 	
