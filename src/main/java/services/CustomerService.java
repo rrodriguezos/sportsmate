@@ -141,6 +141,7 @@ public Customer reconstruct(CustomerForm customerForm)
 		List<Invoice> invoices =new ArrayList<Invoice>();
 		Folder folder1 =new Folder();
 		folder1.setActor(result);
+		
 		folder1.setName("Recibidos");
 		Folder folder2 =new Folder();
 		folder2.setActor(result);
