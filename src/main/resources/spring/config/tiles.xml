@@ -29,10 +29,7 @@
 		<value>/views/folder/tiles.xml</value>
 		<value>/views/tournament/tiles.xml</value>  
 		<value>/views/message/tiles.xml</value>
-		<value>/views/team/tiles.xml</value>  
-		
 		
 	</util:list>
-
 
 </beans>

@@ -54,24 +54,6 @@ public class EventUserController extends AbstractController{
 		
 	}
 	
-	@RequestMapping(value = "/listAllEvents", method = RequestMethod.GET)
-	public ModelAndView listAllEvents()
-	{
-		
-		ModelAndView result;
-		Collection<Event> events;
-		
-		events = eventService.findAll();
-		
-		result = new ModelAndView("event/list");
-		
-		result.addObject("events", events);
-		result.addObject("requestURI", "event/user/listAllEvents.do");
-		
-		return result;
-		
-	}
-	
 	//Display-----------------------------------------------------------------
 	
 	@RequestMapping(value = "/display", method = RequestMethod.GET)
@@ -191,50 +173,6 @@ public class EventUserController extends AbstractController{
 		}
 		return result;
 		
-	}
-	
-	//Join a Event------------------------------------------------------------------
-	@RequestMapping(value = "/joinEvent", method = RequestMethod.GET)
-	public ModelAndView joinEvent(@RequestParam int eventId)
-	{
-					
-		ModelAndView result;
-		Event event;
-		Collection<Event> events;
-					
-		event = eventService.findOne(eventId);
-		eventService.joinEvent(event);
-		events = eventService.findAllEventsByUserId();
-					
-		result = new ModelAndView("event/list");
-					
-		result.addObject("events", events);
-		result.addObject("requestURI", "event/user/list.do");
-					
-		return result;
-				
-	}
-				
-	//DisJoin a Event------------------------------------------------------------------
-	@RequestMapping(value = "/disjoinEvent", method = RequestMethod.GET)
-	public ModelAndView DisjoinEvent(@RequestParam int eventId)
-	{
-							
-		ModelAndView result;
-		Event event;
-		Collection<Event> events;
-							
-		event = eventService.findOne(eventId);
-		eventService.DisjoinEvent(event);
-		events = eventService.findAllEventsByUserId();
-							
-		result = new ModelAndView("event/list");
-							
-		result.addObject("events", events);
-		result.addObject("requestURI", "event/user/list.do");
-						
-		return result;
-							
 	}
 	
 	
