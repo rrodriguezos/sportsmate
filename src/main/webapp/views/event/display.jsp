@@ -50,6 +50,8 @@
 		<form:input path="place" readonly="true"/>
 	<br/>
 	<br/>
+	<acme:textbox code="event.otherSportCenter" path="otherSportCenter" readonly="true"/>
+	
 	<b><spring:message code="event.description" />: </b> 
 		<form:textarea path="description" readonly="true"/>
 	<br/>
