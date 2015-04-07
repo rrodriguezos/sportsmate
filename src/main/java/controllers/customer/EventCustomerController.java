@@ -64,9 +64,7 @@ public class EventCustomerController extends AbstractController{
 		eventForm = eventService.construct(event);
 		users = userService.findAllUsersByEventId(eventId);
 		
-		result = new ModelAndView("event/display");
-		
-		
+		result = new ModelAndView("event/display");		
 
 		result.addObject("eventForm", eventForm);
 		result.addObject("users", users);
