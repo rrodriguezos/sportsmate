@@ -22,7 +22,7 @@
 	
 	<div class='col-md-6 well'>
 	
-	<div class="input-group input-group-lg col">
+	<div class="input-group input-group-lg">
 		<form:label path="username" class="input-group-addon" id="sizing-addon1">
 			<spring:message code="security.username" />
 		</form:label>
