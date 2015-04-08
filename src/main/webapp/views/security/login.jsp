@@ -20,7 +20,7 @@
 
 	<br>
 	
-	<div class='col-md-6'>
+	<div class='col-md-6 well'>
 	
 	<div class="input-group input-group-lg">
 		<form:label path="username" class="input-group-addon" id="sizing-addon1">
@@ -49,7 +49,7 @@
 		</div>
 	</jstl:if>
 	
-	<input type="submit" class="btn btn-lg btn-primary" value="<spring:message code="security.login" />" />
+	<input type="submit" class="btn btn-lg btn-success" value="<spring:message code="security.login" />" />
 	
 	</div>
 </form:form>
