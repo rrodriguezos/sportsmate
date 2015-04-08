@@ -1,0 +1,35 @@
+/* Sportsmate additional page styles for the project */
+
+body {
+
+	background: url(../images/stadium.jpg) no-repeat center center fixed;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+}
+
+#header_image{
+	text-align: center;
+}
+
+/* For auto-sizing the logotype */
+#header_image img {
+ 	max-width: 100%;
+ 	height: auto;
+}
+
+#content_area{
+	background-color: white;
+	border-radius: 4px;
+}
+
+#footer_area{
+	background-color: rgba(0,0,0,0.6);
+	color: #ffffff;
+	border-radius: 4px;
+	padding: 1em 2em;
+	text-align: center;
+	margin-top: 0.2em;
+	border: thin solid black;
+}
