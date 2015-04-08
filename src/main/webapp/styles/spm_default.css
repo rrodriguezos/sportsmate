@@ -40,6 +40,13 @@ body {
 	padding: 1.5% 2% 1% 2%;
 }
 
+#spm-login-img{
+	border-radius: 4px;
+	opacity: 0.7;
+    filter: alpha(opacity=70); /* For IE8 and earlier */
+}
+
+
 /* Provisional & inherit from DP project*/
 
 .error {

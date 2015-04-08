@@ -22,7 +22,7 @@
 	
 	<div class='col-md-6 well'>
 	
-	<div class="input-group input-group-lg">
+	<div class="input-group input-group-lg col">
 		<form:label path="username" class="input-group-addon" id="sizing-addon1">
 			<spring:message code="security.username" />
 		</form:label>
@@ -34,7 +34,7 @@
 	<br>
 	
 	<div class="input-group input-group-lg">
-		<form:label path="password" class="input-group-addon" id="sizing-addon1">
+		<form:label path="password" class="spm-login-label input-group-addon" id="sizing-addon1">
 			<spring:message code="security.password" />
 		</form:label>
 		<form:password path="password" class="form-control" aria-describedby="sizing-addon1"/>
@@ -52,4 +52,10 @@
 	<input type="submit" class="btn btn-lg btn-success" value="<spring:message code="security.login" />" />
 	
 	</div>
+
+	<div class='col-md-6 hidden-sm hidden-xs'>
+		<img id='spm-login-img' class='img-responsive' src='images/login_entering.jpg' alt='Players entering'></img>
+	</div>
+	
+	
 </form:form>
