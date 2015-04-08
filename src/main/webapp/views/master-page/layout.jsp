@@ -19,25 +19,27 @@
 <html>
 <head>
 
-<base
-	href="${pageContext.request.scheme}://${pageContext.request.serverName}:${pageContext.request.serverPort}${pageContext.request.contextPath}/" />
-
+<base href="${pageContext.request.scheme}://${pageContext.request.serverName}:${pageContext.request.serverPort}${pageContext.request.contextPath}/" />
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-
 <link rel="shortcut icon" href="favicon.ico"/> 
 
+<!-- 
 <script type="text/javascript" src="scripts/jquery.js"></script>
 <script type="text/javascript" src="scripts/jquery-ui.js"></script>
 <script type="text/javascript" src="scripts/jmenu.js"></script>
-
+ 
 <link rel="stylesheet" media="all" href="styles/common.css" type="text/css" />
-
 <link rel="stylesheet" media="all" href="styles/jmenu.css" media="screen" type="text/css" />
-	
 <link rel="stylesheet" media="all" href="styles/displaytag.css" type="text/css" />
+
+ -->
+ 
+<link rel="stylesheet" href="styles/bootstrap.css" type="text/css">
+<link rel="stylesheet" href="styles/spm_default.css" type="text/css">
 
 <title><tiles:insertAttribute name="title" ignore="true" /></title>
 
+<!-- 
 <script type="text/javascript">
 	$(document).ready(function() {
 		$("#jMenu").jMenu();
@@ -59,8 +61,10 @@
 			}
 			window.location.replace(loc);
 		}
-	</script>
+</script>
 
+ -->
+ 
 </head>
 
 <body>
@@ -68,8 +72,9 @@
 	<div>
 		<tiles:insertAttribute name="header" />
 	</div>
-	<div id="content_area">
-		<div class="innercontent_area">
+	
+	<div id='content_area' class='container'>
+		<div id='innercontent_area'>
 		<h1>
 			<tiles:insertAttribute name="title" />
 		</h1>
@@ -80,9 +85,12 @@
 		</jstl:if>	
 		</div>
 	</div>
-	<div id="footer_area">
+	
+	<div id='footer_area' class='container'>
 		<tiles:insertAttribute name="footer" />
 	</div>
 
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="scripts/bootstrap.js"></script>
 </body>
 </html>
