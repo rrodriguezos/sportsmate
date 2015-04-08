@@ -53,6 +53,8 @@
 	}
 </script>
 
+-->
+
 <script type="text/javascript">
 		function relativeRedir(loc) {	
 			var b = document.getElementsByTagName('base');
@@ -65,8 +67,6 @@
 		}
 </script>
 
- -->
- 
 </head>
 
 <body>
