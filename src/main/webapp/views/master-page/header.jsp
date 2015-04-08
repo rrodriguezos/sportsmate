@@ -27,14 +27,14 @@
 		<div class='navbar-header'>
 			<a href="?language=es" class="navbar-brand" >
 				<div>
-					<img src="images/es_flag.jpg" alt="Espanol" />
+					<!-- <img src="images/es_flag.jpg" alt="Espanol" />  -->
 					<span>ES</span>
 				</div>
 			</a>
 		
 			<a href="?language=en" class="navbar-brand" >
 				<div>
-					<img src="images/en_flag.jpg" alt="English" />
+					<!--   <img src="images/en_flag.jpg" alt="English" /> -->
 					<span>EN</span>
 				</div>
 			</a>
