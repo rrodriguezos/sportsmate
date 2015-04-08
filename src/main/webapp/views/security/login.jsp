@@ -18,26 +18,38 @@
 
 <form:form action="j_spring_security_check" modelAttribute="credentials">
 
-	<form:label path="username">
-		<spring:message code="security.username" />
-	</form:label>
-	<form:input path="username" />	
-	<form:errors class="error" path="username" />
-	<br />
-	<br />
-	<form:label path="password">
-		<spring:message code="security.password" />
-	</form:label>
-	<form:password path="password" />	
-	<form:errors class="error" path="password" />
-	<br />
-	<br />
+	<br>
+	
+	<div class='col-md-6'>
+	
+	<div class="input-group input-group-lg">
+		<form:label path="username" class="input-group-addon" id="sizing-addon1">
+			<spring:message code="security.username" />
+		</form:label>
+	
+		<form:input path="username" class="form-control" aria-describedby="sizing-addon1"/>	
+		<form:errors class="alert alert-danger" path="username" />
+	</div>
+	
+	<br>
+	
+	<div class="input-group input-group-lg">
+		<form:label path="password" class="input-group-addon" id="sizing-addon1">
+			<spring:message code="security.password" />
+		</form:label>
+		<form:password path="password" class="form-control" aria-describedby="sizing-addon1"/>
+		<form:errors class="alert alert-danger" path="password" />
+	</div>
+	
+	<br>
+	
 	<jstl:if test="${showError == true}">
-		<div class="error">
+		<div class="alert alert-danger">
 			<spring:message code="security.login.failed" />
 		</div>
 	</jstl:if>
 	
-	<input type="submit" value="<spring:message code="security.login" />" />
+	<input type="submit" class="btn btn-lg btn-primary" value="<spring:message code="security.login" />" />
 	
+	</div>
 </form:form>

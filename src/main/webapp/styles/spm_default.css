@@ -35,3 +35,19 @@ body {
 	margin-top: 0.2em;
 	border: thin solid black;
 }
+
+#innercontent_area{
+	padding: 1.5% 2% 1% 2%;
+}
+
+/* Provisional & inherit from DP project*/
+
+.error {
+	color: red;
+	font-weight: bolder;
+}
+
+.message {
+	color: red;
+	font-weight: bolder;
+}
