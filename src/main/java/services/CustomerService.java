@@ -109,7 +109,6 @@ public Collection<Invoice> getAllInvoices() {
 		customerForm.setEmailCenter(customer.getEmailCenter());
 		customerForm.setWeb(customer.getWeb());
 		customerForm.setPhone(customer.getPhone());
-
 		
 		return customerForm;
 	}
@@ -163,7 +162,7 @@ public Customer reconstruct(CustomerForm customerForm)
 		
 		
 		
-		 UserAccount userAccount = new UserAccount();
+		UserAccount userAccount = new UserAccount();
 	     userAccount.setUsername(customerForm.getUsername());
 
 	    String password = customerForm.getPassword();
