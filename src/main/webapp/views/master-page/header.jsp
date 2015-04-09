@@ -84,12 +84,12 @@
 					<ul class='dropdown-menu'>				
 						<li><a href="event/customer/list.do"><spring:message code="master.page.customer.events" /></a></li>
 						<li><a href="tournament/customer/list.do"><spring:message code="master.page.customer.tournaments" /></a></li>	
-						<li><a href="customer/seeInvoices.do"><spring:message code="master.page.customer.seeInvoices" /></a></li>
 						<li><a href="profile/customer/list.do"><spring:message code="master.page.customer.listProfile" /></a></li>
 						<li><a href="profile/customer/edit.do"><spring:message code="master.page.customer.editProfile" /></a></li>				
 						<li><a href="folder/actor/list.do"><spring:message code="master.page.folders" /></a></li>
 					</ul>
-				</li>			
+				</li>		
+				<li><a href="customer/seeInvoices.do"><spring:message code="master.page.customer.seeInvoices" /></a></li>	
 			</security:authorize>
             
          
