@@ -93,7 +93,7 @@
 	   		   	onclick="javascript: window.location.replace('event/user/edit.do?eventId= ${eventForm.id}')" /> 
 	   		
 			<jstl:if test="${eventForm.id != 0 && users.size()==1}"> 			
-				<input type="submit" name="deleteEU" value="<spring:message code="event.delete" />"
+				<input type="submit" name="delete" value="<spring:message code="event.delete" />"
 			       	onclick="return confirm('<spring:message code="event.confirm.delete" />')" />
 			</jstl:if> 
 		</jstl:if>

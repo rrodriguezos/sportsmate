@@ -9,9 +9,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+
+import services.ActorService;
 import services.EventService;
 import services.UserService;
 import controllers.AbstractController;
+import domain.Actor;
+import domain.Customer;
 import domain.Event;
 import domain.User;
 import forms.EventForm;
@@ -25,6 +29,9 @@ public class EventCustomerController extends AbstractController{
 	
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	private ActorService actorService;
 
 	// Constructors -----------------------------------------------------------
 	public EventCustomerController() {
@@ -59,16 +66,23 @@ public class EventCustomerController extends AbstractController{
 		Event event;
 		EventForm eventForm;
 		Collection<User> users;
+		Actor actor;
 
 		event = eventService.findOne(eventId);
 		eventForm = eventService.construct(event);
 		users = userService.findAllUsersByEventId(eventId);
+		actor = actorService.findByPrincipal();
 		
 		result = new ModelAndView("event/display");		
 
 		result.addObject("eventForm", eventForm);
 		result.addObject("users", users);
 		result.addObject("creationMoment", event.getCreationMoment());
+		
+		if(actor instanceof Customer){
+			Customer customer = (Customer)actor;
+			result.addObject("customer", customer);
+		}
 
 		return result;
 

@@ -17,7 +17,6 @@ import services.EventService;
 import services.UserService;
 import controllers.AbstractController;
 import domain.Actor;
-import domain.Customer;
 import domain.Event;
 import domain.User;
 import forms.EventForm;
@@ -89,9 +88,6 @@ public class EventUserController extends AbstractController{
 		if(actor instanceof User){
 			User user = (User)actor;
 			result.addObject("user", user);
-		}else if(actor instanceof Customer){
-			Customer customer = (Customer)actor;
-			result.addObject("customer", customer);
 		}
 		
 		return result;
