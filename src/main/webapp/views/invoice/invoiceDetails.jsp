@@ -40,7 +40,7 @@ pagesize="5" class="displaytag" >
 <display:column title="${makePay}"> 
 	
 	<jstl:if test="${row.datePay == null}">
-		<a href="customer/makePay.do?id=${row.id}">
+		<a href="customer/makePayPaypal.do?id=${row.id}">
 		<jstl:out value="${makePay}"></jstl:out>
 		</a>
 	</jstl:if>
