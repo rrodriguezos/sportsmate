@@ -48,6 +48,8 @@ public class CustomerForm
 	private Collection<Tournament> tournaments;
 	private Collection<Vote> votes;
 	
+	private boolean terms;
+	
 	
 	public int getId() {
 		return id;
@@ -222,6 +224,13 @@ public class CustomerForm
 	}
 	public void setWeb(String web) {
 		this.web = web;
+	}
+	
+	public boolean getTerms() {
+		return terms;
+	}
+	public void setTerms(boolean terms) {
+		this.terms = terms;
 	}
 	
 	

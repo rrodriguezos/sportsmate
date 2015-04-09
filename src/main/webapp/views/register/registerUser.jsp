@@ -11,7 +11,7 @@
 
 <form:form action="register/registerUser.do" modelAttribute="userForm">
 
-	<br>
+
 	
 	<fieldset>
 		<legend>
@@ -21,8 +21,8 @@
 		<acme:password code="register.password" path="password" />
 		<acme:password code="register.password2" path="password2" />
 	</fieldset>
+	<hr />
 
-	<br>
 		<legend>
 			<spring:message code="register.user" />
 		</legend>
@@ -30,6 +30,14 @@
 		<acme:textbox code="register.surname" path="surname" />
 		<acme:textbox code="register.email" path="email" />
 		<acme:textbox code="register.phone" path="phone" />
+		
+		<hr />	
+	
+	<br />
+	<b><spring:message code="actor.terms" /></b>
+	<br />	
+	<form:checkbox path="terms" /><a href="conditions/laws.do" target="_blank"><spring:message code="actor.conditions"/></a> 
+	<br />	
 	
 	<br />
 	<acme:submit name="save" code="register.save" />
