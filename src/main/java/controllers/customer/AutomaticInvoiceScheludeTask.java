@@ -57,7 +57,7 @@ public class AutomaticInvoiceScheludeTask {
 	        			
 	        			newInvoiceToSave.setCustomer(e);
 	        			Date deadLine=new Date();
-	        			deadLine.setTime(deadLine.getTime()+864000000);
+	        			deadLine.setTime(deadLine.getTime()+172800000);
 	        			
 	        			newInvoiceToSave.setDeadLine(deadLine);
 	        			newInvoiceToSave.setFee(15.0);
@@ -79,7 +79,7 @@ public class AutomaticInvoiceScheludeTask {
         			
         			newInvoiceToSave.setCustomer(e);
         			Date deadLine=new Date();
-        			deadLine.setTime(deadLine.getTime()+864000000);
+        			deadLine.setTime(deadLine.getTime()+172800000);
         			
         			newInvoiceToSave.setDeadLine(deadLine);
         			newInvoiceToSave.setFee(15.0);
