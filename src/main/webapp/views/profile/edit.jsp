@@ -62,11 +62,6 @@
 
 	
 		<acme:submit name="save" code="actor.save" />&nbsp;
-		
-			<input type="submit" name="delete"
-				value="<spring:message code="actor.delete"/>"
-				onclick="window.location.href='j_spring_security_logout'" />&nbsp;
-		
 		<acme:cancel url="welcome/index.do" code="actor.cancel" />&nbsp;
 	</form:form>		
 	</security:authorize>
@@ -100,11 +95,6 @@
 		<br>
 		
 		<acme:submit code="actor.save" name="save" />&nbsp;
-		
-			<input type="submit" name="delete" class="btn btn-md btn-default"
-				value="<spring:message code="user.delete"/>"
-				onclick="window.location.href='j_spring_security_logout'" />&nbsp;
-		
 		<acme:cancel url="welcome/index.do" code="actor.cancel" />&nbsp;
 	
 	
