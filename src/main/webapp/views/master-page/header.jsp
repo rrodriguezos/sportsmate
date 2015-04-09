@@ -25,8 +25,6 @@
 			<li><a class="fNiv"><spring:message	code="master.page.administrator" /></a>
 				<ul>
 					<li class="arrow"></li>
-					<li><a href="administrator/action-1.do"><spring:message code="master.page.administrator.action.1" /></a></li>
-					<li><a href="administrator/action-2.do"><spring:message code="master.page.administrator.action.2" /></a></li>					
 					<li><a href="folder/actor/list.do"><spring:message code="master.page.folders" /></a></li>
 				</ul>
 			</li>
@@ -52,12 +50,15 @@
 				<ul>
 					<li class="arrow"></li>
 					<li><a href="event/user/list.do"><spring:message code="master.page.user.events" /></a></li>	
+					<li><a href="team/user/list.do"><spring:message code="master.page.user.teams" /></a></li>	
 					<li><a href="profile/user/list.do"><spring:message code="master.page.user.listProfile" /></a></li>
 					<li><a href="profile/user/edit.do"><spring:message code="master.page.user.editProfile" /></a></li>
 					<li><a href="event/user/calendar/seeSportCenters.do"><spring:message code="master.page.user.seeSportCenters" /></a></li>			
 					<li><a href="folder/actor/list.do"><spring:message code="master.page.folders" /></a></li>
 				</ul>
 			</li>
+			<li><a href="event/user/listAllEvents.do"><spring:message code="master.page.user.listAllEvents" /></a></li>
+			<li><a href="team/user/listAllTeams.do"><spring:message code="master.page.user.listAllTeams" /></a></li>
 				
 		</security:authorize>
 		
@@ -82,9 +83,6 @@
 				</a>
 				<ul>
 					<li class="arrow"></li>
-					<li><a href="profile/action-1.do"><spring:message code="master.page.profile.action.1" /></a></li>
-					<li><a href="profile/action-2.do"><spring:message code="master.page.profile.action.2" /></a></li>
-					<li><a href="profile/action-3.do"><spring:message code="master.page.profile.action.3" /></a></li>					
 					<li><a href="j_spring_security_logout"><spring:message code="master.page.logout" /> </a></li>
 				</ul>
 			</li>

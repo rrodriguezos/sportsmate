@@ -31,4 +31,9 @@
 		<put-attribute name="body" value="/views/event/edit.jsp" />
 	</definition>
 	
+	<definition name="event/ListAllEvents" extends="master.page">	
+		<put-attribute name="title" value="Todos los eventos" />
+		<put-attribute name="body" value="/views/event/list.jsp" />
+	</definition>
+	
 </tiles-definitions>
