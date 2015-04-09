@@ -92,15 +92,19 @@ public class TeamUserController extends AbstractController {
 		Team team;
 		TeamForm teamForm;
 		Collection<User> users;
+		User principal;
 
 		team = teamService.findOne(teamId);
 		teamForm = teamService.construct(team);
 		users = team.getUsers();
+		principal = userService.findByPrincipal();
 
 		result = new ModelAndView("team/display");
 
 		result.addObject("teamForm", teamForm);
 		result.addObject("users", users);
+		result.addObject("principal", principal);
+		result.addObject("team", team);
 
 		return result;
 
@@ -120,6 +124,7 @@ public class TeamUserController extends AbstractController {
 		teamForm = teamService.construct(team);
 
 		result = createEditModelAndView(teamForm);
+		result.addObject("teamForm", teamForm);
 		result.addObject("requestURI", "team/user/edit.do");
 
 		return result;
@@ -179,16 +184,17 @@ public class TeamUserController extends AbstractController {
 	
 	// Delete-------------------------------------------------
 
-	@RequestMapping(value = "display", method = RequestMethod.POST, params = "delete")
+	@RequestMapping(value = "/display", method = RequestMethod.POST, params = "delete")
 	public ModelAndView delete(@Valid TeamForm teamForm,
 			BindingResult binding) 
 	{
 		ModelAndView result;
 		Team team;
+		
 		try {
 			team = teamService.reconstruct(teamForm);
 			teamService.delete(team);
-			result = new ModelAndView("redirect:list.do");
+			result = new ModelAndView("team/list");
 		} catch (Throwable oops) {
 			result = createEditModelAndView(teamForm,
 					"team.commit.error");

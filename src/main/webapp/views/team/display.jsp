@@ -61,7 +61,7 @@
 
 	<security:authorize access="hasRole('USER')">
 		<acme:cancel code="team.back" url="team/user/list.do" />
-		<jstl:if test="${principal.teamsCreated.contains(row)}">
+		<jstl:if test="${principal.teamsCreated.contains(team)}">
 			<input type="button" name="edit"
 				value="<spring:message code="team.edit"/>"
 				onclick="javascript: window.location.replace('team/user/edit.do?teamId= ${teamForm.id}')" />

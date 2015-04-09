@@ -22,6 +22,7 @@
 <form:form action="${requestURI}" modelAttribute="teamForm">
 
 	<form:hidden path="id" />
+	<form:hidden path="captain"/>
 	
 	<acme:textbox code="team.name" path="name"/>
 	<br/>
