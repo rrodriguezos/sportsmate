@@ -37,6 +37,6 @@
 
 <acme:cancel code="folder.back" url="welcome/index.do" />&nbsp;
 
-<input type="button" name="create" value="<spring:message code="message.create"/>" 
+<input type="button" name="create" class="btn btn-md btn-success" value="<spring:message code="message.create"/>" 
 	   	   onclick="javascript: window.location.replace('message/actor/create.do');" />
 

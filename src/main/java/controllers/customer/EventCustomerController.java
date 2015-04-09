@@ -153,7 +153,7 @@ public class EventCustomerController extends AbstractController{
 	
 	// Delete---------------------------------------------------------------
 	
-	@RequestMapping(value = "/display", method = RequestMethod.POST, params = "deleteEC")
+	@RequestMapping(value = "display", method = RequestMethod.POST, params = "deleteEC")
 	public ModelAndView delete(@Valid EventForm eventForm, BindingResult binding) 
 	{
 		
