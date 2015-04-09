@@ -109,7 +109,6 @@ public Collection<Invoice> getAllInvoices() {
 		customerForm.setEmailCenter(customer.getEmailCenter());
 		customerForm.setWeb(customer.getWeb());
 		customerForm.setPhone(customer.getPhone());
-
 		
 		return customerForm;
 	}
@@ -117,7 +116,8 @@ public Collection<Invoice> getAllInvoices() {
 
 
 
-	public Customer reconstruct(CustomerForm customerForm) {
+public Customer reconstruct(CustomerForm customerForm) 
+{
 		Customer result = new Customer();
 		result.setCif(customerForm.getCif());
 		result.setStreet(customerForm.getStreet());
@@ -140,7 +140,8 @@ public Collection<Invoice> getAllInvoices() {
 		List<Invoice> invoices =new ArrayList<Invoice>();
 		Folder folder1 =new Folder();
 		folder1.setActor(result);
-		folder1.setName("Recividos");
+		
+		folder1.setName("Recibidos");
 		Folder folder2 =new Folder();
 		folder2.setActor(result);
 		folder2.setName("Enviados");
@@ -161,7 +162,7 @@ public Collection<Invoice> getAllInvoices() {
 		
 		
 		
-		 UserAccount userAccount = new UserAccount();
+		UserAccount userAccount = new UserAccount();
 	     userAccount.setUsername(customerForm.getUsername());
 
 	    String password = customerForm.getPassword();
@@ -176,6 +177,37 @@ public Collection<Invoice> getAllInvoices() {
 	    authorities.add(authority);
 	    userAccount.setAuthorities(authorities);
 	    result.setUserAccount(userAccount);
+
+		return result;
+
+	}
+	
+public Customer reconstructEdit(CustomerForm customerForm) 
+{
+		Customer result = findByPrincipal();
+		result.setCif(customerForm.getCif());
+		result.setStreet(customerForm.getStreet());
+		result.setZip(customerForm.getZip());
+		result.setProvinceCenter(customerForm.getProvinceCenter());
+		result.setCity(customerForm.getCity());
+		result.setNameCenter(customerForm.getNameCenter());
+		result.setPhoneCenter(customerForm.getPhoneCenter());
+		result.setEmailCenter(customerForm.getEmailCenter());
+		result.setWeb(customerForm.getWeb());
+		result.setPhone(customerForm.getPhone());
+		
+		result.setName(customerForm.getName());
+		result.setSurname(customerForm.getSurname());
+		result.setEmail(customerForm.getEmail());
+
+
+	    String password = customerForm.getPassword();
+
+	    Md5PasswordEncoder encoder = new Md5PasswordEncoder();
+	    String md5 = encoder.encodePassword(password, null);
+	    
+	    result.getUserAccount().setPassword(md5);
+
 
 		return result;
 

@@ -65,6 +65,8 @@ public class User extends Actor{
 	private Collection<Team> teams;
 	private Collection<Team> teamsCreated;
 	private Collection<Tournament> tournaments;
+	private Collection<Tournament> tournamentsCreated;
+	
 
 	@Valid
 	@NotNull
@@ -142,7 +144,6 @@ public class User extends Actor{
 	}
 
 	@Valid 
-	@NotNull
 	@OneToMany(mappedBy="user")
 	public Collection<Tournament> getTournaments() {
 		return tournaments;
@@ -150,6 +151,18 @@ public class User extends Actor{
 
 	public void setTournaments(Collection<Tournament> tournaments) {
 		this.tournaments = tournaments;
+	}
+	
+	@Valid
+	@OneToMany(mappedBy="user")
+	public Collection<Tournament> getTournamentsCreated() 
+	{
+		return tournamentsCreated;
+	}
+
+	public void setTournamentsCreated(Collection<Tournament> tournamentsCreated) 
+	{
+		this.tournamentsCreated = tournamentsCreated;
 	}
 
 	

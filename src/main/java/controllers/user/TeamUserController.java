@@ -46,12 +46,15 @@ public class TeamUserController extends AbstractController {
 
 		ModelAndView result;
 		Collection<Team> teams;
+		User principal;
 
 		teams = teamService.findAllTeamsByUserId();
+		principal = userService.findByPrincipal();
 
 		result = new ModelAndView("team/list");
 
 		result.addObject("teams", teams);
+		result.addObject("principal", principal);
 		result.addObject("requestURI", "team/user/list.do");
 
 		return result;
@@ -64,12 +67,15 @@ public class TeamUserController extends AbstractController {
 		
 		ModelAndView result;
 		Collection<Team> teams;
+		User principal;
 		
 		teams = teamService.findAll();
+		principal = userService.findByPrincipal();
 		
 		result = new ModelAndView("team/list");
 		
 		result.addObject("teams", teams);
+		result.addObject("principal", principal);
 		result.addObject("requestURI", "team/user/listAllTeams.do");
 		
 		return result;
@@ -170,27 +176,25 @@ public class TeamUserController extends AbstractController {
 
 	}
 	
-	// Delete---------------------------------------------------------------
 	
-	@RequestMapping(value = "edit", method = RequestMethod.POST, params = "delete")
-	public ModelAndView delete(@Valid TeamForm teamForm, BindingResult binding) 
-	{
+	// Delete-------------------------------------------------
 
+	@RequestMapping(value = "display", method = RequestMethod.POST, params = "delete")
+	public ModelAndView delete(@Valid TeamForm teamForm,
+			BindingResult binding) 
+	{
 		ModelAndView result;
 		Team team;
 		try {
-
 			team = teamService.reconstruct(teamForm);
-
 			teamService.delete(team);
-
 			result = new ModelAndView("redirect:list.do");
-
 		} catch (Throwable oops) {
-			result = createEditModelAndView(teamForm, "team.commit.error");
+			result = createEditModelAndView(teamForm,
+					"team.commit.error");
 		}
+		
 		return result;
-
 	}
 	
 	//Join a team------------------------------------------------------------------

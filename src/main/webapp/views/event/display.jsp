@@ -50,6 +50,8 @@
 		<form:input path="place" readonly="true"/>
 	<br/>
 	<br/>
+	<acme:textbox code="event.otherSportCenter" path="otherSportCenter" readonly="true"/>
+	
 	<b><spring:message code="event.description" />: </b> 
 		<form:textarea path="description" readonly="true"/>
 	<br/>
@@ -73,27 +75,28 @@
 
 	<security:authorize access="hasRole('CUSTOMER')">
 		<acme:cancel code="event.back" url="event/customer/list.do" />
-	
-		<input type="button" name="edit" value="<spring:message code="event.edit"/>" 
-	   		   onclick="javascript: window.location.replace('event/customer/edit.do?eventId= ${eventForm.id}')" /> 
+		<jstl:if test="${eventForm.customer.id == customer.id}">
+			<input type="button" name="edit" value="<spring:message code="event.edit"/>" 
+	   		   	onclick="javascript: window.location.replace('event/customer/edit.do?eventId= ${eventForm.id}')" /> 
 	   		
-		<jstl:if test="${eventForm.id != 0 && users.size()==0}"> 			
-			<input type="submit" name="deleteEC" value="<spring:message code="event.delete" />"
-			   	onclick="return confirm('<spring:message code="event.confirm.delete" />')" />
+			<jstl:if test="${eventForm.id != 0 && users.size()==0}"> 			
+				<input type="submit" name="deleteEC" value="<spring:message code="event.delete" />"
+			   		onclick="return confirm('<spring:message code="event.confirm.delete" />')" />
+			</jstl:if>
 		</jstl:if>
-	
 	</security:authorize>
 	
 	<security:authorize access="hasRole('USER')">
 		<acme:cancel code="event.back" url="event/user/list.do" />
-	
-		<input type="button" name="edit" value="<spring:message code="event.edit"/>" 
-	   		   onclick="javascript: window.location.replace('event/user/edit.do?eventId= ${eventForm.id}')" /> 
+		<jstl:if test="${eventForm.owner.id == user.id}">
+			<input type="button" name="edit" value="<spring:message code="event.edit"/>" 
+	   		   	onclick="javascript: window.location.replace('event/user/edit.do?eventId= ${eventForm.id}')" /> 
 	   		
-		<jstl:if test="${eventForm.id != 0 && users.size()==1}"> 			
-			<input type="submit" name="deleteEU" value="<spring:message code="event.delete" />"
-			       onclick="return confirm('<spring:message code="event.confirm.delete" />')" />
-		</jstl:if> 
+			<jstl:if test="${eventForm.id != 0 && users.size()==1}"> 			
+				<input type="submit" name="delete" value="<spring:message code="event.delete" />"
+			       	onclick="return confirm('<spring:message code="event.confirm.delete" />')" />
+			</jstl:if> 
+		</jstl:if>
 	</security:authorize>
 
 </form:form>

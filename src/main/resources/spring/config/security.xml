@@ -53,6 +53,12 @@
 		<security:intercept-url pattern="/event/customer/display.do" access="hasRole('CUSTOMER')" />
 		<security:intercept-url pattern="/event/customer/create.do" access="hasRole('CUSTOMER')" />
 		<security:intercept-url pattern="/event/customer/edit.do" access="hasRole('CUSTOMER')" />
+				
+		<security:intercept-url pattern="/tournament/customer/list.do" access="hasRole('CUSTOMER')" /> 
+		<security:intercept-url pattern="/tournament/customer/display.do" access="hasRole('CUSTOMER')" />
+		<security:intercept-url pattern="/tournament/customer/create.do" access="hasRole('CUSTOMER')" />
+		<security:intercept-url pattern="/tournament/customer/edit.do" access="hasRole('CUSTOMER')" />
+		
 		<security:intercept-url pattern="/customer/seeInvoices.do" access="hasRole('CUSTOMER')" />
 		<security:intercept-url pattern="/customer/invoiceDetails.do" access="hasRole('CUSTOMER')" />
 		<security:intercept-url pattern="/customer/makePay.do" access="hasRole('CUSTOMER')" />
@@ -66,6 +72,12 @@
 		<security:intercept-url pattern="/event/user/display.do" access="hasRole('USER')" />
 		<security:intercept-url pattern="/event/user/create.do" access="hasRole('USER')" />
 		<security:intercept-url pattern="/event/user/edit.do" access="hasRole('USER')" />
+		
+		<security:intercept-url pattern="/tournament/user/list.do" access="hasRole('USER')" />
+		<security:intercept-url pattern="/tournament/user/display.do" access="hasRole('USER')" />
+		<security:intercept-url pattern="/tournament/user/create.do" access="hasRole('USER')" />
+		<security:intercept-url pattern="/tournament/user/edit.do" access="hasRole('USER')" />
+		
 		<security:intercept-url pattern="/profile/user/edit.do" access="hasRole('USER')" />
 		<security:intercept-url pattern="/profile/user/list.do" access="hasRole('USER')" />
 		<security:intercept-url pattern="/event/user/calendar/seeSportCenters.do" access="hasRole('USER')" />

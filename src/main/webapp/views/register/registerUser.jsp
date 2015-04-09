@@ -11,7 +11,8 @@
 
 <form:form action="register/registerUser.do" modelAttribute="userForm">
 
-
+	<br>
+	
 	<fieldset>
 		<legend>
 			<spring:message code="register.useraccount" />
@@ -20,8 +21,8 @@
 		<acme:password code="register.password" path="password" />
 		<acme:password code="register.password2" path="password2" />
 	</fieldset>
-	<hr />
 
+	<br>
 		<legend>
 			<spring:message code="register.user" />
 		</legend>

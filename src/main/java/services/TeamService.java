@@ -9,14 +9,13 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import repositories.TeamRepository;
-import domain.Event;
 import domain.Match;
 import domain.Team;
 import domain.Tournament;
 import domain.User;
-import forms.EventForm;
 import forms.TeamForm;
 
+import forms.TournamentForm;
 @Service
 @Transactional
 public class TeamService {
@@ -67,9 +66,19 @@ public class TeamService {
 	public Team save(Team team)
 	{
 		Team result;
+		User principal;
 		
+		principal = userService.findByPrincipal();
 		
 		result = teamRepository.save(team);
+		
+		
+		if(team.getId() == 0){
+			principal.getTeamsCreated().add(result);
+			principal.getTeams().add(result);
+		}
+		
+		userService.save(principal);
 		
 		return result;
 	}
@@ -121,6 +130,7 @@ public class TeamService {
 		result.setId(team.getId());
 		result.setMaxNumber(team.getMaxNumber());
 		result.setName(team.getName());
+		result.setCaptain(team.getCaptain());
 		
 		return result;
 	}
@@ -140,6 +150,7 @@ public class TeamService {
 		result.setId(teamForm.getId());
 		result.setMaxNumber(teamForm.getMaxNumber());
 		result.setName(teamForm.getName());
+		result.setCaptain(teamForm.getCaptain());
 		
 		return result;
 	}
@@ -174,4 +185,19 @@ public class TeamService {
 		
 	}
 	
+public Collection<Team> findAllTeamsByTournament(TournamentForm tournamentForm) {
+	Collection<Team> all;
+
+	all = tournamentForm.getTeams();	
+	
+	return all;
+}
+public Collection<Team> findAllTeamsByTournamentId(int tournamentId) {
+	Collection<Team> all;
+	
+	all = teamRepository.findAllTeamsByTournamentId(tournamentId);
+	
+	return all;
+}
+
 }

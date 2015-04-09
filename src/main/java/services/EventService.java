@@ -123,8 +123,11 @@ public class EventService {
 		
 		if(actorService.findByPrincipal() instanceof User){
 			
-			owner = (User)actorService.findByPrincipal();
-			owner.getEventsCreated().add(aux);			
+			owner = (User) actorService.findByPrincipal();
+			if (event.getId() == 0) {
+				owner.getEventsCreated().add(aux);
+				owner.getEvents().add(aux);
+			}
 			userService.save(owner);
 			
 		}else if(actorService.findByPrincipal() instanceof Customer){
@@ -290,6 +293,12 @@ public class EventService {
 		result.setSport(event.getSport());
 		result.setPlace(event.getPlace());
 		
+		if(event.getOwner() instanceof User){
+			result.setOwner(event.getOwner());
+		}else if(event.getCustomer() instanceof Customer){
+			result.setCustomer(event.getCustomer());
+		}
+		
 		return result;
 		
 	}
@@ -316,7 +325,7 @@ public class EventService {
 		event.setSport(eventForm.getSport());
 		
 		if(event.getOwner() instanceof User){
-			if(!eventForm.getOtherSportCenter().isEmpty()){
+			if(eventForm.getOtherSportCenter()!= ""){
 				event.setPlace(eventForm.getOtherSportCenter());
 			}else{
 				event.setPlace(eventForm.getPlace());	

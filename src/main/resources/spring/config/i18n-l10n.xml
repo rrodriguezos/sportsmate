@@ -31,6 +31,7 @@
 		<value>/views/register/messages</value>
 		<value>/views/event/messages</value>
 		<value>/views/team/messages</value>
+		<value>/views/tournament/messages</value>
 		<value>/views/calendar/messages</value>
 		<value>/views/invoice/messages</value>
 		<value>/views/folder/messages</value>

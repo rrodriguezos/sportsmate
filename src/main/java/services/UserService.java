@@ -28,10 +28,15 @@ public class UserService {
 @Autowired
 private UserRepository userRepository;
 
-public Collection<User>  findAll()
-{
-	return userRepository.findAll();
-}
+	public Collection<User>  findAll()
+	{
+		
+		Collection<User> all;
+		
+		all = userRepository.findAll();
+		
+		return all;
+	}
 public User findOne(Integer userId) 
 {
 	
@@ -136,6 +141,28 @@ public 	User reconstruct(UserForm userForm)
     return result;
 }
 
+public User reconstructEdit(UserForm userForm) 
+{
+		User result = findByPrincipal();
+		
+		result.setPhone(userForm.getPhone());		
+		result.setName(userForm.getName());
+		result.setSurname(userForm.getSurname());
+		result.setEmail(userForm.getEmail());
+
+
+	    String password = userForm.getPassword();
+
+	    Md5PasswordEncoder encoder = new Md5PasswordEncoder();
+	    String md5 = encoder.encodePassword(password, null);
+	    
+	    result.getUserAccount().setPassword(md5);
+
+
+		return result;
+
+	}
+
 public UserForm construct (User user){
 	UserForm result;
 	result = new UserForm();
@@ -188,6 +215,7 @@ public void delete(User user)
 		
 		return all;
 	}
+
 
 }
 

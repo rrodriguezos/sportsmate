@@ -42,16 +42,16 @@
 	<jstl:if test="${requestURI == 'team/user/listAllTeams.do' }">
 		<spring:message code="team.joinTeam" var="joinTeamHeader" />
 		<display:column title="${joinTeamHeader}">
-
-			<security:authorize access="hasRole('USER')">
-				<a href="team/user/joinTeam.do?teamId=${row.id}"> <spring:message
-						code="team.joinTeam" />
-				</a>
-			</security:authorize>
-
+			<jstl:if test="${!principal.teams.contains(row)}">
+				<security:authorize access="hasRole('USER')">
+					<a href="team/user/joinTeam.do?teamId=${row.id}"> <spring:message
+							code="team.joinTeam" />
+					</a>
+				</security:authorize>
+			</jstl:if>
 		</display:column>
 	</jstl:if>
-	
+
 	<jstl:if test="${requestURI == 'team/user/list.do' }">
 		<spring:message code="team.disjoinTeam" var="disjoinTeamHeader" />
 		<display:column title="${disjoinTeamHeader}">
@@ -68,11 +68,11 @@
 </display:table>
 
 <jstl:if test="${requestURI == 'team/user/list.do' }">
-<security:authorize access="hasRole('USER')">
-	<input type="button" name="create"
-		value="<spring:message code="team.create"/>"
-		onclick="javascript: window.location.replace('team/user/create.do');" />
-</security:authorize>
+	<security:authorize access="hasRole('USER')">
+		<input type="button" name="create"
+			value="<spring:message code="team.create"/>"
+			onclick="javascript: window.location.replace('team/user/create.do');" />
+	</security:authorize>
 </jstl:if>
 
 

@@ -56,20 +56,20 @@
 			</a>
 		</security:authorize>
 	</display:column>
-	
+
 	<jstl:if test="${requestURI == 'event/user/listAllEvents.do' }">
 		<spring:message code="event.joinEvent" var="joinEventHeader" />
 		<display:column title="${joinEventHeader}">
-
-			<security:authorize access="hasRole('USER')">
-				<a href="event/user/joinEvent.do?eventId=${row.id}"> <spring:message
-						code="event.joinEvent" />
-				</a>
-			</security:authorize>
-
+			<jstl:if test="${!principal.events.contains(row)}">
+				<security:authorize access="hasRole('USER')">
+					<a href="event/user/joinEvent.do?eventId=${row.id}"> <spring:message
+							code="event.joinEvent" />
+					</a>
+				</security:authorize>
+			</jstl:if>
 		</display:column>
 	</jstl:if>
-	
+
 	<jstl:if test="${requestURI == 'event/user/list.do' }">
 		<spring:message code="event.disjoinEvent" var="disjoinEventHeader" />
 		<display:column title="${disjoinEventHeader}">
@@ -82,15 +82,15 @@
 
 		</display:column>
 	</jstl:if>
-	
+
 </display:table>
 
 <security:authorize access="hasRole('USER')">
-<jstl:if test="${requestURI == 'event/user/list.do' }">
-	<input type="button" name="create"
-		value="<spring:message code="event.create"/>"
-		onclick="javascript: window.location.replace('event/user/create.do');" />
-</jstl:if>
+	<jstl:if test="${requestURI == 'event/user/list.do' }">
+		<input type="button" name="create"
+			value="<spring:message code="event.create"/>"
+			onclick="javascript: window.location.replace('event/user/create.do');" />
+	</jstl:if>
 </security:authorize>
 
 <security:authorize access="hasRole('CUSTOMER')">

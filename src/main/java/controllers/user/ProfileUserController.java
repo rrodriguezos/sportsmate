@@ -112,7 +112,7 @@ public ModelAndView save(@Valid UserForm userForm, BindingResult binding)
 	} else {
 		try {
 
-			user = userService.reconstruct(userForm);
+			user = userService.reconstructEdit(userForm);
 
 			userService.save(user);
 
