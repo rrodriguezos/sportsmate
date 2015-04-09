@@ -1,7 +1,8 @@
 /* Sportsmate additional page styles for the project */
 
 body {
-
+	
+	background-color: #000000;
 	background: url(../images/stadium.jpg) no-repeat center center fixed;
 	-webkit-background-size: cover;
 	-moz-background-size: cover;

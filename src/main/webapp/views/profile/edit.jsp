@@ -33,6 +33,8 @@
 			<acme:password code="useraccount.password" path="password" />
 			<acme:password code="useraccount.password2" path="password2" />
 		</fieldset>
+		
+		
 		<fieldset>
 			<legend>
 				<spring:message code="personal.actor" />
@@ -83,8 +85,9 @@
 			<acme:password code="useraccount.password" path="password" />
 			<acme:password code="useraccount.password2" path="password2" />
 		</fieldset>
-	<hr />
-
+	
+	<br><br>
+	
 		<legend>
 			<spring:message code="personal.actor" />
 		</legend>
@@ -94,10 +97,11 @@
 		<acme:textbox code="actor.phone" path="phone" />
 	
 			
+		<br>
 		
 		<acme:submit code="actor.save" name="save" />&nbsp;
 		
-			<input type="submit" name="delete"
+			<input type="submit" name="delete" class="btn btn-md btn-default"
 				value="<spring:message code="user.delete"/>"
 				onclick="window.location.href='j_spring_security_logout'" />&nbsp;
 		
