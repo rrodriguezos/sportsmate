@@ -9,7 +9,9 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
-<form:form action="register/registerUser.do" modelAttribute="userForm">
+<br>
+
+<form:form action="register/registerUser.do" modelAttribute="userForm" class="form-horizontal">
 
 
 	
@@ -21,7 +23,8 @@
 		<acme:password code="register.password" path="password" />
 		<acme:password code="register.password2" path="password2" />
 	</fieldset>
-	<hr />
+
+<br>
 
 		<legend>
 			<spring:message code="register.user" />
@@ -30,17 +33,24 @@
 		<acme:textbox code="register.surname" path="surname" />
 		<acme:textbox code="register.email" path="email" />
 		<acme:textbox code="register.phone" path="phone" />
-		
-		<hr />	
 	
-	<br />
+	<br>
+	
+	<div class="col-xs-12">
+	<br>
 	<b><spring:message code="actor.terms" /></b>
-	<br />	
-	<form:checkbox path="terms" /><a href="conditions/laws.do" target="_blank"><spring:message code="actor.conditions"/></a> 
-	<br />	
+	<br>
 	
-	<br />
+	
+	<form:checkbox path="terms" />
+		<a href="conditions/laws.do" target="_blank">
+			<spring:message code="actor.conditions"/>
+		</a> 
+	
+	
+	<br><br>
+	
 	<acme:submit name="save" code="register.save" />
 	<acme:cancel url="welcome/index.do" code="register.cancel" />
-
-</form:form>
+	</div>
+	</form:form>
