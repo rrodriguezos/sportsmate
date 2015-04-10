@@ -47,6 +47,9 @@
 		
 	<input type="button"  value="<spring:message code="message.back"/>" 
 	   	   onclick="javascript: window.location.replace('message/actor/list.do?folderId= ${folderId}')" /> 
+	   	   
+	<input type="button" name="reply" value="<spring:message code="message.reply"/>" 
+	   	   onclick="javascript: window.location.replace('message/actor/reply.do?messageId=${messageForm.id}');" />
 
 </form:form>
 

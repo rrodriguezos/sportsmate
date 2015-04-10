@@ -99,6 +99,7 @@
 		<security:intercept-url pattern="/message/actor/display.do" access="hasAnyRole('CUSTOMER','ADMIN', 'USER')" />	
 		<security:intercept-url pattern="/message/actor/edit.do" access="hasAnyRole('CUSTOMER','ADMIN', 'USER')" />	
 		<security:intercept-url pattern="/message/actor/create.do" access="hasAnyRole('CUSTOMER','ADMIN', 'USER')" />
+		<security:intercept-url pattern="/message/actor/reply.do" access="hasAnyRole('CUSTOMER','ADMIN', 'USER')" />
 		<security:intercept-url pattern="/tournament/listAll.do" access="hasAnyRole('CUSTOMER','ADMIN', 'USER')" />	
 		
 		<security:intercept-url pattern="/conditions/laws.do" access="permitAll" />

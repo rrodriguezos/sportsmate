@@ -7,6 +7,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.Transient;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
@@ -72,7 +73,13 @@ public abstract class Actor extends DomainEntity{
 	{
 		this.phone = phone;
 	}
-
+	
+	@Transient
+	public String getCadena(){
+		return getName()+" "+getSurname()+" ("+getEmail()+")";
+	}
+	
+	
 	//Relationships-------------------------------------------------------------------------
 	private UserAccount userAccount;
 	private Collection<Folder> folders;

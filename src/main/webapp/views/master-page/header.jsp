@@ -83,8 +83,10 @@
 						<li><a href="tournament/customer/list.do"><spring:message code="master.page.customer.tournaments" /></a></li>		
 						<li><a href="folder/actor/list.do"><spring:message code="master.page.folders" /></a></li>
 					</ul>
-				</li>		
+				</li>	
+				<li><a href="event/customer/create.do"><spring:message code="master.page.createEvents" /></a></li>
 				<li><a href="customer/seeInvoices.do"><spring:message code="master.page.customer.seeInvoices" /></a></li>	
+				<li><a href="folder/actor/list.do"><spring:message code="master.page.folders" /></a></li>	
 			</security:authorize>
             
          
@@ -104,7 +106,10 @@
 					</ul>
 				</li>
 				<li><a href="event/user/listAllEvents.do"><spring:message code="master.page.user.listAllEvents" /></a></li>
+				<li><a href="event/user/create.do"><spring:message code="master.page.createEvents" /></a></li>
+				
 				<li><a href="team/user/listAllTeams.do"><spring:message code="master.page.user.listAllTeams" /></a></li>
+				<li><a href="folder/actor/list.do"><spring:message code="master.page.folders" /></a></li>
 			</security:authorize>
 			
 			<!-- TOURNAMENT -->

@@ -23,23 +23,27 @@
 <form:form action="message/actor/edit.do" modelAttribute="messageForm">
 
 	<form:hidden path="id" />	
+	<form:hidden path="recipient" />
 	
 	<acme:textbox code="message.sendMoment" path="sendMoment" readonly="true"/>
 	<br />
-
+	
 	<b><spring:message code="message.sender" />: </b>
 		<jstl:out value="${sender}" />
 	<br />
-	<br />
+	<br />	
 	
-	
+	<jstl:if test="${messageForm.recipient == null }">
 	<form:label path="recipient"><spring:message code="message.recipient"/></form:label>
 		<form:select path="recipient" >
-			<form:options items="${actors}"  itemLabel="email"/>
+			<form:options items="${actors}"  itemLabel="cadena"/>
 		</form:select>
-		<form:errors cssClass="error" path="recipient" />
+		<form:errors cssClass="error" path="recipient" />	
 	<br />
 	<br />
+	</jstl:if>
+	<b><spring:message code="message.sender" />: </b>
+		<jstl:out value="${recipient}" />
 	
 	<acme:textbox code="message.subject" path="subject"/>
 	<br />
