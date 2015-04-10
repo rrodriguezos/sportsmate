@@ -1,9 +1,7 @@
 package controllers.user;
 
 import java.util.Collection;
-
 import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -11,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-
 import services.ActorService;
 import services.EventService;
 import services.UserService;
@@ -50,13 +47,37 @@ public class EventUserController extends AbstractController{
 		
 		ModelAndView result;
 		Collection<Event> events;
+		User principal;
 		
-		events = eventService.findAllEventsByUserId();
+		events = eventService.findAllEventsCreatedByUserId();
+		principal = userService.findByPrincipal();
 		
 		result = new ModelAndView("event/list");
 		
 		result.addObject("events", events);
+		result.addObject("principal", principal);
 		result.addObject("requestURI", "event/user/list.do");
+		
+		return result;
+		
+	}
+	
+	@RequestMapping(value = "/listAllEvents", method = RequestMethod.GET)
+	public ModelAndView listAllEvents()
+	{
+		
+		ModelAndView result;
+		Collection<Event> events;
+		User principal;
+		
+		events = eventService.findAll();
+		principal = userService.findByPrincipal();
+		
+		result = new ModelAndView("event/list");
+		
+		result.addObject("events", events);
+		result.addObject("principal", principal);
+		result.addObject("requestURI", "event/user/listAllEvents.do");
 		
 		return result;
 		
@@ -194,6 +215,50 @@ public class EventUserController extends AbstractController{
 		
 	}
 	
+	//Join a Event------------------------------------------------------------------
+	@RequestMapping(value = "/joinEvent", method = RequestMethod.GET)
+	public ModelAndView joinEvent(@RequestParam int eventId)
+	{
+					
+		ModelAndView result;
+		Event event;
+		Collection<Event> events;
+					
+		event = eventService.findOne(eventId);
+		eventService.joinEvent(event);
+		events = eventService.findAll();
+					
+		result = new ModelAndView("event/list");
+					
+		result.addObject("events", events);
+		result.addObject("requestURI", "event/user/list.do");
+					
+		return result;
+				
+	}
+				
+	//DisJoin a Event------------------------------------------------------------------
+	@RequestMapping(value = "/disjoinEvent", method = RequestMethod.GET)
+	public ModelAndView DisjoinEvent(@RequestParam int eventId)
+	{
+							
+		ModelAndView result;
+		Event event;
+		Collection<Event> events;
+							
+		event = eventService.findOne(eventId);
+		eventService.DisjoinEvent(event);
+		events = eventService.findAll();
+							
+		result = new ModelAndView("event/list");
+							
+		result.addObject("events", events);
+		result.addObject("requestURI", "event/user/list.do");
+						
+		return result;
+							
+	}
+	
 	
 	// Ancillary methods---------------------------------------------------
 
@@ -228,5 +293,3 @@ public class EventUserController extends AbstractController{
 	}		
 	
 }
-
-

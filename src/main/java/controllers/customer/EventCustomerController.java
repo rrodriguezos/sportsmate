@@ -47,7 +47,7 @@ public class EventCustomerController extends AbstractController{
 		ModelAndView result;
 		Collection<Event> events;
 
-		events = eventService.findAllEventsByCustomerId();
+		events = eventService.findAllEventsCreatedByCustomerId();
 
 		result = new ModelAndView("event/list");
 
@@ -206,4 +206,5 @@ public class EventCustomerController extends AbstractController{
 		return result;
 	}
 }
+
 

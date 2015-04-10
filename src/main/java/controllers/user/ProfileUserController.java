@@ -61,7 +61,7 @@ public ModelAndView list()
 	User profile = userService.findByPrincipal();
 	profile = userService.findOne(profile.getId());
 
-	Collection<Event> events = eventService.findAllEventsByUserId();
+	Collection<Event> events = eventService.findAllEventsCreatedByUserId();
 	Collection<Tournament> tournaments = tournamentService.
 					findAllTournamentsByUserId();
 	Collection<Friendship> friendships = friendshipService.

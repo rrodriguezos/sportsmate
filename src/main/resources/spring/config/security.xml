@@ -83,12 +83,23 @@
 		<security:intercept-url pattern="/event/user/calendar/seeSportCenters.do" access="hasRole('USER')" />
 		<security:intercept-url pattern="/event/user/calendar/seeSportCenterCalendar.do" access="hasRole('USER')" />
 		<security:intercept-url pattern="/event/user/calendar/joinEvent.do" access="hasRole('USER')" />
+		<security:intercept-url pattern="/event/user/listAllEvents.do" access="hasRole('USER')" />
+		<security:intercept-url pattern="/event/user/joinEvent.do" access="hasRole('USER')" />
+		<security:intercept-url pattern="/event/user/disjoinEvent.do" access="hasRole('USER')" />
+		<security:intercept-url pattern="/team/user/list.do" access="hasRole('USER')" />
+		<security:intercept-url pattern="/team/user/display.do" access="hasRole('USER')" />
+		<security:intercept-url pattern="/team/user/create.do" access="hasRole('USER')" />
+		<security:intercept-url pattern="/team/user/edit.do" access="hasRole('USER')" />
+		<security:intercept-url pattern="/team/user/listAllTeams.do" access="hasRole('USER')" />
+		<security:intercept-url pattern="/team/user/joinTeam.do" access="hasRole('USER')" />
+		<security:intercept-url pattern="/team/user/disjoinTeam.do" access="hasRole('USER')" />
 		 
 		<security:intercept-url pattern="/folder/actor/**" access="hasAnyRole('CUSTOMER','ADMIN', 'USER')" />
 		<security:intercept-url pattern="/message/actor/list.do" access="hasAnyRole('CUSTOMER','ADMIN', 'USER')" />	
 		<security:intercept-url pattern="/message/actor/display.do" access="hasAnyRole('CUSTOMER','ADMIN', 'USER')" />	
 		<security:intercept-url pattern="/message/actor/edit.do" access="hasAnyRole('CUSTOMER','ADMIN', 'USER')" />	
-		<security:intercept-url pattern="/message/actor/create.do" access="hasAnyRole('CUSTOMER','ADMIN', 'USER')" />	
+		<security:intercept-url pattern="/message/actor/create.do" access="hasAnyRole('CUSTOMER','ADMIN', 'USER')" />
+		<security:intercept-url pattern="/tournament/listAll.do" access="hasAnyRole('CUSTOMER','ADMIN', 'USER')" />	
 		
 		<security:intercept-url pattern="/conditions/laws.do" access="permitAll" />
 		<security:intercept-url pattern="/conditions/cookies.do" access="permitAll" />

@@ -52,6 +52,12 @@
 	<hr />	
 	
 	<br />
+	<b><spring:message code="actor.terms" /></b>
+	<br />	
+	<form:checkbox path="terms" /><a href="conditions/laws.do" target="_blank"><spring:message code="actor.conditions"/></a> 
+	<br />	
+	
+	<br />
 	<acme:submit name="save" code="register.save" />
 	<acme:cancel url="welcome/index.do" code="register.cancel" />
 

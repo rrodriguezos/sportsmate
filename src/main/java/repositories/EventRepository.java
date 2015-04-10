@@ -17,10 +17,10 @@ public interface EventRepository extends JpaRepository<Event, Integer> {
 	Event findCustomerToEditByCustomerId(int cusotmerId);
 	
 	@Query("select u.eventsCreated from User u where u.id=?1")
-	Collection<Event> findAllEventsByUserId(int userId);
+	Collection<Event> findAllEventsCreatedByUserId(int userId);
 	
 	@Query("select c.events from Customer c where c.id=?1")
-	Collection<Event> findAllEventsByCustomerId(int customerId);
+	Collection<Event> findAllEventsCreatedByCustomerId(int customerId);
 
 	@Query(" select c from Event c where c.startMoment > CURRENT_TIMESTAMP  and c.customer.id=?1 ORDER BY startMoment DESC")
 	Collection<Event> finAllEventsCalendar(int id);

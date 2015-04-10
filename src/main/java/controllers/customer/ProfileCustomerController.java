@@ -51,7 +51,7 @@ public ModelAndView list()
 	Customer profile = customerService.findByPrincipal();
 	profile = customerService.findOne(profile.getId());
 
-	Collection<Event> events = eventService.findAllEventsByCustomerId();
+	Collection<Event> events = eventService.findAllEventsCreatedByCustomerId();
 	Collection<Tournament> tournaments = tournamentService.
 					findAllTournamentsByCustomerId();
 	Collection<Invoice> invoices = invoiceService.

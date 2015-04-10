@@ -14,7 +14,6 @@
 <%@taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
 
 
-
 <!-- *************************** -->
 <!-- HERE STARTS THE NEW MENUBAR -->
 <!-- *************************** -->
@@ -65,8 +64,6 @@
 					</a>
 					
 					<ul class='dropdown-menu'>
-						<li><a href="administrator/action-1.do"><spring:message code="master.page.administrator.action.1" /></a></li>
-						<li><a href="administrator/action-2.do"><spring:message code="master.page.administrator.action.2" /></a></li>					
 						<li><a href="folder/actor/list.do"><spring:message code="master.page.folders" /></a></li>
 					</ul>
 				</li>		
@@ -83,9 +80,7 @@
 					</a>
 					<ul class='dropdown-menu'>				
 						<li><a href="event/customer/list.do"><spring:message code="master.page.customer.events" /></a></li>
-						<li><a href="tournament/customer/list.do"><spring:message code="master.page.customer.tournaments" /></a></li>	
-						<li><a href="profile/customer/list.do"><spring:message code="master.page.customer.listProfile" /></a></li>
-						<li><a href="profile/customer/edit.do"><spring:message code="master.page.customer.editProfile" /></a></li>				
+						<li><a href="tournament/customer/list.do"><spring:message code="master.page.customer.tournaments" /></a></li>		
 						<li><a href="folder/actor/list.do"><spring:message code="master.page.folders" /></a></li>
 					</ul>
 				</li>		
@@ -103,10 +98,42 @@
 					<ul class='dropdown-menu'>
 						<li><a href="event/user/list.do"><spring:message code="master.page.user.events" /></a></li>	
 						<li><a href="tournament/user/list.do"><spring:message code="master.page.user.tournaments" /></a></li>
-						<li><a href="profile/user/list.do"><spring:message code="master.page.user.listProfile" /></a></li>
-						<li><a href="profile/user/edit.do"><spring:message code="master.page.user.editProfile" /></a></li>
 						<li><a href="event/user/calendar/seeSportCenters.do"><spring:message code="master.page.user.seeSportCenters" /></a></li>			
 						<li><a href="folder/actor/list.do"><spring:message code="master.page.folders" /></a></li>
+						<li><a href="team/user/list.do"><spring:message code="master.page.user.teams" /></a></li>
+					</ul>
+				</li>
+				<li><a href="event/user/listAllEvents.do"><spring:message code="master.page.user.listAllEvents" /></a></li>
+				<li><a href="team/user/listAllTeams.do"><spring:message code="master.page.user.listAllTeams" /></a></li>
+			</security:authorize>
+			
+			<!-- TOURNAMENT -->
+			
+			<security:authorize access="hasRole('USER')">
+				<li>
+					<a href='#' data-toggle='dropdown'>
+						<spring:message	code="master.page.tournament" />
+						<span class='caret'></span>
+					</a>
+					<ul class='dropdown-menu'>
+						<li><a href="tournament/user/list.do"><spring:message code="master.page.actor.list.tournaments" /></a></li>
+						<li><a href="tournament/user/create.do"><spring:message code="master.page.actor.create.tournaments" /></a></li>
+						<li><a href="tournament/listAll.do"><spring:message code="master.page.actor.all.tournaments" /></a></li>
+						
+					</ul>
+				</li>		
+			</security:authorize>
+			<security:authorize access="hasRole('CUSTOMER')">
+				<li>
+					<a href='#' data-toggle='dropdown'>
+						<spring:message	code="master.page.tournament" />
+						<span class='caret'></span>
+					</a>
+					<ul class='dropdown-menu'>
+						<li><a href="tournament/customer/list.do"><spring:message code="master.page.actor.list.tournaments" /></a></li>
+						<li><a href="tournament/customer/create.do"><spring:message code="master.page.actor.create.tournaments" /></a></li>
+						<li><a href="tournament/listAll.do"><spring:message code="master.page.actor.all.tournaments" /></a></li>
+						
 					</ul>
 				</li>		
 			</security:authorize>
@@ -131,8 +158,6 @@
 				</li>
 			</security:authorize>
 			
-			
-			
          	<!-- AUTENTICATED -->
          	<security:authorize access="isAuthenticated()">
 				<li>
@@ -142,9 +167,14 @@
 			        	<span class='caret'></span>
 					</a>
 					<ul class='dropdown-menu'>
-						<li><a href="profile/action-1.do"><spring:message code="master.page.profile.action.1" /></a></li>
-						<li><a href="profile/action-2.do"><spring:message code="master.page.profile.action.2" /></a></li>
-						<li><a href="profile/action-3.do"><spring:message code="master.page.profile.action.3" /></a></li>					
+					<security:authorize access="hasRole('CUSTOMER')">
+						<li><a href="profile/customer/list.do"><spring:message code="master.page.customer.listProfile" /></a></li>
+						<li><a href="profile/customer/edit.do"><spring:message code="master.page.customer.editProfile" /></a></li>
+						</security:authorize>
+						<security:authorize access="hasRole('USER')">
+						<li><a href="profile/user/list.do"><spring:message code="master.page.user.listProfile" /></a></li>
+						<li><a href="profile/user/edit.do"><spring:message code="master.page.user.editProfile" /></a></li>						
+						</security:authorize>
 						<li><a href="j_spring_security_logout"><spring:message code="master.page.logout" /> </a></li>
 					</ul>
 				</li>

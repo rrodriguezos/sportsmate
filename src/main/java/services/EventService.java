@@ -3,12 +3,10 @@ package services;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
-
 import repositories.EventRepository;
 import domain.Actor;
 import domain.Customer;
@@ -123,8 +121,11 @@ public class EventService {
 		
 		if(actorService.findByPrincipal() instanceof User){
 			
-			owner = (User)actorService.findByPrincipal();
-			owner.getEventsCreated().add(aux);			
+			owner = (User) actorService.findByPrincipal();
+			if (event.getId() == 0) {
+				owner.getEventsCreated().add(aux);
+				owner.getEvents().add(aux);
+			}
 			userService.save(owner);
 			
 		}else if(actorService.findByPrincipal() instanceof Customer){
@@ -190,6 +191,17 @@ public class EventService {
 		
 	}
 	
+	public void checkPrincipalByJoinedUser(Event event)
+	{
+		
+		User user;
+		
+		user = userService.findByPrincipal();
+		
+		Assert.isTrue(event.getUsers().contains(user));		
+		
+	}
+	
 	public Event findOneToEdit(int eventId)
 	{
 		
@@ -204,7 +216,7 @@ public class EventService {
 	}	
 
 	
-	public Collection<Event> findAllEventsByUserId()
+	public Collection<Event> findAllEventsCreatedByUserId()
 	{
 		
 		Collection<Event> all;
@@ -213,13 +225,13 @@ public class EventService {
 		
 		user = userService.findByPrincipal();
 		userId = user.getId();
-		all = eventRepository.findAllEventsByUserId(userId);
+		all = eventRepository.findAllEventsCreatedByUserId(userId);
 		
 		return all;
 		
 	}
 	
-	public Collection<Event> findAllEventsByCustomerId()
+	public Collection<Event> findAllEventsCreatedByCustomerId()
 	{
 		
 		Collection<Event> all;
@@ -228,7 +240,7 @@ public class EventService {
 		
 		customer = customerService.findByPrincipal();
 		customerId = customer.getId();
-		all = eventRepository.findAllEventsByCustomerId(customerId);
+		all = eventRepository.findAllEventsCreatedByCustomerId(customerId);
 		
 		return all;
 		
@@ -342,6 +354,39 @@ public class EventService {
 		
 		return result;
 	}
+	
+	public void joinEvent(Event event)
+	{
+		
+		User user;
+		
+		user = userService.findByPrincipal();
+		
+		event.getUsers().add(user);
+		user.getEvents().add(event);
+		
+		save(event);
+		userService.save(user);
+		
+	}
+	
+	public void DisjoinEvent(Event event)
+	{
+		
+		User user;
+		
+		checkPrincipalByJoinedUser(event);
+		
+		user = userService.findByPrincipal();
+		
+		event.getUsers().remove(user);
+		user.getEvents().remove(event);
+		
+		save(event);
+		userService.save(user);
+		
+	}
+	
 }
 
 

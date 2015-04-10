@@ -26,6 +26,11 @@
 		<put-attribute name="body" value="/views/tournament/display.jsp" />
 	</definition>
 	
+	<definition name="tournament/listAll" extends="master.page">	
+		<put-attribute name="title" value="All tournaments" />
+		<put-attribute name="body" value="/views/tournament/listAll.jsp" />
+	</definition>
+	
 	<definition name="tournament/edit" extends="master.page">	
 		<put-attribute name="title" value="Tournament" />
 		<put-attribute name="body" value="/views/tournament/edit.jsp" />

@@ -208,13 +208,7 @@
 		<property name="teams">
 			<list>
 			</list>
-		</property>
-
-		<property name="events">
-			<list>
-				
-			</list>
-		</property>
+		</property>		
 
 		<property name="eventsCreated">
 			<list>
@@ -222,6 +216,12 @@
 				<ref bean="event2" />				
 				<ref bean="event6" />
 				<ref bean="event7" />
+			</list>
+		</property>
+		
+		<property name="events">
+			<list>
+							
 			</list>
 		</property>
 
@@ -270,15 +270,17 @@
 			</list>
 		</property>
 
-		<property name="events">
-			<list>
-			</list>
-		</property>
-
 		<property name="eventsCreated">
 			<list>
 				<ref bean="event4" />
 				<ref bean="event8" />
+			</list>
+		</property>
+		
+		
+		<property name="events">
+			<list>
+				
 			</list>
 		</property>
 
