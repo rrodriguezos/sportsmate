@@ -122,9 +122,11 @@ public class EventUserController extends AbstractController{
 		Event event;
 		EventForm eventForm;	
 		Collection<String> places;
+		Collection<User> users;
 		
 		places = eventService.places();
-		event = eventService.findOneToEdit(eventId);	
+		event = eventService.findOneToEdit(eventId);
+		users = userService.findAllUsersByEventId(eventId);	
 		
 		eventForm = eventService.construct(event);
 		if(!places.contains(event.getPlace())){
@@ -132,7 +134,9 @@ public class EventUserController extends AbstractController{
 			eventForm.setOtherSportCenter(event.getPlace());
 		}
 
-		result = createEditModelAndView(eventForm);
+		result = createEditModelAndView(eventForm);		
+
+		result.addObject("users", users);
 
 		return result;
 	}
@@ -169,7 +173,7 @@ public class EventUserController extends AbstractController{
 	
 	// Delete---------------------------------------------------------------
 	
-	@RequestMapping(value = "display", method = RequestMethod.POST, params = "deleteEU")
+	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "deleteEU")
 	public ModelAndView delete(@Valid EventForm eventForm, BindingResult binding) 
 	{
 		

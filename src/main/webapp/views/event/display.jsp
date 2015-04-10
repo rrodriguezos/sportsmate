@@ -29,31 +29,35 @@
 	<br/>
 	<br/>
 	<b><spring:message code="event.title" />: </b> 
-		<form:input path="title" readonly="true"/>
+		<jstl:out value="${eventForm.title}"/>
 	<br/>
 	<br/>
 	<b><spring:message code="event.startMoment" />: </b> 
-		<form:input path="startMoment" readonly="true" format="{0,date,dd/MM/yyyy HH:mm}"/>&nbsp;	
-
+		<fmt:formatDate value="${eventForm.startMoment}" pattern="dd/MM/yyyy HH:mm"/>
+	<br/>
+	<br/>
 	<b><spring:message code="event.finishMoment" />: </b> 
-		<form:input path="finishMoment" readonly="true" format="{0,date,dd/MM/yyyy HH:mm}"/>
+		<fmt:formatDate value="${eventForm.finishMoment}" pattern="dd/MM/yyyy HH:mm"/>
 	<br/>
 	<br/>	
 	<b><spring:message code="event.sport" />: </b> 
-		<form:input path="sport" readonly="true"/>&nbsp;	
-	
+		<jstl:out value="${eventForm.sport}"/>	
+	<br/>
+	<br/>
 	<b><spring:message code="event.numberMaxParticipant" />: </b> 
-		<form:input path="numberMaxParticipant" readonly="true"/>
+	<jstl:out value="${eventForm.numberMaxParticipant}"/>
 	<br/>
 	<br/>	
 	<b><spring:message code="event.place" />: </b> 
-		<form:input path="place" readonly="true"/>
+		<jstl:out value="${eventForm.place}"/>
 	<br/>
 	<br/>
-	<acme:textbox code="event.otherSportCenter" path="otherSportCenter" readonly="true"/>
+	<jstl:if test="${otherSportCenter != null }">
+		<jstl:out value="${eventForm.otherSportCenter}"/>
+	</jstl:if>
 	
 	<b><spring:message code="event.description" />: </b> 
-		<form:textarea path="description" readonly="true"/>
+		<jstl:out value="${eventForm.description}"/>
 	<br/>
 
 	<h1><spring:message code="event.participants"/></h1>
@@ -77,12 +81,8 @@
 		<acme:cancel code="event.back" url="event/customer/list.do" />
 		<jstl:if test="${eventForm.customer.id == customer.id}">
 			<input type="button" name="edit" value="<spring:message code="event.edit"/>" 
-	   		   	onclick="javascript: window.location.replace('event/customer/edit.do?eventId= ${eventForm.id}')" /> 
-	   		
-			<jstl:if test="${eventForm.id != 0 && users.size()==0}"> 			
-				<input type="submit" name="deleteEC" value="<spring:message code="event.delete" />"
-			   		onclick="return confirm('<spring:message code="event.confirm.delete" />')" />
-			</jstl:if>
+	   		   	onclick="javascript: window.location.replace('event/customer/edit.do?eventId= ${eventForm.id}')" /> 	   		
+			
 		</jstl:if>
 	</security:authorize>
 	
@@ -92,10 +92,7 @@
 			<input type="button" name="edit" value="<spring:message code="event.edit"/>" 
 	   		   	onclick="javascript: window.location.replace('event/user/edit.do?eventId= ${eventForm.id}')" /> 
 	   		
-			<jstl:if test="${eventForm.id != 0 && users.size()==1}"> 			
-				<input type="submit" name="deleteEU" value="<spring:message code="event.delete" />"
-			       	onclick="return confirm('<spring:message code="event.confirm.delete" />')" />
-			</jstl:if> 
+			 
 		</jstl:if>
 	</security:authorize>
 

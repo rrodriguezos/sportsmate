@@ -35,9 +35,6 @@
 	<spring:message code="event.numberMaxParticipant" var="numberMaxParticipantHeader"/>
 	<display:column property="numberMaxParticipant" title="${numberMaxParticipantHeader}" />
 	
-	<spring:message code="event.sport" var="sportHeader"/>
-	<display:column property="sport" title="${sportHeader}" />
-	
 	<spring:message code="event.display" var="displayHeader"/>
 	<display:column title="${displayHeader}">	
 		<security:authorize access="hasRole('USER')">	
