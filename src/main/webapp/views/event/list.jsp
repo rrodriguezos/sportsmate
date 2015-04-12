@@ -54,6 +54,8 @@
 </display:table>
 </div>
 
+<br>
+
 <security:authorize access="hasRole('USER')">
 	<input type="button" class="btn btn-md btn-success" name="create" value="<spring:message code="event.create"/>" 
 	   	   onclick="javascript: window.location.replace('event/user/create.do');" />

@@ -35,6 +35,7 @@
 			<acme:password code="useraccount.password2" path="password2" />
 		</fieldset>
 		
+		<br>
 		
 		<fieldset>
 			<legend>
@@ -45,6 +46,10 @@
 		<acme:textbox code="actor.email" path="email" />
 		<acme:textbox code="actor.phone" path="phone" />
 		</fieldset>
+		
+		<br>
+		
+		
 		<fieldset>
 			<legend>
 				<spring:message code="customer.center" />
@@ -61,6 +66,7 @@
 	
 		</fieldset>
 
+	<br>
 	
 		<acme:submit name="save" code="actor.save" />&nbsp;
 		<acme:cancel url="welcome/index.do" code="actor.cancel" />&nbsp;
@@ -92,7 +98,7 @@
 		<acme:textbox code="actor.email" path="email" />
 		<acme:textbox code="actor.phone" path="phone" />
 	
-			
+	<br>		
 		
 	<div class="col-xs-12"> 
 	<br>

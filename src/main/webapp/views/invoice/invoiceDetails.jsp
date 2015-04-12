@@ -26,11 +26,11 @@
 <spring:message code="customer.invoice.makePay" var="makePay"></spring:message>
 <spring:message code="customer.invoice.payMaked" var="payMaked"></spring:message>
 
-
+<div class='table-responsive'>
 <display:table name="invoice" id="row"
 
 requestURI="customer/invoiceDetails.do"
-pagesize="5" class="displaytag" >
+pagesize="5" class="table table-bordered table-hover" >
 
 	<display:column title="${fee}" >${row.fee}</display:column>
 	<display:column title="${datePay}">${row.datePay}</display:column>
@@ -50,10 +50,8 @@ pagesize="5" class="displaytag" >
 	
 	</jstl:if>
 
-
-
-
 </display:column>
 
 
 </display:table>
+</div>

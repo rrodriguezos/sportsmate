@@ -25,11 +25,11 @@
 
 
 
-
+<div class='table-responsive'>
 <display:table name="invoices" id="row"
 
 requestURI="customer/seeInvoices.do"
-pagesize="5" class="displaytag" >
+pagesize="5" class="table table-bordered table-hover" >
 
 <display:column title="${fee}" >${row.fee}</display:column>
 <display:column title="${datePay}">
@@ -52,12 +52,14 @@ pagesize="5" class="displaytag" >
 
 </display:table>
 
+</div>
 
+
+<div class='table-responsive'>
 <display:table name="items" id="row"
 
 requestURI="customer/ownItemList.do"
-pagesize="5" class="displaytag" >
-
-
+pagesize="5" class="table table-bordered table-hover" >
 
 </display:table>
+</div>
