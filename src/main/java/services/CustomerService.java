@@ -47,12 +47,15 @@ return customerRepository.save(customer);
 public Customer create() 
 {
 	Customer customer = new Customer();
+	Collection<Folder> folders;
 
+	folders = new ArrayList<Folder>();
 	UserAccount useraccount = new UserAccount();
 	Authority authority = new Authority();
 	authority.setAuthority("CUSTOMER");
 	useraccount.addAuthority(authority);
 	customer.setUserAccount(useraccount);
+	customer.setFolders(folders);
 
 return customer;
 }

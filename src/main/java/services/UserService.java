@@ -62,9 +62,10 @@ public User create()
 	Collection<Team> teams;
 	Collection<Team> teamsCreated;
 	Collection<Tournament> tournaments;
+	Collection<Folder> folders;
 	
 	
-
+	folders = new ArrayList<Folder>();
 	votes = new ArrayList<Vote>();
 	shipsUser = new ArrayList<Friendship>();
 	shipsUserFriend = new ArrayList<Friendship>();
@@ -87,6 +88,7 @@ public User create()
 	user.setTeamsCreated(teamsCreated);
 	user.setTournaments(tournaments);
 	user.setVotes(votes);
+	user.setFolders(folders);
 	
 return user;
 }
