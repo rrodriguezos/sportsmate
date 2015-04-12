@@ -19,6 +19,7 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
+<br>
 
 <security:authorize access="hasRole('CUSTOMER')">
 
@@ -92,11 +93,12 @@
 		<acme:textbox code="actor.phone" path="phone" />
 	
 			
-		<br>
 		
+	<div class="col-xs-12"> 
+	<br>
 		<acme:submit code="actor.save" name="save" />&nbsp;
 		<acme:cancel url="welcome/index.do" code="actor.cancel" />&nbsp;
-	
+	</div>
 	
 
 </form:form>
