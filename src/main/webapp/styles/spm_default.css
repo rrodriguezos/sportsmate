@@ -94,6 +94,30 @@ span.pagelinks {
 }
 
 
+/* Carousel */
+#carousel-example-generic{
+	
+	/* nothing for now */
+}
+
+#carousel-example-generic img{
+	width: 100%;
+	height: auto;
+}
+
+.spm-custom-glyphicon{
+  top: 1px;
+  font-family: 'Glyphicons Halflings';
+  font-style: normal;
+  font-weight: bolder;
+  font-size: 2em;
+  line-height: 1;
+  position: absolute;
+  top: 50%;
+  z-index: 5;
+  display: inline-block;
+}
+
 /* Provisional & inherit from DP project*/
 
 .error {
