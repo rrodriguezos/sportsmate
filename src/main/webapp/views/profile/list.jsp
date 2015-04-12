@@ -10,12 +10,13 @@
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
 
-
+<br>
 
 <div>
 	<security:authorize access="hasRole('CUSTOMER')">
+	<div class='table-responsive'>
 	<display:table name="profile"	requestURI="${requestURI}" id="profile"
-		pagesize="5" class="displayTag">
+		pagesize="5" class="table table-bordered table-hover">
 		
 			<h1>
 			<spring:message code="personal.actor" />
@@ -43,10 +44,13 @@
 		
 		
 </display:table>
+</div>
+
 </security:authorize>
 	<security:authorize access="hasRole('USER')">
+	<div class='table-responsive'>
 	<display:table name="profile"	requestURI="${requestURI}" id="profile"
-		pagesize="5" class="displayTag">
+		pagesize="5" class="table table-bordered table-hover">
 		
 		<h1>
 			<spring:message code="personal.actor" />
@@ -59,9 +63,8 @@
 		<display:column>
 		<a href="profile/user/edit.do?userId=${profile.id}"><spring:message code="user.edit" /></a>
 		</display:column>
-		
-		
-</display:table>
+	</display:table>
+	</div>
 </security:authorize>
 
 

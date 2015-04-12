@@ -27,8 +27,9 @@
 	<h1><spring:message code="message.posted"/></h1>
 </jstl:if>
 
+<div class='table-responsive'>
 <display:table name="messages" id="row" requestURI="message/actor/list.do" 
-			   pagesize="5" class="displaytag">
+			   pagesize="5" class="table table-bordered table-hover">
 			   
 	<spring:message code="message.sendMoment" var="sendMomentHeader"/>
 	<display:column property="sendMoment" title="${sendMomentHeader}" format="{0,date,dd/MM/yyyy HH:mm}" />	
@@ -44,10 +45,11 @@
 	</display:column>	
 	
 </display:table>
+</div>
 
 <acme:cancel code="message.back" url="folder/actor/list.do" />&nbsp;
 
 <jstl:if test="${nameFolder == Inbox}">
-	<input type="button" name="create" value="<spring:message code="message.create"/>" 
+	<input type="button" class="btn btn-md btn-success" name="create" value="<spring:message code="message.create"/>" 
 	   	   onclick="javascript: window.location.replace('message/actor/create.do');" />
 </jstl:if>

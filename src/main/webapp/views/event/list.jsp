@@ -20,8 +20,10 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
+<br>
+<div class='table-responsive'>
 <display:table name="events" id="row" requestURI="${requestURI}" 
-			   pagesize="5" class="displaytag">
+			   pagesize="5" class="table table-bordered table-hover">
 			   
 	<spring:message code="event.title" var="titleHeader"/>
 	<display:column property="title" title="${titleHeader}" />	
@@ -50,14 +52,15 @@
 	</display:column>
 			   
 </display:table>
+</div>
 
 <security:authorize access="hasRole('USER')">
-	<input type="button" name="create" value="<spring:message code="event.create"/>" 
+	<input type="button" class="btn btn-md btn-success" name="create" value="<spring:message code="event.create"/>" 
 	   	   onclick="javascript: window.location.replace('event/user/create.do');" />
 </security:authorize>
 
 <security:authorize access="hasRole('CUSTOMER')">
-	<input type="button" name="create" value="<spring:message code="event.create"/>" 
+	<input type="button" class="btn btn-md btn-success" name="create" value="<spring:message code="event.create"/>" 
 	   	   onclick="javascript: window.location.replace('event/customer/create.do');" />
 </security:authorize>
 

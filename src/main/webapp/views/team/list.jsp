@@ -21,8 +21,10 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
+<br>
+<div class='table-responsive'>
 <display:table name="teams" id="row" requestURI="${requestURI}"
-	pagesize="5" class="displaytag">
+	pagesize="5" class="table table-bordered table-hover">
 
 	<spring:message code="team.name" var="nameHeader" />
 	<display:column property="name" title="${nameHeader}" />
@@ -66,10 +68,11 @@
 	</jstl:if>
 
 </display:table>
+</div>
 
 <jstl:if test="${requestURI == 'team/user/list.do' }">
 	<security:authorize access="hasRole('USER')">
-		<input type="button" name="create"
+		<input type="button" class="btn btn-md btn-success" name="create"
 			value="<spring:message code="team.create"/>"
 			onclick="javascript: window.location.replace('team/user/create.do');" />
 	</security:authorize>

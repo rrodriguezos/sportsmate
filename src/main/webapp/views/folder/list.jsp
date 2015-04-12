@@ -20,8 +20,10 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
+<br>
+<div class='table-responsive'>
 <display:table name="folders" id="row" requestURI="folder/actor/list.do" 
-			   pagesize="5" class="displaytag">
+			   pagesize="5" class="table table-bordered table-hover">
 
 	<spring:message code="folder.name" var="name"/>
 	<display:column property="name" title="${name}"  />	
@@ -34,6 +36,7 @@
 	</display:column>
 			   
 </display:table>
+</div>
 
 <acme:cancel code="folder.back" url="welcome/index.do" />&nbsp;
 

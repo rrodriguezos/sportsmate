@@ -19,6 +19,8 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
+<br>
+
 <form:form action="${requestURI}" modelAttribute="eventForm">
 
 	<form:hidden path="id" />
@@ -60,8 +62,12 @@
 		<jstl:out value="${eventForm.description}"/>
 	<br/>
 
+	<br><br>
+	
 	<h1><spring:message code="event.participants"/></h1>
-	<display:table name="users" id="row" pagesize="5" class="displaytag">
+
+	<div class='table-responsive'>
+	<display:table name="users" id="row" pagesize="5" class="table table-bordered table-hover">
 	
 		<spring:message code="event.user.name" var="nameHeader"/>
 		<display:column property="name" title="${nameHeader}" />
@@ -76,11 +82,12 @@
 		<display:column property="phone" title="${phoneHeader}" />
 			   
 	</display:table>
-
+	</div>
+	
 	<security:authorize access="hasRole('CUSTOMER')">
 		<acme:cancel code="event.back" url="event/customer/list.do" />
 		<jstl:if test="${eventForm.customer.id == customer.id}">
-			<input type="button" name="edit" value="<spring:message code="event.edit"/>" 
+			<input type="button" name="edit" class="btn btn-md btn-success" value="<spring:message code="event.edit"/>" 
 	   		   	onclick="javascript: window.location.replace('event/customer/edit.do?eventId= ${eventForm.id}')" /> 	   		
 			
 		</jstl:if>
@@ -89,7 +96,7 @@
 	<security:authorize access="hasRole('USER')">
 		<acme:cancel code="event.back" url="event/user/list.do" />
 		<jstl:if test="${eventForm.owner.id == user.id}">
-			<input type="button" name="edit" value="<spring:message code="event.edit"/>" 
+			<input type="button" class="btn btn-md btn-success" name="edit" value="<spring:message code="event.edit"/>" 
 	   		   	onclick="javascript: window.location.replace('event/user/edit.do?eventId= ${eventForm.id}')" /> 
 	   		
 			 
