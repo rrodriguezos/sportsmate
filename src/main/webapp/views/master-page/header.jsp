@@ -171,11 +171,11 @@
 					</a>
 					<ul class='dropdown-menu'>
 					<security:authorize access="hasRole('CUSTOMER')">
-						<li><a href="profile/customer/list.do"><spring:message code="master.page.customer.listProfile" /></a></li>
+						<li><a href="profile/customer/display.do"><spring:message code="master.page.customer.listProfile" /></a></li>
 						<li><a href="profile/customer/edit.do"><spring:message code="master.page.customer.editProfile" /></a></li>
 						</security:authorize>
 						<security:authorize access="hasRole('USER')">
-						<li><a href="profile/user/list.do"><spring:message code="master.page.user.listProfile" /></a></li>
+						<li><a href="profile/user/display.do"><spring:message code="master.page.user.listProfile" /></a></li>
 						<li><a href="profile/user/edit.do"><spring:message code="master.page.user.editProfile" /></a></li>						
 						</security:authorize>
 						<li><a href="j_spring_security_logout"><spring:message code="master.page.logout" /> </a></li>
