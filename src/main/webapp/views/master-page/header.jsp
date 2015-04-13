@@ -80,7 +80,6 @@
 					</a>
 					<ul class='dropdown-menu'>				
 						<li><a href="event/customer/list.do"><spring:message code="master.page.customer.events" /></a></li>
-						<li><a href="tournament/customer/list.do"><spring:message code="master.page.customer.tournaments" /></a></li>		
 						<li><a href="folder/actor/list.do"><spring:message code="master.page.folders" /></a></li>
 					</ul>
 				</li>	
@@ -99,7 +98,6 @@
 					</a>
 					<ul class='dropdown-menu'>
 						<li><a href="event/user/list.do"><spring:message code="master.page.user.events" /></a></li>	
-						<li><a href="tournament/user/list.do"><spring:message code="master.page.user.tournaments" /></a></li>
 						<li><a href="event/user/calendar/seeSportCenters.do"><spring:message code="master.page.user.seeSportCenters" /></a></li>			
 						<li><a href="folder/actor/list.do"><spring:message code="master.page.folders" /></a></li>
 						<li><a href="team/user/list.do"><spring:message code="master.page.user.teams" /></a></li>
