@@ -73,6 +73,19 @@
 			<b><spring:message code="center.web" />: </b> 
 			<jstl:out value="${customer.web}" />
 			<br/>
+		
+			<jstl:if test="${customer.rating == null}">
+			<spring:message code="actor.rating.Empty" />
+			<jstl:out value=""></jstl:out>
+		
+			</jstl:if>
+			<jstl:if test="${customer.rating != null}">
+			 <spring:message code="actor.rating" />
+			<jstl:out value="${customer.rating}" />
+			</jstl:if>
+			<br/>
+			
+			
 			<a href="profile/customer/edit.do?customerId=${profile.id}"><spring:message code="customer.edit" /></a>
 </form:form>
 </security:authorize>
@@ -96,6 +109,18 @@
 			<b><spring:message code="actor.phone" />: </b> 
 			<jstl:out value="${actor.phone}" />
 			<br/>
+			
+			<jstl:if test="${user.rating == null}">
+			<spring:message code="actor.rating.Empty" />
+			<jstl:out value=""></jstl:out>
+		
+			</jstl:if>
+			<jstl:if test="${user.rating != null}">
+			 <spring:message code="actor.rating" />
+			<jstl:out value="${user.rating}" />
+			</jstl:if>
+			<br/>
+			
 		<a href="profile/user/edit.do?userId=${profile.id}"><spring:message code="user.edit" /></a>
 </form:form>
 </security:authorize>
