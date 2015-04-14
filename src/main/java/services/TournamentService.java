@@ -29,17 +29,70 @@ public class TournamentService {
 @Autowired
 	private ActorService actorService;
 
+
 public Collection<Tournament>  findAll(){
-return tournamentRepository.findAll();
+	Collection<Tournament> all;
+	
+	all = tournamentRepository.findAll();
+	
+	return all;
 }
-public Tournament findOne(Integer valueOf) {
-return tournamentRepository.findOne(valueOf);
+public Tournament findOne(int tournamentId) {
+	Tournament result;
+	
+	result = tournamentRepository.findOne(tournamentId);
+	
+	return result;
+}
+
+public Tournament create()
+{
+	
+	Tournament tournament;
+	Actor actor;
+	User owner;
+	Customer customer;
+	Collection<Team> teams;
+	Collection<Match> matches;
+	Date creationMoment;
+	long miliseconds;
+	
+	tournament = new Tournament();
+	actor = actorService.findByPrincipal();
+	teams = new ArrayList<Team>();
+	matches = new ArrayList<Match>();
+	miliseconds = System.currentTimeMillis()-3;
+	creationMoment = new Date(miliseconds);
+	
+	if(actor instanceof User){
+		
+		owner = (User)actor;
+		
+		tournament.setUser(owner);
+		
+		
+	}else if(actor instanceof Customer){
+		
+		customer = (Customer)actor;
+		
+		tournament.setCustomer(customer);
+		tournament.setPlace(tournament.getCustomer().getNameCenter());
+	
+	}
+	
+	tournament.setCreationMoment(creationMoment);
+	tournament.setMatches(matches);
+	tournament.setTeams(teams);
+	
+
+	return tournament;
+	
 }
 
 public void save(Tournament tournament)
 {
 	
-	User organiser;
+	User owner;
 	Customer customer;
 	Tournament aux;
 	
@@ -50,12 +103,12 @@ public void save(Tournament tournament)
 	
 	if(actorService.findByPrincipal() instanceof User){
 		
-		organiser = (User) actorService.findByPrincipal();
+		owner = (User) actorService.findByPrincipal();
 		if (tournament.getId() == 0) {
-			organiser.getTournamentsCreated().add(aux);
-			organiser.getTournaments().add(aux);
+			owner.getTournamentsCreated().add(aux);
+			owner.getTournaments().add(aux);
 		}
-		userService.save(organiser);
+		userService.save(owner);
 		
 	}else if(actorService.findByPrincipal() instanceof Customer){
 		
@@ -63,6 +116,121 @@ public void save(Tournament tournament)
 		customer.getTournaments().add(aux);
 		customerService.save(customer);
 	}
+	
+}
+public void delete(Tournament tournament)
+{
+	User owner;
+	Customer customer;
+	
+	Assert.notNull(tournament);
+	checkPrincipalByActor(tournament);
+	
+	if(actorService.findByPrincipal() instanceof User){
+		
+		owner = (User)actorService.findByPrincipal();
+		owner.getTournamentsCreated().remove(tournament);
+		tournamentRepository.delete(tournament);
+		userService.save(owner);
+		
+	}else if(actorService.findByPrincipal() instanceof Customer){
+		
+		customer = (Customer)actorService.findByPrincipal();
+		customer.getTournaments().remove(tournament);
+		tournamentRepository.delete(tournament);
+		customerService.save(customer);			
+	}
+	
+
+	
+}
+
+//Other business methods ------------------------------------------------------
+
+public void checkPrincipalByActor(Tournament tournament)
+{
+	
+	Actor actor;
+	User owner;
+	Customer customer;
+	
+	actor = actorService.findByPrincipal();
+	
+	if(actor instanceof User){
+		owner = (User)actor;
+		Assert.isTrue(tournament.getUser().equals(owner));
+	}else if(actor instanceof Customer){
+		customer = (Customer)actor;
+		Assert.isTrue(tournament.getCustomer().equals(customer));
+	}		
+	
+}
+
+public Tournament findOneToEdit(int tournamentId)
+{
+	
+	Tournament tournament;
+	
+	tournament = tournamentRepository.findOne(tournamentId);	
+	
+	checkPrincipalByActor(tournament);
+	
+	return tournament;
+	
+}
+
+public Collection<Tournament> findAllTournamentsCreatedByUserId() {
+	
+	Collection<Tournament> all;
+	User user;
+	int userId;
+	
+	user = userService.findByPrincipal();
+	userId = user.getId();
+	all = tournamentRepository.findAllTournamentsCreatedByUserId(userId);
+	
+	return all;
+}
+public Collection<Tournament> findAllTournamentsCreatedByCustomerId()
+{	
+	Collection<Tournament> all;
+	Customer customer;
+	int customerId;
+	
+	customer = customerService.findByPrincipal();
+	customerId = customer.getId();
+	all = tournamentRepository.findAllTournamentsCreatedByCustomerId(customerId);
+	
+	return all;
+	
+}
+
+public Collection<String> sports()
+{
+	
+	Collection<String> all;
+	
+	all = new ArrayList<String>();
+	
+	all.add("FOOTBALL"); all.add("TENNIS"); all.add("BASKETBALL"); all.add("FUTSAL");
+	all.add("RACE"); all.add("PADDLE"); all.add("FOOTBALL_7"); 
+	
+	return all;
+	
+}
+
+public Collection<String> places()
+{
+	
+	Collection<String> all;
+	
+	all = new ArrayList<String>();
+	
+	all.add("IndorClub"); all.add("SportClub"); all.add("Place 3"); all.add("Place 4"); all.add("Place 5");
+	all.add("Place 6"); all.add("Place 7"); all.add("Place 8"); all.add("Place 9"); all.add("Other center");
+	
+	
+	return all;
 	
 }
 
@@ -83,6 +251,14 @@ public TournamentForm construct(Tournament tournament)
 	result.setSport(tournament.getSport());
 	result.setPlace(tournament.getPlace());
 	result.setPrize(tournament.getPrize());
+	result.setMatches(tournament.getMatches());
+	result.setTeams(tournament.getTeams());
+	
+	if(tournament.getUser() instanceof User){
+		result.setUser(tournament.getUser());
+	}else if(tournament.getCustomer() instanceof Customer){
+		result.setCustomer(tournament.getCustomer());
+	}
 	
 	
 	return result;
@@ -110,9 +286,11 @@ public Tournament reconstruct(TournamentForm tournamentForm)
 	tournament.setDescription(tournamentForm.getDescription());
 	tournament.setNumberOfTeams(tournamentForm.getNumberOfTeams());
 	tournament.setSport(tournamentForm.getSport());
+	tournament.setMatches(tournamentForm.getMatches());
+	tournament.setTeams(tournamentForm.getTeams());
 	
 	if(tournament.getUser() instanceof User){
-		if(!tournamentForm.getOtherSportCenter().isEmpty()){
+		if(tournamentForm.getOtherSportCenter()!= ""){
 			tournament.setPlace(tournamentForm.getOtherSportCenter());
 		}else{
 			tournament.setPlace(tournamentForm.getPlace());	
@@ -126,30 +304,8 @@ public Tournament reconstruct(TournamentForm tournamentForm)
 	return tournament;
 	
 }
-public Collection<Tournament> findAllTournamentsByCustomerId()
-{	
-	Collection<Tournament> all;
-	Customer customer;
-	int customerId;
-	
-	customer = customerService.findByPrincipal();
-	customerId = customer.getId();
-	all = tournamentRepository.findAllTournamentsByCustomerId(customerId);
-	
-	return all;
-	
-}
-public Collection<Tournament> findAllTournamentsByUserId() {
-	Collection<Tournament> all;
-	User user;
-	int userId;
-	
-	user = userService.findByPrincipal();
-	userId = user.getId();
-	all = tournamentRepository.findAllTournamentsByUserId(userId);
-	
-	return all;
-}
+
+
 public Collection<Tournament> findAllTournamentsCalendar(int id) {
 	
 	
@@ -169,120 +325,14 @@ public Collection<Tournament> findAllTournamentsCalendar(int id) {
 
 }
 
-public Tournament create()
-{
-	
-	Tournament tournament;
-	Actor actor;
-	User owner;
-	Customer customer;
-	Collection<Team> teams;
-	Collection<Match> matches;
-	Date creationMoment;
-	long miliseconds;
-	
-	tournament = new Tournament();
-	actor = actorService.findByPrincipal();
-	teams = new ArrayList<Team>();
-	matches = new ArrayList<Match>();
-	miliseconds = System.currentTimeMillis()-10;
-	creationMoment = new Date(miliseconds);
-	
-	if(actor instanceof User){
-		
-		owner = (User)actor;
-		
-		tournament.setUser(owner);
-		
-	}else if(actor instanceof Customer){
-		
-		customer = (Customer)actor;
-		
-		tournament.setCustomer(customer);
-		tournament.setPlace(tournament.getCustomer().getNameCenter());
-	
-	}
-	
-	tournament.setCreationMoment(creationMoment);
-	tournament.setMatches(matches);
-	tournament.setTeams(teams);
-	
-	return tournament;
-	
-}
 
-public void delete(Tournament tournament)
-{
-	User organiser;
-	Customer customer;
-	
-	Assert.notNull(tournament);
-	checkPrincipalByActor(tournament);
-	Assert.isTrue(tournament.getTeams().size()>=4);
-	
-	if(actorService.findByPrincipal() instanceof User){
-		
-		organiser = (User)actorService.findByPrincipal();
-		organiser.getTournamentsCreated().remove(tournament);
-		userService.save(organiser);
-		
-	}else if(actorService.findByPrincipal() instanceof Customer){
-		
-		customer = (Customer)actorService.findByPrincipal();
-		customer.getTournaments().remove(tournament);
-		customerService.save(customer);			
-	}
-	
-	tournamentRepository.delete(tournament);
-	
-}
 
-public void checkPrincipalByActor(Tournament tournament)
-{
-	
-	Actor actor;
-	User organiser;
-	Customer customer;
-	
-	actor = actorService.findByPrincipal();
-	
-	if(actor instanceof User){
-		organiser = (User)actor;
-		Assert.isTrue(tournament.getUser().equals(organiser));
-	}else if(actor instanceof Customer){
-		customer = (Customer)actor;
-		Assert.isTrue(tournament.getCustomer().equals(customer));
-	}		
-	
-}
 
-public Collection<String> places()
-{
-	
-	Collection<String> all;
-	
-	all = new ArrayList<String>();
-	
-	all.add("IndorClub"); all.add("SportClub"); all.add("Place 3"); all.add("Place 4"); all.add("Place 5");
-	all.add("Place 6"); all.add("Place 7"); all.add("Place 8"); all.add("Place 9"); all.add("Other center");
-	
-	
-	return all;
-	
-}
 
-public Collection<String> sports()
-{
-	
-	Collection<String> all;
-	
-	all = new ArrayList<String>();
-	
-	all.add("FOOTBALL"); all.add("TENNIS"); all.add("BASKETBALL"); all.add("FUTSAL");
-	all.add("RACE"); all.add("PADDLE"); all.add("FOOTBALL_7"); 
-	
-	return all;
-	
-}
+
+
+
+
+
 
 }

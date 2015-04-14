@@ -16,9 +16,11 @@ import javax.validation.constraints.Past;
 import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import domain.Customer;
 import domain.Match;
 import domain.Sport;
 import domain.Team;
+import domain.User;
 
 public class TournamentForm {
 	
@@ -34,6 +36,9 @@ public class TournamentForm {
 	private String place;
 	private int numberOfTeams;
 	private Double prize;
+	
+	private Customer customer;
+	private User user;
 	
 	private Collection<Match> matches;
 	private Collection<Team> teams;
@@ -191,5 +196,21 @@ public class TournamentForm {
 	{
 		this.matches = matches;
 	}
+	
+	@Valid
+	public Customer getCustomer() {
+		return customer;
+	}
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
+	}
+	
+	@Valid
+	public User getUser() {
+		return user;
+	}
+	public void setUser(User user) {
+		this.user = user;
+	}	
 
 }

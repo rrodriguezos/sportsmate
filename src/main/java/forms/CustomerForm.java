@@ -232,10 +232,5 @@ public class CustomerForm
 	public void setTerms(boolean terms) {
 		this.terms = terms;
 	}
-	
-	
-	
-	
-
-	
+		
 }

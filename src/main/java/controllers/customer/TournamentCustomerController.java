@@ -47,12 +47,12 @@ public ModelAndView list()
 		ModelAndView result;
 		Collection<Tournament> tournaments;
 		
-		tournaments = tournamentService.findAllTournamentsByCustomerId();
+		tournaments = tournamentService.findAllTournamentsCreatedByCustomerId();
 		
 		result = new ModelAndView("tournament/list");
 		
 		result.addObject("tournaments", tournaments);
-		result.addObject("requestURI", "tournament/user/list.do");
+		result.addObject("requestURI", "tournament/customer/list.do");
 		
 		return result;
 
@@ -89,11 +89,8 @@ public ModelAndView create()
 	ModelAndView result;
 	Tournament tournament;
 	TournamentForm tournamentForm;
-	Collection<Match> matches;
-	Collection<Team> teams;
 
-	matches = matchService.findAll();
-	teams = teamService.findAll();
+
 	
 	tournament = tournamentService.create();
 	tournamentForm= tournamentService.construct(tournament);
@@ -101,8 +98,7 @@ public ModelAndView create()
 	result = createEditModelAndView(tournamentForm);
 	result.addObject("tournamentForm", tournamentForm);
 	result.addObject("requestURI", "tournament/customer/edit.do");
-	result.addObject("matches",matches);
-	result.addObject("teams",teams);
+
 	
 	return result;	
 }
@@ -113,22 +109,17 @@ public ModelAndView edit(@RequestParam int tournamentId)
 {
 ModelAndView result;
 Tournament tournament;
-TournamentForm tournamentForm;	
-Collection<String> places;
+TournamentForm tournamentForm;
 Collection<Match> matches;
 Collection<Team> teams;
 
 matches = matchService.findAll();
 teams = teamService.findAll();
 
-places = tournamentService.places();
-tournament = tournamentService.findOne(tournamentId);	
+tournament = tournamentService.findOneToEdit(tournamentId);	
 
 tournamentForm = tournamentService.construct(tournament);
-if(!places.contains(tournament.getPlace())){
-	
-	tournamentForm.setOtherSportCenter(tournament.getPlace());
-}
+
 
 result = createEditModelAndView(tournamentForm);
 result.addObject("matches",matches);
@@ -196,12 +187,10 @@ protected ModelAndView createEditModelAndView(TournamentForm tournamentForm, Str
 	
 	ModelAndView result;
 	Collection<String> sports;
-	Collection<String> places;
 	Collection<Match> matches;
 	Collection<Team> teams;
 	
 	sports = tournamentService.sports();
-	places = tournamentService.places();
 	matches = matchService.findAll();
 	teams = teamService.findAll();
 	
@@ -209,7 +198,6 @@ protected ModelAndView createEditModelAndView(TournamentForm tournamentForm, Str
 		
 	result.addObject("tournamentForm", tournamentForm);
 	result.addObject("sports", sports);
-	result.addObject("places", places);
 	result.addObject("matches", matches);
 	result.addObject("teams", teams);
 	result.addObject("message", message);		
