@@ -199,8 +199,32 @@ public class TournamentUserRoundsController
 	{
 		Match match =matchService.findOne(id);
 			
+		ModelAndView result = null;
 		
-		return null;
+		
+	    result = new ModelAndView("tournament/user/rounds/declareWinnerOfMatch");
+	    result.addObject("teams", match.getTeams());
+	    result.addObject("match", match);
+		
+		return result;
+		
+		
+	}
+	
+	@RequestMapping("/declareWinnerOfMatchId.do")
+	public ModelAndView declareWinnerofMatch(@RequestParam int idTeam, @RequestParam int idMatch)
+	{
+		Match match = matchService.findOne(idMatch);
+		Team team = teamService.findOne(idTeam);
+		
+		
+		match.setWinner(team);
+		
+		matchService.save(match);
+		
+		
+		
+		return list();
 		
 		
 	}
