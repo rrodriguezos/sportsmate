@@ -190,7 +190,7 @@ public class Tournament extends DomainEntity{
 	
 	@Valid
 	@NotNull
-	@ManyToMany
+	@ManyToMany(cascade = {CascadeType.ALL})
 	public Collection<Team> getTeams()
 	{
 		return teams;
