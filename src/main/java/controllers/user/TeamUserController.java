@@ -159,7 +159,7 @@ public class TeamUserController extends AbstractController {
 
 		ModelAndView result;
 		Team team;
-
+		
 		if (binding.hasErrors()) {
 			result = createEditModelAndView(teamForm);
 		} else {
@@ -184,7 +184,7 @@ public class TeamUserController extends AbstractController {
 	
 	// Delete-------------------------------------------------
 
-	@RequestMapping(value = "/display", method = RequestMethod.POST, params = "delete")
+	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "delete")
 	public ModelAndView delete(@Valid TeamForm teamForm,
 			BindingResult binding) 
 	{
