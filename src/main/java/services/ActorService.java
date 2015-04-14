@@ -12,7 +12,6 @@ import repositories.ActorRepository;
 import security.LoginService;
 import security.UserAccount;
 import domain.Actor;
-import domain.Actor;
 @Service
 @Transactional
 public class ActorService {

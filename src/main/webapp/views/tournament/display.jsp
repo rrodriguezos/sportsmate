@@ -25,6 +25,10 @@
 	<jstl:out value="${tournament.title}" />
 <br/>
 
+
+<b><spring:message code="tournament.creationMoment" />: </b> 
+	<fmt:formatDate value="${tournamentMoment}" pattern="dd/MM/yyyy"/>	
+	<br/>
 <b><spring:message code="tournament.advertised" />: </b> 
 	<jstl:out value="${tournament.advertised}"/>	
 <br/>

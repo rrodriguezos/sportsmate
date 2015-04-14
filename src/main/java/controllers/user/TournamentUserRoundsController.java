@@ -45,7 +45,7 @@ public class TournamentUserRoundsController
 	@RequestMapping("/addTeamTest")
 	public ModelAndView addTeamTest(){
 		
-		List<Tournament> tournaments = (List<Tournament>) tournamentService.findAllTournamentsByUserId();
+		List<Tournament> tournaments = (List<Tournament>) tournamentService.findAllTournamentsCreatedByUserId();
 		
 		Tournament tournament=tournaments.get(0);
 		
@@ -163,7 +163,7 @@ public class TournamentUserRoundsController
 	@RequestMapping("/list")
 	public ModelAndView list(){
 		
-		Collection<Tournament> tournaments=tournamentService.findAllTournamentsByUserId();
+		Collection<Tournament> tournaments=tournamentService.findAllTournamentsCreatedByUserId();
 		
 		if(tournaments== null)
 			new Throwable("no tournaments for this user");

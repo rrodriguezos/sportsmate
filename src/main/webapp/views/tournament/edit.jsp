@@ -93,13 +93,26 @@
 	<br />
 		
 	
-	<security:authorize access="hasRole('CUSTOMER')">
-		<acme:submit code="tournament.save" name="saveTC" />&nbsp;		
+<security:authorize access="hasRole('CUSTOMER')">
+		
+		<acme:submit code="tournament.save" name="saveTC" />&nbsp;
+		
+		<jstl:if test="${tournamentForm.id != 0}"> 			
+			<input type="submit" name="deleteTC" value="<spring:message code="tournament.delete" />"
+			   	   onclick="return confirm('<spring:message code="tournament.confirm.delete" />')" />&nbsp;
+		</jstl:if>
+		
 		<acme:cancel code="tournament.cancel" url="tournament/customer/list.do" />
 	</security:authorize>	
 	
 	<security:authorize access="hasRole('USER')">
 		<acme:submit code="tournament.save" name="saveTU" />&nbsp;
+		
+		<jstl:if test="${tournamentForm.id != 0}"> 			
+				<input type="submit" name="deleteTU" value="<spring:message code="tournament.delete" />"
+			       	onclick="return confirm('<spring:message code="tournament.confirm.delete" />')" />
+		</jstl:if>
+		
 		<acme:cancel code="tournament.cancel" url="tournament/user/list.do" />
 	</security:authorize>	
 	
