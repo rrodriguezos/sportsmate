@@ -37,6 +37,7 @@
 		<value>/views/invoice/messages</value>
 		<value>/views/folder/messages</value>
 		<value>/views/message/messages</value>
+		<value>/views/tournamentsManage/messages</value>
 		
 	</util:list>
 

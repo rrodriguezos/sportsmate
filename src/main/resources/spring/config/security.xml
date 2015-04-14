@@ -103,6 +103,11 @@
 		<security:intercept-url pattern="/message/actor/create.do" access="hasAnyRole('CUSTOMER','ADMIN', 'USER')" />
 		<security:intercept-url pattern="/message/actor/reply.do" access="hasAnyRole('CUSTOMER','ADMIN', 'USER')" />
 		<security:intercept-url pattern="/tournament/listAll.do" access="hasAnyRole('CUSTOMER','ADMIN', 'USER')" />	
+		<security:intercept-url pattern="/tournament/user/rounds/list.do" access="hasAnyRole('CUSTOMER','ADMIN', 'USER')" />
+		<security:intercept-url pattern="/tournament/user/rounds/manageTournament.do" access="hasAnyRole('CUSTOMER','ADMIN', 'USER')" />	
+		<security:intercept-url pattern="/tournament/user/rounds/createFirstRounds.do" access="hasAnyRole('CUSTOMER','ADMIN', 'USER')" />
+		<security:intercept-url pattern="/tournament/user/rounds/declareWinnerOfMatch.do" access="hasAnyRole('CUSTOMER','ADMIN', 'USER')" />
+
 		
 		<security:intercept-url pattern="/conditions/laws.do" access="permitAll" />
 		<security:intercept-url pattern="/conditions/cookies.do" access="permitAll" />

@@ -97,9 +97,9 @@ public class Match extends DomainEntity{
 	private Collection<Team> teams;
 	private Tournament tournament;	
 
-	@Valid
-	@NotNull
-	@ManyToOne(optional=false)
+	
+	
+	@ManyToOne(optional=true)
 	public Team getWinner() 
 	{
 		return winner;
