@@ -20,6 +20,9 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
+<br>
+
+
 <form:form action="message/actor/edit.do" modelAttribute="messageForm">
 
 	<form:hidden path="id" />	
@@ -28,21 +31,26 @@
 	<acme:textbox code="message.sendMoment" path="sendMoment" readonly="true"/>
 	<br />
 	
+	<div class="col-xs-12"> 
 	<b><spring:message code="message.sender" />: </b>
 		<jstl:out value="${sender}" />
+	
 	<br />
 	<br />	
+	
 	
 	<jstl:if test="${messageForm.recipient == null }">
 	<form:label path="recipient"><spring:message code="message.recipient"/></form:label>
 		<form:select path="recipient" >
 			<form:options items="${actors}"  itemLabel="cadena"/>
 		</form:select>
-		<form:errors cssClass="error" path="recipient" />	
+		<form:errors class="alert alert-danger spm-form-error" path="recipient" />	
 	<br />
 	<br />
 	</jstl:if>
-	<b><spring:message code="message.sender" />: </b>
+	</div>
+	
+	<!--  <b><spring:message code="message.sender" />: </b> -->
 		<jstl:out value="${recipient}" />
 	
 	<acme:textbox code="message.subject" path="subject"/>
@@ -51,8 +59,9 @@
 	<acme:textarea code="message.body" path="body"/>
 	<br />
 	
-	<input type="submit" name="send" value="<spring:message code="message.send" />" />&nbsp; 
-
+	<div class="col-xs-12"> 
+	<input type="submit" class="btn btn-md btn-success" name="send" value="<spring:message code="message.send" />" />&nbsp; 
+	</div>
 </form:form>
 
 

@@ -32,10 +32,12 @@
 
 <%-- Definition --%>
 
+<div class="col-md-9 col-xs-12 spm-form-spacing">
 <div class="form-group">
 	<form:label path="${path}">
 		<spring:message code="${code}" />
 	</form:label>
-	<form:textarea path="${path}" readonly="${readonly}" />
-	<form:errors path="${path}" cssClass="error" />
+	<form:textarea path="${path}" rows="8" readonly="${readonly}" class="form-control"/>
+	<form:errors path="${path}" class="alert alert-danger spm-form-error" />
+</div>
 </div>
