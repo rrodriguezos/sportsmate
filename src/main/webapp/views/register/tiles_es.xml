@@ -17,12 +17,12 @@
 <tiles-definitions>
 
 	<definition name="register/registerCustomer" extends="master.page">
-		<put-attribute name="title" value="Regístrese como cliente " />
+		<put-attribute name="title" value="¡Registra tu centro deportivo!" />
 		<put-attribute name="body" value="/views/register/registerCustomer.jsp" />
 	</definition>
 
 	<definition name="register/registerUser" extends="master.page">
-		<put-attribute name="title" value="Regístrese como usuario" />
+		<put-attribute name="title" value="¡Regístate!" />
 		<put-attribute name="body"	value="/views/register/registerUser.jsp" />
 	</definition>
 

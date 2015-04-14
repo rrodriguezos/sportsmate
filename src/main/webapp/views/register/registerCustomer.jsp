@@ -4,12 +4,13 @@
 <%@taglib prefix="jstl" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-<%@taglib prefix="security"
-	uri="http://www.springframework.org/security/tags"%>
+<%@taglib prefix="security"	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
-<form:form action="register/registerCustomer.do" modelAttribute="customerForm">
+<br>
+
+<form:form action="register/registerCustomer.do" modelAttribute="customerForm" class="form-horizontal">
 
 
 
@@ -21,7 +22,9 @@
 		<acme:password code="register.password" path="password" />
 		<acme:password code="register.password2" path="password2" />
 	</fieldset>
-	<hr />
+	
+	<br>
+	
 	<fieldset>
 		<legend>
 			<spring:message code="register.user" />
@@ -32,6 +35,8 @@
 		<acme:textbox code="register.phone" path="phone" />
 		</fieldset>
 		
+	<br>
+	
 		<fieldset>
 		<legend>
 			<spring:message code="register.center" />
@@ -49,10 +54,19 @@
 		<acme:textbox code="register.web" path="web" />
 	
 	</fieldset>
-	<hr />	
 	
-	<br />
+<!-- IGNORE THE WARNING, IT'S BEACUSE THE <FORM> -->	
+<div class="col-xs-12">
+	<br>	
+	<b><spring:message code="actor.terms" /></b>
+	<br>
+		
+	<form:checkbox path="terms" /><a href="conditions/laws.do" target="_blank"><spring:message code="actor.conditions"/></a> 
+	
+	<br><br>
+	
 	<acme:submit name="save" code="register.save" />
 	<acme:cancel url="welcome/index.do" code="register.cancel" />
-
+	
 </form:form>
+</div>

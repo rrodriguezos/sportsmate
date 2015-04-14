@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.ActorService;
+import services.FolderService;
 import services.MessageService;
 import controllers.AbstractController;
 import domain.Actor;
@@ -29,6 +30,9 @@ public class MessageActorController extends AbstractController{
 	
 	@Autowired
 	private ActorService actorService;
+	
+	@Autowired
+	private FolderService folderService;
 
 	//Constructors -----------------------------------------------------------
 	public MessageActorController()
@@ -45,12 +49,18 @@ public class MessageActorController extends AbstractController{
 		
 		ModelAndView result;
 		Collection<Message> messages;
+		String nameFolder;
 		
 		messages = messageService.findAllMessagesByFolderId(folderId);
+		nameFolder = folderService.findOne(folderId).getName();
 		
 		result = new ModelAndView("message/list");
 		
 		result.addObject("messages", messages);
+		result.addObject("nameFolder", nameFolder);
+		
+		result.addObject("Inbox", "Inbox");
+		result.addObject("Outbox", "Outbox");
 		
 		return result;
 		
@@ -101,7 +111,32 @@ public class MessageActorController extends AbstractController{
 
 		return result;
 
-	}			
+	}	
+	
+	// Reply  ----------------------------------------------------------------
+	@RequestMapping(value = "/reply", method = RequestMethod.GET)
+	public ModelAndView reply(@RequestParam int messageId) {
+
+		ModelAndView result;
+		Message message;
+		Message aux;
+		MessageForm messageForm;
+
+		message = messageService.create();
+		aux = messageService.findOne(messageId);
+		messageForm = messageService.construct(message);
+		
+		messageForm.setRecipient(aux.getSender());
+
+		result = createEditModelAndView(messageForm);
+		
+		result.addObject("recipient", aux.getSender().getName()+"-"+aux.getSender().getSurname()+" ("+aux.getSender().getEmail()+")");
+
+		return result;
+
+	}
+	
+	
 	// Edition-----------------------------------------------------------------
 	@RequestMapping(value="/edit", method=RequestMethod.POST, params="send")
 	public ModelAndView send(@Valid MessageForm messageForm, BindingResult binding)
@@ -155,7 +190,7 @@ public class MessageActorController extends AbstractController{
 		
 		result.addObject("messageForm", messageForm);
 		result.addObject("actors", actors);
-		result.addObject("sender", sender.getName()+"-"+sender.getSurname()+" "+sender.getEmail());
+		result.addObject("sender", sender.getName()+"-"+sender.getSurname()+" ("+sender.getEmail()+")");
 		result.addObject("message",message);
 
 		return result;

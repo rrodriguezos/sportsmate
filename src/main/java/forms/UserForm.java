@@ -19,6 +19,8 @@ public class UserForm {
 	private String password2;
     private String username;
     
+    private boolean terms;
+    
     
     
     
@@ -86,6 +88,13 @@ public class UserForm {
 	}
 	public void setUsername(String username) {
 		this.username = username;
+	}
+	
+	public boolean getTerms() {
+		return terms;
+	}
+	public void setTerms(boolean terms) {
+		this.terms = terms;
 	}
     
     

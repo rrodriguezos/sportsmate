@@ -32,11 +32,17 @@
 </jstl:if>
 
 <%-- Definition --%>
+ 
+ <div class="col-md-9 col-xs-12 spm-form-spacing">
+		<div class="input-group input-group-md">
+			<form:label path="${path}" class="input-group-addon" id="sizing-addon1">
+				<spring:message code="${code}" />
+			</form:label>
+			<form:input path="${path}" readonly="${readonly}" class="form-control" />
+		</div>
+		<div>
+			<form:errors path="${path}" class="alert alert-danger spm-form-error" />
+		</div>
 
-<div>
-	<form:label path="${path}">
-		<spring:message code="${code}" />
-	</form:label>	
-	<form:input path="${path}" readonly="${readonly}" />	
-	<form:errors path="${path}" cssClass="error" />
-</div>	
+</div>
+ 

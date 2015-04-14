@@ -3,6 +3,7 @@ package services;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,12 +48,15 @@ return customerRepository.save(customer);
 public Customer create() 
 {
 	Customer customer = new Customer();
+	Collection<Folder> folders;
 
+	folders = new ArrayList<Folder>();
 	UserAccount useraccount = new UserAccount();
 	Authority authority = new Authority();
 	authority.setAuthority("CUSTOMER");
 	useraccount.addAuthority(authority);
 	customer.setUserAccount(useraccount);
+	customer.setFolders(folders);
 
 return customer;
 }
@@ -230,6 +234,27 @@ public Customer reconstructEdit(CustomerForm customerForm)
 		customerRepository.delete(customer.getId());
 		
 	}
+	
+	public Collection<Customer> findByKeyword(String keywords) 
+	{
+		Assert.notNull(keywords);
+		Collection<Customer> allCustomers;
+		Collection<Customer> allByKeyword;
+
+		allCustomers = findAll();
+		allByKeyword = new HashSet<Customer>();
+		keywords = keywords.toUpperCase();
+
+		for (Customer p : allCustomers) {
+			if (p.getNameCenter().toUpperCase().contains(keywords)
+					|| p.getProvinceCenter().toUpperCase().contains(keywords)
+					|| p.getEmailCenter().toUpperCase().contains(keywords)) {
+				allByKeyword.add(p);
+			}
+		}
+
+		return allByKeyword;
 	}
+}
 
 

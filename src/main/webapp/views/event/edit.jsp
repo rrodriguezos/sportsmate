@@ -62,16 +62,29 @@
 		<acme:textbox code="event.place" path="place" readonly="true"/>
 	</security:authorize>
 	<br />
+	
 		
 	
 	<security:authorize access="hasRole('CUSTOMER')">
+		
 		<acme:submit code="event.save" name="saveEC" />&nbsp;
+		
+		<jstl:if test="${eventForm.id != 0 && users.size()==0}"> 			
+			<input type="submit" name="deleteEC" value="<spring:message code="event.delete" />"
+			   	   onclick="return confirm('<spring:message code="event.confirm.delete" />')" />&nbsp;
+		</jstl:if>
 		
 		<acme:cancel code="event.cancel" url="event/customer/list.do" />
 	</security:authorize>	
 	
 	<security:authorize access="hasRole('USER')">
 		<acme:submit code="event.save" name="saveEU" />&nbsp;
+		
+		<jstl:if test="${eventForm.id != 0 && users.size()==1}"> 			
+				<input type="submit" name="deleteEU" value="<spring:message code="event.delete" />"
+			       	onclick="return confirm('<spring:message code="event.confirm.delete" />')" />
+		</jstl:if>
+		
 		<acme:cancel code="event.cancel" url="event/user/list.do" />
 	</security:authorize>
 	

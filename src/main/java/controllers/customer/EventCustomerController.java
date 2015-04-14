@@ -47,7 +47,7 @@ public class EventCustomerController extends AbstractController{
 		ModelAndView result;
 		Collection<Event> events;
 
-		events = eventService.findAllEventsByCustomerId();
+		events = eventService.findAllEventsCreatedByCustomerId();
 
 		result = new ModelAndView("event/list");
 
@@ -69,9 +69,9 @@ public class EventCustomerController extends AbstractController{
 		Actor actor;
 
 		event = eventService.findOne(eventId);
-		eventForm = eventService.construct(event);
-		users = userService.findAllUsersByEventId(eventId);
+		eventForm = eventService.construct(event);		
 		actor = actorService.findByPrincipal();
+		users = userService.findAllUsersByEventId(eventId);
 		
 		result = new ModelAndView("event/display");		
 
@@ -114,11 +114,15 @@ public class EventCustomerController extends AbstractController{
 		ModelAndView result;
 		Event event;
 		EventForm eventForm;
+		Collection<User> users;
 
 		event = eventService.findOneToEdit(eventId);
 		eventForm = eventService.construct(event);
+		users = userService.findAllUsersByEventId(eventId);
 
 		result = createEditModelAndView(eventForm);
+		
+		result.addObject("users", users);
 
 		return result;
 	}
@@ -153,7 +157,7 @@ public class EventCustomerController extends AbstractController{
 	
 	// Delete---------------------------------------------------------------
 	
-	@RequestMapping(value = "display", method = RequestMethod.POST, params = "deleteEC")
+	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "deleteEC")
 	public ModelAndView delete(@Valid EventForm eventForm, BindingResult binding) 
 	{
 		
@@ -202,4 +206,5 @@ public class EventCustomerController extends AbstractController{
 		return result;
 	}
 }
+
 

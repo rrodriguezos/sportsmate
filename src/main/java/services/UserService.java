@@ -9,11 +9,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.Assert;
 
 import repositories.UserRepository;
 import security.Authority;
 import security.LoginService;
 import security.UserAccount;
+import domain.User;
 import domain.Event;
 import domain.Folder;
 import domain.Friendship;
@@ -62,9 +64,10 @@ public User create()
 	Collection<Team> teams;
 	Collection<Team> teamsCreated;
 	Collection<Tournament> tournaments;
+	Collection<Folder> folders;
 	
 	
-
+	folders = new ArrayList<Folder>();
 	votes = new ArrayList<Vote>();
 	shipsUser = new ArrayList<Friendship>();
 	shipsUserFriend = new ArrayList<Friendship>();
@@ -87,6 +90,7 @@ public User create()
 	user.setTeamsCreated(teamsCreated);
 	user.setTournaments(tournaments);
 	user.setVotes(votes);
+	user.setFolders(folders);
 	
 return user;
 }
@@ -216,6 +220,26 @@ public void delete(User user)
 		return all;
 	}
 
+	public Collection<User> findByKeyword(String keywords) 
+	{
+		Assert.notNull(keywords);
+		Collection<User> allUsers;
+		Collection<User> allByKeyword;
 
+		allUsers = findAll();
+		allByKeyword = new HashSet<User>();
+		keywords = keywords.toUpperCase();
+
+		for (User p : allUsers) {
+			if (p.getName().toUpperCase().contains(keywords)
+					|| p.getSurname().toUpperCase().contains(keywords)
+					|| p.getEmail().toUpperCase().contains(keywords)) {
+				allByKeyword.add(p);
+			}
+		}
+
+		return allByKeyword;
+	}
+	
 }
 

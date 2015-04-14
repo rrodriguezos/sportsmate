@@ -1,6 +1,6 @@
 package controllers.user;
 
-import java.util.Collection;
+
 
 import javax.validation.Valid;
 
@@ -14,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 
 
+
 import services.EventService;
 import services.FriendshipService;
 import services.TeamService;
@@ -22,10 +23,7 @@ import services.UserService;
 import controllers.AbstractController;
 
 
-import domain.Event;
-import domain.Friendship;
-import domain.Team;
-import domain.Tournament;
+import domain.Actor;
 import domain.User;
 import forms.UserForm;
 
@@ -50,36 +48,33 @@ public class ProfileUserController extends AbstractController {
 	private TeamService teamService;
 	
 	
-// List------------------------------------------------------------------------
 
-@RequestMapping(value = "/list", method = RequestMethod.GET)
-public ModelAndView list() 
-{
+
+//Display----------------------------------------------------------------------
+
+@RequestMapping(value = "/display", method = RequestMethod.GET)
+public ModelAndView display() {
 
 	ModelAndView result;
-
+	UserForm userForm;
+	Actor actor;
+	
+	
+	actor = userService.findByPrincipal();
 	User profile = userService.findByPrincipal();
 	profile = userService.findOne(profile.getId());
 
-	Collection<Event> events = eventService.findAllEventsByUserId();
-	Collection<Tournament> tournaments = tournamentService.
-					findAllTournamentsByUserId();
-	Collection<Friendship> friendships = friendshipService.
-			findAllFriendshipsByUserId();
-	Collection<Team> teams = teamService.
-			findAllTeamsByUserId();
+	userForm = userService.construct(profile);
+	
+	
+	result = new ModelAndView("profile/display");		
+
+	result.addObject("userForm", userForm);
+	result.addObject("requestURI", "profile/user/display.do");
+	result.addObject("actor",actor);
 	
 
-		result = new ModelAndView("profile/list");
-		result.addObject("profile", profile);
-		result.addObject("actor", "/user");
-		result.addObject("requestURI", "profile/user/list.do");
-		result.addObject("events", events);
-		result.addObject("tournaments", tournaments);
-		result.addObject("friendship", friendships);
-		result.addObject("team", teams);
-
-return result;
+	return result;
 
 }
 		

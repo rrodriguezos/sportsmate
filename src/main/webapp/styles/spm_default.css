@@ -48,6 +48,63 @@ body {
     filter: alpha(opacity=70); /* For IE8 and earlier */
 }
 
+.spm-form-error{
+	display: inline-block;
+	margin-top: 2px;
+	padding-top: 4px;
+	padding-bottom: 4px;
+	margin-bottom: 4px;
+}
+
+.spm-form-spacing{
+	margin-bottom: 8px;	
+}
+
+
+/* Details on tables */
+
+.spm-table{
+	/* TODO */
+}
+
+table{
+	margin: 20px 0 20px 0;
+}
+
+th{
+	background-color: #d6e9c6;
+}
+
+span.pagebanner {
+	background-color: #eee;
+	border: thin solid #999;
+	padding: 4px 8px 4px 8px;
+	margin-top: 10px;
+	display: block;
+	border-bottom: none;
+}
+
+span.pagelinks {
+	background-color: #eee;
+	border: thin solid #999;
+	padding: 4px 8px 4px 8px;
+	display: block;
+	border-top: none;
+	margin-bottom: -5px;
+}
+
+
+/* Carousel */
+#carousel-example-generic{
+	
+	/* nothing for now */
+}
+
+#carousel-example-generic img{
+	width: 100%;
+	height: auto;
+}
+
 
 /* Provisional & inherit from DP project*/
 

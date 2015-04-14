@@ -13,6 +13,17 @@
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
 
+<script type="text/javascript">
+	function search()
+	{
+		var key = document.getElementById("idsearch").value;
+		window.location.replace('actor/search.do?keyword='+ key);
+	}
+	function hidSearch(event)
+	{
+		  if (e.which == 13)  return false;
+	}
+</script>
 
 <!-- *************************** -->
 <!-- HERE STARTS THE NEW MENUBAR -->
@@ -80,13 +91,12 @@
 					</a>
 					<ul class='dropdown-menu'>				
 						<li><a href="event/customer/list.do"><spring:message code="master.page.customer.events" /></a></li>
-						<li><a href="tournament/customer/list.do"><spring:message code="master.page.customer.tournaments" /></a></li>	
-						<li><a href="profile/customer/list.do"><spring:message code="master.page.customer.listProfile" /></a></li>
-						<li><a href="profile/customer/edit.do"><spring:message code="master.page.customer.editProfile" /></a></li>				
 						<li><a href="folder/actor/list.do"><spring:message code="master.page.folders" /></a></li>
 					</ul>
-				</li>		
+				</li>	
+				<li><a href="event/customer/create.do"><spring:message code="master.page.createEvents" /></a></li>
 				<li><a href="customer/seeInvoices.do"><spring:message code="master.page.customer.seeInvoices" /></a></li>	
+				<li><a href="folder/actor/list.do"><spring:message code="master.page.folders" /></a></li>	
 			</security:authorize>
             
          
@@ -99,16 +109,47 @@
 					</a>
 					<ul class='dropdown-menu'>
 						<li><a href="event/user/list.do"><spring:message code="master.page.user.events" /></a></li>	
-						<li><a href="tournament/user/list.do"><spring:message code="master.page.user.tournaments" /></a></li>
-						<li><a href="profile/user/list.do"><spring:message code="master.page.user.listProfile" /></a></li>
-						<li><a href="profile/user/edit.do"><spring:message code="master.page.user.editProfile" /></a></li>
 						<li><a href="event/user/calendar/seeSportCenters.do"><spring:message code="master.page.user.seeSportCenters" /></a></li>			
 						<li><a href="folder/actor/list.do"><spring:message code="master.page.folders" /></a></li>
 						<li><a href="team/user/list.do"><spring:message code="master.page.user.teams" /></a></li>
 					</ul>
 				</li>
 				<li><a href="event/user/listAllEvents.do"><spring:message code="master.page.user.listAllEvents" /></a></li>
+				<li><a href="event/user/create.do"><spring:message code="master.page.createEvents" /></a></li>
+				
 				<li><a href="team/user/listAllTeams.do"><spring:message code="master.page.user.listAllTeams" /></a></li>
+				<li><a href="folder/actor/list.do"><spring:message code="master.page.folders" /></a></li>
+			</security:authorize>
+			
+			<!-- TOURNAMENT -->
+			
+			<security:authorize access="hasRole('USER')">
+				<li>
+					<a href='#' data-toggle='dropdown'>
+						<spring:message	code="master.page.tournament" />
+						<span class='caret'></span>
+					</a>
+					<ul class='dropdown-menu'>
+						<li><a href="tournament/user/list.do"><spring:message code="master.page.actor.list.tournaments" /></a></li>
+						<li><a href="tournament/user/create.do"><spring:message code="master.page.actor.create.tournaments" /></a></li>
+						<li><a href="tournament/listAll.do"><spring:message code="master.page.actor.all.tournaments" /></a></li>
+						
+					</ul>
+				</li>		
+			</security:authorize>
+			<security:authorize access="hasRole('CUSTOMER')">
+				<li>
+					<a href='#' data-toggle='dropdown'>
+						<spring:message	code="master.page.tournament" />
+						<span class='caret'></span>
+					</a>
+					<ul class='dropdown-menu'>
+						<li><a href="tournament/customer/list.do"><spring:message code="master.page.actor.list.tournaments" /></a></li>
+						<li><a href="tournament/customer/create.do"><spring:message code="master.page.actor.create.tournaments" /></a></li>
+						<li><a href="tournament/listAll.do"><spring:message code="master.page.actor.all.tournaments" /></a></li>
+						
+					</ul>
+				</li>		
 			</security:authorize>
          	
          	
@@ -140,6 +181,14 @@
 			        	<span class='caret'></span>
 					</a>
 					<ul class='dropdown-menu'>
+					<security:authorize access="hasRole('CUSTOMER')">
+						<li><a href="profile/customer/display.do"><spring:message code="master.page.customer.listProfile" /></a></li>
+						<li><a href="profile/customer/edit.do"><spring:message code="master.page.customer.editProfile" /></a></li>
+						</security:authorize>
+						<security:authorize access="hasRole('USER')">
+						<li><a href="profile/user/display.do"><spring:message code="master.page.user.listProfile" /></a></li>
+						<li><a href="profile/user/edit.do"><spring:message code="master.page.user.editProfile" /></a></li>						
+						</security:authorize>
 						<li><a href="j_spring_security_logout"><spring:message code="master.page.logout" /> </a></li>
 					</ul>
 				</li>
@@ -158,6 +207,13 @@
 					<li><a href="conditions/laws.do"><spring:message code="master.page.laws" /></a></li>
 					<li><a href="conditions/cookies.do"><spring:message code="master.page.cookies" /></a></li>
 				</ul>
+			</li>
+			
+			<li>
+				<form> 
+					<input  type="text"  id="idsearch" onkeypress="hidSearch(event);">
+					<input class="btn-style" type="button"  value="<spring:message code="master.page.search" />" onclick="search()"   >
+				</form>
 			</li>
 			
 			

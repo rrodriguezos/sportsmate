@@ -19,6 +19,7 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
+<br>
 
 <security:authorize access="hasRole('CUSTOMER')">
 
@@ -34,6 +35,7 @@
 			<acme:password code="useraccount.password2" path="password2" />
 		</fieldset>
 		
+		<br>
 		
 		<fieldset>
 			<legend>
@@ -44,6 +46,10 @@
 		<acme:textbox code="actor.email" path="email" />
 		<acme:textbox code="actor.phone" path="phone" />
 		</fieldset>
+		
+		<br>
+		
+		
 		<fieldset>
 			<legend>
 				<spring:message code="customer.center" />
@@ -60,13 +66,9 @@
 	
 		</fieldset>
 
+	<br>
 	
 		<acme:submit name="save" code="actor.save" />&nbsp;
-		
-			<input type="submit" name="delete"
-				value="<spring:message code="actor.delete"/>"
-				onclick="window.location.href='j_spring_security_logout'" />&nbsp;
-		
 		<acme:cancel url="welcome/index.do" code="actor.cancel" />&nbsp;
 	</form:form>		
 	</security:authorize>
@@ -96,17 +98,13 @@
 		<acme:textbox code="actor.email" path="email" />
 		<acme:textbox code="actor.phone" path="phone" />
 	
-			
-		<br>
+	<br>		
 		
+	<div class="col-xs-12"> 
+	<br>
 		<acme:submit code="actor.save" name="save" />&nbsp;
-		
-			<input type="submit" name="delete" class="btn btn-md btn-default"
-				value="<spring:message code="user.delete"/>"
-				onclick="window.location.href='j_spring_security_logout'" />&nbsp;
-		
 		<acme:cancel url="welcome/index.do" code="actor.cancel" />&nbsp;
-	
+	</div>
 	
 
 </form:form>

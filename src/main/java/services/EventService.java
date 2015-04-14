@@ -3,12 +3,10 @@ package services;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
-
 import repositories.EventRepository;
 import domain.Actor;
 import domain.Customer;
@@ -218,7 +216,7 @@ public class EventService {
 	}	
 
 	
-	public Collection<Event> findAllEventsByUserId()
+	public Collection<Event> findAllEventsCreatedByUserId()
 	{
 		
 		Collection<Event> all;
@@ -227,13 +225,13 @@ public class EventService {
 		
 		user = userService.findByPrincipal();
 		userId = user.getId();
-		all = eventRepository.findAllEventsByUserId(userId);
+		all = eventRepository.findAllEventsCreatedByUserId(userId);
 		
 		return all;
 		
 	}
 	
-	public Collection<Event> findAllEventsByCustomerId()
+	public Collection<Event> findAllEventsCreatedByCustomerId()
 	{
 		
 		Collection<Event> all;
@@ -242,7 +240,7 @@ public class EventService {
 		
 		customer = customerService.findByPrincipal();
 		customerId = customer.getId();
-		all = eventRepository.findAllEventsByCustomerId(customerId);
+		all = eventRepository.findAllEventsCreatedByCustomerId(customerId);
 		
 		return all;
 		
