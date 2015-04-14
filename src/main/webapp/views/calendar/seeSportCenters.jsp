@@ -25,11 +25,11 @@
 <spring:message code="sportCenter.street" var="street"/>
 <spring:message code="sportCenter.CalendarOfEvents" var="calendarOfEvents"/>
 
-
+<div class="table-responsive">
 <display:table name="centers" id="row"
 
 requestURI="event/user/calendar/seeSportCenters.do"
-pagesize="5" class="displaytag" >
+pagesize="5" class="table table-bordered table-hover" >
 
 
 
@@ -46,3 +46,4 @@ pagesize="5" class="displaytag" >
 
 
 </display:table>
+</div>

@@ -20,8 +20,9 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
+<div class="table-responsive">
 <display:table name="tournaments" id="row" requestURI="${requestURI}" 
-			   pagesize="5" class="displaytag">
+			   pagesize="5" class="table table-bordered table-hover">
 			   
 			   
 	<spring:message code="tournament.title" var="titleHeader"/>
@@ -49,5 +50,6 @@
 			   
 			   
 </display:table>
+</div>
 
 <acme:cancel code="tournament.back" url="welcome/index.do" />	   

@@ -53,10 +53,11 @@
 
 <h1> <jstl:out value="${events }"></jstl:out> </h1>
 
+<div class="table-responsive">
 <display:table name="events" id="row"
 
 requestURI="event/user/calendar/seeSportCenterCalendar.do"
-pagesize="20" class="displaytag" defaultsort="1" defaultorder="ascending" >
+pagesize="20" class="table table-bordered table-hover" defaultsort="1" defaultorder="ascending" >
 
 <display:column title="${startMoment }"  format="{0,date,dd-MM-yyyy}"> 
 	<jstl:out value="${row.startMoment}"/>
@@ -136,7 +137,7 @@ pagesize="20" class="displaytag" defaultsort="1" defaultorder="ascending" >
 
 
 </display:table>
-
+</div>
 <h1> <jstl:out value="${tournaments }"></jstl:out> </h1>
 
 
