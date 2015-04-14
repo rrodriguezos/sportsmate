@@ -1,6 +1,6 @@
 package controllers.customer;
 
-import java.util.Collection;
+
 
 import javax.validation.Valid;
 
@@ -16,10 +16,8 @@ import services.EventService;
 import services.InvoiceService;
 import services.TournamentService;
 import controllers.AbstractController;
+import domain.Actor;
 import domain.Customer;
-import domain.Event;
-import domain.Invoice;
-import domain.Tournament;
 import forms.CustomerForm;
 
 
@@ -40,33 +38,34 @@ public class ProfileCustomerController extends AbstractController {
 	private InvoiceService invoiceService;
 	
 	
-// List------------------------------------------------------------------------
 
-@RequestMapping(value = "/list", method = RequestMethod.GET)
-public ModelAndView list() 
-{
+
+//Display----------------------------------------------------------------------
+
+@RequestMapping(value = "/display", method = RequestMethod.GET)
+public ModelAndView display() {
 
 	ModelAndView result;
+	CustomerForm customerForm;
+	Customer customer;
+	Actor actor;
+
 
 	Customer profile = customerService.findByPrincipal();
 	profile = customerService.findOne(profile.getId());
+	customerForm = customerService.construct(profile);
+	actor = customerService.findByPrincipal();
+	customer = customerService.findByPrincipal();	
+	
+	result = new ModelAndView("profile/display");		
 
-	Collection<Event> events = eventService.findAllEventsCreatedByCustomerId();
-	Collection<Tournament> tournaments = tournamentService.
-					findAllTournamentsByCustomerId();
-	Collection<Invoice> invoices = invoiceService.
-					findAllInvoicesByCustomerId();
+	result.addObject("customerForm", customerForm);
+	result.addObject("actor",actor);
+	result.addObject("customer",customer);	
+	result.addObject("requestURI", "profile/customer/display.do");
 	
 
-		result = new ModelAndView("profile/list");
-		result.addObject("profile", profile);
-		result.addObject("actor", "/customer");
-		result.addObject("requestURI", "profile/customer/list.do");
-		result.addObject("events", events);
-		result.addObject("tournaments", tournaments);
-		result.addObject("invoices", invoices);
-
-return result;
+	return result;
 
 }
 		

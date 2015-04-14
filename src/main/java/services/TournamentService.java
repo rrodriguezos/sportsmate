@@ -36,41 +36,33 @@ public Tournament findOne(Integer valueOf) {
 return tournamentRepository.findOne(valueOf);
 }
 
-public Tournament findOneToEdit(int tournamentId)
-{
-	
-	Tournament tournament;
-	
-	tournament = tournamentRepository.findOne(tournamentId);	
-	
-	checkPrincipalByActor(tournament);
-	
-	return tournament;
-	
-}
 public void save(Tournament tournament)
 {
 	
 	User organiser;
 	Customer customer;
+	Tournament aux;
 	
 	Assert.notNull(tournament);
 	Assert.isTrue(tournament.getStartMoment().compareTo(tournament.getFinishMoment()) < 0);
 	
-	tournamentRepository.save(tournament);
+	aux = tournamentRepository.save(tournament);
 	
 	if(actorService.findByPrincipal() instanceof User){
 		
-		organiser = (User)actorService.findByPrincipal();
-		organiser.getTournamentsCreated().add(tournament);			
+		organiser = (User) actorService.findByPrincipal();
+		if (tournament.getId() == 0) {
+			organiser.getTournamentsCreated().add(aux);
+			organiser.getTournaments().add(aux);
+		}
 		userService.save(organiser);
 		
 	}else if(actorService.findByPrincipal() instanceof Customer){
 		
 		customer = (Customer)actorService.findByPrincipal();
-		customer.getTournaments().add(tournament);
+		customer.getTournaments().add(aux);
 		customerService.save(customer);
-	}		
+	}
 	
 }
 
@@ -91,6 +83,7 @@ public TournamentForm construct(Tournament tournament)
 	result.setSport(tournament.getSport());
 	result.setPlace(tournament.getPlace());
 	result.setPrize(tournament.getPrize());
+	
 	
 	return result;
 	
@@ -291,4 +284,5 @@ public Collection<String> sports()
 	return all;
 	
 }
+
 }

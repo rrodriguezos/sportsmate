@@ -80,7 +80,6 @@
 					</a>
 					<ul class='dropdown-menu'>				
 						<li><a href="event/customer/list.do"><spring:message code="master.page.customer.events" /></a></li>
-						<li><a href="tournament/customer/list.do"><spring:message code="master.page.customer.tournaments" /></a></li>		
 						<li><a href="folder/actor/list.do"><spring:message code="master.page.folders" /></a></li>
 					</ul>
 				</li>	
@@ -99,10 +98,9 @@
 					</a>
 					<ul class='dropdown-menu'>
 						<li><a href="event/user/list.do"><spring:message code="master.page.user.events" /></a></li>	
-						<li><a href="tournament/user/list.do"><spring:message code="master.page.user.tournaments" /></a></li>
 						<li><a href="event/user/calendar/seeSportCenters.do"><spring:message code="master.page.user.seeSportCenters" /></a></li>			
 						<li><a href="folder/actor/list.do"><spring:message code="master.page.folders" /></a></li>
-						<li><a href="team/user/list.do"><spring:message code="master.page.user.teams" /></a></li>
+						<li><a href="team/user/list.do"><spring:message code="master.page.user.teams" /></a></li> 					
 						<li><a href="tournament/user/rounds/list.do"><spring:message code="master.page.user.manageTournaments" /></a></li>
 					</ul>
 				</li>
@@ -174,11 +172,11 @@
 					</a>
 					<ul class='dropdown-menu'>
 					<security:authorize access="hasRole('CUSTOMER')">
-						<li><a href="profile/customer/list.do"><spring:message code="master.page.customer.listProfile" /></a></li>
+						<li><a href="profile/customer/display.do"><spring:message code="master.page.customer.listProfile" /></a></li>
 						<li><a href="profile/customer/edit.do"><spring:message code="master.page.customer.editProfile" /></a></li>
 						</security:authorize>
 						<security:authorize access="hasRole('USER')">
-						<li><a href="profile/user/list.do"><spring:message code="master.page.user.listProfile" /></a></li>
+						<li><a href="profile/user/display.do"><spring:message code="master.page.user.listProfile" /></a></li>
 						<li><a href="profile/user/edit.do"><spring:message code="master.page.user.editProfile" /></a></li>						
 						</security:authorize>
 						<li><a href="j_spring_security_logout"><spring:message code="master.page.logout" /> </a></li>

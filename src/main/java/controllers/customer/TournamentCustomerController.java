@@ -89,12 +89,20 @@ public ModelAndView create()
 	ModelAndView result;
 	Tournament tournament;
 	TournamentForm tournamentForm;
+	Collection<Match> matches;
+	Collection<Team> teams;
+
+	matches = matchService.findAll();
+	teams = teamService.findAll();
 	
 	tournament = tournamentService.create();
 	tournamentForm= tournamentService.construct(tournament);
 	
 	result = createEditModelAndView(tournamentForm);
+	result.addObject("tournamentForm", tournamentForm);
 	result.addObject("requestURI", "tournament/customer/edit.do");
+	result.addObject("matches",matches);
+	result.addObject("teams",teams);
 	
 	return result;	
 }
@@ -107,9 +115,14 @@ ModelAndView result;
 Tournament tournament;
 TournamentForm tournamentForm;	
 Collection<String> places;
+Collection<Match> matches;
+Collection<Team> teams;
+
+matches = matchService.findAll();
+teams = teamService.findAll();
 
 places = tournamentService.places();
-tournament = tournamentService.findOneToEdit(tournamentId);	
+tournament = tournamentService.findOne(tournamentId);	
 
 tournamentForm = tournamentService.construct(tournament);
 if(!places.contains(tournament.getPlace())){
@@ -118,6 +131,8 @@ if(!places.contains(tournament.getPlace())){
 }
 
 result = createEditModelAndView(tournamentForm);
+result.addObject("matches",matches);
+result.addObject("teams",teams);
 
 return result;
 }
@@ -187,8 +202,8 @@ protected ModelAndView createEditModelAndView(TournamentForm tournamentForm, Str
 	
 	sports = tournamentService.sports();
 	places = tournamentService.places();
-	matches = matchService.findAllMatchesByTournament(tournamentForm);
-	teams = teamService.findAllTeamsByTournament(tournamentForm);
+	matches = matchService.findAll();
+	teams = teamService.findAll();
 	
 	result = new ModelAndView("tournament/edit");
 		

@@ -41,19 +41,15 @@
 	<form:label path="advertised">
 		<spring:message code="tournament.advertised" />
 	</form:label>
-
-	<form:select path="advertised">
-		<form:option label="----" value="0" />
-		<select name="advertised">
-  					<option value="Yes">Yes</option>
- 					 <option value="No">No</option> 			
-		</select>
 	
-	</form:select>
+		<form:select path="advertised">
+        <option value="">--</option>
+        <option value="true">Yes</option>
+        <option value="false">No</option>
+    </form:select>
 
 	<form:label path="sport"><spring:message code="tournament.sport"/></form:label>
 		<form:select path="sport" >
-			<form:option value="------"/>
 			<form:options items="${sports}"  />
 		</form:select>
 		<form:errors cssClass="error" path="sport" />
@@ -62,7 +58,6 @@
 	
 	<form:label path="teams"><spring:message code="tournament.team"/></form:label>
 		<form:select path="teams" >
-			<form:option value="------"/>
 			<form:options items="${teams}"  />
 		</form:select>
 		<form:errors cssClass="error" path="teams" />
@@ -71,7 +66,6 @@
 	
 	<form:label path="matches"><spring:message code="tournament.match"/></form:label>
 		<form:select path="matches" >
-			<form:option value="------"/>
 			<form:options items="${matches}"  />
 		</form:select>
 		<form:errors cssClass="error" path="matches" />
@@ -84,7 +78,6 @@
 	<security:authorize access="hasRole('USER')">
 		<form:label path="place"><spring:message code="tournament.place"/></form:label>
 			<form:select path="place" >
-				<form:option value="------"/>
 				<form:options items="${places}"  />
 			</form:select>
 			<form:errors cssClass="error" path="place" />
