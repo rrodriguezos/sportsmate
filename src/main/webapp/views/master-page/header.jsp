@@ -111,14 +111,13 @@
 						<li><a href="event/user/list.do"><spring:message code="master.page.user.events" /></a></li>	
 						<li><a href="event/user/calendar/seeSportCenters.do"><spring:message code="master.page.user.seeSportCenters" /></a></li>			
 						<li><a href="folder/actor/list.do"><spring:message code="master.page.folders" /></a></li>
-						<li><a href="team/user/list.do"><spring:message code="master.page.user.teams" /></a></li> 					
 						<li><a href="tournament/user/rounds/list.do"><spring:message code="master.page.user.manageTournaments" /></a></li>
 					</ul>
 				</li>
 				<li><a href="event/user/listAllEvents.do"><spring:message code="master.page.user.listAllEvents" /></a></li>
 				<li><a href="event/user/create.do"><spring:message code="master.page.createEvents" /></a></li>
 				
-				<li><a href="team/user/listAllTeams.do"><spring:message code="master.page.user.listAllTeams" /></a></li>
+				
 				<li><a href="folder/actor/list.do"><spring:message code="master.page.folders" /></a></li>
 			</security:authorize>
 			
@@ -153,7 +152,23 @@
 				</li>		
 			</security:authorize>
          	
-         	
+         	<!-- Team -->
+			
+			<security:authorize access="hasRole('USER')">
+				<li>
+					<a href='#' data-toggle='dropdown'>
+						<spring:message	code="master.page.team" />
+						<span class='caret'></span>
+					</a>
+					<ul class='dropdown-menu'>
+					
+						<li><a href="team/user/list.do"><spring:message code="master.page.user.teams" /></a></li>
+						<li><a href="team/user/create.do"><spring:message code="master.page.actor.create.team" /></a></li>
+						<li><a href="team/user/listAllTeams.do"><spring:message code="master.page.user.listAllTeams" /></a></li>
+						
+					</ul>
+				</li>		
+			</security:authorize>
          	<!-- ANONYMOUS -->
          	<security:authorize access="isAnonymous()">
 				<li>

@@ -1,5 +1,6 @@
 package domain;
 
+import java.util.Collection;
 import java.util.Date;
 
 import javax.persistence.Access;
@@ -44,6 +45,7 @@ public class Friendship extends DomainEntity{
 	//Relationships-------------------------------------------------------------------------
 	private User user;
 	private User userFriend;
+	
 
 	@Valid
 	@NotNull
@@ -70,6 +72,9 @@ public class Friendship extends DomainEntity{
 	{
 		this.userFriend = userFriend;
 	}
+
+	
+	
 	
 	
 	

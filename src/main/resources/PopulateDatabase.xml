@@ -244,6 +244,11 @@
 			<list>
 			</list>
 		</property>
+		
+		<property name="requests">
+			<list>
+			</list>
+		</property>
 	</bean>
 
 	<bean id="user2" class="domain.User">
@@ -300,6 +305,11 @@
 		</property>
 
 		<property name="votes">
+			<list>
+			</list>
+		</property>
+		
+		<property name="requests">
 			<list>
 			</list>
 		</property>
@@ -714,6 +724,11 @@
 
 			</list>
 		</property>
+		
+		<property name="requests">
+			<list>
+			</list>
+		</property>
 	</bean>
 
 	<bean id="team2" class="domain.Team">
@@ -737,6 +752,11 @@
 		<property name="winners">
 			<list>
 
+			</list>
+		</property>
+		
+		<property name="requests">
+			<list>
 			</list>
 		</property>
 	</bean>

@@ -70,13 +70,4 @@
 </display:table>
 </div>
 
-<jstl:if test="${requestURI == 'team/user/list.do' }">
-	<security:authorize access="hasRole('USER')">
-		<input type="button" class="btn btn-md btn-success" name="create"
-			value="<spring:message code="team.create"/>"
-			onclick="javascript: window.location.replace('team/user/create.do');" />
-	</security:authorize>
-</jstl:if>
-
-
 <acme:cancel code="team.back" url="welcome/index.do" />
