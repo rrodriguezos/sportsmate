@@ -105,6 +105,27 @@ span.pagelinks {
 	height: auto;
 }
 
+/* Custom search bar */
+.spm-search-input{
+	color: white;
+	border-color: black;
+	background-color: #777;
+}
+
+.spm-search-button{
+	border-color: black;
+	color: lightgray;
+	background-color: #555;
+}
+
+.spm-search-button:hover{
+	border-color: black;
+	color: white;
+	background-color: #999;
+}
+
+
+
 
 /* Provisional & inherit from DP project*/
 

@@ -210,16 +210,29 @@
 				</ul>
 			</li>
 			
+			
+			
+			
+			
+			<!-- Here starts the search bar -->
+			
+			
 			<li>
-				<form> 
-					<input  type="text"  id="idsearch" onkeypress="hidSearch(event);">
-					<input class="btn-style" type="button"  value="<spring:message code="master.page.search" />" onclick="search()"   >
-				</form>
+				<form class="navbar-form navbar-right">	
+					<div class="input-group">
+						<input type="text" class="form-control spm-search-input" id="idsearch" onkeypress="hidSearch(event);">
+						<span class="input-group-btn">
+        					<button class="btn btn-default spm-search-button" type="button" onclick="search()"><spring:message code="master.page.search" /></button>
+      					</span>
+      				</div>
+      			</form>			
 			</li>
 			
 			
+			
+			
+			
 	    </ul>
-	    
 	</div>
 </div>
 
