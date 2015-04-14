@@ -36,17 +36,13 @@
 		
 		<div class='navbar-header'>
 			<a href="?language=es" class="navbar-brand" >
-				<div>
-					<!-- <img src="images/es_flag.jpg" alt="Espanol" />  -->
-					<span>ES</span>
-				</div>
+				<!-- <img src="images/es_flag.jpg" alt="Espanol" />  -->
+				<span>ES</span>
 			</a>
 		
 			<a href="?language=en" class="navbar-brand" >
-				<div>
-					<!--   <img src="images/en_flag.jpg" alt="English" /> -->
-					<span>EN</span>
-				</div>
+				<!--   <img src="images/en_flag.jpg" alt="English" /> -->
+				<span>EN</span>
 			</a>
 		
 			<button type='button' class='navbar-toggle' data-toggle='collapse' data-target='.navbar-collapse'>
@@ -194,25 +190,7 @@
 					</ul>
 				</li>
 			</security:authorize>
-			
-         	
-
-            <!-- CONDITIONS & COOKIES -->
-            <li>
-				<a href='#' data-toggle='dropdown'>
-					<spring:message code="master.page.terms" />
-					<span class='caret'></span>
-				</a>
-				
-				<ul class='dropdown-menu'>
-					<li><a href="conditions/laws.do"><spring:message code="master.page.laws" /></a></li>
-					<li><a href="conditions/cookies.do"><spring:message code="master.page.cookies" /></a></li>
-				</ul>
-			</li>
-			
-			
-			
-			
+						
 			
 			<!-- Here starts the search bar -->
 			
