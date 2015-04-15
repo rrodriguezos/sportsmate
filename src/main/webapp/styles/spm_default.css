@@ -152,6 +152,15 @@ span.pagelinks {
 	padding-bottom: 10px;
 }
 
+.spm-profile-picture-div{
+	padding-top: 20px;
+}
+
+.spm-profile-picture{
+	width: 100%;
+	height: auto;
+}
+
 /* Provisional & inherit from DP project*/
 
 .error {
