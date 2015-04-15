@@ -54,6 +54,7 @@ public class Team extends DomainEntity{
 	private Collection<Tournament> tournaments;
 	private Collection<Match> matchs;
 	private Collection<Match> winners;
+	private Collection<Match> defeats;
 
 	@Valid
 	@NotNull
@@ -107,7 +108,15 @@ public class Team extends DomainEntity{
 	}
 	public void setWinners(Collection<Match> winners) {
 		this.winners = winners;
-	}	
+	}
+	
+	@OneToMany(mappedBy="defeat")
+	public Collection<Match> getDefeats() {
+		return defeats;
+	}
+	public void setDefeats(Collection<Match> defeats) {
+		this.defeats = defeats;
+	}
 	
 	
 	

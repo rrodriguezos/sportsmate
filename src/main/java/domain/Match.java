@@ -97,6 +97,7 @@ public class Match extends DomainEntity{
 	private Team winner;
 	private Collection<Team> teams;
 	private Tournament tournament;	
+	private Team defeat;
 
 	
 	
@@ -134,7 +135,17 @@ public class Match extends DomainEntity{
 	{
 		this.tournament = tournament;
 	}
+
 	
+	@ManyToOne(optional=true)
+	public Team getDefeat() 
+	{
+		return defeat;
+	}
+	public void setDefeat(Team defeat) 
+	{
+		this.defeat = defeat;
+	}
 	
 	
 	
