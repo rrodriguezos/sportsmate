@@ -124,36 +124,88 @@ pagesize="5" class="displaytag" >
 	
 	</display:column>
 	
-	<display:column>
+	<display:column title="tets">
 		
 		<%-- equipos sin jugar aún --%>
-		<jstl:set var="AllPlays" value="false"></jstl:set>
+		<jstl:set var="AllPlays" value="1"></jstl:set>
+		<jstl:set var="AllTeamPlays" value="true"></jstl:set>
 		<jstl:set var="numTeams" value="${row.teams.size() }"></jstl:set>
+		
+		<%-- primero comprobamos si aún quedan partidos sin jugar --%>
+		
 		<jstl:forEach items="${row.matches }" var="a">
-				  
-				<jstl:forEach items="${a.teams }" var="b">
-					  
-					
-					
-					<jstl:forEach items="${b.winners }" var="c">
-						 
-						<jstl:if test="${c.id == a.id }">
-							
-							test1
-						</jstl:if>
+			${a.winner }<br>
+			${a.defeat }<br>
+			<jstl:if test="${a.winner == null }">
+					<%-- hay partidos aún sin jugar --%>
+					<jstl:set var="AllPlays" value= "0"></jstl:set>
+			</jstl:if>
+			
+			</jstl:forEach>
+		
+		
+		
+		<jstl:forEach items="${row.matches }" var="a">
+			${a.winner }<br>
+			${a.defeat }<br>
+			
+			
+			
+			<jstl:if test="${AllPlays == '1' }"> 
+				<%-- no hay partidos sin jugar, declaramos al vencedor del tournament --%>
+				vencedor
+			
+			</jstl:if>
+			
+			<%--comprobamos si hay sin jugar para pasar a la siguiente validación que es ver si todos los equipos han jugado --%>
+			
+			${AllPlays }
+			<jstl:if test="${AllPlays == '0' }">
+				
+				<%-- esta todos jugados, vemos si hay equipos sin jugar aún para generar la siguientes rondas o declarar el vencedor --%>
+				
+				<jstl:forEach items="${row.teams }" var="a">
+						
+						<%-- estos son los teams del tournament, que deben de tener una lista de ganados y perdidos debemos ver que incluyen algun 
+						match, en caso de que no, este no ha jugado aún --%>
+						
+						<jstl:forEach items="${a.winners }" var="b">
+						
+								<jstl:forEach items="${a.defeats }" var="c">
+									
+									<jstl:if test="${b.id == a.id || c.id == a.id }">
+										
+										<jstl:set var="AllTeamPlays" value= "false"></jstl:set>
+										pollas
+									
+									</jstl:if>
+												
+						
+								</jstl:forEach>
+						
+								
+						
+						</jstl:forEach>
+						
 						
 					
-					</jstl:forEach>
+				
+				</jstl:forEach>
+				
+			
+			
+			</jstl:if>
 			
 			
 			</jstl:forEach>
-				
-				
-				
-				
 			
 			
-			</jstl:forEach>
+			
+		
+		
+		
+		
+		
 			
 			
 			

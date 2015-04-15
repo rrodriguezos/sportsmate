@@ -166,9 +166,14 @@ public class TournamentUserRoundsController
 				match.setDescription(".");
 				matchs.add(match);
 				
+				//tournament.setMatches(matchs);
+				//matchService.save(match);
+			//	tournamentService.save(tournament);
+				
 				tournament.setMatches(matchs);
-				matchService.save(match);
 				tournamentService.save(tournament);
+				teamService.save(team1);
+				teamService.save(team2);
 				
 
 				
@@ -243,7 +248,18 @@ public class TournamentUserRoundsController
 		Team team = teamService.findOne(idTeam);
 		
 		
+		Team team2 = null;
+		
+		for (Team t : match.getTeams()){
+			
+			if(t.getId() !=  team.getId()){
+				team2 = t;
+			}
+		}
+		
+		
 		match.setWinner(team);
+		match.setDefeat(team2);
 		
 		matchService.save(match);
 		
