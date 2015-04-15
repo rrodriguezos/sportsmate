@@ -136,8 +136,9 @@ pagesize="5" class="displaytag" >
 		<jstl:forEach items="${row.matches }" var="a">
 			${a.winner }<br>
 			${a.defeat }<br>
-			<jstl:if test="${a.winner == null }">
+			<jstl:if test="${!a.played }">
 					<%-- hay partidos aún sin jugar --%>
+					partidos sin jugar
 					<jstl:set var="AllPlays" value= "0"></jstl:set>
 			</jstl:if>
 			

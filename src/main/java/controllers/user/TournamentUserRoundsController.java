@@ -91,13 +91,13 @@ public class TournamentUserRoundsController
 		if((tournament.getTeams().size() % 2) == 0){
 			
 			Collection<Match> matchs= tournament.getMatches();
-			for(int i=0 ; i < tournament.getTeams().size()/2 ; i++){
+			for(int i=0 ; i < tournament.getTeams().size() ; i+=2){
 			
 			
 				
 				domain.Match match=new Match();
 				match.setCreationMoment(new Date());
-				match.setDescription("");
+				match.setDescription(".");
 				match.setFinishMoment(new Date(new Date().getTime()+604800000));
 				match.setStartMoment(new Date());
 				match.setTitle("Match");
@@ -111,7 +111,8 @@ public class TournamentUserRoundsController
 				Collection<Match> matchsTeam2=team2.getMatchs();
 				matchsTeam1.add(match);
 				matchsTeam2.add(match);
-				
+				team1.setMatchs(matchsTeam1);
+				team2.setMatchs(matchsTeam2);
 				teams1.add(team1);
 				
 				teams1.add(team2);
@@ -123,7 +124,7 @@ public class TournamentUserRoundsController
 				
 				
 				
-				//matchService.save(match);
+				matchService.save(match);
 				tournament.setMatches(matchs);
 				tournamentService.save(tournament);
 				teamService.save(team1);
@@ -141,12 +142,12 @@ public class TournamentUserRoundsController
 		}else {
 			
 			Collection<Match> matchs= tournament.getMatches();
-			for(int i=0 ; i < (tournament.getTeams().size()-1)/2 ; i++){
+			for(int i=0 ; i < (tournament.getTeams().size()-1) ; i+=2){
 				
 				
 				domain.Match match=new Match();
 				match.setCreationMoment(new Date());
-				match.setDescription("");
+				match.setDescription(".");
 				match.setFinishMoment(new Date(new Date().getTime()+604800000));
 				match.setStartMoment(new Date());
 				match.setTitle("Match");
@@ -156,21 +157,24 @@ public class TournamentUserRoundsController
 				Team team1=teams.get(i);
 				
 				Team team2=teams.get(i+1);
-				
 				Collection<Match> matchsTeam1=team1.getMatchs();
 				Collection<Match> matchsTeam2=team2.getMatchs();
 				matchsTeam1.add(match);
 				matchsTeam2.add(match);
+				team1.setMatchs(matchsTeam1);
+				team2.setMatchs(matchsTeam2);
 				teams1.add(team1);
+				
 				teams1.add(team2);
 				match.setTeams(teams1);
 				match.setDescription(".");
+				match.setPlayed(false);
 				matchs.add(match);
 				
-				//tournament.setMatches(matchs);
-				//matchService.save(match);
-			//	tournamentService.save(tournament);
 				
+				
+				
+				matchService.save(match);
 				tournament.setMatches(matchs);
 				tournamentService.save(tournament);
 				teamService.save(team1);
@@ -261,6 +265,7 @@ public class TournamentUserRoundsController
 		
 		match.setWinner(team);
 		match.setDefeat(team2);
+		match.setPlayed(true);
 		
 		matchService.save(match);
 		
