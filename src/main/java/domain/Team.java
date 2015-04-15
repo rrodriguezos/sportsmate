@@ -4,6 +4,7 @@ import java.util.Collection;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
@@ -55,7 +56,19 @@ public class Team extends DomainEntity{
 	private Collection<Match> matchs;
 	private Collection<Match> winners;
 	private Collection<Match> defeats;
-
+	private Collection<Tournament> tournamentWinner;
+	
+	
+	
+	
+	
+	@OneToMany(mappedBy="winner")
+	public Collection<Tournament> getTournamentWinner() {
+		return tournamentWinner;
+	}
+	public void setTournamentWinner(Collection<Tournament> tournamentWinner) {
+		this.tournamentWinner = tournamentWinner;
+	}
 	@Valid
 	@NotNull
 	@ManyToOne(optional=false)

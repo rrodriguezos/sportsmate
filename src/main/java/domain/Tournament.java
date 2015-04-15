@@ -151,7 +151,17 @@ public class Tournament extends DomainEntity{
 	private User user;
 	private Customer customer;
 	private Collection<Team> teams;	
+	private Team winner;
 
+	@ManyToOne(optional=true, cascade= CascadeType.ALL)
+	public Team getWinner() {
+		return winner;
+	}
+	public void setWinner(Team winner) {
+		this.winner = winner;
+	}
+	
+	
 	@Valid
 	@NotNull
 	@OneToMany(cascade=CascadeType.ALL)
