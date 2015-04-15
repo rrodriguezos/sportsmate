@@ -128,27 +128,55 @@ pagesize="5" class="displaytag" >
 		
 		<%-- equipos sin jugar aún --%>
 		<jstl:set var="AllPlays" value="1"></jstl:set>
-		<jstl:set var="AllTeamPlays" value="true"></jstl:set>
+		<jstl:set var="AllTeamPlays" value="1"></jstl:set>
 		<jstl:set var="numTeams" value="${row.teams.size() }"></jstl:set>
 		
 		<%-- primero comprobamos si aún quedan partidos sin jugar --%>
 		
 		<jstl:forEach items="${row.matches }" var="a">
-			${a.winner }<br>
-			${a.defeat }<br>
+			
 			<jstl:if test="${!a.played }">
 					<%-- hay partidos aún sin jugar --%>
 					partidos sin jugar
 					<jstl:set var="AllPlays" value= "0"></jstl:set>
 			</jstl:if>
 			
-			</jstl:forEach>
+		</jstl:forEach>
+		
+		<%-- y comprobamos si quedan equipos sin jugar aún --%>
+		
+		<jstl:forEach items="${row.teams }" var="a">
+						
+						<%-- estos son los teams del tournament, que deben de tener una lista de ganados y perdidos debemos ver que incluyen algun 
+						match, en caso de que no, este no ha jugado aún --%>
+						
+				<jstl:forEach items="${a.winners }" var="b">
+						
+						<jstl:forEach items="${a.defeats }" var="c">
+									
+								<jstl:if test="${b.id == a.id || c.id == a.id }">
+										
+									<jstl:set var="AllTeamPlays" value= "false"></jstl:set>
+										equipos sin jugar aún
+									
+								</jstl:if>
+												
+						
+						</jstl:forEach>
+						
+								
+						
+				</jstl:forEach>
+						
+						
+					
+				
+		</jstl:forEach>
 		
 		
 		
 		<jstl:forEach items="${row.matches }" var="a">
-			${a.winner }<br>
-			${a.defeat }<br>
+			
 			
 			
 			
