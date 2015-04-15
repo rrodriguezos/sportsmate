@@ -25,6 +25,8 @@
 <!-- Carousel -->
 <!-------------->
 
+<div class="col-md-7 col-xs-12">
+
 <div id="carousel-example-generic" class="carousel slide" data-ride="carousel" data-interval="6000">
   
   <!-- Indicators -->
@@ -66,7 +68,13 @@
   </a>
 </div>
 
+</div>
 <!-- Carousel's end -->
 
-<br>
-<span>Bla bla bla...</span>
+<!-- News start -->
+
+<div class="col-md-5 col-xs-12 spm-news">
+	<h2>Prueba de noticia</h2>
+	<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent in nisi a velit eleifend rutrum eleifend vitae mauris. Praesent maximus tortor quis eros semper, at fringilla lorem laoreet. Vestibulum at quam egestas, eleifend urna sed, vulputate orci. Quisque et iaculis lectus. Morbi blandit molestie arcu, sed mattis nisl pretium quis. Praesent dignissim tortor tincidunt lacus fringilla, ac sodales sem pharetra. Phasellus imperdiet rutrum turpis eu faucibus. Quisque fermentum non enim sed vehicula. Suspendisse potenti. Nulla consequat sapien ac porttitor tincidunt. In at sapien non purus cursus ultrices. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Maecenas suscipit, nisi in aliquam porta, dolor lectus laoreet arcu, ut elementum justo tellus vitae nulla. Sed in efficitur quam. Ut lectus tellus, euismod sit amet vestibulum sit amet, pharetra et ante.</p>
+</div>
+

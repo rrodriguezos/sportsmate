@@ -111,8 +111,25 @@
 						<li><a href="tournament/user/rounds/list.do"><spring:message code="master.page.user.manageTournaments" /></a></li>
 					</ul>
 				</li>
-				<li><a href="event/user/listAllEvents.do"><spring:message code="master.page.user.listAllEvents" /></a></li>
-				<li><a href="event/user/create.do"><spring:message code="master.page.createEvents" /></a></li>
+			</security:authorize>
+			
+				
+			<!-- EVENTS -->
+			<security:authorize access="hasRole('USER')">
+				<li>
+					<a href='#' data-toggle='dropdown'>
+						<spring:message	code="master.page.user.eventsgroup" />
+						<span class='caret'></span>
+					</a>
+					<ul class='dropdown-menu'>
+						<li><a href="event/user/create.do"><spring:message code="master.page.createEvents" /></a></li>
+						<li><a href="event/user/listAllEvents.do"><spring:message code="master.page.user.listAllEvents" /></a></li>
+					</ul>
+				</li>
+			
+			
+			
+				
 				
 				<li><a href="team/user/listAllTeams.do"><spring:message code="master.page.user.listAllTeams" /></a></li>
 				<li><a href="folder/actor/list.do"><spring:message code="master.page.folders" /></a></li>
@@ -192,9 +209,9 @@
 			</security:authorize>
 						
 			
+			
 			<!-- Here starts the search bar -->
-			
-			
+						
 			<li>
 				<form class="navbar-form navbar-right">	
 					<div class="input-group">
@@ -205,11 +222,7 @@
       				</div>
       			</form>			
 			</li>
-			
-			
-			
-			
-			
+				
 	    </ul>
 	</div>
 </div>

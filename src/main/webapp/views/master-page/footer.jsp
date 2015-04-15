@@ -29,7 +29,7 @@
 
 <div class="col-sm-4">
 	<div class="spm-footer-gly text-left">
-		<span class="glyphicon glyphicon-duplicate"></span>
+		<span class="glyphicon glyphicon-floppy-disk"></span>
 		<span class="lead">&nbsp<spring:message code="master.page.terms" /></span>
 		
 		<ul class="list-unstyled text-left">
@@ -49,7 +49,7 @@
 
 <div class="col-sm-3">
 	<div class="spm-footer-gly text-left">
-		<span class="glyphicon glyphicon-user"></span>
+		<span class="glyphicon glyphicon-info-sign"></span>
 		<span class="lead">&nbsp <spring:message code="master.page.aboutus" /></span>
 		
 		<ul class="list-unstyled text-left">

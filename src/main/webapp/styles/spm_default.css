@@ -118,7 +118,7 @@ span.pagelinks {
 /* Carousel */
 #carousel-example-generic{
 	
-	/* nothing for now */
+	margin-bottom: 30px;
 }
 
 #carousel-example-generic img{
@@ -145,6 +145,12 @@ span.pagelinks {
 	background-color: #999;
 }
 
+
+.spm-news h2{
+	margin:0px;
+	padding-top: 0px;
+	padding-bottom: 10px;
+}
 
 /* Provisional & inherit from DP project*/
 
