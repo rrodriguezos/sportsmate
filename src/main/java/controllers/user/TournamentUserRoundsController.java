@@ -117,6 +117,7 @@ public class TournamentUserRoundsController
 				teams1.add(team2);
 				match.setTeams(teams1);
 				match.setDescription(".");
+				match.setPlayed(false);
 				matchs.add(match);
 				
 				

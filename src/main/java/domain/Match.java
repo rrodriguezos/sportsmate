@@ -98,7 +98,17 @@ public class Match extends DomainEntity{
 	private Collection<Team> teams;
 	private Tournament tournament;	
 	private Team defeat;
-
+	private boolean played;
+	
+	
+	
+	
+	public boolean isPlayed() {
+		return played;
+	}
+	public void setPlayed(boolean played) {
+		this.played = played;
+	}
 	
 	
 	@ManyToOne(optional=true)
