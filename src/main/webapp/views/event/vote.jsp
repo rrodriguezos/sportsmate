@@ -24,17 +24,41 @@
 
 <security:authorize access="hasRole('USER')">
 
+	<jstl:if test="${yaVotado==true}">
+		<h2>
+			<spring:message code="event.cantVoteThisUser"></spring:message>
+		</h2>
+		<acme:cancel code="event.cancel" url="event/user/list.do" />
+	</jstl:if>
 
-	<form:form action="event/user/vote.do" modelAttribute="userVoteForm">
-	
-		<form:hidden path="id" />
-		<acme:textarea code="event.name" path="name" readonly="true" />
-		<acme:textbox code="event.score" path="score" />
-		<br />
+	<jstl:if test="${yaVotado==false and voteCustomer==false}">
 
-		<acme:submit name="save" code="event.vote" />
+		<form:form action="event/user/vote.do" modelAttribute="userVoteForm">
 
-	</form:form>
+			<form:hidden path="id" />
+			<acme:textarea code="event.name" path="name" readonly="true" />
+			<acme:textbox code="event.score" path="score" />
+			<br />
+
+			<acme:submit name="save" code="event.vote" />
+			<acme:cancel code="event.cancel" url="event/user/list.do" />
+		</form:form>
+	</jstl:if>
+
+	<jstl:if test="${yaVotado==false and voteCustomer==true}">
+
+		<form:form action="event/user/voteCustomer.do"
+			modelAttribute="userVoteForm">
+
+			<form:hidden path="id" />
+			<acme:textarea code="event.place" path="name" readonly="true" />
+			<acme:textbox code="event.score" path="score" />
+			<br />
+
+			<acme:submit name="save" code="event.vote" />
+			<acme:cancel code="event.cancel" url="event/user/list.do" />
+		</form:form>
+	</jstl:if>
 </security:authorize>
 
 

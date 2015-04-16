@@ -110,6 +110,8 @@ public class EventUserController extends AbstractController {
 		Date finish = eventForm.getFinishMoment();
 		result.addObject("today", today);
 		result.addObject("finish", finish);
+		int miId = actor.getId();
+		result.addObject("miId", miId);
 
 		if (actor instanceof User) {
 			User user = (User) actor;

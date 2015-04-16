@@ -56,6 +56,14 @@
 	<br />
 	<b><spring:message code="event.place" />: </b>
 	<jstl:out value="${eventForm.place}" />
+	<security:authorize access="hasRole('USER')">
+		<jstl:if test="${today.after(finish)}">
+
+			<a href="event/user/voteCustomer.do?placeString=${eventForm.place}"><spring:message
+					code="event.vote" /> </a>
+
+		</jstl:if>
+	</security:authorize>
 	<br />
 	<br />
 	<jstl:if test="${otherSportCenter != null }">
@@ -90,7 +98,7 @@
 			<display:column property="phone" title="${phoneHeader}" />
 
 			<security:authorize access="hasRole('USER')">
-				<jstl:if test="${today.after(finish)}">
+				<jstl:if test="${today.after(finish) and miId!=row.id}">
 					<display:column>
 						<a
 							href="event/user/vote.do?eventId=${eventForm.id}&userId=${row.id}"><spring:message
