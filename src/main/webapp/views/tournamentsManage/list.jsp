@@ -28,12 +28,12 @@
 
 
 
-
+<div class="table table-responsive">
 
 <display:table name="tournaments" id="row"
 
 requestURI="/tournament/user/rounds/list.do"
-pagesize="5" class="displaytag" >
+pagesize="5" class="table table-bordered table-hover" >
 	
 	<display:column title="${title }">
 		
@@ -62,3 +62,4 @@ pagesize="5" class="displaytag" >
 
 
 </display:table>
+</div>
