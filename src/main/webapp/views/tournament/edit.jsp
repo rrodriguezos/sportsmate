@@ -56,21 +56,7 @@
 	<br />
 	<br />	
 	
-	<form:label path="teams"><spring:message code="tournament.team"/></form:label>
-		<form:select path="teams" >
-			<form:options items="${teams}"  />
-		</form:select>
-		<form:errors cssClass="error" path="teams" />
-	<br />
-	<br />
 	
-	<form:label path="matches"><spring:message code="tournament.match"/></form:label>
-		<form:select path="matches" >
-			<form:options items="${matches}"  />
-		</form:select>
-		<form:errors cssClass="error" path="matches" />
-	<br />
-	<br />
 	<security:authorize access="hasRole('CUSTOMER')">
 		<acme:textbox code="tournament.place" path="place" readonly="true"/>
 	</security:authorize>

@@ -46,7 +46,7 @@ public ModelAndView list()
 	ModelAndView result;
 	Collection<Tournament> tournaments;
 	
-	tournaments = tournamentService.findAllTournamentsCreatedByCustomerId();
+	tournaments = tournamentService.findAllTournamentsCreatedByUserId();
 	
 	result = new ModelAndView("tournament/list");
 	
@@ -110,10 +110,11 @@ public ModelAndView edit(@RequestParam int tournamentId)
 {
 ModelAndView result;
 Tournament tournament;
-TournamentForm tournamentForm;	
 Collection<String> places;
 Collection<Match> matches;
 Collection<Team> teams;
+TournamentForm tournamentForm;
+
 
 matches = matchService.findAll();
 teams = teamService.findAll();

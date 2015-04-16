@@ -9,7 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import repositories.MatchRepository;
 import domain.Match;
 import domain.Tournament;
-import forms.TournamentForm;
+
 @Service
 @Transactional
 public class MatchService {
@@ -28,16 +28,7 @@ public Match save(Match match){
 return matchRepository.save(match);
 }
 
-public Collection<Match> findAllMatchesByTournament(TournamentForm tournamentForm)
-{
-	
-	Collection<Match> all;
 
-	all = tournamentForm.getMatches();	
-	
-	return all;
-	
-}
 public Collection<Match> findAllMatchesByTournament(Tournament tournament) {
 	
 	Collection<Match> all;

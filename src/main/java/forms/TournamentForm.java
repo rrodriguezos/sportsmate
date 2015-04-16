@@ -1,11 +1,9 @@
 package forms;
 
-import java.util.Collection;
+
 import java.util.Date;
 
-import javax.persistence.CascadeType;
-import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
+
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.Valid;
@@ -17,9 +15,9 @@ import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import domain.Customer;
-import domain.Match;
+
 import domain.Sport;
-import domain.Team;
+
 import domain.User;
 
 public class TournamentForm {
@@ -39,9 +37,7 @@ public class TournamentForm {
 	
 	private Customer customer;
 	private User user;
-	
-	private Collection<Match> matches;
-	private Collection<Team> teams;
+
 	
 	private String otherSportCenter;
 	
@@ -122,7 +118,6 @@ public class TournamentForm {
 	}
 	
 	@Valid
-	@NotNull
 	public Sport getSport() 
 	{
 		return sport;
@@ -173,29 +168,7 @@ public class TournamentForm {
 		
 	}
 	
-	@Valid
-	@NotNull
-	@ManyToMany
-	public Collection<Team> getTeams()
-	{
-		return teams;
-	}
-	public void setTeams(Collection<Team> teams) 
-	{
-		this.teams = teams;
-	}
-	
-	@Valid
-	@NotNull
-	@OneToMany(cascade=CascadeType.ALL)
-	public Collection<Match> getMatches() 
-	{
-		return matches;
-	}
-	public void setMatches(Collection<Match> matches) 
-	{
-		this.matches = matches;
-	}
+
 	
 	@Valid
 	public Customer getCustomer() {

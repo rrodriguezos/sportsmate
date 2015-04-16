@@ -108,7 +108,6 @@ public class Tournament extends DomainEntity{
 	}
 	
 	@Valid
-	@NotNull
 	public Sport getSport() 
 	{
 		return sport;

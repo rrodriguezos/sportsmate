@@ -99,10 +99,10 @@
 		<input type="button" name="edit" value="<spring:message code="tournament.edit"/>" 
 	   		   onclick="javascript: window.location.replace('tournament/customer/edit.do?tournamentId= ${tournamentForm.id}')" /> 
 	   		
-		<jstl:if test="${tournamentForm.id != 0 && teams.size()==0 && marches.size()==0}"> 			
+		 			
 			<input type="submit" name="deleteTC" value="<spring:message code="tournament.delete" />"
 			   	onclick="return confirm('<spring:message code="tournament.confirm.delete" />')" />
-		</jstl:if>
+		
 	
 	</security:authorize>
 	
@@ -112,10 +112,10 @@
 		<input type="button" name="edit" value="<spring:message code="tournament.edit"/>" 
 	   		   onclick="javascript: window.location.replace('tournament/user/edit.do?tournamentId= ${tournamentForm.id}')" /> 
 	   		
-		<jstl:if test="${tournamentForm.id != 0 && teams.size()==0 && matches.size()==0 }"> 			
+		 			
 			<input type="submit" name="deleteTU" value="<spring:message code="tournament.delete" />"
 			       onclick="return confirm('<spring:message code="tournament.confirm.delete" />')" />
-		</jstl:if> 
+		
 	</security:authorize>
 
 </form:form>

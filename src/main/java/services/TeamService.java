@@ -15,7 +15,7 @@ import domain.Tournament;
 import domain.User;
 import forms.TeamForm;
 
-import forms.TournamentForm;
+
 @Service
 @Transactional
 public class TeamService {
@@ -185,13 +185,6 @@ public class TeamService {
 		
 	}
 	
-public Collection<Team> findAllTeamsByTournament(TournamentForm tournamentForm) {
-	Collection<Team> all;
-
-	all = tournamentForm.getTeams();	
-	
-	return all;
-}
 public Collection<Team> findAllTeamsByTournamentId(int tournamentId) {
 	Collection<Team> all;
 	

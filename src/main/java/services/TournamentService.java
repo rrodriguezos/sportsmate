@@ -1,5 +1,7 @@
 
 package services;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
@@ -94,26 +96,26 @@ public void save(Tournament tournament)
 	
 	User owner;
 	Customer customer;
-	Tournament aux;
+	Tournament result;
 	
 	Assert.notNull(tournament);
 	Assert.isTrue(tournament.getStartMoment().compareTo(tournament.getFinishMoment()) < 0);
 	
-	aux = tournamentRepository.save(tournament);
+	result = tournamentRepository.save(tournament);
 	
 	if(actorService.findByPrincipal() instanceof User){
 		
 		owner = (User) actorService.findByPrincipal();
 		if (tournament.getId() == 0) {
-			owner.getTournamentsCreated().add(aux);
-			owner.getTournaments().add(aux);
+			owner.getTournamentsCreated().add(result);
+			owner.getTournaments().add(result);
 		}
 		userService.save(owner);
 		
 	}else if(actorService.findByPrincipal() instanceof Customer){
 		
 		customer = (Customer)actorService.findByPrincipal();
-		customer.getTournaments().add(aux);
+		customer.getTournaments().add(result);
 		customerService.save(customer);
 	}
 	
@@ -125,9 +127,14 @@ public void delete(Tournament tournament)
 	
 	Assert.notNull(tournament);
 	checkPrincipalByActor(tournament);
+	Date currentDate = new Date();
+	DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+	dateFormat.format(currentDate);
+	
 	
 	if(actorService.findByPrincipal() instanceof User){
 		
+		Assert.isTrue(currentDate.compareTo(tournament.getFinishMoment())>0);
 		owner = (User)actorService.findByPrincipal();
 		owner.getTournamentsCreated().remove(tournament);
 		tournamentRepository.delete(tournament);
@@ -136,6 +143,7 @@ public void delete(Tournament tournament)
 	}else if(actorService.findByPrincipal() instanceof Customer){
 		
 		customer = (Customer)actorService.findByPrincipal();
+		Assert.isTrue(currentDate.compareTo(tournament.getFinishMoment())>0);
 		customer.getTournaments().remove(tournament);
 		tournamentRepository.delete(tournament);
 		customerService.save(customer);			
@@ -251,8 +259,7 @@ public TournamentForm construct(Tournament tournament)
 	result.setSport(tournament.getSport());
 	result.setPlace(tournament.getPlace());
 	result.setPrize(tournament.getPrize());
-	result.setMatches(tournament.getMatches());
-	result.setTeams(tournament.getTeams());
+
 	
 	if(tournament.getUser() instanceof User){
 		result.setUser(tournament.getUser());
@@ -286,8 +293,7 @@ public Tournament reconstruct(TournamentForm tournamentForm)
 	tournament.setDescription(tournamentForm.getDescription());
 	tournament.setNumberOfTeams(tournamentForm.getNumberOfTeams());
 	tournament.setSport(tournamentForm.getSport());
-	tournament.setMatches(tournamentForm.getMatches());
-	tournament.setTeams(tournamentForm.getTeams());
+
 	
 	if(tournament.getUser() instanceof User){
 		if(tournamentForm.getOtherSportCenter()!= ""){
