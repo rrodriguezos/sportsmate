@@ -20,6 +20,10 @@
 		<put-attribute name="title" value="Eventos" />
 		<put-attribute name="body" value="/views/event/list.jsp" />
 	</definition>
+	<definition name="event/user/vote" extends="master.page">	
+		<put-attribute name="title" value="Votar a un usuario" />
+		<put-attribute name="body" value="/views/event/vote.jsp" />
+	</definition>
 	
 	<definition name="event/display" extends="master.page">	
 		<put-attribute name="title" value="Detalles del evento" />

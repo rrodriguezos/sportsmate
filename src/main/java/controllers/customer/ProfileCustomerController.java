@@ -1,7 +1,5 @@
 package controllers.customer;
 
-
-
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,137 +18,131 @@ import domain.Actor;
 import domain.Customer;
 import forms.CustomerForm;
 
-
 @Controller
 @RequestMapping("/profile/customer")
 public class ProfileCustomerController extends AbstractController {
-	
+
 	@Autowired
 	private CustomerService customerService;
-	
+
 	@Autowired
 	private EventService eventService;
-	
+
 	@Autowired
 	private TournamentService tournamentService;
-	
+
 	@Autowired
 	private InvoiceService invoiceService;
-	
-	
 
+	// Display----------------------------------------------------------------------
 
-//Display----------------------------------------------------------------------
+	@RequestMapping(value = "/display", method = RequestMethod.GET)
+	public ModelAndView display() {
 
-@RequestMapping(value = "/display", method = RequestMethod.GET)
-public ModelAndView display() {
+		ModelAndView result;
+		CustomerForm customerForm;
+		Customer customer;
+		Actor actor;
 
-	ModelAndView result;
-	CustomerForm customerForm;
-	Customer customer;
-	Actor actor;
+		Customer profile = customerService.findByPrincipal();
+		profile = customerService.findOne(profile.getId());
+		customerForm = customerService.construct(profile);
+		actor = customerService.findByPrincipal();
+		customer = customerService.findByPrincipal();
 
+		result = new ModelAndView("profile/display");
 
-	Customer profile = customerService.findByPrincipal();
-	profile = customerService.findOne(profile.getId());
-	customerForm = customerService.construct(profile);
-	actor = customerService.findByPrincipal();
-	customer = customerService.findByPrincipal();	
-	
-	result = new ModelAndView("profile/display");		
+		result.addObject("customerForm", customerForm);
+		result.addObject("actor", actor);
+		Double rating = profile.getRating();
+		result.addObject("rating", rating);
+		result.addObject("customer", customer);
+		result.addObject("requestURI", "profile/customer/display.do");
 
-	result.addObject("customerForm", customerForm);
-	result.addObject("actor",actor);
-	result.addObject("customer",customer);	
-	result.addObject("requestURI", "profile/customer/display.do");
-	
+		return result;
 
-	return result;
+	}
 
-}
-		
-//Edition----------------------------------------------------------------------
+	// Edition----------------------------------------------------------------------
 
-@RequestMapping( value = "/edit", method = RequestMethod.GET)
-public ModelAndView edit()
-{
+	@RequestMapping(value = "/edit", method = RequestMethod.GET)
+	public ModelAndView edit() {
 
-	ModelAndView result;
-	Customer customer;
-	CustomerForm customerForm;
-	
-	customer = customerService.findByPrincipal();
-	customerForm = customerService.construct(customer);
-	
-	result = createEditModelAndView(customerForm);
-	
-	return result;
-}
-//Save --------------------------------------------------------------------
+		ModelAndView result;
+		Customer customer;
+		CustomerForm customerForm;
 
-@RequestMapping( value = "/edit", method = RequestMethod.POST, params= "save")
-public ModelAndView save(@Valid CustomerForm customerForm, BindingResult binding)
-{
-	
-	
-	ModelAndView result;
-	Customer customer;
-	
-	if(binding.hasErrors()){
+		customer = customerService.findByPrincipal();
+		customerForm = customerService.construct(customer);
+
 		result = createEditModelAndView(customerForm);
-	}else{
+
+		return result;
+	}
+
+	// Save --------------------------------------------------------------------
+
+	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
+	public ModelAndView save(@Valid CustomerForm customerForm,
+			BindingResult binding) {
+
+		ModelAndView result;
+		Customer customer;
+
+		if (binding.hasErrors()) {
+			result = createEditModelAndView(customerForm);
+		} else {
+			try {
+
+				customer = customerService.reconstructEdit(customerForm);
+				customerService.save(customer);
+				result = new ModelAndView("redirect:list.do");
+			} catch (Throwable oops) {
+				result = createEditModelAndView(customerForm,
+						"customer.commit.error");
+			}
+		}
+		return result;
+	}
+
+	// Delete-----------------------------------------------------------------------
+
+	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "delete")
+	public ModelAndView delete(CustomerForm customerForm, BindingResult binding) {
+		ModelAndView result;
+		Customer customer;
+
 		try {
-			
-			customer = customerService.reconstructEdit(customerForm);
-			customerService.save(customer);
+			customer = customerService.reconstruct(customerForm);
+			customerService.delete(customer);
 			result = new ModelAndView("redirect:list.do");
 		} catch (Throwable oops) {
-			result = createEditModelAndView(customerForm, "customer.commit.error");
+			result = createEditModelAndView(customerForm,
+					"customer.commit.error");
 		}
-}
-	return result;
-}
+		return result;
 
-//Delete-----------------------------------------------------------------------
-
-@RequestMapping( value ="/edit", method = RequestMethod.POST , params = "delete")
-public ModelAndView delete(CustomerForm customerForm, BindingResult binding)
-{
-	ModelAndView result;
-	Customer customer;
-	
-	try {
-		customer = customerService.reconstruct(customerForm);
-		customerService.delete(customer);
-		result = new ModelAndView("redirect:list.do");
-	} catch (Throwable oops) {
-		result = createEditModelAndView(customerForm, "customer.commit.error");
 	}
-	return result;
 
+	// The ancillary
+	// methods--------------------------------------------------------
 
+	protected ModelAndView createEditModelAndView(CustomerForm customerForm) {
+		ModelAndView result;
+
+		result = createEditModelAndView(customerForm, null);
+
+		return result;
+	}
+
+	protected ModelAndView createEditModelAndView(CustomerForm customerForm,
+			String message) {
+		ModelAndView result;
+
+		result = new ModelAndView("customer/edit");
+		result.addObject("customerForm", customerForm);
+		result.addObject("message", message);
+
+		return result;
+	}
 }
-
-//The ancillary methods--------------------------------------------------------
-
-protected ModelAndView createEditModelAndView(CustomerForm customerForm){
-	ModelAndView result;
-	
-	result = createEditModelAndView(customerForm, null);
-	
-	return result;
-}
-
-protected ModelAndView createEditModelAndView(CustomerForm customerForm, String message)
-{
-	ModelAndView result;
-
-	result = new ModelAndView("customer/edit");
-	result.addObject("customerForm", customerForm );	
-	result.addObject("message", message);
-	
-	return result;
-}
-}
-
-

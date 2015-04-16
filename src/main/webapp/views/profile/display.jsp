@@ -31,14 +31,13 @@
 					<img src="images/default_profile.jpg" alt="Default profile" class="img-thumbnail .spm-profile-picture" />
 					<br><br>
 					<div>
-						<jstl:if test="${customer.rating == null}">
+						<jstl:if test="${rating == null}">
 							<spring:message code="actor.rating.Empty" />
-						<jstl:out value=""></jstl:out>
 						</jstl:if>
 						
-						<jstl:if test="${customer.rating != null}">
+						<jstl:if test="${rating != null}">
 							<spring:message code="actor.rating" />
-						<jstl:out value="${customer.rating}" />
+						<jstl:out value="${rating}" />
 						</jstl:if>
 					</div>
 				</div>
@@ -127,14 +126,13 @@
 					<img src="images/default_profile.jpg" alt="Default profile" class="img-thumbnail .spm-profile-picture" />
 					<br><br>
 					<div>
-						<jstl:if test="${user.rating == null}">
+						<jstl:if test="${rating == null}">
 							<spring:message code="actor.rating.Empty" />
-						<jstl:out value=""></jstl:out>
 					
 						</jstl:if>
-						<jstl:if test="${user.rating != null}">
+						<jstl:if test="${rating != null}">
 							<spring:message code="actor.rating" />
-						<jstl:out value="${user.rating}" />
+						<jstl:out value="${rating}" />
 						</jstl:if>
 			
 					</div>
