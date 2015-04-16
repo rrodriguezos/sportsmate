@@ -154,12 +154,17 @@ pagesize="5" class="displaytag" >
 						
 						<jstl:forEach items="${a.defeats }" var="c">
 									
-								<jstl:if test="${b.id == a.id || c.id == a.id }">
+								<jstl:forEach items="${row.matchs }" var="d">
+								
+								
+									<jstl:if test="${b.id == d.id || c.id == d.id }">
 										
-									<jstl:set var="AllTeamPlays" value= "false"></jstl:set>
+									<jstl:set var="AllTeamPlays" value= "0"></jstl:set>
 										equipos sin jugar aún
 									
 								</jstl:if>
+								
+								</jstl:forEach>
 												
 						
 						</jstl:forEach>
