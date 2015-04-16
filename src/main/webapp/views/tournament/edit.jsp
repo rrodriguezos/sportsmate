@@ -64,11 +64,6 @@
 	<br />
 	<br />
 
-
-	<security:authorize access="hasRole('CUSTOMER')">
-		<acme:textbox code="tournament.place" path="place" readonly="true" />
-	</security:authorize>
-
 	<security:authorize access="hasRole('USER')">
 		<form:label path="place">
 			<spring:message code="tournament.place" />

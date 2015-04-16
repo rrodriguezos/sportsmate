@@ -163,7 +163,6 @@ public class Tournament extends DomainEntity {
 	}
 
 	@Valid
-	@NotNull
 	@ManyToOne(optional = false)
 	public User getUser() {
 		return user;

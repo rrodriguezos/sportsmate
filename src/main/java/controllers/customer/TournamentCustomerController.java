@@ -129,6 +129,7 @@ public class TournamentCustomerController extends AbstractController {
 		Tournament tournament;
 
 		if (binding.hasErrors()) {
+			System.out.println("Binding " + binding.toString());
 			result = createEditModelAndView(tournamentForm);
 		} else {
 			try {
@@ -138,7 +139,7 @@ public class TournamentCustomerController extends AbstractController {
 
 				result = new ModelAndView("redirect:list.do");
 			} catch (Throwable oops) {
-
+				System.out.println("oops " + oops.getLocalizedMessage());
 				result = createEditModelAndView(tournamentForm,
 						"tournament.commit.error");
 			}
@@ -154,8 +155,7 @@ public class TournamentCustomerController extends AbstractController {
 		ModelAndView result;
 		try {
 
-			tournamentService.delete(tournamentForm);
-
+			tournamentService.delete(tournamentForm);			
 			result = new ModelAndView("redirect:list.do");
 		} catch (Throwable oops) {
 			result = new ModelAndView();

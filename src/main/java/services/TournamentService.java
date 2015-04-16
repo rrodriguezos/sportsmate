@@ -132,8 +132,7 @@ public class TournamentService {
 
 		if (actorService.findByPrincipal() instanceof User) {
 
-			// Assert.isTrue(currentDate.compareTo(tournament.getFinishMoment())
-			// > 0);
+			 Assert.isTrue(currentDate.compareTo(tournament.getFinishMoment())> 0);
 			owner = userService.findByPrincipal();
 			owner.getTournamentsCreated().remove(tournament);
 
@@ -142,8 +141,7 @@ public class TournamentService {
 		} else if (actorService.findByPrincipal() instanceof Customer) {
 
 			customer = customerService.findByPrincipal();
-			// Assert.isTrue(currentDate.compareTo(tournament.getFinishMoment())
-			// > 0);
+			Assert.isTrue(currentDate.compareTo(tournament.getFinishMoment())> 0);
 			customer.getTournaments().remove(tournament);
 			customerService.save(customer);
 		}
@@ -235,7 +233,7 @@ public class TournamentService {
 		all = new ArrayList<String>();
 
 		all.add("IndorClub");
-		all.add("SportClub");
+		all.add("SportsClub");
 		all.add("Place 3");
 		all.add("Place 4");
 		all.add("Place 5");
