@@ -64,9 +64,9 @@ body {
 }
 
 #spm-login-img{
-	border-radius: 4px;
-	opacity: 0.7;
-    filter: alpha(opacity=70); /* For IE8 and earlier */
+	border-radius: 5px;
+	opacity: 0.9;
+    filter: alpha(opacity=90); /* For IE8 and earlier */
 }
 
 .spm-form-error{
