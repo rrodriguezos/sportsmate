@@ -51,6 +51,7 @@ public class TournamentUserRoundsController
 		
 		Tournament tournament=tournaments.get(0);
 		
+		
 		Team team=new Team();
 		team.setCaptain(userService.findByPrincipal());
 		team.setName("5");
@@ -73,7 +74,7 @@ public class TournamentUserRoundsController
 		teams.add(team);
 		
 		tournament.setTeams(teams);
-	
+		teamService.save(team);
 		tournamentService.save(tournament);
 		
 		return null;
@@ -121,7 +122,7 @@ public class TournamentUserRoundsController
 				match.setPlayed(false);
 				matchs.add(match);
 				
-				
+			
 				
 				
 				matchService.save(match);
@@ -267,7 +268,20 @@ public class TournamentUserRoundsController
 		match.setDefeat(team2);
 		match.setPlayed(true);
 		
-		matchService.save(match);
+		Collection<Match> winners = team.getWinners();
+		winners.add(match);
+		team.setWinners(winners);
+		
+		Collection<Match> defeats = team2.getDefeats();
+		defeats.add(match);
+		team2.setDefeats(defeats);
+		
+		
+		
+		
+		teamService.save(team);
+		teamService.save(team2);
+		//matchService.save(match);
 		
 		
 		

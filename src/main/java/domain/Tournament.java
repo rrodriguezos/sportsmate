@@ -155,7 +155,7 @@ public class Tournament extends DomainEntity{
 	
 	
 	
-	@ManyToOne(optional=true, cascade= CascadeType.ALL)
+	@ManyToOne(optional=true, cascade = CascadeType.ALL)
 	public Team getWinner() {
 		return winner;
 	}
@@ -166,7 +166,7 @@ public class Tournament extends DomainEntity{
 	
 	@Valid
 	@NotNull
-	@OneToMany(cascade=CascadeType.ALL)
+	@OneToMany(cascade = CascadeType.ALL)
 	public Collection<Match> getMatches() 
 	{
 		return matches;

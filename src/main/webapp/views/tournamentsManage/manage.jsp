@@ -157,7 +157,7 @@ pagesize="5" class="displaytag" >
 								<jstl:forEach items="${row.matchs }" var="d">
 								
 								
-									<jstl:if test="${b.id == d.id || c.id == d.id }">
+									<jstl:if test="${!(b.id == d.id || c.id == d.id) }">
 										
 									<jstl:set var="AllTeamPlays" value= "0"></jstl:set>
 										equipos sin jugar aún
@@ -178,6 +178,17 @@ pagesize="5" class="displaytag" >
 				
 		</jstl:forEach>
 		
+		<%-- entonces comprobamos si se cumplen las condiciones para poder generar otra ronda o que declarar al vencedor --%>
+		
+		<jstl:if test="${AllPlays == '1' && AllTeamPlays == '1' }">
+		
+				existe un vencedor
+		</jstl:if>
+		
+		<jstl:if test="${AllPlays == '1' && AllTeamPlays == '0' }">
+		
+				CREAR RONDAS NUEVAS
+		</jstl:if>
 		
 		
 		<jstl:forEach items="${row.matches }" var="a">
