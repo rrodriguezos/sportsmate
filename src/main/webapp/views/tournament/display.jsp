@@ -105,11 +105,13 @@
 
 
 	</display:table>
-
+	
+	<br><br>
+	
 	<security:authorize access="hasRole('CUSTOMER')">
 		<acme:cancel code="tournament.back" url="tournament/customer/list.do" />
 
-		<input type="button" name="edit"
+		<input type="button" class="btn btn-md btn-success" name="edit"
 			value="<spring:message code="tournament.edit"/>"
 			onclick="javascript: window.location.replace('tournament/customer/edit.do?tournamentId= ${tournamentId}')" />
 
@@ -120,7 +122,7 @@
 	<security:authorize access="hasRole('USER')">
 		<acme:cancel code="tournament.back" url="tournament/user/list.do" />
 
-		<input type="button" name="edit"
+		<input type="button" class="btn btn-md btn-success" name="edit"
 			value="<spring:message code="tournament.edit"/>"
 			onclick="javascript: window.location.replace('tournament/user/edit.do?tournamentId= ${tournamentId}')" />
 

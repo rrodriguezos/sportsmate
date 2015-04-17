@@ -21,6 +21,8 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
+<br>
+
 <form:form action="${requestURI}" modelAttribute="tournamentForm">
 
 	<form:hidden path="id" />
@@ -29,64 +31,93 @@
 	<br />
 
 	<acme:textbox code="tournament.startMoment" path="startMoment" />
-	<spring:message code="tournament.start" />
+	
+	<div class="col-xs-12"><span><spring:message code="tournament.start" /></span></div>
 	<br />
 	<br />
 
 	<acme:textbox code="tournament.finishMoment" path="finishMoment" />
-	<spring:message code="tournament.finish" />
-	<br />
-	<br />
-
+	<div class="col-xs-12"><span><spring:message code="tournament.finish" /></span></div>
+	
+	<div class="col-xs-12">
+		<br>
+	</div>
+	
 	<acme:textarea code="tournament.description" path="description" />
 	<br />
 
 	<acme:textbox code="tournament.numberOfTeams" path="numberOfTeams" />
-	<br />
+	
+	
+<!-- --------------------------------------------------------------------------------------------- -->
+	
+<div class="col-xs-12">
+	<br>
 
-	<form:label path="advertised">
-		<spring:message code="tournament.advertised" />
-	</form:label>
-
-	<form:select path="advertised">
-		<option value="">--</option>
-		<option value="true">Yes</option>
-		<option value="false">No</option>
-	</form:select>
-
+	<div class="form-group col-xs-12 col-md-3">
+		<form:label path="advertised">
+			<spring:message code="tournament.advertised" />
+		</form:label>
+		
+		<form:select path="advertised" class="form-control">
+			<option value="">--</option>
+			<option value="true">Yes</option>
+			<option value="false">No</option>
+		</form:select>
+	</div>
+	
+	
+	<div class="form-group col-xs-12 col-md-3">
 	<form:label path="sport">
 		<spring:message code="tournament.sport" />
 	</form:label>
-	<form:select path="sport">
+	
+	<form:select path="sport" class="form-control">
 		<form:options items="${sports}" />
 	</form:select>
-	<form:errors cssClass="error" path="sport" />
-	<br />
-	<br />
-
+	<form:errors class="alert alert-danger spm-form-error" path="sport" />
+	</div>
+	
+	
 	<security:authorize access="hasRole('USER')">
+		
+		<div class="form-group col-xs-12 col-md-3">
 		<form:label path="place">
 			<spring:message code="tournament.place" />
 		</form:label>
-		<form:select path="place">
+		<form:select path="place" class="form-control">
 			<form:options items="${places}" />
 		</form:select>
-		<form:errors cssClass="error" path="place" />
-		<br />
-		<br />
+		<form:errors class="alert alert-danger spm-form-error" path="place" />
+		</div>
+	</security:authorize>
+	
+	
+	
+		<br><br>
+		
+</div>
 
+<!-- --------------------------------------------------------------------------------------------- -->
+
+	<div class="col-xs-12">
+		<br>
+	</div>
+	
+	<security:authorize access="hasRole('USER')">
 		<acme:textbox code="tournament.otherSportCenter"
 			path="otherSportCenter" />
 	</security:authorize>
-	<br />
+	
 	<security:authorize access="hasRole('CUSTOMER')">
+	<br>
 		<acme:textbox code="tournament.place" path="place" readonly="true" />
-	</security:authorize>
-	<br />
+	</security:authorize>	
 
-
+		
+<div class="col-xs-12">
 	<security:authorize access="hasRole('CUSTOMER')">
-
+	<br>
 		<acme:submit code="tournament.save" name="saveTC" />&nbsp;
 		
 		<jstl:if test="${tournamentForm.id != 0}">
@@ -100,6 +131,7 @@
 	</security:authorize>
 
 	<security:authorize access="hasRole('USER')">
+	<br>
 		<acme:submit code="tournament.save" name="saveTU" />&nbsp;
 		
 		<jstl:if test="${tournamentForm.id != 0}">
@@ -110,7 +142,7 @@
 
 		<acme:cancel code="tournament.cancel" url="tournament/user/list.do" />
 	</security:authorize>
-
+</div>
 </form:form>
 
 
