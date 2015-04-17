@@ -18,7 +18,7 @@
 
 
 	<definition name="tournament/user/rounds/list" extends="master.page">	
-		<put-attribute name="title" value="Torneos" />
+		<put-attribute name="title" value="Tournaments" />
 		<put-attribute name="body" value="/views/tournamentsManage/list.jsp" />
 	</definition>
 	

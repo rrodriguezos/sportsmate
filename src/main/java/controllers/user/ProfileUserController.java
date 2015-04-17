@@ -70,6 +70,8 @@ public ModelAndView display() {
 	result = new ModelAndView("profile/display");		
 
 	result.addObject("userForm", userForm);
+	Double rating = profile.getRating();
+	result.addObject("rating", rating);
 	result.addObject("requestURI", "profile/user/display.do");
 	result.addObject("actor",actor);
 	

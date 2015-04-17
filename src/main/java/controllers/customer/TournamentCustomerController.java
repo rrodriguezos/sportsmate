@@ -22,199 +22,182 @@ import domain.Team;
 import domain.Tournament;
 import forms.TournamentForm;
 
-
 @Controller
 @RequestMapping("/tournament/customer")
 public class TournamentCustomerController extends AbstractController {
-// Services -------------------------------------------------------------------
-	@Autowired 
+	// Services
+	// -------------------------------------------------------------------
+	@Autowired
 	private TournamentService tournamentService;
-	
+
 	@Autowired
 	private CustomerService customerService;
-	
+
 	@Autowired
 	private TeamService teamService;
-	
+
 	@Autowired
 	private MatchService matchService;
-	
-// Listing---------------------------------------------------------------------
 
-@RequestMapping(value = "/list", method = RequestMethod.GET)
-public ModelAndView list()
-{
+	// Listing---------------------------------------------------------------------
+
+	@RequestMapping(value = "/list", method = RequestMethod.GET)
+	public ModelAndView list() {
 		ModelAndView result;
 		Collection<Tournament> tournaments;
-		
+
 		tournaments = tournamentService.findAllTournamentsCreatedByCustomerId();
-		
+
 		result = new ModelAndView("tournament/list");
-		
+
 		result.addObject("tournaments", tournaments);
 		result.addObject("requestURI", "tournament/customer/list.do");
-		
+
 		return result;
 
 	}
 
-//Display----------------------------------------------------------------------
+	// Display----------------------------------------------------------------------
 
-@RequestMapping(value = "/display", method = RequestMethod.GET)
-public ModelAndView display(@RequestParam int tournamentId) 
-{
-	ModelAndView result;
-	Tournament tournament;
-	Collection<Team> teams;
-	Collection<Match> matches;
-	
-	tournament = tournamentService.findOne(tournamentId);
-	teams = teamService.findAllTeamsByTournamentId(tournamentId);
-	matches = matchService.findAllMatchesByTournament(tournament);
-	
-	result = new ModelAndView("tournament/display");
-	
-	result.addObject("tournament", tournament);
-	result.addObject("matches", matches);
-	result.addObject("teams", teams);
-	
-	return result;
+	@RequestMapping(value = "/display", method = RequestMethod.GET)
+	public ModelAndView display(@RequestParam int tournamentId) {
+		ModelAndView result;
+		Tournament tournament;
+		Collection<Team> teams;
+		Collection<Match> matches;
 
-}
+		tournament = tournamentService.findOne(tournamentId);
+		teams = teamService.findAllTeamsByTournamentId(tournamentId);
+		matches = matchService.findAllMatchesByTournament(tournament);
 
-//Create-----------------------------------------------------------------------
-@RequestMapping(value = "/create", method = RequestMethod.GET)
-public ModelAndView create() 
-{
-	ModelAndView result;
-	Tournament tournament;
-	TournamentForm tournamentForm;
+		result = new ModelAndView("tournament/display");
 
+		result.addObject("tournament", tournament);
+		result.addObject("tournamentId", tournamentId);
+		result.addObject("matches", matches);
+		result.addObject("teams", teams);
 
-	
-	tournament = tournamentService.create();
-	tournamentForm= tournamentService.construct(tournament);
-	
-	result = createEditModelAndView(tournamentForm);
-	result.addObject("tournamentForm", tournamentForm);
-	result.addObject("requestURI", "tournament/customer/edit.do");
+		return result;
 
-	
-	return result;	
-}
+	}
 
-//Edition----------------------------------------------------------------------
-@RequestMapping(value = "/edit", method = RequestMethod.GET)
-public ModelAndView edit(@RequestParam int tournamentId)
-{
-ModelAndView result;
-Tournament tournament;
-TournamentForm tournamentForm;
-Collection<Match> matches;
-Collection<Team> teams;
+	// Create-----------------------------------------------------------------------
+	@RequestMapping(value = "/create", method = RequestMethod.GET)
+	public ModelAndView create() {
+		ModelAndView result;
+		Tournament tournament;
+		TournamentForm tournamentForm;
 
-matches = matchService.findAll();
-teams = teamService.findAll();
+		tournament = tournamentService.create();
+		tournamentForm = tournamentService.construct(tournament);
 
-tournament = tournamentService.findOneToEdit(tournamentId);	
-
-tournamentForm = tournamentService.construct(tournament);
-
-
-result = createEditModelAndView(tournamentForm);
-result.addObject("matches",matches);
-result.addObject("teams",teams);
-
-return result;
-}
-//Save-------------------------------------------------------------------------
-@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "saveTC")
-public ModelAndView save(@Valid TournamentForm tournamentForm, BindingResult binding)
-{
-	ModelAndView result;
-	Tournament tournament;
-	
-	if(binding.hasErrors()){
 		result = createEditModelAndView(tournamentForm);
-	}else{
-		try{
-			tournament = tournamentService.reconstruct(tournamentForm);
-			
-			tournamentService.save(tournament);
-			
-			result = new ModelAndView("redirect:list.do");
-		}catch(Throwable oops){
-			
-			result = createEditModelAndView(tournamentForm, "tournament.commit.error");
+		result.addObject("tournamentForm", tournamentForm);
+		result.addObject("requestURI", "tournament/customer/edit.do");
+
+		return result;
+	}
+
+	// Edition----------------------------------------------------------------------
+	@RequestMapping(value = "/edit", method = RequestMethod.GET)
+	public ModelAndView edit(@RequestParam int tournamentId) {
+		ModelAndView result;
+		Tournament tournament;
+		TournamentForm tournamentForm;
+		Collection<Match> matches;
+		Collection<Team> teams;
+
+		matches = matchService.findAll();
+		teams = teamService.findAll();
+
+		tournament = tournamentService.findOneToEdit(tournamentId);
+
+		tournamentForm = tournamentService.construct(tournament);
+
+		result = createEditModelAndView(tournamentForm);
+		result.addObject("matches", matches);
+		result.addObject("teams", teams);
+
+		return result;
+	}
+
+	// Save-------------------------------------------------------------------------
+	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "saveTC")
+	public ModelAndView save(@Valid TournamentForm tournamentForm,
+			BindingResult binding) {
+		ModelAndView result;
+		Tournament tournament;
+
+		if (binding.hasErrors()) {
+			System.out.println("Binding " + binding.toString());
+			result = createEditModelAndView(tournamentForm);
+		} else {
+			try {
+				tournament = tournamentService.reconstruct(tournamentForm);
+
+				tournamentService.save(tournament);
+
+				result = new ModelAndView("redirect:list.do");
+			} catch (Throwable oops) {
+				System.out.println("oops " + oops.getLocalizedMessage());
+				result = createEditModelAndView(tournamentForm,
+						"tournament.commit.error");
+			}
 		}
+		return result;
+
 	}
-	return result;
 
-}
+	// Delete-----------------------------------------------------------------------
+	@RequestMapping(value = "edit", method = RequestMethod.POST, params = "deleteTC")
+	public ModelAndView delete(@Valid TournamentForm tournamentForm,
+			BindingResult binding) {
+		ModelAndView result;
+		try {
 
-//Delete-----------------------------------------------------------------------
-@RequestMapping(value = "display", method = RequestMethod.POST, params = "deleteTC")
-public ModelAndView delete(@Valid TournamentForm tournamentForm, BindingResult binding) 
-{
-	ModelAndView result;
-	Tournament tournament;
-	try{
-		tournament = tournamentService.reconstruct(tournamentForm);
-		
-		tournamentService.delete(tournament);
-		
-		result = new ModelAndView("redirect:list.do");
-	}catch(Throwable oops){
-		result = createEditModelAndView(tournamentForm, "tournament.commit.error");
+			tournamentService.delete(tournamentForm);			
+			result = new ModelAndView("redirect:list.do");
+		} catch (Throwable oops) {
+			result = new ModelAndView();
+			result.addObject("tournamentForm", tournamentForm);
+			result.addObject("message", "tournament.commit.error");
+		}
+		return result;
 	}
-	return result;
-}
 
-//Ancillary methods------------------------------------------------------------
-protected ModelAndView createEditModelAndView(TournamentForm tournamentForm) 
-{
-	
-	ModelAndView result;
-	
-	result = createEditModelAndView(tournamentForm, null);
-	
-	return result;
-	
-}
+	// Ancillary
+	// methods------------------------------------------------------------
+	protected ModelAndView createEditModelAndView(TournamentForm tournamentForm) {
 
-protected ModelAndView createEditModelAndView(TournamentForm tournamentForm, String message) 
-{
-	
-	ModelAndView result;
-	Collection<String> sports;
-	Collection<Match> matches;
-	Collection<Team> teams;
-	
-	sports = tournamentService.sports();
-	matches = matchService.findAll();
-	teams = teamService.findAll();
-	
-	result = new ModelAndView("tournament/edit");
-		
-	result.addObject("tournamentForm", tournamentForm);
-	result.addObject("sports", sports);
-	result.addObject("matches", matches);
-	result.addObject("teams", teams);
-	result.addObject("message", message);		
+		ModelAndView result;
 
-	return result;
-}	
+		result = createEditModelAndView(tournamentForm, null);
 
+		return result;
 
+	}
 
+	protected ModelAndView createEditModelAndView(
+			TournamentForm tournamentForm, String message) {
+
+		ModelAndView result;
+		Collection<String> sports;
+		Collection<Match> matches;
+		Collection<Team> teams;
+
+		sports = tournamentService.sports();
+		matches = matchService.findAll();
+		teams = teamService.findAll();
+
+		result = new ModelAndView("tournament/edit");
+
+		result.addObject("tournamentForm", tournamentForm);
+		result.addObject("sports", sports);
+		result.addObject("matches", matches);
+		result.addObject("teams", teams);
+		result.addObject("message", message);
+
+		return result;
+	}
 
 }
-
-	
-	
-	
-	
-	
-	
-	
-
