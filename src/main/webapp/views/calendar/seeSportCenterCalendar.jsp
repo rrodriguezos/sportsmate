@@ -141,10 +141,11 @@ pagesize="20" class="table table-bordered table-hover" defaultsort="1" defaultor
 <h1> <jstl:out value="${tournaments }"></jstl:out> </h1>
 
 
+<div class="table-responsive">
 <display:table name="tournaments" id="row"
 
 requestURI="event/user/calendar/seeSportCenterCalendar.do"
-pagesize="5" class="displaytag" >
+pagesize="5" class="table table-bordered table-hover" >
 
 
 
@@ -171,21 +172,5 @@ pagesize="5" class="displaytag" >
 </display:column>
 
 
-
-
-
-
-	
-	
-	
-	
-	
-	
-	
-
-
-
-
-
-
 </display:table>
+</div>
