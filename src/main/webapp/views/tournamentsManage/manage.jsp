@@ -144,7 +144,7 @@ pagesize="5" class="displaytag" >
 		
 		<%-- entonces comprobamos si se cumplen las condiciones para poder generar otra ronda o que declarar al vencedor --%>
 		
-		<jstl:if test="${AllPlaysC  && AllTeamC && needRounds}">
+		<jstl:if test="${AllPlaysC  && AllTeamC && needRounds }">
 		
 				<a href="tournament/user/rounds/declareWinnerOfTournament.do?idTournament=${row.id }"> <jstl:out value="declara al venceder"></jstl:out> </a>
 
