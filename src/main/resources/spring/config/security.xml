@@ -111,6 +111,10 @@
 		<security:intercept-url pattern="/tournament/user/rounds/declareWinnerOfMatch.do" access="hasAnyRole('CUSTOMER','ADMIN', 'USER')" />
 		<security:intercept-url pattern="/tournament/user/rounds/addTeamTest.do" access="hasAnyRole('CUSTOMER','ADMIN', 'USER')" />
 		<security:intercept-url pattern="/tournament/user/rounds/declareWinnerOfMatchId.do" access="hasAnyRole('CUSTOMER','ADMIN', 'USER')" />
+		<security:intercept-url pattern="/tournament/user/rounds/secondRounds.do" access="hasAnyRole('CUSTOMER','ADMIN', 'USER')" />
+		<security:intercept-url pattern="/tournament/user/rounds/declareWinnerOfTournament.do" access="hasAnyRole('CUSTOMER','ADMIN', 'USER')" />
+		
+		
 		
 
 		

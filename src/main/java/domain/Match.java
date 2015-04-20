@@ -123,7 +123,7 @@ public class Match extends DomainEntity{
 	
 	@Valid
 	@NotNull
-	@ManyToMany(cascade = CascadeType.ALL)
+	@ManyToMany
 	@Size(min=2,max=2)
 	public Collection<Team> getTeams() 
 	{
