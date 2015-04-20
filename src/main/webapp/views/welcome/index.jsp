@@ -25,7 +25,7 @@
 <!-- Carousel -->
 <!-------------->
 
-<div class="col-md-7 col-xs-12">
+<div class="col-md-7 col-sm-12 hidden-xs">
 
 <div id="carousel-example-generic" class="carousel slide" data-ride="carousel" data-interval="6000">
   
