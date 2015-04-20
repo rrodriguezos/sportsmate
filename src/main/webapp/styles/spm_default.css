@@ -161,6 +161,10 @@ span.pagelinks {
 	height: auto;
 }
 
+.spm-message-fixing{
+	padding-top: 10px;
+}
+
 /* Provisional & inherit from DP project*/
 
 .error {
