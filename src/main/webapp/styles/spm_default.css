@@ -117,13 +117,22 @@ span.pagelinks {
 
 /* Carousel */
 #carousel-example-generic{
-	
 	margin-bottom: 30px;
 }
 
 #carousel-example-generic img{
 	width: 100%;
 	height: auto;
+}
+
+.spm-carousel-text{
+	font-size: 25px;
+}
+
+.spm-carousel-text-bck{
+	background-color: rgba(0,0,0,0.7);
+	border-radius: 7px;
+	padding: 4px 2px 2px 2px;
 }
 
 /* Custom search bar */
