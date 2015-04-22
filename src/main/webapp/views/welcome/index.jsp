@@ -34,7 +34,7 @@
   <ol class="carousel-indicators">
     <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
     <li data-target="#carousel-example-generic" data-slide-to="1"></li>
-    <!--  <li data-target="#carousel-example-generic" data-slide-to="2"></li> -->
+    <li data-target="#carousel-example-generic" data-slide-to="2"></li>
   </ol>
 
   <!-- Wrapper for slides -->
@@ -43,13 +43,30 @@
     <div class="item active">
       <img src="images/carousel_01.jpg" alt="Carousel_image_01">
       <div class="carousel-caption">
-        <h3>SportsMate Ejemplo 1</h3>
+      <div class="spm-carousel-text-bck">
+        <span class="spm-carousel-text"><spring:message code="welcome.users" /></span>
+        <p><spring:message code="welcome.users.caption" /></p>
+      </div>
       </div>
     </div>
+    
     <div class="item">
       <img src="images/carousel_02.jpg" alt="Carousel_image_02">
       <div class="carousel-caption">
-        <h3>SportsMate Ejemplo 2</h3>
+      <div class="spm-carousel-text-bck">
+        <span class="spm-carousel-text"><spring:message code="welcome.customers" /></span>
+        <p><spring:message code="welcome.customers.caption" /></p>
+      </div>
+      </div>
+    </div>
+    
+    <div class="item">
+      <img src="images/carousel_03.jpg" alt="Carousel_image_03">
+      <div class="carousel-caption">
+      <div class="spm-carousel-text-bck">
+        <span class="spm-carousel-text"><spring:message code="welcome.events" /></span>
+        <p><spring:message code="welcome.events.caption" /></p>
+      </div>
       </div>
     </div>
     <!-- ...  -->

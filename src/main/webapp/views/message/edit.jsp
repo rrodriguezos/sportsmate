@@ -29,26 +29,28 @@
 	<form:hidden path="recipient" />
 	
 	<acme:textbox code="message.sendMoment" path="sendMoment" readonly="true"/>
-	<br />
-	
-	<div class="col-xs-12"> 
-	<b><spring:message code="message.sender" />: </b>
-		<jstl:out value="${sender}" />
-	
-	<br />
-	<br />	
-	
-	
-	<jstl:if test="${messageForm.recipient == null }">
-	<form:label path="recipient"><spring:message code="message.recipient"/></form:label>
-		<form:select path="recipient" >
-			<form:options items="${actors}"  itemLabel="cadena"/>
-		</form:select>
-		<form:errors class="alert alert-danger spm-form-error" path="recipient" />	
-	<br />
-	<br />
-	</jstl:if>
+	<div class="col-xs-12 spm-message-fixing">
+		
+		<b><spring:message code="message.sender" />: </b>
+			<jstl:out value="${sender}" />
+		
+		<br><br>
 	</div>
+	
+	<div class="col-xs-12 col-md-9">
+	<div class="input-group input-group-md">	
+		<jstl:if test="${messageForm.recipient == null }">
+		<form:label class="input-group-addon" path="recipient"><spring:message code="message.recipient"/></form:label>
+			<form:select class="form-control" path="recipient" >
+				<form:options items="${actors}"  itemLabel="cadena"/>
+			</form:select>
+			<form:errors class="alert alert-danger spm-form-error" path="recipient" />	
+		<br />
+		</jstl:if>
+		</div>
+		<br>
+	</div>
+	
 	
 	<!--  <b><spring:message code="message.sender" />: </b> -->
 		<jstl:out value="${recipient}" />
