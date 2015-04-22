@@ -119,12 +119,12 @@
 <div class="col-xs-12">
 	<security:authorize access="hasRole('CUSTOMER')">
 	<br>
-		<acme:submit code="tournament.save" name="saveTC" />&nbsp;
+		<acme:submit code="tournament.save" name="saveTC" />
 		
 		<jstl:if test="${tournamentForm.id != 0}">
-			<input type="submit" name="deleteTC"
+			<input type="submit" class="btn btn-md btn-danger" name="deleteTC"
 				value="<spring:message code="tournament.delete" />"
-				onclick="return confirm('<spring:message code="tournament.confirm.delete" />')" />&nbsp;
+				onclick="return confirm('<spring:message code="tournament.confirm.delete" />')" />
 		</jstl:if>
 
 		<acme:cancel code="tournament.cancel"
@@ -133,10 +133,10 @@
 
 	<security:authorize access="hasRole('USER')">
 	<br>
-		<acme:submit code="tournament.save" name="saveTU" />&nbsp;
+		<acme:submit code="tournament.save" name="saveTU" />
 		
 		<jstl:if test="${tournamentForm.id != 0}">
-			<input type="submit" name="deleteTU"
+			<input type="submit" class="btn btn-md btn-danger" name="deleteTU"
 				value="<spring:message code="tournament.delete" />"
 				onclick="return confirm('<spring:message code="tournament.confirm.delete" />')" />
 		</jstl:if>
