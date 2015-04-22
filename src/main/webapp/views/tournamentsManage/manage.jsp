@@ -36,27 +36,23 @@
 
 
 
-
+<div class="table-responsive">
 <display:table name="tournament" id="row"
 
 requestURI="tournament/user/rounds/manageTournament.do"
-pagesize="5" class="displaytag" >
+pagesize="5" class="table table-bordered table-hover" >
 
-	<display:column title="${title }">
-	
+	<display:column title="${title }">	
 		<jstl:out value="${row.title }"></jstl:out>
 	</display:column>
 	
-	<display:column title="${matches }">
-	
-		
+	<display:column title="${matches }">	
 		<jstl:if test="${row.matches.size() == 0}">
 		
 			<jstl:out value="${noMatches }"></jstl:out> <br>
 			
 			<jstl:if test="${row.teams.size() >= 2 }">
-				
-				
+					
 				<a href="tournament/user/rounds/createFirstRounds.do?id=${row.id }"><jstl:out value="${createMatches }"></jstl:out></a>
 			
 			</jstl:if>
@@ -71,7 +67,6 @@ pagesize="5" class="displaytag" >
 		
 		<jstl:if test="${row.matches.size() != 0}">
 		
-		
 			<jstl:forEach items="${row.matches }" var="a">
 				
 				<jstl:if test="${a.winner ==null }">
@@ -84,29 +79,14 @@ pagesize="5" class="displaytag" >
 					
 				</jstl:if>
 			</jstl:forEach>
-		
-			
-			
+	
 		</jstl:if>
-		
-		
 	
-
-		
-		
 	</display:column>
-	
-	
-	
-		
-	
-	
-
 	
 	<display:column title="${option }">
 	
-		
-		
+
 		<%-- equipos sin jugar aún --%>
 		<jstl:set var="AllPlays" value="1"></jstl:set>
 		<jstl:set var="AllTeamPlays" value="1"></jstl:set>
@@ -135,27 +115,9 @@ pagesize="5" class="displaytag" >
 				<a href="tournament/user/rounds/secondRounds.do?idTournament=${row.id }"> <jstl:out value="${createMatches2 }"></jstl:out> </a>
 		</jstl:if>
 		
-	
-			
-			
-			
-		
-		
-		
-		
-		
-			
-			
-			
-	
-	
-	
+
 	</display:column>
 	
 	
-	
-	
 </display:table>
-
-
-
+</div>

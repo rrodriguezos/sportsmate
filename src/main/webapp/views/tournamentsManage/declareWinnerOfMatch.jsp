@@ -28,11 +28,11 @@
 <spring:message code="tournament.nameOfTeam" var="nombre"></spring:message>
 
 
-
+<div class="table-responsive">
 <display:table name="teams" id="row"
 
 requestURI="customer/ownItemList.do"
-pagesize="5" class="displaytag" >
+pagesize="5" class="table table-bordered table-hover" >
 
 
 	<display:column title="${nombre }">
@@ -50,3 +50,4 @@ pagesize="5" class="displaytag" >
 
 
 </display:table>
+</div>
