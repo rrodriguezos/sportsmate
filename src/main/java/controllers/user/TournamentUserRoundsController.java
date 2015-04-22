@@ -14,6 +14,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;		
 
+import security.Authority;
+import security.LoginService;
 import services.TeamService;
 import services.TournamentService;
 import services.UserService;
@@ -42,13 +44,24 @@ public class TournamentUserRoundsController
 		
 		@Autowired
 		private TeamService teamService;
+		
+		@Autowired
+		private LoginService loginService;
 	
 	
 	
 	@RequestMapping("/addTeamTest")
 	public ModelAndView addTeamTest(){
 		
-		List<Tournament> tournaments = (List<Tournament>) tournamentService.findAllTournamentsCreatedByUserId();
+		Authority authority =new Authority();
+		authority.setAuthority("CUSTOMER");
+		
+		List<Tournament> tournaments = null;
+		if (LoginService.getPrincipal().getAuthorities().contains(authority)){
+			tournaments= (List<Tournament>) tournamentService.findAllTournamentsCreatedByCustomerId();
+		}else{
+			tournaments=(List<Tournament>) tournamentService.findAllTournamentsCreatedByUserId();
+		}
 		
 		Tournament tournament=tournaments.get(1);
 		
@@ -207,8 +220,15 @@ public class TournamentUserRoundsController
 	@RequestMapping("/list")
 	public ModelAndView list(){
 		
-		Collection<Tournament> tournaments=tournamentService.findAllTournamentsCreatedByUserId();
+		Authority authority =new Authority();
+		authority.setAuthority("CUSTOMER");
 		
+		Collection<Tournament> tournaments = null;
+		if (LoginService.getPrincipal().getAuthorities().contains(authority)){
+			tournaments= tournamentService.findAllTournamentsCreatedByCustomerId();
+		}else{
+			tournaments=tournamentService.findAllTournamentsCreatedByUserId();
+		}
 		if(tournaments== null)
 			new Throwable("no tournaments for this user");
 		

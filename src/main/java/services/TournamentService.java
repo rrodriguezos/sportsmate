@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import repositories.TournamentRepository;
+import security.LoginService;
 import domain.Actor;
 import domain.Customer;
 import domain.Match;
@@ -42,9 +43,10 @@ public class TournamentService {
 
 	public Tournament findOne(int tournamentId) {
 		Tournament result;
-
+		
+		
 		result = tournamentRepository.findOne(tournamentId);
-
+		Assert.isTrue(result.getUser().equals(userService.findByPrincipal()) || result.getCustomer().equals(customerService.findByPrincipal()));
 		return result;
 	}
 
