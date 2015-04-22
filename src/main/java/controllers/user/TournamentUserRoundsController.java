@@ -52,10 +52,15 @@ public class TournamentUserRoundsController
 		
 		Tournament tournament=tournaments.get(1);
 		
+		String [] abecedario = {"A", "B", "C", "D", "E", "F", "G", "H", "I", "J",
+				"K", "L", "M","N","O","P","Q","R","S","T","U","V","W", "X","Y","Z" };
+
+		int numRandon = (int) Math.round(Math.random() * 26 ) ;
+		
 		
 		Team team=new Team();
 		team.setCaptain(userService.findByPrincipal());
-		team.setName("5");
+		team.setName(abecedario[numRandon]);
 		
 		Collection<User> users=new ArrayList<User>();
 		users.add(userService.findByPrincipal());

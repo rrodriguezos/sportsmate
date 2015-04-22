@@ -44,7 +44,7 @@ pagesize="5" class="displaytag" >
 
 	<display:column title="${setWinner }">
 	
-		<a href="tournament/user/rounds/declareWinnerOfMatchId.do?idTeam=${row.id }&idMatch=${match.id}">test</a>
+		<a href="tournament/user/rounds/declareWinnerOfMatchId.do?idTeam=${row.id }&idMatch=${match.id}"><jstl:out value="${setWinner }"></jstl:out></a>
 	
 	</display:column>
 

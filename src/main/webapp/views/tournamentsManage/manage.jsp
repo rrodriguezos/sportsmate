@@ -28,6 +28,9 @@
 <spring:message code="tournament.setWinner" var="setWinner"></spring:message>
 <spring:message code="tournament.Winner" var="Winner"></spring:message>
 <spring:message code="tournament.createMatches2" var="createMatches2"></spring:message>
+<spring:message code="tournament.option" var="option"></spring:message>
+<spring:message code="setWinnerOfTournament" var="setWinnerOfTournament"></spring:message>
+
 
 
 
@@ -49,7 +52,7 @@ pagesize="5" class="displaytag" >
 		
 		<jstl:if test="${row.matches.size() == 0}">
 		
-			<jstl:out value="${noMatches }"></jstl:out>
+			<jstl:out value="${noMatches }"></jstl:out> <br>
 			
 			<jstl:if test="${row.teams.size() >= 2 }">
 				
@@ -77,7 +80,7 @@ pagesize="5" class="displaytag" >
 				</jstl:if>
 				<jstl:if test="${a.winner != null }">
 					
-					<jstl:out value="${a.title} : ${Winner } ---> ${a.winner.name }"></jstl:out>
+					<jstl:out value="${a.title} : ${Winner } ---> ${a.winner.name }"></jstl:out><br>
 					
 				</jstl:if>
 			</jstl:forEach>
@@ -94,44 +97,15 @@ pagesize="5" class="displaytag" >
 	</display:column>
 	
 	
-	<display:column title="${setWinner}">
 	
-		<jstl:if test="${row.matches.size() != 0}">
-			<jstl:set var="ganado" value="true"></jstl:set>
-			<jstl:forEach items="${row.matches }" var="a">
-				
-				
-				<jstl:if test="${a.winner == null }">
-						<jstl:set var="ganado" value="false"></jstl:set>
-				</jstl:if>
-			
-			
-			</jstl:forEach>
-			
-			<jstl:if test="${!ganado }">
-					
-					<jstl:out value="no hay ninguno ganado"></jstl:out>		
-				
-				</jstl:if>
-				
-				<jstl:if test="${ganado }">
-					
-					<jstl:out value="Todos los maches estan ganados"></jstl:out>		
-				
-				</jstl:if>
-			
-		</jstl:if>
 		
 	
 	
-	</display:column>
+
 	
-	<display:column title="test">
+	<display:column title="${option }">
 	
-		<jstl:out value="${AllPlaysC }"></jstl:out>
-		<br>
-		<jstl:out value="${AllTeamC }"></jstl:out>
-		<br>
+		
 		
 		<%-- equipos sin jugar aún --%>
 		<jstl:set var="AllPlays" value="1"></jstl:set>
@@ -144,12 +118,12 @@ pagesize="5" class="displaytag" >
 		
 		<%-- entonces comprobamos si se cumplen las condiciones para poder generar otra ronda o que declarar al vencedor --%>
 		
-		<jstl:if test="${AllPlaysC  && AllTeamC && needRounds }">
+		<jstl:if test="${AllPlaysC  && AllTeamC && needRounds && row.winner == null }">
 		
-				<a href="tournament/user/rounds/declareWinnerOfTournament.do?idTournament=${row.id }"> <jstl:out value="declara al venceder"></jstl:out> </a>
+				<a href="tournament/user/rounds/declareWinnerOfTournament.do?idTournament=${row.id }"> <jstl:out value="${setWinnerOfTournament }"></jstl:out> </a>
 
 		</jstl:if>
-		${needRounds }
+		
 		<jstl:if test="${AllPlaysC  && !AllTeamC }">
 		
 				<a href="tournament/user/rounds/secondRounds.do?idTournament=${row.id }"> <jstl:out value="${createMatches2 }"></jstl:out> </a>
@@ -185,59 +159,3 @@ pagesize="5" class="displaytag" >
 
 
 
-<display:table name="tournament" id="row"
-
-requestURI="customer/ownItemList.do"
-pagesize="5" class="displaytag" >
-
-	<display:column title="${matches }">
-	
-		
-		<jstl:if test="${row.matches.size() == 0}">
-		
-			<jstl:out value="${noMatches }"></jstl:out>
-			
-			<jstl:if test="${row.teams.size() >= 2 }">
-				
-				
-				<a href="tournament/user/rounds/createFirstRounds.do?id=${row.id }"><jstl:out value="${createMatches }"></jstl:out></a>
-			
-			</jstl:if>
-			
-			<jstl:if test="${row.teams.size() < 2 }">
-				
-				<jstl:out value="${noTeams }"></jstl:out>
-			
-			</jstl:if>
-			
-		</jstl:if>
-		
-		<jstl:if test="${row.matches.size() != 0}">
-		
-		
-			<jstl:forEach items="${row.matches }" var="a">
-				
-				<jstl:if test="${a.winner ==null }">
-				<jstl:out value="${a.title }"></jstl:out>  <a href="tournament/user/rounds/declareWinnerOfMatch.do?id=${a.id }"><jstl:out value="${setWinner }"></jstl:out></a> 
-				<br>
-				</jstl:if>
-				<jstl:if test="${a.winner != null }">
-					
-					<jstl:out value="${a.title} : ${Winner } ---> ${a.winner.name }"></jstl:out>
-					
-				</jstl:if>
-			</jstl:forEach>
-		
-			
-			
-		</jstl:if>
-		
-		
-	
-
-		
-		
-	</display:column>
-
-
-</display:table>
