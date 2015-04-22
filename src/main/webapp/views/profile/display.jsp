@@ -41,7 +41,9 @@
 						</jstl:if>
 					</div>
 				</div>
-			
+				
+				<div class="col-md-1 hidden-sm hidden-xs spm-profile-margin"></div>
+				
 				<div class='col-md-3'> 
 					<h3>
 						<spring:message code="customer.center" />
@@ -100,13 +102,13 @@
 				
 				</div>
 				
-				<br><br>
+				<br>
 			
 			<div class="row">
 			
-				<div class="text-center">	
+				<div class="col-xs-12 col-md-3">
 					<a href="profile/customer/edit.do?customerId=${profile.id}">
-						<button type="button" class="btn btn-lg btn-success col-xs-12 col-md-6 col-md-offset-3">
+						<button type="button" class="btn btn-lg btn-success col-xs-12 col-md-10 col-md-offset-1"">
 							<spring:message code="customer.edit" />
 						</button>
 					</a>
@@ -138,7 +140,9 @@
 					</div>
 			</div>
 			
-			<div class='col-md-3'> 
+			<div class="col-md-1 hidden-sm hidden-xs spm-profile-margin"></div>
+			
+			<div class='col-md-5'> 
 				<h3>
 				<spring:message code="personal.actor" />
 				</h3>
@@ -160,20 +164,16 @@
 
 		
 		</div>
-				
-				<br><br>
-			
-			<div class="row">
-			
-				<div class="text-center">	
+			<br>			
+			<div class="row">	
+				<div class="col-xs-12 col-md-3">
 					<a href="profile/user/edit.do?userId=${profile.id}">
-						<button type="button" class="btn btn-lg btn-success col-xs-12 col-md-6 col-md-offset-3">
+						<button type="button" class="btn btn-lg btn-success col-xs-12 col-md-10 col-md-offset-1">
 							<spring:message code="user.edit" />
 						</button>
 					</a>
 				</div>
 			</div>
-		
-		
+			
 </form:form>
 </security:authorize>
