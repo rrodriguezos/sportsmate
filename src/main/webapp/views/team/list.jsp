@@ -70,6 +70,8 @@
 </display:table>
 </div>
 
+<br>
+
 <jstl:if test="${requestURI == 'team/user/list.do' }">
 	<security:authorize access="hasRole('USER')">
 		<input type="button" class="btn btn-md btn-success" name="create"
