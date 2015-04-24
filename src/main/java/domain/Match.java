@@ -98,7 +98,17 @@ public class Match extends DomainEntity{
 	private Collection<Team> teams;
 	private Tournament tournament;	
 	private Team defeat;
-
+	private boolean played;
+	
+	
+	
+	
+	public boolean isPlayed() {
+		return played;
+	}
+	public void setPlayed(boolean played) {
+		this.played = played;
+	}
 	
 	
 	@ManyToOne(optional=true)
@@ -113,7 +123,7 @@ public class Match extends DomainEntity{
 	
 	@Valid
 	@NotNull
-	@ManyToMany(cascade = CascadeType.ALL)
+	@ManyToMany
 	@Size(min=2,max=2)
 	public Collection<Team> getTeams() 
 	{

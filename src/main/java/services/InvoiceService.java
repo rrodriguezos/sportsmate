@@ -5,6 +5,7 @@ import java.util.Collection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.Assert;
 
 import repositories.InvoiceRepository;
 import domain.Customer;
@@ -16,10 +17,13 @@ public class InvoiceService {
 	private InvoiceRepository invoiceRepository;
 @Autowired
 	private CustomerService customerService;
+
 public Collection<Invoice>  findAll(){
 return invoiceRepository.findAll();
 }
 public Invoice findOne(Integer valueOf) {
+	Invoice i = invoiceRepository.findOne(valueOf);
+	Assert.isTrue(i.getCustomer().equals(customerService.findByPrincipal()));
 return invoiceRepository.findOne(valueOf);
 }
 public Invoice save(Invoice invoice){

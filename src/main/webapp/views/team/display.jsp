@@ -21,6 +21,8 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
+<br>
+
 <form:form action="${requestURI}" modelAttribute="teamForm">
 
 	<form:hidden path="id" />
@@ -43,7 +45,9 @@
 	<h1>
 		<spring:message code="team.members" />
 	</h1>
-	<display:table name="users" id="row" pagesize="5" class="displaytag">
+	
+	<div class="table-responsive">
+	<display:table name="users" id="row" pagesize="5" class="table table-bordered table-hover">
 
 		<spring:message code="team.user.name" var="nameHeader" />
 		<display:column property="name" title="${nameHeader}" />
@@ -58,16 +62,19 @@
 		<display:column property="phone" title="${phoneHeader}" />
 
 	</display:table>
-
+	</div>
+	
+	<br>
+	
 	<security:authorize access="hasRole('USER')">
 		<acme:cancel code="team.back" url="team/user/list.do" />
 		<jstl:if test="${principal.teamsCreated.contains(team)}">
-			<input type="button" name="edit"
+			<input type="button" class="btn btn-md btn-success" name="edit"
 				value="<spring:message code="team.edit"/>"
 				onclick="javascript: window.location.replace('team/user/edit.do?teamId= ${teamForm.id}')" />
 
 			<jstl:if test="${teamForm.id != 0 && users.size()==1}">
-				<input type="submit" name="delete"
+				<input type="submit" class="btn btn-md btn-danger" name="delete"
 					value="<spring:message code="team.delete" />"
 					onclick="return confirm('<spring:message code="team.confirm.delete" />')" />
 			</jstl:if>

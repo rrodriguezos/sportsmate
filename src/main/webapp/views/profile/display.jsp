@@ -22,105 +22,158 @@
 
 <security:authorize access="hasRole('CUSTOMER')">
 <form:form action="${requestURI}" modelAttribute="customerForm">
-
-		<form:hidden path="id" />
-		
-			<h1>
-			<spring:message code="personal.actor" />
-			</h1>
+	<form:hidden path="id" />
+	
+			<br>
 			
-			<b><spring:message code="actor.name" />: </b> 
-			<jstl:out value="${actor.name}" />
-			<br/>
-			<b><spring:message code="actor.surname" />: </b> 
-			<jstl:out value="${actor.surname}" />
-			<br/>
-			<b><spring:message code="actor.email" />: </b> 
-			<jstl:out value="${actor.email}" />
-			<br/>
-			<b><spring:message code="actor.phone" />: </b> 
-			<jstl:out value="${actor.phone}" />
-			<br/>
+			<div class="row">
+				<div class='col-md-3 spm-profile-picture-div text-center'> 
+					<img src="images/default_profile.jpg" alt="Default profile" class="img-thumbnail .spm-profile-picture" />
+					<br><br>
+					<div>
+						<jstl:if test="${rating == null}">
+							<spring:message code="actor.rating.Empty" />
+						</jstl:if>
+						
+						<jstl:if test="${rating != null}">
+							<spring:message code="actor.rating" />
+						<jstl:out value="${rating}" />
+						</jstl:if>
+					</div>
+				</div>
+				
+				<div class="col-md-1 hidden-sm hidden-xs spm-profile-margin"></div>
+				
+				<div class='col-md-3'> 
+					<h3>
+						<spring:message code="customer.center" />
+					</h3>
+					<br>
+					<span class="glyphicon glyphicon-barcode">&nbsp</span><b><spring:message code="center.cif" />: </b> 
+					<jstl:out value="${customer.cif}" />
+					<br/>
+					<span class="glyphicon glyphicon-home">&nbsp</span><b><spring:message code="center.street" />: </b> 
+					<jstl:out value="${customer.street}" />
+					<br/>
+					<span class="glyphicon glyphicon-home">&nbsp</span><b><spring:message code="center.zip" />: </b> 
+					<jstl:out value="${customer.zip}" />
+					<br/>
+					<span class="glyphicon glyphicon-home">&nbsp</span><b><spring:message code="center.provinceCenter" />: </b> 
+					<jstl:out value="${customer.provinceCenter}" />
+					<br/>
+					<span class="glyphicon glyphicon-home">&nbsp</span><b><spring:message code="center.city" />: </b> 
+					<jstl:out value="${customer.city}" />
+					<br/>
+					<span class="glyphicon glyphicon-king">&nbsp</span><b><spring:message code="center.nameCenter" />: </b> 
+					<jstl:out value="${customer.nameCenter}" />
+					<br/>
+					<span class="glyphicon glyphicon-earphone">&nbsp</span><b><spring:message code="center.phoneCenter" />: </b> 
+					<jstl:out value="${customer.phoneCenter}" />
+					<br/>
+					<span class="glyphicon glyphicon-envelope">&nbsp</span><b><spring:message code="center.emailCenter" />: </b> 
+					<jstl:out value="${customer.emailCenter}" />
+					<br/>
+					<span class="glyphicon glyphicon-cloud">&nbsp</span><b><spring:message code="center.web" />: </b> 
+					<jstl:out value="${customer.web}" />
+					<br/>
+				</div>
+				
+				<div class='col-md-3'>
+					<h3>
+						<spring:message code="personal.actor" />
+					</h3>
+					<br>
+					<span class="glyphicon glyphicon-user">&nbsp</span><b><spring:message code="actor.name" />: </b> 
+						<jstl:out value="${actor.name}" />
+					<br/>
+					<span class="glyphicon glyphicon-font">&nbsp</span><b><spring:message code="actor.surname" />: </b> 
+						<jstl:out value="${actor.surname}" />
+					<br/>
+					<span class="glyphicon glyphicon-envelope">&nbsp</span><b><spring:message code="actor.email" />: </b> 
+						<jstl:out value="${actor.email}" />
+					<br/>
+					<span class="glyphicon glyphicon-earphone">&nbsp</span><b><spring:message code="actor.phone" />: </b> 
+						<jstl:out value="${actor.phone}" />
+					<br/>
+					
+				</div>
+				
+				
+				
+				</div>
+				
+				<br>
 			
-			<h1>
-			<spring:message code="customer.center" />
-			</h1>
+			<div class="row">
 			
-			<b><spring:message code="center.cif" />: </b> 
-			<jstl:out value="${customer.cif}" />
-			<br/>
-			<b><spring:message code="center.street" />: </b> 
-			<jstl:out value="${customer.street}" />
-			<br/>
-			<b><spring:message code="center.zip" />: </b> 
-			<jstl:out value="${customer.zip}" />
-			<br/>
-			<b><spring:message code="center.provinceCenter" />: </b> 
-			<jstl:out value="${customer.provinceCenter}" />
-			<br/>
-			<b><spring:message code="center.city" />: </b> 
-			<jstl:out value="${customer.city}" />
-			<br/>
-			<b><spring:message code="center.nameCenter" />: </b> 
-			<jstl:out value="${customer.nameCenter}" />
-			<br/>
-			<b><spring:message code="center.phoneCenter" />: </b> 
-			<jstl:out value="${customer.phoneCenter}" />
-			<br/>
-			<b><spring:message code="center.emailCenter" />: </b> 
-			<jstl:out value="${customer.emailCenter}" />
-			<br/>
-			<b><spring:message code="center.web" />: </b> 
-			<jstl:out value="${customer.web}" />
-			<br/>
-		
-			<jstl:if test="${customer.rating == null}">
-			<spring:message code="actor.rating.Empty" />
-			<jstl:out value=""></jstl:out>
-		
-			</jstl:if>
-			<jstl:if test="${customer.rating != null}">
-			 <spring:message code="actor.rating" />
-			<jstl:out value="${customer.rating}" />
-			</jstl:if>
-			<br/>
+				<div class="col-xs-12 col-md-3">
+					<a href="profile/customer/edit.do?customerId=${profile.id}">
+						<button type="button" class="btn btn-lg btn-success col-xs-12 col-md-10 col-md-offset-1"">
+							<spring:message code="customer.edit" />
+						</button>
+					</a>
+				</div>
+			</div>
 			
-			
-			<a href="profile/customer/edit.do?customerId=${profile.id}"><spring:message code="customer.edit" /></a>
 </form:form>
 </security:authorize>
 
 <security:authorize access="hasRole('USER')">
 <form:form action="${requestURI}" modelAttribute="userForm">
+			
+			<br>
+			
+			<div class="row">
+			<div class='col-md-3 spm-profile-picture-div text-center'> 
+					<img src="images/default_profile.jpg" alt="Default profile" class="img-thumbnail .spm-profile-picture" />
+					<br><br>
+					<div>
+						<jstl:if test="${rating == null}">
+							<spring:message code="actor.rating.Empty" />
+					
+						</jstl:if>
+						<jstl:if test="${rating != null}">
+							<spring:message code="actor.rating" />
+						<jstl:out value="${rating}" />
+						</jstl:if>
+			
+					</div>
+			</div>
+			
+			<div class="col-md-1 hidden-sm hidden-xs spm-profile-margin"></div>
+			
+			<div class='col-md-5'> 
+				<h3>
+				<spring:message code="personal.actor" />
+				</h3>
+				<br>
+					
+				<span class="glyphicon glyphicon-user">&nbsp</span><b><spring:message code="actor.name" />: </b> 
+				<jstl:out value="${actor.name}" />
+				<br/>
+				<span class="glyphicon glyphicon-font">&nbsp</span><b><spring:message code="actor.surname" />: </b> 
+				<jstl:out value="${actor.surname}" />
+				<br/>
+				<span class="glyphicon glyphicon-envelope">&nbsp</span><b><spring:message code="actor.email" />: </b> 
+				<jstl:out value="${actor.email}" />
+				<br/>
+				<span class="glyphicon glyphicon-earphone">&nbsp</span><b><spring:message code="actor.phone" />: </b> 
+				<jstl:out value="${actor.phone}" />
+				<br/>
+			</div>
 
-			<h1>
-			<spring:message code="personal.actor" />
-			</h1>
-			
-			<b><spring:message code="actor.name" />: </b> 
-			<jstl:out value="${actor.name}" />
-			<br/>
-			<b><spring:message code="actor.surname" />: </b> 
-			<jstl:out value="${actor.surname}" />
-			<br/>
-			<b><spring:message code="actor.email" />: </b> 
-			<jstl:out value="${actor.email}" />
-			<br/>
-			<b><spring:message code="actor.phone" />: </b> 
-			<jstl:out value="${actor.phone}" />
-			<br/>
-			
-			<jstl:if test="${user.rating == null}">
-			<spring:message code="actor.rating.Empty" />
-			<jstl:out value=""></jstl:out>
 		
-			</jstl:if>
-			<jstl:if test="${user.rating != null}">
-			 <spring:message code="actor.rating" />
-			<jstl:out value="${user.rating}" />
-			</jstl:if>
-			<br/>
+		</div>
+			<br>			
+			<div class="row">	
+				<div class="col-xs-12 col-md-3">
+					<a href="profile/user/edit.do?userId=${profile.id}">
+						<button type="button" class="btn btn-lg btn-success col-xs-12 col-md-10 col-md-offset-1">
+							<spring:message code="user.edit" />
+						</button>
+					</a>
+				</div>
+			</div>
 			
-		<a href="profile/user/edit.do?userId=${profile.id}"><spring:message code="user.edit" /></a>
 </form:form>
 </security:authorize>

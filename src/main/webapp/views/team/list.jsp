@@ -67,6 +67,16 @@
 	</jstl:if>
 
 </display:table>
+
+<jstl:if test="${showDisjoin == true }">
+<security:authorize access="hasRole('USER')">
+		<input type="button" class="btn btn-md btn-success" name="create"
+			value="<spring:message code="team.create"/>"
+			onclick="javascript: window.location.replace('team/user/create.do');" />
+</security:authorize>
+</jstl:if>
 </div>
+
+<br>
 
 <acme:cancel code="team.back" url="welcome/index.do" />

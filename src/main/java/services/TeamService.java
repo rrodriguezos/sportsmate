@@ -215,3 +215,4 @@ public Collection<Team> findAllTeamsByTournamentId(int tournamentId) {
 }
 
 }
+

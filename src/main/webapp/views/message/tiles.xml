@@ -22,12 +22,12 @@
 	</definition>	
 	
 	<definition name="message/display" extends="master.page">	
-		<put-attribute name="title" value="Menssage" />
+		<put-attribute name="title" value="Message" />
 		<put-attribute name="body" value="/views/message/display.jsp" />
 	</definition>
 	
 	<definition name="message/edit" extends="master.page">	
-		<put-attribute name="title" value="Menssage" />
+		<put-attribute name="title" value="Message" />
 		<put-attribute name="body" value="/views/message/edit.jsp" />
 	</definition>
 	

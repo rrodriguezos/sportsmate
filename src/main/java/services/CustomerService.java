@@ -1,5 +1,5 @@
-
 package services;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
@@ -23,84 +23,93 @@ import domain.Invoice;
 import domain.Tournament;
 import domain.Vote;
 import forms.CustomerForm;
+import forms.UserVoteForm;
+
 @Service
 @Transactional
 public class CustomerService {
 	@Autowired
 	private CustomerRepository customerRepository;
-	@Autowired 
+	@Autowired
 	private LoginService loginService;
-	
-public Collection<Customer>  findAll(){
-return customerRepository.findAll();
-}
-public Customer findOne(Integer customerId) {
 
-	Customer result;
-	
-	result = customerRepository.findOne(customerId);
-	
-	return result;
-}
-public Customer save(Customer customer){
-return customerRepository.save(customer);
-}
-public Customer create() 
-{
-	Customer customer = new Customer();
-	Collection<Folder> folders;
+	@Autowired
+	private UserService userService;
 
-	folders = new ArrayList<Folder>();
-	UserAccount useraccount = new UserAccount();
-	Authority authority = new Authority();
-	authority.setAuthority("CUSTOMER");
-	useraccount.addAuthority(authority);
-	customer.setUserAccount(useraccount);
-	customer.setFolders(folders);
+	public Collection<Customer> findAll() {
+		return customerRepository.findAll();
+	}
 
-return customer;
-}
-public Collection<Invoice> getAllInvoices() {
-	// TODO Auto-generated method stub
-	
-	int id=customerRepository.getIdFromUserAccount(loginService.getPrincipal().getId());
-	return customerRepository.getAllInvoices(id);
-}
+	public Customer findOne(Integer customerId) {
 
-	//Other business methods ------------------------------------------------
-	public Customer findByPrincipal()
-	{
-	
+		Customer result;
+
+		result = customerRepository.findOne(customerId);
+
+		return result;
+	}
+
+	public Customer save(Customer customer) {
+		return customerRepository.save(customer);
+	}
+
+	public Customer create() {
+		Customer customer = new Customer();
+		Collection<Folder> folders;
+
+		folders = new ArrayList<Folder>();
+		UserAccount useraccount = new UserAccount();
+		Authority authority = new Authority();
+		authority.setAuthority("CUSTOMER");
+		useraccount.addAuthority(authority);
+		customer.setUserAccount(useraccount);
+		customer.setFolders(folders);
+
+		return customer;
+	}
+
+	@SuppressWarnings("static-access")
+	public Collection<Invoice> getAllInvoices() {
+		// TODO Auto-generated method stub
+
+		int id = customerRepository.getIdFromUserAccount(loginService
+				.getPrincipal().getId());
+		return customerRepository.getAllInvoices(id);
+	}
+
+	// Other business methods ------------------------------------------------
+	public Customer findByPrincipal() {
+
 		Customer customer;
 		UserAccount userAccount;
 		int userAccountId;
-	
+
 		userAccount = LoginService.getPrincipal();
-		userAccountId= userAccount.getId();		
-		customer = customerRepository.findCustomerByUserAccountId(userAccountId);
-	
+		userAccountId = userAccount.getId();
+		customer = customerRepository
+				.findCustomerByUserAccountId(userAccountId);
+
 		return customer;
-	
+
 	}
 
-	public Invoice getLastInovice(int id) 
-	{
+	public Invoice getLastInovice(int id) {
 		// TODO Auto-generated method stub
 		Invoice i;
-		
-		i=customerRepository.getlastInvoice(id);
-		if(i==null){
+
+		i = customerRepository.getlastInvoice(id);
+		if (i == null) {
 			new Throwable().printStackTrace();
 		}
 		return i;
 	}
-	
-	public CustomerForm construct (Customer customer){
+
+	public CustomerForm construct(Customer customer) {
 		CustomerForm customerForm = new CustomerForm();
-		
+
 		customerForm.setUsername(customer.getUserAccount().getUsername());
 		customerForm.setPassword(customer.getUserAccount().getPassword());
-		
+
 		customerForm.setName(customer.getName());
 		customerForm.setSurname(customer.getSurname());
 		customerForm.setCif(customer.getCif());
@@ -113,15 +122,11 @@ public Collection<Invoice> getAllInvoices() {
 		customerForm.setEmailCenter(customer.getEmailCenter());
 		customerForm.setWeb(customer.getWeb());
 		customerForm.setPhone(customer.getPhone());
-		
+
 		return customerForm;
 	}
 
-
-
-
-public Customer reconstruct(CustomerForm customerForm) 
-{
+	public Customer reconstruct(CustomerForm customerForm) {
 		Customer result = new Customer();
 		result.setCif(customerForm.getCif());
 		result.setStreet(customerForm.getStreet());
@@ -133,61 +138,58 @@ public Customer reconstruct(CustomerForm customerForm)
 		result.setEmailCenter(customerForm.getEmailCenter());
 		result.setWeb(customerForm.getWeb());
 		result.setPhone(customerForm.getPhone());
-		
+
 		result.setName(customerForm.getName());
 		result.setSurname(customerForm.getSurname());
 		result.setEmail(customerForm.getEmail());
-		List<Vote> votes=new ArrayList<Vote>();
-		List<Tournament> tournaments=new ArrayList<Tournament>();
-		List<Folder> folders=new ArrayList<Folder>();
-		List<Event> events=new ArrayList<Event>();
-		List<Invoice> invoices =new ArrayList<Invoice>();
-		Folder folder1 =new Folder();
+		List<Vote> votes = new ArrayList<Vote>();
+		List<Tournament> tournaments = new ArrayList<Tournament>();
+		List<Folder> folders = new ArrayList<Folder>();
+		List<Event> events = new ArrayList<Event>();
+		List<Invoice> invoices = new ArrayList<Invoice>();
+		Folder folder1 = new Folder();
 		folder1.setActor(result);
-		
+
 		folder1.setName("Recibidos");
-		Folder folder2 =new Folder();
+		Folder folder2 = new Folder();
 		folder2.setActor(result);
 		folder2.setName("Enviados");
 		folders.add(folder1);
 		folders.add(folder2);
-		
-		Invoice invoice=new Invoice();
+
+		Invoice invoice = new Invoice();
 		invoice.setCustomer(result);
-		invoice.setDeadLine(new Date(new Date().getTime()+864000000));
+		invoice.setDeadLine(new Date(new Date().getTime() + 864000000));
 		invoice.setFee(15);
-		
+
 		invoices.add(invoice);
 		result.setVotes(votes);
 		result.setTournaments(tournaments);
 		result.setFolders(folders);
 		result.setEvents(events);
 		result.setInvoices(invoices);
-		
-		
-		
+
 		UserAccount userAccount = new UserAccount();
-	     userAccount.setUsername(customerForm.getUsername());
+		userAccount.setUsername(customerForm.getUsername());
 
-	    String password = customerForm.getPassword();
+		String password = customerForm.getPassword();
 
-	    Md5PasswordEncoder encoder = new Md5PasswordEncoder();
-	    String md5 = encoder.encodePassword(password, null);
-	    
-	    userAccount.setPassword(md5);
-	    Authority authority = new Authority();
-	    authority.setAuthority("CUSTOMER");
-	    Collection<Authority> authorities = new ArrayList<Authority>();
-	    authorities.add(authority);
-	    userAccount.setAuthorities(authorities);
-	    result.setUserAccount(userAccount);
+		Md5PasswordEncoder encoder = new Md5PasswordEncoder();
+		String md5 = encoder.encodePassword(password, null);
+
+		userAccount.setPassword(md5);
+		Authority authority = new Authority();
+		authority.setAuthority("CUSTOMER");
+		Collection<Authority> authorities = new ArrayList<Authority>();
+		authorities.add(authority);
+		userAccount.setAuthorities(authorities);
+		result.setUserAccount(userAccount);
 
 		return result;
 
 	}
-	
-public Customer reconstructEdit(CustomerForm customerForm) 
-{
+
+	public Customer reconstructEdit(CustomerForm customerForm) {
 		Customer result = findByPrincipal();
 		result.setCif(customerForm.getCif());
 		result.setStreet(customerForm.getStreet());
@@ -199,24 +201,22 @@ public Customer reconstructEdit(CustomerForm customerForm)
 		result.setEmailCenter(customerForm.getEmailCenter());
 		result.setWeb(customerForm.getWeb());
 		result.setPhone(customerForm.getPhone());
-		
+
 		result.setName(customerForm.getName());
 		result.setSurname(customerForm.getSurname());
 		result.setEmail(customerForm.getEmail());
 
+		String password = customerForm.getPassword();
 
-	    String password = customerForm.getPassword();
+		Md5PasswordEncoder encoder = new Md5PasswordEncoder();
+		String md5 = encoder.encodePassword(password, null);
 
-	    Md5PasswordEncoder encoder = new Md5PasswordEncoder();
-	    String md5 = encoder.encodePassword(password, null);
-	    
-	    result.getUserAccount().setPassword(md5);
-
+		result.getUserAccount().setPassword(md5);
 
 		return result;
 
 	}
-	
+
 	public boolean userRegistered(String username) {
 		Boolean res = true;
 		if (customerRepository.getCustomerByUserName(username) == null) {
@@ -224,19 +224,21 @@ public Customer reconstructEdit(CustomerForm customerForm)
 		}
 		return res;
 	}
+
 	public Customer findOneToEdit(int customerId) {
 		Assert.notNull(customerId);
-		//comprobar aqui que el customerId de findOne es el mismo que el findPrincipal
+		// comprobar aqui que el customerId de findOne es el mismo que el
+		// findPrincipal
 
 		return customerRepository.findOne(customerId);
 	}
+
 	public void delete(Customer customer) {
 		customerRepository.delete(customer.getId());
-		
+
 	}
-	
-	public Collection<Customer> findByKeyword(String keywords) 
-	{
+
+	public Collection<Customer> findByKeyword(String keywords) {
 		Assert.notNull(keywords);
 		Collection<Customer> allCustomers;
 		Collection<Customer> allByKeyword;
@@ -255,6 +257,35 @@ public Customer reconstructEdit(CustomerForm customerForm)
 
 		return allByKeyword;
 	}
+
+	public Vote voteReconstruct(UserVoteForm userVoteForm) {
+		Vote vote = new Vote();
+		vote.setNameUser(userService.findByPrincipal().getName());
+		vote.setScore(userVoteForm.getScore());
+		return vote;
+	}
+
+	public void saveVote(Customer customer) {
+		Double aux = 0.0;
+		Double rating = 0.0;
+		for (Vote a : customer.getVotes()) {
+			rating += a.getScore();
+			aux++;
+		}
+		customer.setRating(rating / aux);
+		customerRepository.save(customer);
+
+	}
+
+	public Customer findOneFromPlaceString(String placeString) {
+		Customer c = null;
+		Collection<Customer> customers = customerRepository.findAll();
+		for (Customer custo : customers) {
+			if (custo.getNameCenter().equals(placeString)) {
+				c = custo;
+				break;
+			}
+		}
+		return c;
+	}
 }
-
-

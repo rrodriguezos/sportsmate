@@ -28,11 +28,11 @@
 <spring:message code="tournament.nameOfTeam" var="nombre"></spring:message>
 
 
-
+<div class="table-responsive">
 <display:table name="teams" id="row"
 
 requestURI="customer/ownItemList.do"
-pagesize="5" class="displaytag" >
+pagesize="5" class="table table-bordered table-hover" >
 
 
 	<display:column title="${nombre }">
@@ -44,9 +44,10 @@ pagesize="5" class="displaytag" >
 
 	<display:column title="${setWinner }">
 	
-		<a href="tournament/user/rounds/declareWinnerOfMatchId.do?idTeam=${row.id }&idMatch=${match.id}">test</a>
+		<a href="tournament/user/rounds/declareWinnerOfMatchId.do?idTeam=${row.id }&idMatch=${match.id}"><jstl:out value="${setWinner }"></jstl:out></a>
 	
 	</display:column>
 
 
 </display:table>
+</div>

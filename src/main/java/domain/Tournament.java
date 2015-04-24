@@ -36,7 +36,9 @@ public class Tournament extends DomainEntity{
 	private Date startMoment;
 	private Date finishMoment;
 	private String description;
-	private Sport sport;
+	private String sport;
+	
+
 	private String place;
 	private int numberOfTeams;
 	private Double prize;
@@ -107,16 +109,15 @@ public class Tournament extends DomainEntity{
 		this.description = description;
 	}
 	
-	@Valid
-	@NotNull
-	public Sport getSport() 
+	public String getSport() 
 	{
 		return sport;
 	}
-	public void setSport(Sport sport) 
+	public void setSport(String sport) 
 	{
 		this.sport = sport;
 	}
+	
 	
 	@NotBlank
 	public String getPlace() 
@@ -151,10 +152,22 @@ public class Tournament extends DomainEntity{
 	private User user;
 	private Customer customer;
 	private Collection<Team> teams;	
-
+	private Team winner;
+	
+	
+	
+	@ManyToOne(optional=true, cascade = CascadeType.ALL)
+	public Team getWinner() {
+		return winner;
+	}
+	public void setWinner(Team winner) {
+		this.winner = winner;
+	}
+	
+	
 	@Valid
 	@NotNull
-	@OneToMany(cascade=CascadeType.ALL)
+	@OneToMany(cascade = CascadeType.ALL)
 	public Collection<Match> getMatches() 
 	{
 		return matches;
@@ -204,3 +217,4 @@ public class Tournament extends DomainEntity{
 	
 
 }
+

@@ -775,6 +775,29 @@
 			</list>
 		</property>
 	</bean>
+	
+	<bean id="tournament3" class="domain.Tournament">
+		<property name="title" value="The amazing tournament3 " />
+		<property name="creationMoment" value="01/02/2014 09:00" />
+		<property name="startMoment" value="10/04/2014 20:00" />
+		<property name="finishMoment" value="12/14/2015 20:00" />
+		<property name="description" value="Torneo de padel" />
+		<property name="advertised" value="true" />
+		<property name="sport" value="PADDLE" />
+		<property name="numberOfTeams" value="8" />
+		<property name="prize" value="100" />
+		<property name="place" value="IndorClub" />
+		<property name="user" ref="user1" />
+		<property name="customer" ref="customer1" />
+		<property name="teams">
+			<list>
+			</list>
+		</property>
+		<property name="matches">
+			<list>
+			</list>
+		</property>
+	</bean>
 
 	<bean id="tournament2" class="domain.Tournament">
 		<property name="title" value="The amazing tournament2 " />

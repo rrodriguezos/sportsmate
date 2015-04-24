@@ -17,7 +17,9 @@
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
-<%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
+<%@taglib prefix="acme" tagdir="/WEB-INF/tags" %>
+
+<br>
 
 <form:form action="message/actor/display.do" modelAttribute="messageForm">
 
@@ -44,11 +46,11 @@
 		<form:textarea path="body" readonly="true"/>
 	<br/>
 	<br/>	
-		
-	<input type="button"  value="<spring:message code="message.back"/>" 
+	<br>
+	<input type="button" class="btn btn-md btn-default" value="<spring:message code="message.back"/>" 
 	   	   onclick="javascript: window.location.replace('message/actor/list.do?folderId= ${folderId}')" /> 
 	   	   
-	<input type="button" name="reply" value="<spring:message code="message.reply"/>" 
+	<input type="button" class="btn btn-md btn-success" name="reply" value="<spring:message code="message.reply"/>" 
 	   	   onclick="javascript: window.location.replace('message/actor/reply.do?messageId=${messageForm.id}');" />
 
 </form:form>

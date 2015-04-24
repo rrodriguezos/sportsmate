@@ -28,6 +28,10 @@ public class User extends Actor{
 	
 	//Attributes-------------------------------------------------------------------------
 	private Collection<Vote> votes;
+	private Double rating;
+	
+
+	
 
 	@Valid
 	@NotNull
@@ -56,6 +60,9 @@ public class User extends Actor{
 		return rating;
 	}
 	
+	public void setRating(Double rat) {
+		rating = rat;
+	}
 		
 	//Relationships----------------------------------------------------------------------
 	private Collection<Friendship> frindships;
@@ -66,7 +73,7 @@ public class User extends Actor{
 	private Collection<Tournament> tournaments;
 	private Collection<Tournament> tournamentsCreated;
 	private Collection<RequestTeam> requests;
-
+	
 
 	@Valid
 	@NotNull

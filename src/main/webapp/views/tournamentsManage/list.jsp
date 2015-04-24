@@ -28,12 +28,12 @@
 
 
 
-
+<div class="table table-responsive">
 
 <display:table name="tournaments" id="row"
 
 requestURI="/tournament/user/rounds/list.do"
-pagesize="5" class="displaytag" >
+pagesize="5" class="table table-bordered table-hover" >
 	
 	<display:column title="${title }">
 		
@@ -45,7 +45,11 @@ pagesize="5" class="displaytag" >
 	
 	<display:column title="${matches }">
 		
-		<jstl:out value="${row.matches }"></jstl:out>
+		<jstl:forEach items="${row.matches }" var="a">
+			
+			<jstl:out value="a.title"></jstl:out>
+		
+		</jstl:forEach>
 	
 	
 	
@@ -62,3 +66,4 @@ pagesize="5" class="displaytag" >
 
 
 </display:table>
+</div>
