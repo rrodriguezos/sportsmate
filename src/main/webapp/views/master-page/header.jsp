@@ -36,17 +36,13 @@
 		
 		<div class='navbar-header'>
 			<a href="?language=es" class="navbar-brand" >
-				<div>
-					<!-- <img src="images/es_flag.jpg" alt="Espanol" />  -->
-					<span>ES</span>
-				</div>
+				<!-- <img src="images/es_flag.jpg" alt="Espanol" />  -->
+				<span>ES</span>
 			</a>
 		
 			<a href="?language=en" class="navbar-brand" >
-				<div>
-					<!--   <img src="images/en_flag.jpg" alt="English" /> -->
-					<span>EN</span>
-				</div>
+				<!--   <img src="images/en_flag.jpg" alt="English" /> -->
+				<span>EN</span>
 			</a>
 		
 			<button type='button' class='navbar-toggle' data-toggle='collapse' data-target='.navbar-collapse'>
@@ -108,14 +104,33 @@
 						<span class='caret'></span>
 					</a>
 					<ul class='dropdown-menu'>
-						<li><a href="event/user/list.do"><spring:message code="master.page.user.events" /></a></li>	
 						<li><a href="event/user/calendar/seeSportCenters.do"><spring:message code="master.page.user.seeSportCenters" /></a></li>			
 						<li><a href="folder/actor/list.do"><spring:message code="master.page.folders" /></a></li>
 						<li><a href="tournament/user/rounds/list.do"><spring:message code="master.page.user.manageTournaments" /></a></li>
 					</ul>
 				</li>
-				<li><a href="event/user/listAllEvents.do"><spring:message code="master.page.user.listAllEvents" /></a></li>
-				<li><a href="event/user/create.do"><spring:message code="master.page.createEvents" /></a></li>
+			</security:authorize>
+			
+				
+			<!-- EVENTS -->
+			<security:authorize access="hasRole('USER')">
+				<li>
+					<a href='#' data-toggle='dropdown'>
+						<spring:message	code="master.page.user.eventsgroup" />
+						<span class='caret'></span>
+					</a>
+					<ul class='dropdown-menu'>
+					
+						<li><a href="event/user/listAllEvents.do"><spring:message code="master.page.user.listAllEvents" /></a></li>
+						<li><a href="event/user/list.do"><spring:message code="master.page.user.events" /></a></li>
+						<li><a href="event/user/create.do"><spring:message code="master.page.createEvents" /></a></li>
+						
+					</ul>
+				</li>
+			
+			
+			
+				
 				
 				
 				<li><a href="folder/actor/list.do"><spring:message code="master.page.folders" /></a></li>
@@ -130,9 +145,11 @@
 						<span class='caret'></span>
 					</a>
 					<ul class='dropdown-menu'>
+					
+						<li><a href="tournament/listAll.do"><spring:message code="master.page.actor.all.tournaments" /></a></li>
 						<li><a href="tournament/user/list.do"><spring:message code="master.page.actor.list.tournaments" /></a></li>
 						<li><a href="tournament/user/create.do"><spring:message code="master.page.actor.create.tournaments" /></a></li>
-						<li><a href="tournament/listAll.do"><spring:message code="master.page.actor.all.tournaments" /></a></li>
+						
 						
 					</ul>
 				</li>		
@@ -161,10 +178,28 @@
 						<span class='caret'></span>
 					</a>
 					<ul class='dropdown-menu'>
-					
+						
+						<li><a href="team/user/listAllTeams.do"><spring:message code="master.page.user.listAllTeams" /></a></li>
 						<li><a href="team/user/list.do"><spring:message code="master.page.user.teams" /></a></li>
 						<li><a href="team/user/create.do"><spring:message code="master.page.actor.create.team" /></a></li>
-						<li><a href="team/user/listAllTeams.do"><spring:message code="master.page.user.listAllTeams" /></a></li>
+						<li><a href="requestTeam/user/list.do"><spring:message code="master.page.user.requestTeam" /></a></li>
+						
+					</ul>
+				</li>		
+			</security:authorize>
+			
+			<!-- Friendship -->
+			
+			<security:authorize access="hasRole('USER')">
+				<li>
+					<a href='#' data-toggle='dropdown'>
+						<spring:message	code="master.page.friendship" />
+						<span class='caret'></span>
+					</a>
+					<ul class='dropdown-menu'>
+						
+						<li><a href="friendships/user/list.do"><spring:message code="master.page.user.friendships" /></a></li>
+						<li><a href="friendship/user/list.do"><spring:message code="master.page.user.friendshipRequest" /></a></li>
 						
 					</ul>
 				</li>		
@@ -209,29 +244,11 @@
 					</ul>
 				</li>
 			</security:authorize>
-			
-         	
-
-            <!-- CONDITIONS & COOKIES -->
-            <li>
-				<a href='#' data-toggle='dropdown'>
-					<spring:message code="master.page.terms" />
-					<span class='caret'></span>
-				</a>
-				
-				<ul class='dropdown-menu'>
-					<li><a href="conditions/laws.do"><spring:message code="master.page.laws" /></a></li>
-					<li><a href="conditions/cookies.do"><spring:message code="master.page.cookies" /></a></li>
-				</ul>
-			</li>
-			
-			
-			
+						
 			
 			
 			<!-- Here starts the search bar -->
-			
-			
+						
 			<li>
 				<form class="navbar-form navbar-right">	
 					<div class="input-group">
@@ -242,11 +259,7 @@
       				</div>
       			</form>			
 			</li>
-			
-			
-			
-			
-			
+				
 	    </ul>
 	</div>
 </div>

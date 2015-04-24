@@ -44,6 +44,8 @@
                 <bean class="converters.InvoiceToStringConverter"/>
                 <bean class="converters.StringToAdministratorConverter" />
                 <bean class="converters.AdministratorToStringConverter"/>
+                <bean class="converters.StringToRequestTeamConverter" />
+                <bean class="converters.RequestTeamtoStringConverter"/>
 	</util:list>
 	
 </beans>

@@ -31,12 +31,33 @@ body {
 #footer_area{
 	background-color: rgba(0,0,0,0.6);
 	color: #ffffff;
-	border-radius: 4px;
-	padding: 1em 2em;
+	border-radius: 5px;
+	padding: 2em 0em 1em 0em;
 	text-align: center;
 	margin-top: 0.3em;
+	margin-bottom: 10px;
 	border: thin solid black;
 }
+
+.spm-footer-gly, .spm-footer-gly a{
+	color: #888888;
+}
+
+.spm-footer-gly a:hover{
+	color: white;
+	font-decoration: none;
+}
+.spm-footer-gly .glyphicon{
+	font-size: 18px;	
+}
+
+.spm-copyright{
+	vertical-align: middle;
+	padding-top: 20px;
+	color: #FFFFFF;
+
+}
+
 
 #innercontent_area{
 	padding: 1.5% 2% 1% 2%;
@@ -97,7 +118,7 @@ span.pagelinks {
 /* Carousel */
 #carousel-example-generic{
 	
-	/* nothing for now */
+	margin-bottom: 30px;
 }
 
 #carousel-example-generic img{
@@ -125,7 +146,11 @@ span.pagelinks {
 }
 
 
-
+.spm-news h2{
+	margin:0px;
+	padding-top: 0px;
+	padding-bottom: 10px;
+}
 
 /* Provisional & inherit from DP project*/
 

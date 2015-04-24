@@ -58,8 +58,7 @@ public class User extends Actor{
 	
 		
 	//Relationships----------------------------------------------------------------------
-	private Collection<Friendship> shipsUser;
-	private Collection<Friendship> shipsUserFriend;
+	private Collection<Friendship> frindships;
 	private Collection<Event> events;
 	private Collection<Event> eventsCreated;
 	private Collection<Team> teams;
@@ -68,30 +67,18 @@ public class User extends Actor{
 	private Collection<Tournament> tournamentsCreated;
 	private Collection<RequestTeam> requests;
 
+
 	@Valid
 	@NotNull
 	@OneToMany(mappedBy="user")
-	public Collection<Friendship> getShipsUser() 
+	public Collection<Friendship> getFriendships() 
 	{
-		return shipsUser;
+		return frindships;
 	}
 
-	public void setShipsUser(Collection<Friendship> shipsUser) 
+	public void setFriendships(Collection<Friendship> Friendships) 
 	{
-		this.shipsUser = shipsUser;
-	}
-
-	@Valid
-	@NotNull
-	@OneToMany(mappedBy="userFriend")
-	public Collection<Friendship> getShipsUserFriend() 
-	{
-		return shipsUserFriend;
-	}
-
-	public void setShipsUserFriend(Collection<Friendship> shipsUserFriend) 
-	{
-		this.shipsUserFriend = shipsUserFriend;
+		this.frindships = Friendships;
 	}
 
 	@Valid

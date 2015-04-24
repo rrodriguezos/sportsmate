@@ -30,6 +30,9 @@ public class UserService {
 @Autowired
 private UserRepository userRepository;
 
+@Autowired
+private FriendshipService friendshipService;
+
 	public Collection<User>  findAll()
 	{
 		
@@ -57,8 +60,7 @@ public User create()
 {
 	User user= new User();
 	Collection<Vote> votes;
-	Collection<Friendship> shipsUser;
-	Collection<Friendship> shipsUserFriend;
+	Collection<Friendship> friendships;
 	Collection<Event> events;
 	Collection<Event> eventsCreated;
 	Collection<Team> teams;
@@ -69,8 +71,7 @@ public User create()
 	
 	folders = new ArrayList<Folder>();
 	votes = new ArrayList<Vote>();
-	shipsUser = new ArrayList<Friendship>();
-	shipsUserFriend = new ArrayList<Friendship>();
+	friendships = new ArrayList<Friendship>();
 	events = new ArrayList<Event>();
 	eventsCreated = new ArrayList<Event>();
 	teams = new ArrayList<Team>();
@@ -84,8 +85,7 @@ public User create()
 	user.setUserAccount(useraccount);
 	user.setEventsCreated(eventsCreated);
 	user.setEvents(events);
-	user.setShipsUser(shipsUser);
-	user.setShipsUserFriend(shipsUserFriend);
+	user.setFriendships(friendships);
 	user.setTeams(teams);
 	user.setTeamsCreated(teamsCreated);
 	user.setTournaments(tournaments);
@@ -134,8 +134,7 @@ public 	User reconstruct(UserForm userForm)
 	
 	result.setEvents(new ArrayList<Event>());
 	result.setTeamsCreated(new ArrayList<Team>());
-	result.setShipsUserFriend(new ArrayList<Friendship>());
-	result.setShipsUser(new ArrayList<Friendship>());
+	result.setFriendships(new ArrayList<Friendship>());
 	result.setTournaments(new ArrayList<Tournament>());
 	result.setVotes(new ArrayList<Vote>());
 	result.setEventsCreated(new ArrayList<Event>());
@@ -239,6 +238,30 @@ public void delete(User user)
 		}
 
 		return allByKeyword;
+	}
+	
+	public Collection<User> findFriendshipFromUser()
+	{
+		
+		Collection<User> result;
+		Collection<Friendship> friendships;
+		User principal;
+
+		principal = findByPrincipal();
+		friendships = friendshipService.findAllfriendships();
+		result = new ArrayList<User>();
+
+		for (Friendship f : friendships) {
+			if (f.getRequest() == true && f.getUser().equals(principal)) {
+				result.add(f.getUserFriend());
+			}
+			if (f.getRequest() == true && f.getUserFriend().equals(principal)) {
+				result.add(f.getUser());
+			}
+		}
+		
+		return result;
+		
 	}
 	
 }

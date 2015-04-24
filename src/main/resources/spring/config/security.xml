@@ -93,7 +93,13 @@
 		<security:intercept-url pattern="/team/user/create.do" access="hasRole('USER')" />
 		<security:intercept-url pattern="/team/user/edit.do" access="hasRole('USER')" />
 		<security:intercept-url pattern="/team/user/listAllTeams.do" access="hasRole('USER')" />
-		<security:intercept-url pattern="/team/user/joinTeam.do" access="hasRole('USER')" />
+		<security:intercept-url pattern="/requestTeam/user/sendRequest.do" access="hasRole('USER')" />
+		<security:intercept-url pattern="/requestTeam/user/acceptRequest.do" access="hasRole('USER')" />
+		<security:intercept-url pattern="/requestTeam/user/list.do" access="hasRole('USER')" />
+		<security:intercept-url pattern="/friendship/user/sendRequest.do" access="hasRole('USER')" />
+		<security:intercept-url pattern="/friendship/user/acceptRequest.do" access="hasRole('USER')" />
+		<security:intercept-url pattern="/friendship/user/list.do" access="hasRole('USER')" />
+		<security:intercept-url pattern="/friendships/user/list.do" access="hasRole('USER')" />
 		<security:intercept-url pattern="/team/user/disjoinTeam.do" access="hasRole('USER')" />
 		 
 		<security:intercept-url pattern="/folder/actor/**" access="hasAnyRole('CUSTOMER','ADMIN', 'USER')" />
@@ -107,6 +113,9 @@
 		<security:intercept-url pattern="/tournament/user/rounds/manageTournament.do" access="hasAnyRole('CUSTOMER','ADMIN', 'USER')" />	
 		<security:intercept-url pattern="/tournament/user/rounds/createFirstRounds.do" access="hasAnyRole('CUSTOMER','ADMIN', 'USER')" />
 		<security:intercept-url pattern="/tournament/user/rounds/declareWinnerOfMatch.do" access="hasAnyRole('CUSTOMER','ADMIN', 'USER')" />
+		<security:intercept-url pattern="/tournament/user/rounds/addTeamTest.do" access="hasAnyRole('CUSTOMER','ADMIN', 'USER')" />
+		<security:intercept-url pattern="/tournament/user/rounds/declareWinnerOfMatchId.do" access="hasAnyRole('CUSTOMER','ADMIN', 'USER')" />
+		
 
 		
 		<security:intercept-url pattern="/conditions/laws.do" access="permitAll" />

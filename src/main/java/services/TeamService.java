@@ -10,6 +10,7 @@ import org.springframework.util.Assert;
 
 import repositories.TeamRepository;
 import domain.Match;
+import domain.RequestTeam;
 import domain.Team;
 import domain.Tournament;
 import domain.User;
@@ -28,6 +29,9 @@ public class TeamService {
 	@Autowired
 	private UserService userService;
 	
+	@Autowired
+	private RequestTeamService requestTeamService;
+	
 	// Constructors-----------------------------------------------------------
 	public TeamService(){
 		super();
@@ -42,6 +46,7 @@ public class TeamService {
 		Collection<Tournament> tournaments;
 		Collection<Match> matchs;
 		Collection<Match> winners;
+		Collection<RequestTeam> requestTeams;
 		User captain;
 		
 		
@@ -51,6 +56,7 @@ public class TeamService {
 		tournaments = new ArrayList<Tournament>();
 		matchs = new ArrayList<Match>();
 		winners = new ArrayList<Match>();
+		requestTeams = new ArrayList<RequestTeam>();
 		
 		users.add(captain);
 		
@@ -59,6 +65,7 @@ public class TeamService {
 		team.setTournaments(tournaments);
 		team.setMatchs(matchs);
 		team.setWinners(winners);
+		team.setRequests(requestTeams);
 		
 		return team;
 	}
@@ -101,6 +108,11 @@ public class TeamService {
 	public Collection<Team> findAll() 
 	{
 		return teamRepository.findAll();
+	}
+	
+	public Collection<Team> findAllOtherUser(int userId) 
+	{
+		return teamRepository.findAllOtherUser(userId);
 	}
 
 	public Team findOne(Integer valueOf) 
@@ -155,16 +167,18 @@ public class TeamService {
 		return result;
 	}
 	
-	public void joinTeam(Team team)
+	public void joinTeam(Team team, RequestTeam requestTeam)
 	{
 		
 		User user;
 		
-		user = userService.findByPrincipal();
-		
+		user = requestTeam.getUser();
+
+		requestTeam.setRequest(true);
 		team.getUsers().add(user);
 		user.getTeams().add(team);
 		
+		requestTeamService.save(requestTeam);
 		save(team);
 		userService.save(user);
 		

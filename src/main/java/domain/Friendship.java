@@ -27,6 +27,7 @@ public class Friendship extends DomainEntity{
 	
 	//Attributes-------------------------------------------------------------------------
 	private Date date;
+	private Boolean request;
 
 	@NotNull
 	@Past
@@ -41,6 +42,17 @@ public class Friendship extends DomainEntity{
 	{
 		this.date = date;
 	}	
+	
+	@NotNull
+	public Boolean getRequest() 
+	{
+		return request;
+	}
+	
+	public void setRequest(Boolean request) 
+	{
+		this.request = request;
+	}
 		
 	//Relationships-------------------------------------------------------------------------
 	private User user;

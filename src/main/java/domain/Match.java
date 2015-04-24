@@ -5,6 +5,7 @@ import java.util.Date;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
@@ -96,6 +97,7 @@ public class Match extends DomainEntity{
 	private Team winner;
 	private Collection<Team> teams;
 	private Tournament tournament;	
+	private Team defeat;
 
 	
 	
@@ -111,7 +113,7 @@ public class Match extends DomainEntity{
 	
 	@Valid
 	@NotNull
-	@ManyToMany
+	@ManyToMany(cascade = CascadeType.ALL)
 	@Size(min=2,max=2)
 	public Collection<Team> getTeams() 
 	{
@@ -133,7 +135,17 @@ public class Match extends DomainEntity{
 	{
 		this.tournament = tournament;
 	}
+
 	
+	@ManyToOne(optional=true)
+	public Team getDefeat() 
+	{
+		return defeat;
+	}
+	public void setDefeat(Team defeat) 
+	{
+		this.defeat = defeat;
+	}
 	
 	
 	

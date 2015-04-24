@@ -19,4 +19,5 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 	@Query("select e.users from Event e where e.id=?1")
 	Collection<User> findAllUsersByEventId(int eventId);
 	
+	
 }

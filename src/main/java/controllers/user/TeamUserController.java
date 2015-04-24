@@ -47,6 +47,7 @@ public class TeamUserController extends AbstractController {
 		ModelAndView result;
 		Collection<Team> teams;
 		User principal;
+		Boolean showDisjoin = true;
 
 		teams = teamService.findAllTeamsByUserId();
 		principal = userService.findByPrincipal();
@@ -55,6 +56,7 @@ public class TeamUserController extends AbstractController {
 
 		result.addObject("teams", teams);
 		result.addObject("principal", principal);
+		result.addObject("showDisjoin", showDisjoin);
 		result.addObject("requestURI", "team/user/list.do");
 
 		return result;
@@ -68,14 +70,17 @@ public class TeamUserController extends AbstractController {
 		ModelAndView result;
 		Collection<Team> teams;
 		User principal;
+		Boolean showSend = true;
 		
-		teams = teamService.findAll();
+		
 		principal = userService.findByPrincipal();
+		teams = teamService.findAllOtherUser(principal.getId());
 		
 		result = new ModelAndView("team/list");
 		
 		result.addObject("teams", teams);
 		result.addObject("principal", principal);
+		result.addObject("showSend", showSend);
 		result.addObject("requestURI", "team/user/listAllTeams.do");
 		
 		return result;
@@ -203,27 +208,6 @@ public class TeamUserController extends AbstractController {
 		return result;
 	}
 	
-	//Join a team------------------------------------------------------------------
-	@RequestMapping(value = "/joinTeam", method = RequestMethod.GET)
-	public ModelAndView joinTeam(@RequestParam int teamId) 
-	{
-
-		ModelAndView result;
-		Team team;
-		Collection<Team> teams;
-
-		team = teamService.findOne(teamId);
-		teamService.joinTeam(team);
-		teams = teamService.findAllTeamsByUserId();
-
-		result = new ModelAndView("team/list");
-
-		result.addObject("teams", teams);
-		result.addObject("requestURI", "team/user/list.do");
-
-		return result;
-
-	}
 	
 	// DisJoin a Team------------------------------------------------------------------
 	@RequestMapping(value = "/disjoinTeam", method = RequestMethod.GET)

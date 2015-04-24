@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.validation.Valid;		
+
 import services.TeamService;
 import services.TournamentService;
 import services.UserService;
@@ -105,14 +107,28 @@ public class TournamentUserRoundsController
 				Team team1=teams.get(i);
 				
 				Team team2=teams.get(i+1);
+				Collection<Match> matchsTeam1=team1.getMatchs();
+				Collection<Match> matchsTeam2=team2.getMatchs();
+				matchsTeam1.add(match);
+				matchsTeam2.add(match);
+				
 				teams1.add(team1);
+				
 				teams1.add(team2);
 				match.setTeams(teams1);
 				match.setDescription(".");
 				matchs.add(match);
 				
+				
+				
+				
+				//matchService.save(match);
 				tournament.setMatches(matchs);
-				matchService.save(match);
+				tournamentService.save(tournament);
+				teamService.save(team1);
+				teamService.save(team2);
+			
+				
 				
 			}
 			
@@ -139,6 +155,11 @@ public class TournamentUserRoundsController
 				Team team1=teams.get(i);
 				
 				Team team2=teams.get(i+1);
+				
+				Collection<Match> matchsTeam1=team1.getMatchs();
+				Collection<Match> matchsTeam2=team2.getMatchs();
+				matchsTeam1.add(match);
+				matchsTeam2.add(match);
 				teams1.add(team1);
 				teams1.add(team2);
 				match.setTeams(teams1);
@@ -147,6 +168,10 @@ public class TournamentUserRoundsController
 				
 				tournament.setMatches(matchs);
 				matchService.save(match);
+				tournamentService.save(tournament);
+				
+
+				
 					
 			}
 			
@@ -199,8 +224,32 @@ public class TournamentUserRoundsController
 	{
 		Match match =matchService.findOne(id);
 			
+		ModelAndView result = null;
 		
-		return null;
+		
+	    result = new ModelAndView("tournament/user/rounds/declareWinnerOfMatch");
+	    result.addObject("teams", match.getTeams());
+	    result.addObject("match", match);
+		
+		return result;
+		
+		
+	}
+	
+	@RequestMapping("/declareWinnerOfMatchId.do")
+	public ModelAndView declareWinnerofMatch(@RequestParam int idTeam, @RequestParam int idMatch)
+	{
+		Match match = matchService.findOne(idMatch);
+		Team team = teamService.findOne(idTeam);
+		
+		
+		match.setWinner(team);
+		
+		matchService.save(match);
+		
+		
+		
+		return list();
 		
 		
 	}

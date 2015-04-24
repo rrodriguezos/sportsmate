@@ -230,12 +230,7 @@
 			</list>
 		</property>
 
-		<property name="shipsUser">
-			<list>
-			</list>
-		</property>
-
-		<property name="shipsUserFriend">
+		<property name="friendships">
 			<list>
 			</list>
 		</property>
@@ -294,12 +289,7 @@
 			</list>
 		</property>
 
-		<property name="shipsUser">
-			<list>
-			</list>
-		</property>
-
-		<property name="shipsUserFriend">
+		<property name="friendships">
 			<list>
 			</list>
 		</property>
@@ -557,11 +547,12 @@
 	</bean>
 
 	<!-- FRIENDSHIP -->
-	<bean id="friendship1" class="domain.Friendship">
+	<!-- <bean id="friendship1" class="domain.Friendship">
 		<property name="date" value="10/10/2013 09:00" />
 		<property name="user" ref="user1" />
+		<property name="user" ref="user1" />
 		<property name="userFriend" ref="user2" />
-	</bean>
+	</bean> -->
 
 	<!-- EVENT -->
 	<bean id="event1" class="domain.Event">

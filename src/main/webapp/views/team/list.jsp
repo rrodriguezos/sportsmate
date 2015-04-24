@@ -25,6 +25,7 @@
 <div class='table-responsive'>
 <display:table name="teams" id="row" requestURI="${requestURI}"
 	pagesize="5" class="table table-bordered table-hover">
+	
 
 	<spring:message code="team.name" var="nameHeader" />
 	<display:column property="name" title="${nameHeader}" />
@@ -41,20 +42,18 @@
 		</security:authorize>
 	</display:column>
 
-	<jstl:if test="${requestURI == 'team/user/listAllTeams.do' }">
-		<spring:message code="team.joinTeam" var="joinTeamHeader" />
-		<display:column title="${joinTeamHeader}">
-			<jstl:if test="${!principal.teams.contains(row)}">
+	<jstl:if test="${showSend == true }">
+		<spring:message code="team.sendRequest" var="sendRequestHeader" />
+		<display:column title="${sendRequestHeader}">
 				<security:authorize access="hasRole('USER')">
-					<a href="team/user/joinTeam.do?teamId=${row.id}"> <spring:message
-							code="team.joinTeam" />
+					<a href="requestTeam/user/sendRequest.do?teamId=${row.id}"> <spring:message
+							code="team.sendRequest" />
 					</a>
 				</security:authorize>
-			</jstl:if>
 		</display:column>
 	</jstl:if>
 
-	<jstl:if test="${requestURI == 'team/user/list.do' }">
+	<jstl:if test="${showDisjoin == true }">
 		<spring:message code="team.disjoinTeam" var="disjoinTeamHeader" />
 		<display:column title="${disjoinTeamHeader}">
 

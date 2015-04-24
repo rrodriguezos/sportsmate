@@ -16,4 +16,7 @@ public interface TeamRepository extends JpaRepository<Team, Integer> {
 	@Query("select t.teams from Tournament t where t.id=?1")
 	Collection<Team> findAllTeamsByTournamentId(int tournamentId);
 	
+	@Query("select t from Team t where t.captain.id!=?1")
+	Collection<Team> findAllOtherUser(int userId);
+	
 }

@@ -27,4 +27,10 @@
 		<put-attribute name="body" value="/views/tournamentsManage/manage.jsp" />
 	</definition>
 	
+	<definition name="tournament/user/rounds/declareWinnerOfMatch" extends="master.page">	
+		<put-attribute name="title" value="Set Winner of this match" />
+		<put-attribute name="body" value="/views/tournamentsManage/declareWinnerOfMatch.jsp" />
+	</definition>
+	
+	
 </tiles-definitions>
