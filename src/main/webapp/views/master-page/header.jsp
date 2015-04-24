@@ -98,17 +98,7 @@
          
          	<!-- USER -->
          	<security:authorize access="hasRole('USER')">
-				<li>
-					<a href='#' data-toggle='dropdown'>
-						<spring:message	code="master.page.user" />
-						<span class='caret'></span>
-					</a>
-					<ul class='dropdown-menu'>
-						<li><a href="event/user/calendar/seeSportCenters.do"><spring:message code="master.page.user.seeSportCenters" /></a></li>			
-						<li><a href="folder/actor/list.do"><spring:message code="master.page.folders" /></a></li>
-						<li><a href="tournament/user/rounds/list.do"><spring:message code="master.page.user.manageTournaments" /></a></li>
-					</ul>
-				</li>
+					<li><a href="event/user/calendar/seeSportCenters.do"><spring:message code="master.page.user.seeSportCenters" /></a></li>			
 			</security:authorize>
 			
 				
@@ -149,7 +139,7 @@
 						<li><a href="tournament/listAll.do"><spring:message code="master.page.actor.all.tournaments" /></a></li>
 						<li><a href="tournament/user/list.do"><spring:message code="master.page.actor.list.tournaments" /></a></li>
 						<li><a href="tournament/user/create.do"><spring:message code="master.page.actor.create.tournaments" /></a></li>
-						
+						<li><a href="tournament/user/rounds/list.do"><spring:message code="master.page.user.manageTournaments" /></a></li>
 						
 					</ul>
 				</li>		
