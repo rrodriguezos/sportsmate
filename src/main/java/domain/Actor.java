@@ -5,6 +5,7 @@ import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.Lob;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Transient;
@@ -32,6 +33,9 @@ public abstract class Actor extends DomainEntity{
 	private String surname;
 	private String email;
 	private String phone;
+	
+	private byte[] imagen;
+	private boolean errorImagen;
 
 	@NotBlank
 	public String getName() 
@@ -77,6 +81,21 @@ public abstract class Actor extends DomainEntity{
 	@Transient
 	public String getCadena(){
 		return getName()+" "+getSurname()+" ("+getEmail()+")";
+	}
+	
+	 @Lob
+	 public byte[] getImagen() {
+	  return imagen;
+	 }
+	 
+	 public void setImagen(byte[] imagen) {
+	  this.imagen = imagen;
+	 }
+	 
+	@Transient
+	public boolean isErrorImagen() {
+		errorImagen = (getImagen() == null || getImagen().length == 0);
+		return errorImagen;
 	}
 	
 	

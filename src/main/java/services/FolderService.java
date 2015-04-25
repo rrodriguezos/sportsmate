@@ -1,4 +1,5 @@
 package services;
+import java.util.ArrayList;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.util.Assert;
 import repositories.FolderRepository;
 import domain.Actor;
 import domain.Folder;
+import domain.Message;
 
 @Service
 @Transactional
@@ -52,6 +54,51 @@ public class FolderService {
 		Assert.notNull(result);
 		
 		return result;
+		
+	}
+	
+	public Folder create(String nameFolder)
+	{
+		
+		Folder folder;
+		Collection<Message> messages;
+		
+		folder = new Folder();
+		messages = new ArrayList<Message>();
+		
+		folder.setMessages(messages);
+		
+		return folder;
+		
+	}
+	
+	public Folder create(Actor owner, String nameFolder)
+	{
+		
+		Folder folder;
+		Collection<Message> messages;
+		
+		folder = new Folder();
+		messages = new ArrayList<Message>();
+		
+		folder.setName(nameFolder);
+		folder.setActor(owner);		
+		folder.setMessages(messages);
+		
+		return folder;
+		
+	}
+	
+	public Folder save(Folder folder)
+	{
+		
+		Folder folderAux;
+		
+		Assert.notNull(folder);
+		
+		folderAux = folderRepository.save(folder);
+		
+		return folderAux;
 		
 	}
 	

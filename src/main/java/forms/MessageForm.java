@@ -17,7 +17,6 @@ public class MessageForm {
 	private String body;
 	private Date sendMoment;
 	private Actor recipient;
-	private String senderEmail;
 	
 	public int getId() 
 	{
@@ -83,15 +82,6 @@ public class MessageForm {
 		
 	}	
 	
-	public String getSenderEmail()
-	{
-		return senderEmail;
-		
-	}
-	public void setSenderEmail(String senderEmail)
-	{
-		this.senderEmail = senderEmail;
-		
-	}
+	
 	
 }
