@@ -16,8 +16,8 @@
 
 
 
-<div class="col-sm-4 col-sm-offset-1">
-	<div class="spm-footer-gly text-left">
+<div class="col-md-3 col-sm-6 col-xs-12">
+	<div class="spm-footer-gly text-left col-sm-10 col-sm-offset-2">
 		<span class="glyphicon glyphicon-envelope"></span>
 		<span class="lead">&nbsp <spring:message code="master.page.contact" /></span>
 		
@@ -27,8 +27,12 @@
 	</div>
 </div>
 
-<div class="col-sm-4">
-	<div class="spm-footer-gly text-left">
+<div class="col-xs-12 hidden-sm hidden-md hidden-lg">
+	<br>
+</div>
+
+<div class="col-md-3 col-sm-6 col-xs-12">
+	<div class="spm-footer-gly text-left col-sm-10 col-sm-offset-2">
 		<span class="glyphicon glyphicon-floppy-disk"></span>
 		<span class="lead">&nbsp<spring:message code="master.page.terms" /></span>
 		
@@ -47,13 +51,42 @@
 	</div>
 </div>
 
-<div class="col-sm-3">
-	<div class="spm-footer-gly text-left">
+<!-- Not hide in sm -->
+<div class="col-xs-12 hidden-md hidden-lg">
+	<br>
+</div>
+
+<div class="col-md-3 col-sm-6 col-xs-12">
+	<div class="spm-footer-gly text-left col-sm-10 col-sm-offset-2">
 		<span class="glyphicon glyphicon-info-sign"></span>
 		<span class="lead">&nbsp <spring:message code="master.page.aboutus" /></span>
 		
 		<ul class="list-unstyled text-left">
 			<li><a href="http://github.com/ISPPG5/sportsmate" target="blank">Github</a></li>
+		</ul>
+	</div>
+</div>
+
+<div class="col-xs-12 hidden-sm hidden-md hidden-lg">
+	<br>
+</div>
+
+<div class="col-md-3 col-sm-6 col-xs-12">
+	<div class="spm-footer-gly text-left col-sm-10 col-sm-offset-2">
+		<span class="glyphicon glyphicon-text-background"></span>
+		<span class="lead">&nbsp <spring:message code="master.page.languages" /></span>
+		
+		<ul class="list-unstyled text-left">
+			<li>
+				<a href="?language=en" target="blank">
+					<spring:message code="master.page.languages.english" />
+				</a>
+			</li>
+			<li>
+				<a href="?language=es" target="blank">
+					<spring:message code="master.page.languages.spanish" />
+				</a>
+			</li>
 		</ul>
 	</div>
 </div>

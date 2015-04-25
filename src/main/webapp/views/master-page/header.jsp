@@ -34,14 +34,13 @@
 <div class='navbar navbar-inverse navbar-fixed-top'>
 	<div class='container'>
 		
+		<!--  
 		<div class='navbar-header'>
 			<a href="?language=es" class="navbar-brand" >
-				<!-- <img src="images/es_flag.jpg" alt="Espanol" />  -->
 				<span>ES</span>
 			</a>
 		
 			<a href="?language=en" class="navbar-brand" >
-				<!--   <img src="images/en_flag.jpg" alt="English" /> -->
 				<span>EN</span>
 			</a>
 		
@@ -52,7 +51,7 @@
 				<span class='icon-bar'></span>
 			</button> 
 		</div>
-		
+		-->
 		
 		<!-- *********************************************** -->
 		<!-- HERE STARTS THE DIFFERENT MENU'S AND SUB-MENU'S -->
@@ -218,7 +217,7 @@
          	<security:authorize access="isAuthenticated()">
 				<li>
 					<a href='#' data-toggle='dropdown'>
-						<spring:message code="master.page.profile" /> 
+						<!-- <spring:message code="master.page.profile" /> --> 
 			        	<security:authentication property="principal.username" />
 			        	<span class='caret'></span>
 					</a>
