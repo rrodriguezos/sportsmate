@@ -33,17 +33,9 @@
 
 <div class='navbar navbar-inverse navbar-fixed-top'>
 	<div class='container'>
-		
-		<!--  
-		<div class='navbar-header'>
-			<a href="?language=es" class="navbar-brand" >
-				<span>ES</span>
-			</a>
-		
-			<a href="?language=en" class="navbar-brand" >
-				<span>EN</span>
-			</a>
-		
+
+		<!-- BUTTON WHEN MOBILE OR EXTRA SMALL SIZE -->
+		<div class='navbar-header'>			
 			<button type='button' class='navbar-toggle' data-toggle='collapse' data-target='.navbar-collapse'>
 				<span class='sr-only'>Toggle Navigation</span>
 				<span class='icon-bar'></span>
@@ -51,11 +43,13 @@
 				<span class='icon-bar'></span>
 			</button> 
 		</div>
-		-->
+
 		
 		<!-- *********************************************** -->
 		<!-- HERE STARTS THE DIFFERENT MENU'S AND SUB-MENU'S -->
 		<!-- *********************************************** -->
+				
+		
 		
 		<!-- Main headbar instructions -->
     	<ul class='nav navbar-nav navbar-right collapse navbar-collapse'>
@@ -77,6 +71,8 @@
             
             
             
+            
+            
             <!-- CUSTOMER -->
             <security:authorize access="hasRole('CUSTOMER')">
 				<li>
@@ -95,7 +91,7 @@
 			</security:authorize>
             
          
-         	<!-- USER -->
+         	<!-- SPORTS CENTER -->
          	<security:authorize access="hasRole('USER')">
 					<li><a href="event/user/calendar/seeSportCenters.do"><spring:message code="master.page.user.seeSportCenters" /></a></li>			
 			</security:authorize>
@@ -194,6 +190,7 @@
 					</ul>
 				</li>		
 			</security:authorize>
+			
          	<!-- ANONYMOUS -->
          	<security:authorize access="isAnonymous()">
 				<li>
@@ -213,7 +210,8 @@
 				</li>
 			</security:authorize>
 			
-         	<!-- AUTENTICATED -->
+         	
+			<!-- AUTENTICATED -->
          	<security:authorize access="isAuthenticated()">
 				<li>
 					<a href='#' data-toggle='dropdown'>
@@ -222,19 +220,22 @@
 			        	<span class='caret'></span>
 					</a>
 					<ul class='dropdown-menu'>
-					<security:authorize access="hasRole('CUSTOMER')">
-						<li><a href="profile/customer/display.do"><spring:message code="master.page.customer.listProfile" /></a></li>
-						<li><a href="profile/customer/edit.do"><spring:message code="master.page.customer.editProfile" /></a></li>
+						<security:authorize access="hasRole('CUSTOMER')">
+							<li><a href="profile/customer/display.do"><spring:message code="master.page.customer.listProfile" /></a></li>
+							<li><a href="profile/customer/edit.do"><spring:message code="master.page.customer.editProfile" /></a></li>
 						</security:authorize>
+						
 						<security:authorize access="hasRole('USER')">
-						<li><a href="profile/user/display.do"><spring:message code="master.page.user.listProfile" /></a></li>
-						<li><a href="profile/user/edit.do"><spring:message code="master.page.user.editProfile" /></a></li>						
+							<li><a href="profile/user/display.do"><spring:message code="master.page.user.listProfile" /></a></li>
+							<li><a href="profile/user/edit.do"><spring:message code="master.page.user.editProfile" /></a></li>						
 						</security:authorize>
+						
+						<li class='divider'></li>
+						
 						<li><a href="j_spring_security_logout"><spring:message code="master.page.logout" /> </a></li>
 					</ul>
 				</li>
-			</security:authorize>
-						
+			</security:authorize>			
 			
 			
 			<!-- Here starts the search bar -->
@@ -248,8 +249,7 @@
       					</span>
       				</div>
       			</form>			
-			</li>
-				
+			</li>		
 	    </ul>
 	</div>
 </div>
