@@ -42,7 +42,7 @@
 		<jstl:if test="${messageForm.recipient == null }">
 		<form:label class="input-group-addon" path="recipient"><spring:message code="message.recipient"/></form:label>
 			<form:select class="form-control" path="recipient" >
-				<form:options items="${actors}"  itemLabel="cadena"/>
+				<form:options items="${actors}"  itemLabel="name" itemValue="id"/>
 			</form:select>
 			<form:errors class="alert alert-danger spm-form-error" path="recipient" />	
 		<br />

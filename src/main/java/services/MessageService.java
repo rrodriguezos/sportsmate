@@ -160,7 +160,6 @@ public class MessageService {
 		result.setSubject(message.getSubject());
 		result.setBody(message.getBody());
 		result.setRecipient(message.getRecipient());
-		result.setSenderEmail(message.getSender().getEmail());	
 		
 		return result;
 	}

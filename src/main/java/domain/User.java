@@ -20,35 +20,24 @@ import javax.validation.constraints.Size;
 @Access(AccessType.PROPERTY)
 @Table(indexes={@Index(columnList="name"),@Index(columnList="surname"),@Index(columnList="email")})
 public class User extends Actor{
+	
 	//Constructors----------------------------------------------------------------------
 	public User()
 	{
+		
 		super();
+		
 	}	
 	
 	//Attributes-------------------------------------------------------------------------
-	private Collection<Vote> votes;
+	
 	private Double rating;
 	
-
-	
-
-	@Valid
-	@NotNull
-	@ElementCollection
-	public Collection<Vote> getVotes() 
-	{
-		return votes;
-	}
-
-	public void setVotes(Collection<Vote> votes) 
-	{
-		this.votes = votes;
-	}
 	
 	@Transient
 	public Double getRating()
 	{
+		
 		Double rating = 0.0;
 		
 		for(Vote itero : getVotes()){
@@ -58,13 +47,18 @@ public class User extends Actor{
 		rating = rating/getVotes().size();
 		
 		return rating;
+		
 	}
 	
-	public void setRating(Double rat) {
-		rating = rat;
+	public void setRating(Double rating) 
+	{
+		
+		rating = this.rating;
+		
 	}
 		
 	//Relationships----------------------------------------------------------------------
+	private Collection<Vote> votes;
 	private Collection<Friendship> frindships;
 	private Collection<Event> events;
 	private Collection<Event> eventsCreated;
@@ -74,18 +68,38 @@ public class User extends Actor{
 	private Collection<Tournament> tournamentsCreated;
 	private Collection<RequestTeam> requests;
 	
+	@Valid
+	@NotNull
+	@ElementCollection
+	public Collection<Vote> getVotes() 
+	{
+		
+		return votes;
+		
+	}
+
+	public void setVotes(Collection<Vote> votes) 
+	{
+		
+		this.votes = votes;
+		
+	}
 
 	@Valid
 	@NotNull
 	@OneToMany(mappedBy="user")
 	public Collection<Friendship> getFriendships() 
 	{
+		
 		return frindships;
+		
 	}
 
 	public void setFriendships(Collection<Friendship> Friendships) 
 	{
+		
 		this.frindships = Friendships;
+		
 	}
 
 	@Valid
@@ -93,11 +107,16 @@ public class User extends Actor{
 	@ManyToMany
 	public Collection<Event> getEvents() 
 	{
+		
 		return events;
+		
 	}	
+	
 	public void setEvents(Collection<Event> events) 
 	{
+		
 		this.events = events;
+		
 	}	
 	
 	@Valid
@@ -105,12 +124,16 @@ public class User extends Actor{
 	@OneToMany(mappedBy="owner")
 	public Collection<Event> getEventsCreated() 
 	{
+		
 		return eventsCreated;
+		
 	}
 
 	public void setEventsCreated(Collection<Event> eventsCreated) 
 	{
+		
 		this.eventsCreated = eventsCreated;
+		
 	}
 
 	@Valid
@@ -118,58 +141,83 @@ public class User extends Actor{
 	@ManyToMany
 	public Collection<Team> getTeams()
 	{
+		
 		return teams;
+		
 	}
+	
 	public void setTeams(Collection<Team> teams) 
 	{
+		
 		this.teams = teams;
+		
 	}
 
 	@Valid
 	@NotNull
 	@Size(min=0,max=10)
 	@OneToMany(mappedBy="captain")
-	public Collection<Team> getTeamsCreated() {
+	public Collection<Team> getTeamsCreated() 
+	{
+		
 		return teamsCreated;
+		
 	}
 
-	public void setTeamsCreated(Collection<Team> teamsCreated) {
+	public void setTeamsCreated(Collection<Team> teamsCreated)
+	{
+		
 		this.teamsCreated = teamsCreated;
+		
 	}
 
 	@Valid 
 	@OneToMany(mappedBy="user")
-	public Collection<Tournament> getTournaments() {
+	public Collection<Tournament> getTournaments() 
+	{
+		
 		return tournaments;
+		
 	}
 
-	public void setTournaments(Collection<Tournament> tournaments) {
+	public void setTournaments(Collection<Tournament> tournaments) 
+	{
+		
 		this.tournaments = tournaments;
+		
 	}
 	
 	@Valid
 	@OneToMany(mappedBy="user")
 	public Collection<Tournament> getTournamentsCreated() 
 	{
+		
 		return tournamentsCreated;
+		
 	}
 
 	public void setTournamentsCreated(Collection<Tournament> tournamentsCreated) 
 	{
+		
 		this.tournamentsCreated = tournamentsCreated;
+		
 	}
 
 	@Valid
 	@NotNull
 	@OneToMany(mappedBy="user")
-	public Collection<RequestTeam> getRequests() {
+	public Collection<RequestTeam> getRequests() 
+	{
+		
 		return requests;
+		
 	}
 
-	public void setRequests(Collection<RequestTeam> requests) {
+	public void setRequests(Collection<RequestTeam> requests) 
+	{
+		
 		this.requests = requests;
+		
 	}
-	
-	
 	
 }

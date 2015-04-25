@@ -15,9 +15,11 @@ import repositories.UserRepository;
 import security.Authority;
 import security.LoginService;
 import security.UserAccount;
+import utilities.HashPassword;
 import domain.Event;
 import domain.Folder;
 import domain.Friendship;
+import domain.RequestTeam;
 import domain.Team;
 import domain.Tournament;
 import domain.User;
@@ -28,26 +30,57 @@ import forms.UserVoteForm;
 @Service
 @Transactional
 public class UserService {
-	
+
+	// Managed repository -----------------------------------------------------
 	@Autowired
 	private UserRepository userRepository;
 
+	// Supporting services ---------------------------------------------------
 	@Autowired
 	private FriendshipService friendshipService;
 
-	public Collection<User>  findAll()
+	@Autowired
+	private FolderService folderService;
+
+	// Constructor ------------------------------------------------------------
+	public UserService() 
 	{
+
+		super();
+
+	}
+
+	// Simple CRUD methods ----------------------------------------------------
+
+	public User findOne(int userId) 
+	{
+
+		User result;
+
+		result = userRepository.findOne(userId);
+
+		return result;
 		
+	}
+
+	public Collection<User> findAll() 
+	{
+
 		Collection<User> all;
 
 		all = userRepository.findAll();
 
 		return all;
+		
 	}
 
-	public User create()
+	public User create() 
 	{
-		User user= new User();
+		
+		User user;
+		UserAccount useraccount;
+		Authority authority;
+
 		Collection<Vote> votes;
 		Collection<Friendship> friendships;
 		Collection<Event> events;
@@ -56,8 +89,12 @@ public class UserService {
 		Collection<Team> teamsCreated;
 		Collection<Tournament> tournaments;
 		Collection<Folder> folders;
-		
-		
+		Collection<RequestTeam> requests;
+
+		user = new User();
+		useraccount = new UserAccount();
+		authority = new Authority();
+
 		folders = new ArrayList<Folder>();
 		votes = new ArrayList<Vote>();
 		friendships = new ArrayList<Friendship>();
@@ -66,12 +103,12 @@ public class UserService {
 		teams = new ArrayList<Team>();
 		teamsCreated = new ArrayList<Team>();
 		tournaments = new ArrayList<Tournament>();
-		UserAccount useraccount = new UserAccount();
-		Authority authority = new Authority();
-		
+		requests = new ArrayList<RequestTeam>();
+
 		authority.setAuthority("USER");
 		useraccount.addAuthority(authority);
 		user.setUserAccount(useraccount);
+
 		user.setEventsCreated(eventsCreated);
 		user.setEvents(events);
 		user.setFriendships(friendships);
@@ -80,72 +117,91 @@ public class UserService {
 		user.setTournaments(tournaments);
 		user.setVotes(votes);
 		user.setFolders(folders);
-		
-	return user;
+		user.setRequests(requests);
+
+		return user;
 	}
 
-	public 	User reconstruct(UserForm userForm)
-	{
-		User result=new User();
-		result.setName(userForm.getName());
-		result.setSurname(userForm.getSurname());
-		result.setEmail(userForm.getEmail());
-		
-		 UserAccount userAccount = new UserAccount();
-	     userAccount.setUsername(userForm.getUsername());
-	
-	    String password = userForm.getPassword();
-	
-	    Md5PasswordEncoder encoder = new Md5PasswordEncoder();
-	    String md5 = encoder.encodePassword(password, null);
-	    
-	    userAccount.setPassword(md5);
-	    Authority authority = new Authority();
-	    authority.setAuthority("USER");
-	    Collection<Authority> authorities = new ArrayList<Authority>();
-	    authorities.add(authority);
-	    userAccount.setAuthorities(authorities);
-	    result.setUserAccount(userAccount);
-	    
-	    Collection<Folder> folders=new ArrayList<Folder>();
-		Folder recibidos=new Folder();
-		Folder enviados=new Folder();
-		enviados.setActor(result);
-		recibidos.setActor(result);
-		recibidos.setName("Recibidos");
-		enviados.setActor(result);
-		enviados.setName("Enviados");
-		folders.add(enviados);
-		folders.add(recibidos);
-		result.setFolders(folders);
-		
-		result.setPhone(userForm.getPhone());
-		
-		result.setEvents(new ArrayList<Event>());
-		result.setTeamsCreated(new ArrayList<Team>());
-		result.setFriendships(new ArrayList<Friendship>());
-		result.setTournaments(new ArrayList<Tournament>());
-		result.setVotes(new ArrayList<Vote>());
-		result.setEventsCreated(new ArrayList<Event>());
-		result.setTeams(new ArrayList<Team>());
-		
-	    
-	    return result;
-	}
-
-	public User findOne(Integer userId) {
+	public User save(User user) {
 
 		User result;
+		String passwordCoded;
+		String password;
+		UserAccount userUserAccount;
+		Folder inbox;
+		Folder outbox;
+		Collection<Folder> folders;
 
-		result = userRepository.findOne(userId);
+		folders = new ArrayList<Folder>();
+
+		password = user.getUserAccount().getPassword();
+		passwordCoded = HashPassword.encode(password);
+
+		userUserAccount = user.getUserAccount();
+		userUserAccount.setPassword(passwordCoded);
+
+		user.setUserAccount(userUserAccount);
+
+		inbox = folderService.create(user, "Inbox");
+		outbox = folderService.create(user, "Outbox");
+
+		folders.add(inbox);
+		folders.add(outbox);
+
+		user.setFolders(folders);
+
+		result = userRepository.save(user);
+
+		inbox.setActor(result);
+		outbox.setActor(result);
+
+		folderService.save(inbox);
+		folderService.save(outbox);
 
 		return result;
 	}
 
-	public User save(User user) {
-		return userRepository.save(user);
+	// Other business methods ------------------------------------------------
+
+	public UserForm construct(User user) {
+		UserForm userForm;
+
+		userForm = new UserForm();
+
+		userForm.setUsername(user.getUserAccount().getUsername());
+		userForm.setPassword(user.getUserAccount().getPassword());
+
+		userForm.setName(user.getName());
+		userForm.setSurname(user.getSurname());
+		userForm.setEmail(user.getEmail());
+		userForm.setPhone(user.getPhone());
+
+		userForm.setImagen(user.getImagen());
+
+		return userForm;
 	}
 
+	public User reconstruct(UserForm userForm) {
+		User user;
+
+		user = create();
+
+		user.setName(userForm.getName());
+		user.setSurname(userForm.getSurname());
+		user.setEmail(userForm.getEmail());
+		user.setPhone(userForm.getPhone());
+
+		user.setImagen(userForm.getImagen());
+
+		user.getUserAccount().setUsername(userForm.getUsername());
+		user.getUserAccount().setPassword(userForm.getPassword());
+
+		Assert.isTrue(userForm.getTerms());
+		Assert.isTrue(user.getUserAccount().getPassword()
+				.equals(userForm.getPassword2()));
+
+		return user;
+	}
 
 	public User reconstructEdit(UserForm userForm) {
 		User result = findByPrincipal();
@@ -164,21 +220,6 @@ public class UserService {
 
 		return result;
 
-	}
-
-	public UserForm construct(User user) {
-		UserForm result;
-		result = new UserForm();
-
-		result.setUsername(user.getUserAccount().getUsername());
-		result.setPassword(user.getUserAccount().getPassword());
-
-		result.setName(user.getName());
-		result.setSurname(user.getSurname());
-		result.setEmail(user.getEmail());
-		result.setPhone(user.getPhone());
-
-		return result;
 	}
 
 	// Other business methods ------------------------------------------------
@@ -236,10 +277,9 @@ public class UserService {
 
 		return allByKeyword;
 	}
-	
-	public Collection<User> findFriendshipFromUser()
-	{
-		
+
+	public Collection<User> findFriendshipFromUser() {
+
 		Collection<User> result;
 		Collection<Friendship> friendships;
 		User principal;
@@ -256,11 +296,10 @@ public class UserService {
 				result.add(f.getUser());
 			}
 		}
-		
+
 		return result;
-		
+
 	}
-	
 
 	public Vote voteReconstruct(UserVoteForm userVoteForm) {
 		Vote vote = new Vote();

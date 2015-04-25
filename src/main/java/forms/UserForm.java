@@ -2,6 +2,7 @@ package forms;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
+import javax.persistence.Lob;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
@@ -10,94 +11,158 @@ import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.SafeHtml;
 
 @Access(AccessType.PROPERTY)
-public class UserForm {
-	private int id;
+public class UserForm {	
 
-	private String name,surname,email;
-	private String phone;
+	private String name;
+	private String surname;
+	private String email;
+	private String phone;	
+	private byte[] imagen;
+	
     private String password;
 	private String password2;
     private String username;
     
     private boolean terms;
     
-    
-    
-    
-    
-    public int getId() {
-		return id;
-	}
-	
-	public void setId(int id) {
-		this.id = id;
-	}
-    
+    public UserForm()
+    {
+    	
+    	super();
+    	
+    }     
     
     @NotBlank
     @SafeHtml
-	public String getName() {
+	public String getName() 
+    {
+    	
 		return name;
+		
 	}
-	public void setName(String name) {
+	public void setName(String name) 
+	{
+		
 		this.name = name;
+		
 	}
+	
 	@NotBlank
     @SafeHtml
-	public String getSurname() {
+	public String getSurname() 
+	{
+		
 		return surname;
+		
 	}
-	public void setSurname(String surname) {
+	
+	public void setSurname(String surname) 
+	{
+		
 		this.surname = surname;
+		
 	}
+	
 	@NotBlank
     @SafeHtml
     @Email
-	public String getEmail() {
+	public String getEmail() 
+	{
+		
 		return email;
+		
 	}
-	public void setEmail(String email) {
+	
+	public void setEmail(String email) 
+	{
+		
 		this.email = email;
+		
 	}
     @Pattern(regexp = "^[9|6|7][0-9]{8}")
-	public String getPhone() {
+	public String getPhone() 
+    {
+    	
 		return phone;
+		
 	}
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
-	 @Size(min = 5, max = 32)
-	public String getPassword() {
+	
+	@Size(min = 5, max = 32)
+	public String getPassword() 
+	{
+		
 		return password;
+		
+	}	
+	
+	@Lob
+	public byte[] getImagen() 
+	{
+		
+		return imagen;
+		
 	}
-	public void setPassword(String password) {
+
+	public void setImagen(byte[] imagen) 
+	{
+		
+		this.imagen = imagen;
+		
+	}
+
+	public void setPassword(String password) 
+	{
+		
 		this.password = password;
+		
 	}
-	 @Size(min = 5, max = 32)
-	public String getPassword2() {
+	
+	@NotBlank
+	@Size(min = 5, max = 32)
+	public String getPassword2() 
+	{
+		 
 		return password2;
+		
 	}
-	public void setPassword2(String password2) {
+	 
+	public void setPassword2(String password2)
+	{
+		
 		this.password2 = password2;
+		
 	}
 	
 	@NotBlank
 	@SafeHtml
-	public String getUsername() {
+	public String getUsername() 
+	{
+		
 		return username;
+		
 	}
-	public void setUsername(String username) {
+	
+	public void setUsername(String username)
+	{
+		
 		this.username = username;
+		
 	}
 	
-	public boolean getTerms() {
+	public boolean getTerms() 
+	{
+		
 		return terms;
+		
 	}
-	public void setTerms(boolean terms) {
+	public void setTerms(boolean terms) 
+	{
+		
 		this.terms = terms;
+		
 	}
-    
-    
-	
 	
 }
