@@ -78,12 +78,12 @@
 		
 		<ul class="list-unstyled text-left">
 			<li>
-				<a href="?language=en" target="blank">
+				<a href="?language=en">
 					<spring:message code="master.page.languages.english" />
 				</a>
 			</li>
 			<li>
-				<a href="?language=es" target="blank">
+				<a href="?language=es">
 					<spring:message code="master.page.languages.spanish" />
 				</a>
 			</li>
