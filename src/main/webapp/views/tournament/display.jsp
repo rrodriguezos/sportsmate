@@ -16,95 +16,121 @@
 <%@taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"%>
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-<%@taglib prefix="security"
-	uri="http://www.springframework.org/security/tags"%>
+<%@taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
-<%@ taglib prefix="acme" tagdir="/WEB-INF/tags"%>
+<%@taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
-<form:form action="${requestURI}" modelAttribute="tournamentForm">
+<!-- <form:form action="${requestURI}" modelAttribute="tournamentForm"> -->
 
-	<b><spring:message code="tournament.title" />: </b>
+	<!--  <b><spring:message code="tournament.title" />: </b>
 	<jstl:out value="${tournament.title}" />
 	<br />
+	-->
+	
+	<!-- Tournament title section -->
+	<div class="col-xs-12 well spm-tournament-well">
+		<span class="glyphicon glyphicon-globe">&nbsp</span>
+		<span class="lead"><b><jstl:out value="${tournament.title}" /></b></span>
+	</div>
+	
+	<!-- Tournament content section -->
+		<div class="col-xs-12 well well-sm">
+			<div class="col-xs-12 col-sm-5">
+				<div>
+					<b><spring:message code="tournament.creationMoment" />: </b>
+					<fmt:formatDate value="${tournamentMoment}" pattern="dd/MM/yyyy" />
+				</div>
+					
+				<div>
+					<b><spring:message code="tournament.startMoment" />: </b>
+					<fmt:formatDate value="${tournament.startMoment}" 
+					pattern="dd/MM/yyyy HH:mm" />
+				</div>
+				
+				<div>
+					<b><spring:message code="tournament.finishMoment" />: </b>
+					<fmt:formatDate value="${tournament.finishMoment}" 
+					pattern="dd/MM/yyyy HH:mm" />
+				</div>
+				
+				<div>
+					<b><spring:message code="tournament.sport" />: </b>
+					<jstl:out value="${tournament.sport}" />
+				</div>
+				
+				<div>
+					<b><spring:message code="tournament.place" />: </b>
+					<jstl:out value="${tournament.place}" />
+				</div>
+				
+				<div>
+					<b><spring:message code="tournament.numberOfTeams" />: </b>
+					<jstl:out value="${tournament.numberOfTeams}" />
+				</div>
+				
+				<div>
+					<b><spring:message code="tournament.prize" />: </b>
+					<jstl:out value="${tournament.prize}" />
+				</div>
 
+				<div>
+					<b><spring:message code="tournament.advertised" />: </b>
+					<jstl:out value="${tournament.advertised}" />
+				</div>
+			</div>
+			
+			<div class="col-sm-1 hidden-xs"></div>
+			
+			<div class="col-xs-12 col-sm-7 alert alert-info">
+				<div>
+					<b><spring:message code="tournament.description" />: </b>
+					<jstl:out value="${tournament.description}" />
+				</div>
+			</div>
+		</div>
 
-	<b><spring:message code="tournament.creationMoment" />: </b>
-	<fmt:formatDate value="${tournamentMoment}" pattern="dd/MM/yyyy" />
-	<br />
-	<b><spring:message code="tournament.advertised" />: </b>
-	<jstl:out value="${tournament.advertised}" />
-	<br />
-
-	<b><spring:message code="tournament.prize" />: </b>
-	<jstl:out value="${tournament.prize}" />
-	<br />
-
-	<b><spring:message code="tournament.startMoment" />: </b>
-	<fmt:formatDate value="${tournament.startMoment}"
-		pattern="dd/MM/yyyy HH:mm" />
-	<br />
-
-	<b><spring:message code="tournament.finishMoment" />: </b>
-	<fmt:formatDate value="${tournament.finishMoment}"
-		pattern="dd/MM/yyyy HH:mm" />
-	<br />
-
-	<b><spring:message code="tournament.numberOfTeams" />: </b>
-	<jstl:out value="${tournament.numberOfTeams}" />
-	<br />
-
-	<b><spring:message code="tournament.sport" />: </b>
-	<jstl:out value="${tournament.sport}" />
-	<br />
-
-	<b><spring:message code="tournament.place" />: </b>
-	<jstl:out value="${tournament.place}" />
-	<br />
-
-	<b><spring:message code="tournament.description" />: </b>
-	<jstl:out value="${tournament.description}" />
-	<br />
-
-	<h1>
+		
+	<h3>
 		<spring:message code="tournament.teams" />
-	</h1>
-	<display:table name="teams" id="row" pagesize="5" class="displaytag">
-
-		<spring:message code="tournament.team.name" var="nameHeader" />
-		<display:column property="name" title="${nameHeader}" />
-
-		<spring:message code="tournament.team.maxNumber" var="maxNumberHeader" />
-		<display:column property="maxNumber" title="${maxNumberHeader}" />
-
-	</display:table>
-
-	<h1>
+	</h3>
+	
+	<div class="table-responsive">
+		<display:table name="teams" id="row" pagesize="5" class="table table-bordered table-hover">
+			<spring:message code="tournament.team.name" var="nameHeader" />
+			<display:column property="name" title="${nameHeader}" />
+	
+			<spring:message code="tournament.team.maxNumber" var="maxNumberHeader" />
+			<display:column property="maxNumber" title="${maxNumberHeader}" />
+		</display:table>
+	</div>
+	
+	<h3>
 		<spring:message code="tournament.matches" />
-	</h1>
-	<display:table name="matches" id="row" pagesize="5" class="displaytag">
-
-		<spring:message code="tournament.match.title" var="titleHeader" />
-		<display:column property="title" title="${titleHeader}" />
-
-		<spring:message code="tournament.match.description"
-			var="descriptionHeader" />
-		<display:column property="description" title="${descriptionHeader}" />
-
-		<spring:message code="tournament.match.creationMoment"
-			var="creationMomentHeader" />
-		<display:column property="creationMoment"
-			title="${creationMomentHeader}" />
-
-		<spring:message code="tournament.match.startMoment"
-			var="startMomentHeader" />
-		<display:column property="startMoment" title="${startMomentHeader}" />
-
-		<spring:message code="tournament.match.finishMoment"
-			var="finishMomentHeader" />
-		<display:column property="finishMoment" title="${finishMomentHeader}" />
-
-
-	</display:table>
+	</h3>
+	
+	<div class="table-responsive">
+		<display:table name="matches" id="row" pagesize="5" class="table table-bordered table-hover">
+			<spring:message code="tournament.match.title" var="titleHeader" />
+			<display:column property="title" title="${titleHeader}" />
+	
+			<spring:message code="tournament.match.description"
+				var="descriptionHeader" />
+			<display:column property="description" title="${descriptionHeader}" />
+	
+			<spring:message code="tournament.match.creationMoment"
+				var="creationMomentHeader" />
+			<display:column property="creationMoment"
+				title="${creationMomentHeader}" />
+	
+			<spring:message code="tournament.match.startMoment"
+				var="startMomentHeader" />
+			<display:column property="startMoment" title="${startMomentHeader}" />
+	
+			<spring:message code="tournament.match.finishMoment"
+				var="finishMomentHeader" />
+			<display:column property="finishMoment" title="${finishMomentHeader}" />
+		</display:table>
+	</div>
 	
 	<br><br>
 	
@@ -114,9 +140,7 @@
 		<input type="button" class="btn btn-md btn-success" name="edit"
 			value="<spring:message code="tournament.edit"/>"
 			onclick="javascript: window.location.replace('tournament/customer/edit.do?tournamentId= ${tournamentId}')" />
-
-
-
+	
 	</security:authorize>
 
 	<security:authorize access="hasRole('USER')">
@@ -126,7 +150,6 @@
 			value="<spring:message code="tournament.edit"/>"
 			onclick="javascript: window.location.replace('tournament/user/edit.do?tournamentId= ${tournamentId}')" />
 
-
 	</security:authorize>
 
-</form:form>
+<!-- </form:form> -->

@@ -22,15 +22,17 @@
 	</definition>
 	
 	<definition name="tournament/display" extends="master.page">	
-		<put-attribute name="title" value="Details of tournament" />
+		<!-- <put-attribute name="title" value="Details of tournament" /> -->
 		<put-attribute name="body" value="/views/tournament/display.jsp" />
 	</definition>
+	
 	<definition name="tournament/user/display" extends="master.page">	
-		<put-attribute name="title" value="Details of tournament" />
+		<!-- <put-attribute name="title" value="Details of tournament" /> -->
 		<put-attribute name="body" value="/views/tournament/display.jsp" />
 	</definition>
+	
 	<definition name="tournament/customer/display" extends="master.page">	
-		<put-attribute name="title" value="Details of tournament" />
+		<!-- <put-attribute name="title" value="Details of tournament" /> -->
 		<put-attribute name="body" value="/views/tournament/display.jsp" />
 	</definition>
 	
@@ -43,10 +45,12 @@
 		<put-attribute name="title" value="Tournament" />
 		<put-attribute name="body" value="/views/tournament/edit.jsp" />
 	</definition>
+	
 	<definition name="tournament/user/edit" extends="master.page">	
 		<put-attribute name="title" value="Tournament" />
 		<put-attribute name="body" value="/views/tournament/edit.jsp" />
 	</definition>
+	
 	<definition name="tournament/customer/edit" extends="master.page">	
 		<put-attribute name="title" value="Tournament" />
 		<put-attribute name="body" value="/views/tournament/edit.jsp" />
