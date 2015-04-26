@@ -20,13 +20,8 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
-<!-- <form:form action="${requestURI}" modelAttribute="tournamentForm"> -->
+<form:form action="${requestURI}" modelAttribute="tournamentForm">
 
-	<!--  <b><spring:message code="tournament.title" />: </b>
-	<jstl:out value="${tournament.title}" />
-	<br />
-	-->
-	
 	<!-- Tournament title section -->
 	<div class="col-xs-12 well spm-tournament-well">
 		<span class="glyphicon glyphicon-globe">&nbsp</span>
@@ -154,4 +149,4 @@
 
 	</security:authorize>
 
-<!-- </form:form> -->
+</form:form>
