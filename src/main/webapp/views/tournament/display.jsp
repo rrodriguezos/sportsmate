@@ -77,9 +77,11 @@
 					<b><spring:message code="tournament.advertised" />: </b>
 					<jstl:out value="${tournament.advertised}" />
 				</div>
+				
+				<div class="col-xs-12 hidden-sm hidden-md hidden-lg">
+					<br>
+				</div>
 			</div>
-			
-			<div class="col-sm-1 hidden-xs"></div>
 			
 			<div class="col-xs-12 col-sm-7 alert alert-info">
 				<div>
