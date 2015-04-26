@@ -107,8 +107,8 @@ public class UserService {
 
 		authority.setAuthority("USER");
 		useraccount.addAuthority(authority);
+		
 		user.setUserAccount(useraccount);
-
 		user.setEventsCreated(eventsCreated);
 		user.setEvents(events);
 		user.setFriendships(friendships);
@@ -120,9 +120,11 @@ public class UserService {
 		user.setRequests(requests);
 
 		return user;
+		
 	}
 
-	public User save(User user) {
+	public User save(User user) 
+	{
 
 		User result;
 		String passwordCoded;
@@ -159,11 +161,14 @@ public class UserService {
 		folderService.save(outbox);
 
 		return result;
+		
 	}
 
 	// Other business methods ------------------------------------------------
 
-	public UserForm construct(User user) {
+	public UserForm construct(User user) 
+	{
+		
 		UserForm userForm;
 
 		userForm = new UserForm();
@@ -179,9 +184,12 @@ public class UserService {
 		userForm.setImagen(user.getImagen());
 
 		return userForm;
+		
 	}
 
-	public User reconstruct(UserForm userForm) {
+	public User reconstruct(UserForm userForm)
+	{
+		
 		User user;
 
 		user = create();
@@ -201,9 +209,12 @@ public class UserService {
 				.equals(userForm.getPassword2()));
 
 		return user;
+		
 	}
 
-	public User reconstructEdit(UserForm userForm) {
+	public User reconstructEdit(UserForm userForm)
+	{
+		
 		User result = findByPrincipal();
 
 		result.setPhone(userForm.getPhone());
@@ -223,7 +234,8 @@ public class UserService {
 	}
 
 	// Other business methods ------------------------------------------------
-	public User findByPrincipal() {
+	public User findByPrincipal() 
+	{
 
 		User user;
 		UserAccount userAccount;
@@ -236,30 +248,61 @@ public class UserService {
 		return user;
 
 	}
+	
+	public void checkPrincipal(User user)
+	{
+		
+		Assert.notNull(user);
+		
+		User aux;
+		
+		aux = findByPrincipal();
+		
+		Assert.isTrue(aux.equals(user));
+		
+	}
 
-	public boolean userRegistered(String username) {
+	public boolean userRegistered(String username)
+	{
+		
 		Boolean res = true;
-		if (userRepository.isRegistered(username) == null) {
+		User user;
+		
+		user = userRepository.isRegistered(username);
+		
+		if (user == null) {
 			res = false;
 		}
+		
 		return res;
 	}
 
-	public void delete(User user) {
+	public void delete(User user) 
+	{
+		
+		Assert.notNull(user);
+		checkPrincipal(user);
+		
 		userRepository.delete(user);
 
 	}
 
-	public Collection<User> findAllUsersByEventId(int eventId) {
+	public Collection<User> findAllUsersByEventId(int eventId)
+	{
+		
 		Set<User> all;
 
 		all = new HashSet<User>(userRepository.findAllUsersByEventId(eventId));
 
 		return all;
+		
 	}
 
-	public Collection<User> findByKeyword(String keywords) {
+	public Collection<User> findByKeyword(String keywords) 
+	{
+		
 		Assert.notNull(keywords);
+		
 		Collection<User> allUsers;
 		Collection<User> allByKeyword;
 
@@ -276,9 +319,11 @@ public class UserService {
 		}
 
 		return allByKeyword;
+		
 	}
 
-	public Collection<User> findFriendshipFromUser() {
+	public Collection<User> findFriendshipFromUser() 
+	{
 
 		Collection<User> result;
 		Collection<Friendship> friendships;
@@ -301,22 +346,32 @@ public class UserService {
 
 	}
 
-	public Vote voteReconstruct(UserVoteForm userVoteForm) {
-		Vote vote = new Vote();
+	public Vote voteReconstruct(UserVoteForm userVoteForm) 
+	{
+		
+		Vote vote;
+		
+		vote = new Vote();
+		
 		vote.setNameUser(userVoteForm.getName());
 		vote.setScore(userVoteForm.getScore());
+		
 		return vote;
+		
 	}
 
-	public void saveVote(User user) {
+	public void saveVote(User user) 
+	{
+		
 		Double aux = 0.0;
 		Double rating = 0.0;
+		
 		for (Vote a : user.getVotes()) {
 			rating += a.getScore();
 			aux++;
 		}
+		
 		user.setRating(rating / aux);
-		System.out.println(user.getRating());
 		userRepository.save(user);
 
 	}

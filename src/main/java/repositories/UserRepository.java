@@ -6,7 +6,6 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import domain.User;
-import domain.User;
 @Repository
 public interface UserRepository extends JpaRepository<User, Integer> {
 	

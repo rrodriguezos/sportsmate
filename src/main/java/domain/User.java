@@ -30,9 +30,25 @@ public class User extends Actor{
 	}	
 	
 	//Attributes-------------------------------------------------------------------------
-	
+	private Collection<Vote> votes;
 	private Double rating;
 	
+	@Valid
+	@NotNull
+	@ElementCollection
+	public Collection<Vote> getVotes() 
+	{
+		
+		return votes;
+		
+	}
+
+	public void setVotes(Collection<Vote> votes) 
+	{
+		
+		this.votes = votes;
+		
+	}
 	
 	@Transient
 	public Double getRating()
@@ -58,7 +74,7 @@ public class User extends Actor{
 	}
 		
 	//Relationships----------------------------------------------------------------------
-	private Collection<Vote> votes;
+	
 	private Collection<Friendship> frindships;
 	private Collection<Event> events;
 	private Collection<Event> eventsCreated;
@@ -66,24 +82,7 @@ public class User extends Actor{
 	private Collection<Team> teamsCreated;
 	private Collection<Tournament> tournaments;
 	private Collection<Tournament> tournamentsCreated;
-	private Collection<RequestTeam> requests;
-	
-	@Valid
-	@NotNull
-	@ElementCollection
-	public Collection<Vote> getVotes() 
-	{
-		
-		return votes;
-		
-	}
-
-	public void setVotes(Collection<Vote> votes) 
-	{
-		
-		this.votes = votes;
-		
-	}
+	private Collection<RequestTeam> requests;	
 
 	@Valid
 	@NotNull

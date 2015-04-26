@@ -79,6 +79,8 @@ public class UserForm {
 		this.email = email;
 		
 	}
+	
+	@NotBlank
     @Pattern(regexp = "^[9|6|7][0-9]{8}")
 	public String getPhone() 
     {
@@ -91,6 +93,8 @@ public class UserForm {
 	}
 	
 	@Size(min = 5, max = 32)
+	@NotBlank
+	@SafeHtml
 	public String getPassword() 
 	{
 		
@@ -121,6 +125,7 @@ public class UserForm {
 	}
 	
 	@NotBlank
+	@SafeHtml
 	@Size(min = 5, max = 32)
 	public String getPassword2() 
 	{
