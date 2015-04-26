@@ -22,6 +22,7 @@
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
 <br>
+
 <div class='table-responsive'>
 <display:table name="teams" id="row" requestURI="${requestURI}"
 	pagesize="5" class="table table-bordered table-hover">
@@ -67,16 +68,19 @@
 	</jstl:if>
 
 </display:table>
+</div>
+
+
 
 <jstl:if test="${showDisjoin == true }">
+
+<br>
 <security:authorize access="hasRole('USER')">
 		<input type="button" class="btn btn-md btn-success" name="create"
 			value="<spring:message code="team.create"/>"
 			onclick="javascript: window.location.replace('team/user/create.do');" />
 </security:authorize>
 </jstl:if>
-</div>
 
-<br>
 
 <acme:cancel code="team.back" url="welcome/index.do" />

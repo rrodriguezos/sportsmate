@@ -47,4 +47,6 @@
 </display:table>
 </div>
 
+<br>
+
 <acme:cancel code="requestTeam.back" url="welcome/index.do" />

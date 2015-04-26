@@ -257,5 +257,7 @@
 <!-- ******** -->
 
 <div id='header_image' class='container'> 
-	<img src="images/logotrans.png" alt="SportsMate Co., Inc." />
+	<a href="welcome/index.do">
+		<img src="images/logotrans.png" alt="SportsMate Co., Inc." />
+	</a>
 </div>

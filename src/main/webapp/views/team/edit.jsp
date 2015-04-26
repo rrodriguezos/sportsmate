@@ -19,6 +19,8 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
+<br>
+
 <form:form action="${requestURI}" modelAttribute="teamForm">
 
 	<form:hidden path="id" />
@@ -28,11 +30,15 @@
 	<br/>
 	
 	<acme:textbox code="team.maxNumber" path="maxNumber"/>
-	<br/>
-		
+	
+	
+			
 	<security:authorize access="hasRole('USER')">
-		<acme:submit code="team.save" name="saveEU" />&nbsp;
+	<div class="col-xs-12">
+		<br>
+		<acme:submit code="team.save" name="saveEU" />
 		<acme:cancel code="team.cancel" url="team/user/list.do" />
+	</div>
 	</security:authorize>
 	
 </form:form>
