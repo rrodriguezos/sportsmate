@@ -1,8 +1,5 @@
 package controllers.register;
 
-
-
-
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -159,6 +156,10 @@ public ModelAndView saveUser(@Valid UserForm userForm,
 }
 		return result;
 }
+
+
+
+
 }
 
 	

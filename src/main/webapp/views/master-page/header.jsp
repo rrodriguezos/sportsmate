@@ -88,8 +88,8 @@
 						
 						<!-- PROFILE USER -->
 						<security:authorize access="hasRole('USER')">
-							<li><a href="profile/user/display.do"><spring:message code="master.page.user.listProfile" /></a></li>
-							<li><a href="profile/user/edit.do"><spring:message code="master.page.user.editProfile" /></a></li>						
+							<li><a href="user/display.do"><spring:message code="master.page.user.listProfile" /></a></li>
+												
 						</security:authorize>
 						
 						<li class='divider'></li>
@@ -226,7 +226,7 @@
 					</a>
 					<ul class='dropdown-menu'>
 						<li><a href="register/registerCustomer.do"><spring:message code="master.page.register.customer" /></a></li>
-						<li><a href="register/registerUser.do"><spring:message code="master.page.register.user" /></a></li>
+						<li><a href="user/create.do"><spring:message code="master.page.register.user" /></a></li>
 					</ul>
 				</li>
 			</security:authorize>
