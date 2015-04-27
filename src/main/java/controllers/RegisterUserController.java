@@ -95,12 +95,12 @@ public class RegisterUserController extends AbstractController {
 			try {
 				
 				user = userService.reconstruct(userForm);
-				if(user.getId()!=0  && 
-				  (user.getUserAccount().getUsername().equals(userForm.getUsername()))||
-				 !(user.getUserAccount().getUsername().equals(userForm.getUsername()))){
-					userService.save(user);
-				}
+//				if(user.getId()!=0  && 
+//				  (user.getUserAccount().getUsername().equals(userForm.getUsername())) ||
+//				 !(user.getUserAccount().getUsername().equals(userForm.getUsername()))){					
+//				}
 				
+				userService.save(user);
 				
 				result = new ModelAndView("redirect:../welcome/index.do");
 				

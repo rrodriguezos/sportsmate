@@ -54,9 +54,11 @@
 	<br>
 	
 	<!-- IGNORE THE WARNING, IT'S BEACUSE THE <FORM> -->
-	
-		<div class="col-xs-12"> 
 	<jstl:if test="${id == 0}">
+		<form:hidden path="terms"/>
+	</jstl:if>
+		<div class="col-xs-12"> 
+	<jstl:if test="${userForm.id == 0}">
 		<br>
 		<b><spring:message code="user.terms" /></b>
 		<br>

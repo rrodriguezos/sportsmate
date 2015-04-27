@@ -136,6 +136,8 @@ public class UserService {
 
 		folders = new ArrayList<Folder>();
 
+		if(user.getId() == 0){
+		
 		password = user.getUserAccount().getPassword();
 		passwordCoded = HashPassword.encode(password);
 
@@ -159,6 +161,20 @@ public class UserService {
 
 		folderService.save(inbox);
 		folderService.save(outbox);
+		
+		}else{
+			
+			password = user.getUserAccount().getPassword();
+			passwordCoded = HashPassword.encode(password);
+
+			userUserAccount = user.getUserAccount();
+			userUserAccount.setPassword(passwordCoded);
+
+			user.setUserAccount(userUserAccount);
+			
+			result = userRepository.save(user);
+		}
+		
 
 		return result;
 		
@@ -215,16 +231,18 @@ public class UserService {
 	{
 		
 		User user;
-		User aux;
-
-		user = create();
-		aux = findByPrincipal();
 		
 		if(userForm.getId()!= 0){
-			user.getUserAccount().setUsername(aux.getUserAccount().getUsername());
-			user.getUserAccount().setPassword(aux.getUserAccount().getPassword());
-			userForm.setTerms(true);
+			user = findByPrincipal();
+			user.getUserAccount().setUsername(userForm.getUsername());
+			user.getUserAccount().setPassword(userForm.getPassword());
+			userForm.setTerms(true);//Esta sobra
+			
+			Assert.isTrue(user.getUserAccount().getPassword().equals(userForm.getPassword2()));
+			
 		}else{
+			
+			user = create();
 			user.getUserAccount().setUsername(userForm.getUsername());
 			user.getUserAccount().setPassword(userForm.getPassword());			
 		}
@@ -234,9 +252,8 @@ public class UserService {
 		user.setEmail(userForm.getEmail());
 		user.setPhone(userForm.getPhone());
 
-		user.setImagen(userForm.getImagen());
+		user.setImagen(userForm.getImagen());		
 		
-		Assert.isTrue(user.getUserAccount().getPassword().equals(userForm.getPassword2()));
 		Assert.isTrue(userForm.getTerms());
 
 		return user;
