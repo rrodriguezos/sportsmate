@@ -94,18 +94,22 @@ public class EventUserController extends AbstractController {
 		EventForm eventForm;
 		Collection<User> users;
 		Actor actor;
+		Boolean estoyApuntado = false;
 
 		event = eventService.findOne(eventId);
 		eventForm = eventService.construct(event);
 		users = userService.findAllUsersByEventId(eventId);
 		actor = actorService.findByPrincipal();
 
+		if (event.getUsers().contains(actor)) {
+			estoyApuntado = true;
+		}
 		result = new ModelAndView("event/display");
 
 		result.addObject("eventForm", eventForm);
 		result.addObject("users", users);
 		result.addObject("creationMoment", event.getCreationMoment());
-
+		result.addObject("estoyApuntado", estoyApuntado);
 		Date today = new Date(System.currentTimeMillis());
 		Date finish = eventForm.getFinishMoment();
 		result.addObject("today", today);
