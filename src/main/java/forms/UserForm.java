@@ -13,6 +13,8 @@ import org.hibernate.validator.constraints.SafeHtml;
 @Access(AccessType.PROPERTY)
 public class UserForm {	
 
+	private int id;
+	
 	private String name;
 	private String surname;
 	private String email;
@@ -31,8 +33,22 @@ public class UserForm {
     	super();
     	
     }     
-    
-    @NotBlank
+        
+    public int getId() 
+    {
+    	
+		return id;
+		
+	}
+
+	public void setId(int id) 
+	{
+		
+		this.id = id;
+		
+	}
+	
+	@NotBlank
     @SafeHtml
 	public String getName() 
     {

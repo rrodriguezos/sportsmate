@@ -50,6 +50,7 @@
 	<br><br>
 	
 	<acme:submit name="save" code="register.save" />
+	
 	<acme:cancel url="welcome/index.do" code="register.cancel" />
 	
 	</form:form>

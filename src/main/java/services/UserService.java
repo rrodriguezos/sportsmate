@@ -178,16 +178,40 @@ public class UserService {
 
 	// Other business methods ------------------------------------------------
 
-	public UserForm construct(User user) 
+	public UserForm construct() 
 	{
 		
 		UserForm userForm;
+		User user;
+
+		userForm = new UserForm();
+		user = create();
+
+		userForm.setUsername(user.getUserAccount().getUsername());
+		userForm.setPassword(user.getUserAccount().getPassword());
+
+		userForm.setName(user.getName());
+		userForm.setSurname(user.getSurname());
+		userForm.setEmail(user.getEmail());
+		userForm.setPhone(user.getPhone());
+
+		userForm.setImagen(user.getImagen());
+
+		return userForm;
+		
+	}
+	
+	public UserForm construct(User user) 
+	{
+		
+		UserForm userForm;		
 
 		userForm = new UserForm();
 
 		userForm.setUsername(user.getUserAccount().getUsername());
 		userForm.setPassword(user.getUserAccount().getPassword());
 
+		userForm.setId(user.getId());
 		userForm.setName(user.getName());
 		userForm.setSurname(user.getSurname());
 		userForm.setEmail(user.getEmail());
@@ -203,8 +227,19 @@ public class UserService {
 	{
 		
 		User user;
+		User aux;
 
 		user = create();
+		aux = findByPrincipal();
+		
+		if(userForm.getId()!= 0){
+			user.getUserAccount().setUsername(aux.getUserAccount().getUsername());
+			user.getUserAccount().setPassword(aux.getUserAccount().getPassword());
+			userForm.setTerms(true);
+		}else{
+			user.getUserAccount().setUsername(userForm.getUsername());
+			user.getUserAccount().setPassword(userForm.getPassword());			
+		}
 
 		user.setName(userForm.getName());
 		user.setSurname(userForm.getSurname());
@@ -212,13 +247,9 @@ public class UserService {
 		user.setPhone(userForm.getPhone());
 
 		user.setImagen(userForm.getImagen());
-
-		user.getUserAccount().setUsername(userForm.getUsername());
-		user.getUserAccount().setPassword(userForm.getPassword());
-
+		
+		Assert.isTrue(user.getUserAccount().getPassword().equals(userForm.getPassword2()));
 		Assert.isTrue(userForm.getTerms());
-		Assert.isTrue(user.getUserAccount().getPassword()
-				.equals(userForm.getPassword2()));
 
 		return user;
 		
@@ -245,7 +276,6 @@ public class UserService {
 
 	}
 
-	// Other business methods ------------------------------------------------
 	public User findByPrincipal() 
 	{
 
@@ -386,5 +416,18 @@ public class UserService {
 		user.setRating(rating / aux);
 		userRepository.save(user);
 
+	}
+	
+	public User findOneUserToEdit(int userId)
+	{
+		
+		User user;
+		
+		user = findOne(userId);
+		
+		checkPrincipal(user);
+		
+		return user;
+		
 	}
 }
