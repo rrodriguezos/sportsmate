@@ -177,6 +177,10 @@ span.pagelinks {
 	width: 50px;
 }
 
+.spm-tournament-well .glyphicon{
+	font-size: 18px;
+}
+
 /* Provisional & inherit from DP project*/
 
 .error {
