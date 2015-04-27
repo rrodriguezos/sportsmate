@@ -408,7 +408,7 @@ public class CustomerService {
 			aux++;
 		}
 		
-		customer.setRating(rating / aux);
+//		customer.setRating(rating / aux);
 		customerRepository.save(customer);
 
 	}

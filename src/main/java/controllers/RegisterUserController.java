@@ -42,6 +42,7 @@ public class RegisterUserController extends AbstractController {
 		result = new ModelAndView("user/display");
 		
 		result.addObject("user", user);
+		result.addObject("rating", user.getRating());
 
 		return result;
 

@@ -22,10 +22,10 @@
 	
 	<form:hidden path="id"/>
 	
-	<jstl:if test="${id != 0 }">
+	<jstl:if test="${userForm.id != 0 }">
 		<h1><spring:message code="user.registerEdit" /></h1>
 	</jstl:if>
-	<jstl:if test="${id == 0 }">
+	<jstl:if test="${userForm.id == 0 }">
 		<h1><spring:message code="user.register" /></h1>
 	</jstl:if>
 	

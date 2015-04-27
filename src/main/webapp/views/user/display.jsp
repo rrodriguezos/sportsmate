@@ -24,14 +24,10 @@
 			<img src="images/default_profile.jpg" alt="Default profile" class="img-thumbnail .spm-profile-picture" />
 				<br><br>
 				<div>
-					<jstl:if test="${rating == 0.0}">
-						<spring:message code="actor.rating.Empty" />
-
-					</jstl:if>
-					<jstl:if test="${rating != 0.0}">
-						<spring:message code="actor.rating" />
+					
+						<spring:message code="user.rating" />
 						<jstl:out value="${rating}" />
-					</jstl:if>
+					
 
 				</div>
 		</div>

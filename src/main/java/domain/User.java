@@ -59,9 +59,7 @@ public class User extends Actor{
 		for(Vote itero : getVotes()){
 			rating+=itero.getScore();
 		}
-		
-		rating = rating/getVotes().size();
-		
+				
 		return rating;
 		
 	}
