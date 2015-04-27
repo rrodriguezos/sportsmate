@@ -36,9 +36,11 @@
 	<security:authorize access="hasRole('USER')">
 	<spring:message code="user.sendRequest" var="sendRequestHeader" />
 	<display:column title="${sendRequestHeader}">
+		<jstl:if test="${principal != row}">
 		<a href="friendship/user/sendRequest.do?userFriendId=${row.id}"> <spring:message
 				code="user.sendRequest" />
 		</a>
+		</jstl:if>
 	</display:column>
 	</security:authorize>	
 

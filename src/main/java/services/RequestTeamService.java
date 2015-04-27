@@ -98,7 +98,7 @@ public class RequestTeamService {
 		principal.getRequests().add(request);
 		
 		teamService.save(team);
-		userService.save(principal);
+		principal = userService.save(principal);
 		
 	}
 }

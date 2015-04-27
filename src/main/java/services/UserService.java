@@ -163,6 +163,18 @@ public class UserService {
 		return result;
 		
 	}
+	
+//	public User saveJoin(User user)
+//	{
+//		User result;
+//		
+//		Assert.notNull(user);
+//		checkPrincipal(user);
+//		result = userRepository.save(user);
+//		
+//		return result;
+//		
+//	}
 
 	// Other business methods ------------------------------------------------
 

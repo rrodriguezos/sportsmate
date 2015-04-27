@@ -40,14 +40,17 @@ public class ActorController extends AbstractController
 		
 		Collection<Customer> customers;
 		Collection<User> users;
+		User principal;
 		
 		customers = customerService.findByKeyword(keyword);
 		users = userService.findByKeyword(keyword);
+		principal = userService.findByPrincipal();
 		
 		result = new ModelAndView("actor/search");
 		result.addObject("requestURI", "actor/search.do");
 		result.addObject("customers", customers);
 		result.addObject("users", users);
+		result.addObject("principal",principal);
 		
 		return result;
 	}
