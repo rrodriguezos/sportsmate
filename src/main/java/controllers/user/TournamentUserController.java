@@ -1,6 +1,9 @@
 package controllers.user;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Collection;
+import java.util.Date;
 
 import javax.validation.Valid;
 
@@ -164,10 +167,18 @@ public class TournamentUserController extends AbstractController {
 			tournamentService.delete(tournamentForm);
 			result = new ModelAndView("redirect:list.do");
 		} catch (Throwable oops) {
+			Date currentDate = new Date();
+			DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+			dateFormat.format(currentDate);
 			System.out.println(oops.getLocalizedMessage());
 			result = new ModelAndView();
 			result.addObject("tournamentForm", tournamentForm);
-			result.addObject("message", "tournament.commit.error");
+			if (currentDate.compareTo(tournamentForm.getFinishMoment()) > 0) {
+				result.addObject("message",
+						"tournament.commit.error.not.finish");
+			} else {
+				result.addObject("message", "tournament.commit.error");
+			}
 		}
 		return result;
 	}
