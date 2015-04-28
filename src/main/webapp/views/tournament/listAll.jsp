@@ -27,7 +27,7 @@
 
 		<display:column>
 			<div class="col-xs-12">
-				<div class="alert alert-info spm-no-margin-bottom">
+				<div class="alert alert-success spm-no-margin-bottom">
 					<spring:message code="tournament.title" var="titleHeader" />
 					<jstl:out value="${row.title}"></jstl:out>
 				</div>

@@ -28,7 +28,7 @@
 		<display:column>
 		
 		<div class="col-xs-12">
-			<div class="alert alert-info spm-no-margin-bottom">
+			<div class="alert alert-success spm-no-margin-bottom">
 				<!--  <b><spring:message code="tournament.title" />: </b> -->
 				<spring:message code="tournament.title" var="titleHeader" />
 				<jstl:out value="${row.title}"></jstl:out>
@@ -91,7 +91,7 @@
 					
 					<security:authorize access="hasRole('USER')">
 							<a href="tournament/user/display.do?tournamentId=${row.id}"> 
-									<button type="button" class="btn btn-md btn-info col-xs-2">
+									<button type="button" class="btn btn-md btn-default col-xs-2">
 										<spring:message	code="tournament.display" />
 									</button>
 							</a>
@@ -99,7 +99,7 @@
 					
 					<security:authorize access="hasRole('CUSTOMER')">
 						<a href="tournament/customer/display.do?tournamentId=${row.id}">
-							<button type="button" class="btn btn-md btn-info col-xs-2">
+							<button type="button" class="btn btn-md btn-default col-xs-2">
 								<spring:message code="tournament.display" />
 							</button>
 						</a>

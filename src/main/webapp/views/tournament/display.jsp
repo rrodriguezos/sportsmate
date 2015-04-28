@@ -83,7 +83,7 @@
 				</div>
 			</div>
 			
-			<div class="col-xs-12 col-sm-7 alert alert-info">
+			<div class="col-xs-12 col-sm-7 alert alert-success">
 				<div>
 					<b><spring:message code="tournament.description" />: </b>
 					<jstl:out value="${tournament.description}" />
