@@ -69,15 +69,12 @@
 				</div>
 
 				<div>
-					<b><spring:message code="tournament.advertised"/></b>
-					<jstl:if test="${tournament.advertised}">
-					<b><spring:message code="tournament.yesAdvertised" var="yesAdvertirsed"/>: </b>
-					<jstl:out value="${yesAdvertirsed }" />
+					<b><spring:message code="tournament.advertised" />: </b>
+					<jstl:if test="${tournament.advertised==true}">
+					<spring:message code="tournament.yes"/>
 					</jstl:if>
-					
-					<jstl:if test="${!tournament.advertised}">
-					<b><spring:message code="tournament.noAdvertised" var="noAdvertirsed"/>: </b>
-					<jstl:out value="${noAdvertirsed }" />
+					<jstl:if test="${tournament.advertised==false}">
+					<spring:message code="tournament.no"/>
 					</jstl:if>
 				</div>
 				

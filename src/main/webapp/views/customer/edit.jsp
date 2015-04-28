@@ -8,8 +8,6 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
-<br>
-
 <form:form action="customer/edit.do" modelAttribute="customerForm" class="form-horizontal">
 
 	<form:hidden path="id"/>
@@ -21,6 +19,8 @@
 		<h1><spring:message code="customer.register" /></h1>
 	</jstl:if>
 
+	<br>
+	
 	<fieldset>
 		<legend>
 			<spring:message code="customer.useraccount" />

@@ -23,60 +23,97 @@
 
 <div class="table-responsive">
 	<display:table name="tournaments" id="row" requestURI="${requestURI}"
-		pagesize="5" class="table table-bordered table-hover">
+		pagesize="5" class="">
+
 		<display:column>
-
-			<b><spring:message code="tournament.title" />: </b>
-			<spring:message code="tournament.title" var="titleHeader" />
-			<jstl:out value="${row.title}"></jstl:out>
-			<br />
-			<b><spring:message code="tournament.advertised" />: </b>
-			<jstl:if test="${row.advertised}">
-			<b><spring:message code="tournament.yesAdvertised" var="yesAdvertirsed"/>: </b>
-			<jstl:out value="${yesAdvertirsed }" />
-			</jstl:if>
-			<jstl:if test="${!row.advertised}">
-			<b><spring:message code="tournament.noAdvertised" var="noAdvertirsed"/>: </b>
-			<jstl:out value="${noAdvertirsed }" />
-			</jstl:if>
-			<br />
-			<b><spring:message code="tournament.startMoment" />: </b>
-			<spring:message code="tournament.startMoment" var="startMomentHeader" />
-			<jstl:out value="${row.startMoment}"></jstl:out>
-			<br />
-			<b><spring:message code="tournament.finishMoment" />: </b>
-			<spring:message code="tournament.finishMoment"
-				var="finishMomentHeader" />
-			<jstl:out value="${row.finishMoment}"></jstl:out>
-			<br />
-			<b><spring:message code="tournament.numberOfTeams" />: </b>
-			<spring:message code="tournament.numberOfTeams"
-				var="numberOfTeamsHeader" />
-			<jstl:out value="${row.numberOfTeams}" />
-			<br />
-			<b><spring:message code="tournament.prize" />: </b>
-			<spring:message code="tournament.prize" var="prizeHeader" />
-			<jstl:out value="${row.prize}" />
-			<br />
-			<b><spring:message code="tournament.sport" />: </b>
-			<spring:message code="tournament.sport" var="sportHeader" />
-			<jstl:out value="${row.sport}" />
-			<br />
-
-			<spring:message code="tournament.display" var="displayHeader" />
-			<security:authorize access="hasRole('USER')">
-				<a href="tournament/user/display.do?tournamentId=${row.id}"> <spring:message
-						code="tournament.display" />
-				</a>
-			</security:authorize>
-			<security:authorize access="hasRole('CUSTOMER')">
-				<a href="tournament/customer/display.do?tournamentId=${row.id}">
-					<spring:message code="tournament.display" />
-				</a>
-			</security:authorize>
+		
+		<div class="col-xs-12">
+			<div class="alert alert-info spm-no-margin-bottom">
+				<!--  <b><spring:message code="tournament.title" />: </b> -->
+				<spring:message code="tournament.title" var="titleHeader" />
+				<jstl:out value="${row.title}"></jstl:out>
+			</div>
+			
+			<div class="well well-sm col-xs-12 spm-no-margin-bottom">
+				<div class="col-xs-12 col-md-4">
+					<div>
+					<b><spring:message code="tournament.startMoment" />: </b>
+					<spring:message code="tournament.startMoment" var="startMomentHeader" />
+					<jstl:out value="${row.startMoment}"></jstl:out>
+					</div>
+					
+					<div>
+					<b><spring:message code="tournament.finishMoment" />: </b>
+					<spring:message code="tournament.finishMoment"
+						var="finishMomentHeader" />
+					<jstl:out value="${row.finishMoment}"></jstl:out>
+					</div>
+				</div>
+				
+				<div class="col-xs-12 col-md-3">
+					<div>
+					<b><spring:message code="tournament.sport" />: </b>
+					<spring:message code="tournament.sport" var="sportHeader" />
+					<jstl:out value="${row.sport}" />
+					</div>
+					
+					<div>
+					<b><spring:message code="tournament.numberOfTeams" />: </b>
+					<spring:message code="tournament.numberOfTeams"
+						var="numberOfTeamsHeader" />
+					<jstl:out value="${row.numberOfTeams}" />
+					</div>
+				</div>
+				
+				<div class="col-xs-12 col-md-3">
+					<div>
+					<b><spring:message code="tournament.advertised" />: </b>
+					<spring:message code="tournament.advertised" var="advertisedHeader" />
+					<jstl:if test="${row.advertised==true}">
+					<spring:message code="tournament.yes"/>
+					</jstl:if>
+					<jstl:if test="${row.advertised==false}">
+					<spring:message code="tournament.no"/>
+					</jstl:if>
+					</div>
+					
+					<div>
+					<b><spring:message code="tournament.prize" />: </b>
+					<spring:message code="tournament.prize" var="prizeHeader" />
+					<jstl:out value="${row.prize}" />
+					</div>
+				</div>	
+			</div>
+			
+			<div class="row">
+			<div class="col-xs-12 spm-button-list">
+				<spring:message code="tournament.display" var="displayHeader" />
+					
+					<security:authorize access="hasRole('USER')">
+							<a href="tournament/user/display.do?tournamentId=${row.id}"> 
+									<button type="button" class="btn btn-md btn-info col-xs-2">
+										<spring:message	code="tournament.display" />
+									</button>
+							</a>
+					</security:authorize>
+					
+					<security:authorize access="hasRole('CUSTOMER')">
+						<a href="tournament/customer/display.do?tournamentId=${row.id}">
+							<button type="button" class="btn btn-md btn-info col-xs-2">
+								<spring:message code="tournament.display" />
+							</button>
+						</a>
+					</security:authorize>
+			</div>
+			</div>
+		</div>
 		</display:column>
+		
+
+		
 	</display:table>
 </div>
+
 <security:authorize access="hasRole('USER')">
 	<input type="button" class="btn btn-md btn-success" name="create"
 		value="<spring:message code="tournament.create"/>"

@@ -8,12 +8,14 @@
  * http://www.tdg-seville.info/License.html
  --%>
 
-<%@page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1"%>
 
-<%@taglib prefix="jstl"	uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="jstl" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-<%@taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
+<%@taglib prefix="security"
+	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
@@ -26,40 +28,40 @@
 
 
 <div class='table-responsive'>
-<display:table name="invoices" id="row"
+	<display:table name="invoices" id="row"
+		requestURI="customer/seeInvoices.do" pagesize="5"
+		class="table table-bordered table-hover">
 
-requestURI="customer/seeInvoices.do"
-pagesize="5" class="table table-bordered table-hover" >
+		<display:column title="${fee}">${row.fee}</display:column>
+		<display:column title="${datePay}">
 
-<display:column title="${fee}" >${row.fee}</display:column>
-<display:column title="${datePay}">
+			<jstl:if test="${row.datePay == null}">
+				<spring:message code="customer.invoice.unPaid" />
 
-	<jstl:if test="${row.datePay == null}">
-		<spring:message code="customer.invoice.unPaid" />
-		
-	</jstl:if>
-	
-	<jstl:if test="${row.datePay !=null}">
-		<spring:message code="customer.invoice.payMaked" /> 
-		<jstl:out value="---> ${row.datePay}"></jstl:out>
-	</jstl:if>
+			</jstl:if>
 
-</display:column>
-<%-- <display:column title="${deadLine}">${row.deadLine }</display:column>> --%>
+			<jstl:if test="${row.datePay !=null}">
+				<spring:message code="customer.invoice.payMaked" />
+				<jstl:out value="---> ${row.datePay}"></jstl:out>
+			</jstl:if>
 
-<display:column title="${details}"> <a href="customer/invoiceDetails.do?id=${row.id}">${details }</a></display:column>
+		</display:column>
+		<%-- <display:column title="${deadLine}">${row.deadLine }</display:column>> --%>
+
+		<display:column title="${details}">
+			<a href="customer/invoiceDetails.do?id=${row.id}">${details }</a>
+		</display:column>
 
 
-</display:table>
+	</display:table>
 
 </div>
 
 
 <div class='table-responsive'>
-<display:table name="items" id="row"
+	<display:table name="items" id="row"
+		requestURI="customer/ownItemList.do" pagesize="5"
+		class="table table-bordered table-hover">
 
-requestURI="customer/ownItemList.do"
-pagesize="5" class="table table-bordered table-hover" >
-
-</display:table>
+	</display:table>
 </div>

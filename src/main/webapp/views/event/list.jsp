@@ -26,34 +26,41 @@
 	<display:table name="events" id="row" requestURI="${requestURI}"
 		pagesize="5" class="table table-bordered table-hover">
 
-		<spring:message code="event.title" var="titleHeader" />
-		<display:column property="title" title="${titleHeader}" />
+		<display:column>
 
-		<spring:message code="event.startMoment" var="startMomentHeader" />
-		<display:column property="startMoment" title="${startMomentHeader}"
-			format="{0,date,dd/MM/yyyy HH:mm}" />
-
-		<spring:message code="event.finishMoment" var="finishMomentHeader" />
-		<display:column property="finishMoment" title="${finishMomentHeader}"
-			format="{0,date,dd/MM/yyyy HH:mm}" />
-
-		<spring:message code="event.numberMaxParticipant"
-			var="numberMaxParticipantHeader" />
-		<display:column property="numberMaxParticipant"
-			title="${numberMaxParticipantHeader}" />
-
-		<spring:message code="event.display" var="displayHeader" />
-		<display:column title="${displayHeader}">
+			<b><spring:message code="event.title" />: </b>
+			<spring:message code="tournament.title" var="titleHeader" />
+			<jstl:out value="${row.title}"></jstl:out>
+			<br />
+			
+			<b><spring:message code="event.startMoment" />: </b>
+			<spring:message code="event.startMoment" var="startMomentHeader" />
+			<jstl:out value="${row.startMoment}"></jstl:out>
+			<br />
+			
+			<b><spring:message code="event.finishMoment" />: </b>
+			<spring:message code="event.finishMoment" var="finishMomentHeader" />
+			<jstl:out value="${row.finishMoment}"></jstl:out>
+			<br />
+			
+			<b><spring:message code="event.numberMaxParticipant" />: </b>
+			<spring:message code="event.numberMaxParticipant" var="numberMaxParticipantHeader" />
+			<jstl:out value="${row.numberMaxParticipant}"></jstl:out>
+			<br />		
+			
+			<spring:message code="event.display"
+				var="displayHeader" />
 			<security:authorize access="hasRole('USER')">
-				<a href="event/user/display.do?eventId=${row.id}"> <spring:message
-						code="event.display" />
+				<a href="event/user/display.do?eventId=${row.id}">
+					<spring:message code="event.display" />
 				</a>
 			</security:authorize>
 			<security:authorize access="hasRole('CUSTOMER')">
-				<a href="event/customer/display.do?eventId=${row.id}"> <spring:message
-						code="event.display" />
+				<a href="event/customer/display.do?eventId=${row.id}">
+					<spring:message code="event.display" />
 				</a>
 			</security:authorize>
+
 		</display:column>
 		<jstl:if test="${showJoin == true}">
 		<display:column title="${join }">
@@ -93,6 +100,7 @@
 		
 		</display:column>
 		</jstl:if>
+
 
 	</display:table>
 </div>

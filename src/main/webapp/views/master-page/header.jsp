@@ -8,20 +8,21 @@
  * http://www.tdg-seville.info/License.html
  --%>
 
-<%@page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1"%>
 
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
-<%@taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
+<%@taglib prefix="security"
+	uri="http://www.springframework.org/security/tags"%>
 
 <script type="text/javascript">
-	function search()
-	{
+	function search() {
 		var key = document.getElementById("idsearch").value;
-		window.location.replace('actor/search.do?keyword='+ key);
+		window.location.replace('actor/search.do?keyword=' + key);
 	}
-	function hidSearch(event)
-	{
-		  if (e.which == 13)  return false;
+	function hidSearch(event) {
+		if (e.which == 13)
+			return false;
 	}
 </script>
 
@@ -36,134 +37,134 @@
 
 		<!-- BUTTON WHEN MOBILE OR EXTRA SMALL SIZE -->
 		<div class='navbar-header'>
-	
-			<button type='button' class='navbar-toggle' data-toggle='collapse' data-target='.navbar-collapse'>
-				<span class='sr-only'>Toggle Navigation</span>
-				<span class='icon-bar'></span>
-				<span class='icon-bar'></span>
-				<span class='icon-bar'></span>
-			</button> 
+
+			<button type='button' class='navbar-toggle' data-toggle='collapse'
+				data-target='.navbar-collapse'>
+				<span class='sr-only'>Toggle Navigation</span> <span
+					class='icon-bar'></span> <span class='icon-bar'></span> <span
+					class='icon-bar'></span>
+			</button>
 		</div>
 
-		
+
 		<!-- *********************************************** -->
 		<!-- HERE STARTS THE DIFFERENT MENU'S AND SUB-MENU'S -->
 		<!-- *********************************************** -->
-				
-		
-		
-		<!-- Main headbar instructions -->
-    	<ul class='nav navbar-nav collapse navbar-collapse'>
 
-           
-            <!-- ADMIN -->
-            <security:authorize access="hasRole('ADMIN')">
-				<li>
-					<a href='#' data-toggle='dropdown'>
-						<spring:message	code="master.page.administrator" />
-						<span class='caret'></span>
-					</a>
-					
+
+
+		<!-- Main headbar instructions -->
+		<ul class='nav navbar-nav collapse navbar-collapse'>
+
+
+			<!-- ADMIN -->
+			<security:authorize access="hasRole('ADMIN')">
+				<li><a href='#' data-toggle='dropdown'> <spring:message
+							code="master.page.administrator" /> <span class='caret'></span>
+				</a>
+
 					<ul class='dropdown-menu'>
-						<li><a href="folder/actor/list.do"><spring:message code="master.page.folders" /></a></li>
-					</ul>
-				</li>		
+						<li><a href="folder/actor/list.do"><spring:message
+									code="master.page.folders" /></a></li>
+					</ul></li>
 			</security:authorize>
-            
-            
-            <!-- AUTENTICATED -->
-         	<security:authorize access="isAuthenticated()">
-				<li>
-					<a href='#' data-toggle='dropdown' class="text-capitalize"> <!-- Mayus la primera por css -->
-			        	<security:authentication property="principal.username" />
-			        	<span class='caret'></span>
-					</a>
+
+
+			<!-- AUTENTICATED -->
+			<security:authorize access="isAuthenticated()">
+				<li><a href='#' data-toggle='dropdown' class="text-capitalize">
+						<!-- Mayus la primera por css --> <security:authentication
+							property="principal.username" /> <span class='caret'></span>
+				</a>
 					<ul class='dropdown-menu'>
-						
+
 						<!-- PROFILE CUSTOMER -->
 						<security:authorize access="hasRole('CUSTOMER')">
-							<li><a href="customer/display.do"><spring:message code="master.page.customer.listProfile" /></a></li>
-							<li><a href="customer/edit.do"><spring:message code="master.page.customer.editProfile" /></a></li>
+							<li><a href="customer/display.do"><spring:message
+										code="master.page.customer.listProfile" /></a></li>
 						</security:authorize>
-						
+
 						<!-- PROFILE USER -->
 						<security:authorize access="hasRole('USER')">
-							<li><a href="user/display.do"><spring:message code="master.page.user.listProfile" /></a></li>
-							<li><a href="user/edit.do"><spring:message code="master.page.user.listProfile" /></a></li>					
+							<li><a href="user/display.do"><spring:message
+										code="master.page.user.listProfile" /></a></li>
 						</security:authorize>
-						
+
 						<li class='divider'></li>
-						
+
 						<!-- FOLDERS USER -->
 						<security:authorize access="hasRole('USER')">
-							<li><a href="folder/actor/list.do"><spring:message code="master.page.folders" /></a></li>
+							<li><a href="folder/actor/list.do"><spring:message
+										code="master.page.folders" /></a></li>
 						</security:authorize>
-						
+
 						<!-- FOLDERS CUSTOMER -->
 						<security:authorize access="hasRole('CUSTOMER')">
-							<li><a href="folder/actor/list.do"><spring:message code="master.page.folders" /></a></li>
+							<li><a href="folder/actor/list.do"><spring:message
+										code="master.page.folders" /></a></li>
 						</security:authorize>
-						
+
 						<li class='divider'></li>
-						
+
 						<!-- INVOICES CUSTOMER -->
 						<security:authorize access="hasRole('CUSTOMER')">
-							<li><a href="customer/seeInvoices.do"><spring:message code="master.page.customer.seeInvoices" /></a></li>
+							<li><a href="customer/seeInvoices.do"><spring:message
+										code="master.page.customer.seeInvoices" /></a></li>
 						</security:authorize>
-						
+
 						<!-- FRIENDSHIPS USER -->
 						<security:authorize access="hasRole('USER')">
-							<li><a href="friendships/user/list.do"><spring:message code="master.page.user.friendships" /></a></li>
-							<li><a href="friendship/user/list.do"><spring:message code="master.page.user.friendshipRequest" /></a></li>
+							<li><a href="friendships/user/list.do"><spring:message
+										code="master.page.user.friendships" /></a></li>
+							<li><a href="friendship/user/list.do"><spring:message
+										code="master.page.user.friendshipRequest" /></a></li>
 						</security:authorize>
-						
+
 						<li class='divider'></li>
-						
+
 						<!-- LOGOUT -->
-						<li><a href="j_spring_security_logout"><spring:message code="master.page.logout" /> </a></li>
-					</ul>
-				</li>
+						<li><a href="j_spring_security_logout"><spring:message
+									code="master.page.logout" /> </a></li>
+					</ul></li>
 			</security:authorize>
 
-			
+
 			<!-- EVENTS -->
 			<security:authorize access="hasRole('USER')">
-				<li>
-					<a href='#' data-toggle='dropdown'>
-						<spring:message	code="master.page.user.eventsgroup" />
-						<span class='caret'></span>
-					</a>
+				<li><a href='#' data-toggle='dropdown'> <spring:message
+							code="master.page.user.eventsgroup" /> <span class='caret'></span>
+				</a>
 					<ul class='dropdown-menu'>
-						<li><a href="event/user/listAllEvents.do"><spring:message code="master.page.user.listAllEvents" /></a></li>
-						<li><a href="event/user/list.do"><spring:message code="master.page.user.events" /></a></li>
-						<li><a href="event/user/create.do"><spring:message code="master.page.createEvents" /></a></li>
-					</ul>
-				</li>
+						<li><a href="event/user/listAllEvents.do"><spring:message
+									code="master.page.user.listAllEvents" /></a></li>
+						<li><a href="event/user/list.do"><spring:message
+									code="master.page.user.events" /></a></li>
+						<li><a href="event/user/create.do"><spring:message
+									code="master.page.createEvents" /></a></li>
+					</ul></li>
 			</security:authorize>
-			
+
 			<security:authorize access="hasRole('CUSTOMER')">
-				<li>
-					<a href='#' data-toggle='dropdown'>
-						<spring:message	code="master.page.user.eventsgroup" /> <!-- le dejo el de user pq es lo mismo -->
+				<li><a href='#' data-toggle='dropdown'> <spring:message
+							code="master.page.user.eventsgroup" /> <!-- le dejo el de user pq es lo mismo -->
 						<span class='caret'></span>
-					</a>
-					<ul class='dropdown-menu'>				
-						<li><a href="event/customer/list.do"><spring:message code="master.page.customer.events" /></a></li>
-						<li><a href="event/customer/create.do"><spring:message code="master.page.createEvents" /></a></li>
-					</ul>
-				</li>
+				</a>
+					<ul class='dropdown-menu'>
+						<li><a href="event/customer/list.do"><spring:message
+									code="master.page.customer.events" /></a></li>
+						<li><a href="event/customer/create.do"><spring:message
+									code="master.page.createEvents" /></a></li>
+					</ul></li>
 			</security:authorize>
-			
-			
-			
-			
+
+
+
+
 			<!-- TOURNAMENT -->
 			<security:authorize access="hasRole('USER')">
-				<li>
-					<a href='#' data-toggle='dropdown'>
-						<spring:message	code="master.page.tournament" />
-						<span class='caret'></span>
-					</a>
+				<li><a href='#' data-toggle='dropdown'> <spring:message
+							code="master.page.tournament" /> <span class='caret'></span>
+				</a>
 					<ul class='dropdown-menu'>
 					
 						<li><a href="tournament/listAll.do"><spring:message code="master.page.actor.all.tournaments" /></a></li>
@@ -173,16 +174,14 @@
 					</ul>
 				</li>
 				
-					
 			</security:authorize>
-			
+
 			<security:authorize access="hasRole('CUSTOMER')">
-				<li>
-					<a href='#' data-toggle='dropdown'>
-						<spring:message	code="master.page.tournament" />
-						<span class='caret'></span>
-					</a>
+				<li><a href='#' data-toggle='dropdown'> <spring:message
+							code="master.page.tournament" /> <span class='caret'></span>
+				</a>
 					<ul class='dropdown-menu'>
+
 						<li><a href="tournament/customer/list.do"><spring:message code="master.page.actor.list.tournaments" /></a></li>
 						<li><a href="tournament/customer/create.do"><spring:message code="master.page.actor.create.tournaments" /></a></li>
 						<li><a href="tournament/listAll.do"><spring:message code="master.page.actor.all.tournaments" /></a></li>
@@ -202,30 +201,32 @@
       				</div>
       			</form>			
 			</li>		
+
 			</security:authorize>
-         	
-         	<!-- TEAM -->
+
+			<!-- TEAM -->
 			<security:authorize access="hasRole('USER')">
-				<li>
-					<a href='#' data-toggle='dropdown'>
-						<spring:message	code="master.page.team" />
-						<span class='caret'></span>
-					</a>
+				<li><a href='#' data-toggle='dropdown'> <spring:message
+							code="master.page.team" /> <span class='caret'></span>
+				</a>
 					<ul class='dropdown-menu'>
-						<li><a href="team/user/listAllTeams.do"><spring:message code="master.page.user.listAllTeams" /></a></li>
-						<li><a href="team/user/list.do"><spring:message code="master.page.user.teams" /></a></li>
-						<li><a href="team/user/create.do"><spring:message code="master.page.actor.create.team" /></a></li>
-						<li><a href="requestTeam/user/list.do"><spring:message code="master.page.user.requestTeam" /></a></li>
-					</ul>
-				</li>		
+						<li><a href="team/user/listAllTeams.do"><spring:message
+									code="master.page.user.listAllTeams" /></a></li>
+						<li><a href="team/user/list.do"><spring:message
+									code="master.page.user.teams" /></a></li>
+						<li><a href="team/user/create.do"><spring:message
+									code="master.page.actor.create.team" /></a></li>
+						<li><a href="requestTeam/user/list.do"><spring:message
+									code="master.page.user.requestTeam" /></a></li>
+					</ul></li>
 			</security:authorize>
-			
-			
+
+
 			<!-- SPORTS CENTER -->
-         	<security:authorize access="hasRole('USER')">
-					<li><a href="event/user/calendar/seeSportCenters.do"><spring:message code="master.page.user.seeSportCenters" /></a></li>			
+			<security:authorize access="hasRole('USER')">
+				<li><a href="event/user/calendar/seeSportCenters.do"><spring:message
+							code="master.page.user.seeSportCenters" /></a></li>
 			</security:authorize>
-			
 			
 				<!-- Here starts the search bar -->
 			<security:authorize access="hasRole('USER')">
@@ -254,26 +255,32 @@
 						<spring:message code="master.page.register" />
 						<span class='caret'></span>
 					</a>
+					
 					<ul class='dropdown-menu'>
-						<li><a href="customer/create.do"><spring:message code="master.page.register.customer" /></a></li>
-						<li><a href="user/create.do"><spring:message code="master.page.register.user" /></a></li>
-					</ul>
-				</li>
+						<li><a href="customer/create.do"><spring:message
+									code="master.page.register.customer" /></a></li>
+						<li><a href="user/create.do"><spring:message
+									code="master.page.register.user" /></a></li>
+					</ul></li>
 			</security:authorize>
 				
 	    </ul>
+
 	</div>
 </div>
 
-<br><br><br><br>
+<br>
+<br>
+<br>
+<br>
 
 
 <!-- ******** -->
 <!-- LOGOTYPE -->
 <!-- ******** -->
 
-<div id='header_image' class='container'> 
-	<a href="welcome/index.do">
-		<img src="images/logotrans.png" alt="SportsMate Co., Inc." />
+<div id='header_image' class='container'>
+	<a href="welcome/index.do"> <img src="images/logotrans.png"
+		alt="SportsMate Co., Inc." />
 	</a>
 </div>

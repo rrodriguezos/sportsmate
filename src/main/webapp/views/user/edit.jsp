@@ -29,6 +29,8 @@
 		<h1><spring:message code="user.register" /></h1>
 	</jstl:if>
 	
+	<br>
+	
 	<fieldset>
 		
 			<legend>
