@@ -74,7 +74,7 @@ public class MessageActorController extends AbstractController{
 		Message message;
 		MessageForm messageForm;
 		int folderId;
-		
+		boolean destinatario = false;
 
 		message = messageService.findOne(messageId);
 		messageForm = messageService.construct(message);
@@ -91,6 +91,11 @@ public class MessageActorController extends AbstractController{
 		result.addObject("to", message.getRecipient().getName()+" "+
 				   				   message.getRecipient().getSurname()+" ("+
 				   				   message.getRecipient().getEmail()+")");
+		
+		if(message.getRecipient().equals(actorService.findByPrincipal())){
+			destinatario = true;
+			result.addObject("destinatario", destinatario);
+		}
 
 		return result;
 
@@ -131,6 +136,7 @@ public class MessageActorController extends AbstractController{
 		result = createEditModelAndView(messageForm);
 		
 		result.addObject("recipient", aux.getSender().getName()+"-"+aux.getSender().getSurname()+" ("+aux.getSender().getEmail()+")");
+		result.addObject("distinto", true);
 
 		return result;
 

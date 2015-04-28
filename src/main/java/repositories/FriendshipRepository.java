@@ -11,7 +11,7 @@ import domain.RequestTeam;
 public interface FriendshipRepository extends JpaRepository<Friendship, Integer> {
 	
 	
-	@Query("select u.friendships from User u where u.id=?1")
+	@Query("select u.friendships from User u join u.friendships f where f.user.id =?1 or f.userFriend.id =?1")
 	Collection<Friendship> findAllFriendshisByUserId(int userId);
 	
 	@Query("select f from Friendship f where f.request = false and f.userFriend.id =?1")

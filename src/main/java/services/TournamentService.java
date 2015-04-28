@@ -12,7 +12,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import repositories.TournamentRepository;
-import security.LoginService;
 import domain.Actor;
 import domain.Customer;
 import domain.Match;
@@ -43,10 +42,11 @@ public class TournamentService {
 
 	public Tournament findOne(int tournamentId) {
 		Tournament result;
-		
-		
+
 		result = tournamentRepository.findOne(tournamentId);
-		Assert.isTrue(result.getUser().equals(userService.findByPrincipal()) || result.getCustomer().equals(customerService.findByPrincipal()));
+		Assert.isTrue(result.getUser().equals(userService.findByPrincipal())
+				|| result.getCustomer().equals(
+						customerService.findByPrincipal()));
 		return result;
 	}
 
@@ -134,7 +134,7 @@ public class TournamentService {
 
 		if (actorService.findByPrincipal() instanceof User) {
 
-			 Assert.isTrue(currentDate.compareTo(tournament.getFinishMoment())> 0);
+			Assert.isTrue(currentDate.compareTo(tournament.getFinishMoment()) > 0);
 			owner = userService.findByPrincipal();
 			owner.getTournamentsCreated().remove(tournament);
 
@@ -143,7 +143,7 @@ public class TournamentService {
 		} else if (actorService.findByPrincipal() instanceof Customer) {
 
 			customer = customerService.findByPrincipal();
-			Assert.isTrue(currentDate.compareTo(tournament.getFinishMoment())> 0);
+			Assert.isTrue(currentDate.compareTo(tournament.getFinishMoment()) > 0);
 			customer.getTournaments().remove(tournament);
 			customerService.save(customer);
 		}
@@ -162,10 +162,10 @@ public class TournamentService {
 		actor = actorService.findByPrincipal();
 
 		if (actor instanceof User) {
-			owner = (User) actor;
+			owner = userService.findByPrincipal();
 			Assert.isTrue(tournament.getUser().equals(owner));
 		} else if (actor instanceof Customer) {
-			customer = (Customer) actor;
+			customer = customerService.findByPrincipal();
 			Assert.isTrue(tournament.getCustomer().equals(customer));
 		}
 

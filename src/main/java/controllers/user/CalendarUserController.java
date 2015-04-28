@@ -1,8 +1,10 @@
 package controllers.user;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -74,8 +76,11 @@ public class CalendarUserController extends AbstractController
 		ModelAndView result;
 		Customer c;
 		User u;
+		Date actualDate;
+		Collection<Event> eventsToRemove;
 		
-		
+		actualDate = new Date();
+		eventsToRemove = new ArrayList<Event>();
 		
 		if( id < 0 )
 			new Throwable("Bad id");
@@ -105,12 +110,18 @@ public class CalendarUserController extends AbstractController
 		    }
 		});
 		
-	
+		for(Event e: c.getEvents()){
+			if(e.getStartMoment().before(actualDate)){
+				eventsToRemove.add(e);
+			}
+		}
 		
+		c.getEvents().removeAll(eventsToRemove);
 		
 		
 		
 		result.addObject("events", c.getEvents());
+		result.addObject("actualDate", actualDate);
 		result.addObject("tournaments", c.getTournaments());
 		result.addObject("userEvents", u.getEvents());
 		

@@ -42,9 +42,11 @@ public class FriendshipService {
 		Friendship friendship;
 		Date date;
 		User principal;
+		long miliseconds;
 
 		friendship = new Friendship();
-		date = new Date();
+		miliseconds = System.currentTimeMillis() - 3;
+		date = new Date(miliseconds);
 		principal = userService.findByPrincipal();
 		friendship.setUserFriend(userFriend);
 		friendship.setUser(principal);
@@ -119,7 +121,12 @@ public class FriendshipService {
 		request =create(userFriend);
 		principal = userService.findByPrincipal();
 		
-		
+		if(userFriend.getFriendships().equals(null)){
+			userFriend.setFriendships(new ArrayList<Friendship>());
+		}
+		if(principal.getFriendships().equals(null)){
+			principal.setFriendships(new ArrayList<Friendship>());
+		}
 		
 		request = save(request);
 		

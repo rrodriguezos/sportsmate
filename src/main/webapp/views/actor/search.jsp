@@ -37,13 +37,11 @@
 		<spring:message code="user.sendRequest" var="sendRequestHeader" />
 		<display:column title="${sendRequestHeader}">
 			<jstl:if test="${principal != row}">
-				<jstl:forEach var="friendship" items="${friendships}">
-					<jstl:if test="${friendship.userFriend != row}">
+					<jstl:if test="${!friendshipRequested.contains(row)}">
 						<a href="friendship/user/sendRequest.do?userFriendId=${row.id}">
 							<spring:message code="user.sendRequest" />
 						</a>
 					</jstl:if>
-				</jstl:forEach>
 			</jstl:if>
 		</display:column>
 	</security:authorize>

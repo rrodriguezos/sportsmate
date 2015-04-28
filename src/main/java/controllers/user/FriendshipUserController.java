@@ -88,10 +88,9 @@ public class FriendshipUserController extends AbstractController {
 		friendshipService.sendRequest(userFriendId);
 		friendships = friendshipService.findAllFriendshipsByUserId();
 		
-		result = new ModelAndView("friendship/list");
+		result = new ModelAndView("redirect:../../welcome/index.do");
 
 		result.addObject("friendships", friendships);
-		result.addObject("requestURI", "friendship/user/list.do");
 
 		return result;
 

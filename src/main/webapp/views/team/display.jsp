@@ -67,7 +67,7 @@
 	<br>
 	
 	<security:authorize access="hasRole('USER')">
-		<acme:cancel code="team.back" url="team/user/list.do" />
+		<acme:cancel code="team.back" url="team/user/listAllTeams.do" />
 		<jstl:if test="${principal.teamsCreated.contains(team)}">
 			<input type="button" class="btn btn-md btn-success" name="edit"
 				value="<spring:message code="team.edit"/>"

@@ -1,5 +1,6 @@
 package controllers;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,17 +48,29 @@ public class ActorController extends AbstractController
 		Collection<User> users;
 		User principal;
 		Collection<Friendship> friendships;
+		Collection<User> friendshipRequested;
 		
 		
 		customers = customerService.findByKeyword(keyword);
 		users = userService.findByKeyword(keyword);
 		principal = userService.findByPrincipal();
 		friendships = friendshipService.findAllFriendshipsByUserId();
+		friendshipRequested = new ArrayList<User>();
+		
+		for(Friendship f: friendships){
+			if(f.getUser().equals(principal)){
+				friendshipRequested.add(f.getUserFriend());
+			}
+			if(f.getUserFriend().equals(principal)){
+				friendshipRequested.add(f.getUser());
+			}
+		}
 		
 		result = new ModelAndView("actor/search");
 		result.addObject("requestURI", "actor/search.do");
 		result.addObject("customers", customers);
 		result.addObject("friendships", friendships);
+		result.addObject("friendshipRequested", friendshipRequested);
 		result.addObject("users", users);
 		result.addObject("principal",principal);
 		

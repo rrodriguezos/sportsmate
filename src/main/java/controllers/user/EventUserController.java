@@ -1,5 +1,6 @@
 package controllers.user;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 
@@ -70,15 +71,30 @@ public class EventUserController extends AbstractController {
 		ModelAndView result;
 		Collection<Event> events;
 		User principal;
+		Date actualDate;
+		Collection<Event> eventsToRemove;
+		boolean showJoin = true;
 
+		actualDate = new Date();
+		eventsToRemove = new ArrayList<Event>();
 		events = eventService.findAll();
 		principal = userService.findByPrincipal();
+		
+		for(Event e: events){
+			if(e.getStartMoment().before(actualDate)){
+				eventsToRemove.add(e);
+			}
+		}
+		
+		events.removeAll(eventsToRemove);
 
 		result = new ModelAndView("event/list");
 
 		result.addObject("events", events);
 		result.addObject("principal", principal);
+		result.addObject("showJoin", showJoin);
 		result.addObject("requestURI", "event/user/listAllEvents.do");
+		result.addObject("userEvents", principal.getEvents());
 
 		return result;
 
@@ -94,18 +110,22 @@ public class EventUserController extends AbstractController {
 		EventForm eventForm;
 		Collection<User> users;
 		Actor actor;
+		Boolean estoyApuntado = false;
 
 		event = eventService.findOne(eventId);
 		eventForm = eventService.construct(event);
 		users = userService.findAllUsersByEventId(eventId);
 		actor = actorService.findByPrincipal();
 
+		if (event.getUsers().contains(actor)) {
+			estoyApuntado = true;
+		}
 		result = new ModelAndView("event/display");
 
 		result.addObject("eventForm", eventForm);
 		result.addObject("users", users);
 		result.addObject("creationMoment", event.getCreationMoment());
-
+		result.addObject("estoyApuntado", estoyApuntado);
 		Date today = new Date(System.currentTimeMillis());
 		Date finish = eventForm.getFinishMoment();
 		result.addObject("today", today);
@@ -215,6 +235,7 @@ public class EventUserController extends AbstractController {
 		} catch (Throwable oops) {
 			result = createEditModelAndView(eventForm, "event.commit.error");
 		}
+		
 		return result;
 
 	}

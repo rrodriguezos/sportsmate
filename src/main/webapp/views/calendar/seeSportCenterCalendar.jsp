@@ -59,7 +59,7 @@
 requestURI="event/user/calendar/seeSportCenterCalendar.do"
 pagesize="20" class="table table-bordered table-hover" defaultsort="1" defaultorder="ascending" >
 
-<display:column title="${startMoment }"  format="{0,date,dd-MM-yyyy}"> 
+<display:column title="${startMoment }"  format="{0,date,dd-MM-yyyy }"> 
 	<jstl:out value="${row.startMoment}"/>
 </display:column>
 
@@ -122,6 +122,7 @@ pagesize="20" class="table table-bordered table-hover" defaultsort="1" defaultor
 			<jstl:if test="${contains == false}">
 				<a href="event/user/calendar/joinEvent.do?id=${row.id }"><jstl:out value="${join }"></jstl:out></a>
 			</jstl:if>
+		
 			
 			<jstl:if test="${contains == true}">
 				<jstl:out value="${joined }"></jstl:out>
@@ -129,10 +130,8 @@ pagesize="20" class="table table-bordered table-hover" defaultsort="1" defaultor
 		</jstl:if>
 	
 	
-	
 
 </display:column>
-
 
 
 

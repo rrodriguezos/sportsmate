@@ -54,7 +54,10 @@ public class ProfileCustomerController extends AbstractController {
 
 		result.addObject("customerForm", customerForm);
 		result.addObject("actor", actor);
-		Double rating = profile.getRating();
+		Double rating = 0.0;
+		if (profile.getRating() > 0.0 && profile.getRating() < 5.0) {
+			rating = profile.getRating();
+		}
 		result.addObject("rating", rating);
 		result.addObject("customer", customer);
 		result.addObject("requestURI", "profile/customer/display.do");

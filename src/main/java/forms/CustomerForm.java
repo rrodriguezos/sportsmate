@@ -14,6 +14,8 @@ import org.hibernate.validator.constraints.URL;
 @Access(AccessType.PROPERTY)
 public class CustomerForm {
 		
+	private int id;
+	
 	private String name;
 	private String surname;
 	private String email;
@@ -34,8 +36,29 @@ public class CustomerForm {
 	private String password2;
 	private String username;	
 	
-	private boolean terms;    
-   
+	private boolean terms;   
+	
+	public CustomerForm()
+	{
+				
+		super();
+		
+	}
+	
+	public int getId() 
+	{
+		
+		return id;
+		
+	}
+
+	public void setId(int id) 
+	{
+		
+		this.id = id;
+		
+	}
+
 	@NotBlank
     @SafeHtml
 	public String getName() 

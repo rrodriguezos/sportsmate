@@ -9,6 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.Index;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
@@ -25,8 +26,11 @@ import org.hibernate.validator.constraints.URL;
 		@Index(columnList = "email") })
 public class Customer extends Actor {
 	// Constructors----------------------------------------------------------------------
-	public Customer() {
+	public Customer() 
+	{
+		
 		super();
+		
 	}
 
 	// Attributes-------------------------------------------------------------------------
@@ -43,108 +47,174 @@ public class Customer extends Actor {
 
 	@NotBlank
 	@Size(min = 9, max = 9)
-	public String getCif() {
+	public String getCif()
+	{
+		
 		return cif;
+		
 	}
 
-	public void setCif(String cif) {
+	public void setCif(String cif) 
+	{
+		
 		this.cif = cif;
+		
 	}
 
 	@NotBlank
-	public String getStreet() {
+	public String getStreet() 
+	{
+		
 		return street;
+		
 	}
 
-	public void setStreet(String street) {
+	public void setStreet(String street)
+	{
+		
 		this.street = street;
+		
 	}
 
 	@Range(min = 0, max = 99999)
-	public int getZip() {
+	public int getZip()
+	{
+		
 		return zip;
+		
 	}
 
-	public void setZip(int zip) {
+	public void setZip(int zip)
+	{
+		
 		this.zip = zip;
+		
 	}
 
 	@NotBlank
-	public String getProvinceCenter() {
+	public String getProvinceCenter() 
+	{
+		
 		return provinceCenter;
+		
 	}
 
-	public void setProvinceCenter(String provinceCenter) {
+	public void setProvinceCenter(String provinceCenter)
+	{
+		
 		this.provinceCenter = provinceCenter;
+		
 	}
 
 	@NotBlank
-	public String getCity() {
+	public String getCity() 
+	{
+		
 		return city;
+		
 	}
 
-	public void setCity(String city) {
+	public void setCity(String city) 
+	{
+		
 		this.city = city;
+		
 	}
 
 	@NotBlank
-	public String getNameCenter() {
+	public String getNameCenter() 
+	{
+		
 		return nameCenter;
+		
 	}
 
-	public void setNameCenter(String nameCenter) {
+	public void setNameCenter(String nameCenter) 
+	{
+		
 		this.nameCenter = nameCenter;
+		
 	}
 
 	@NotBlank
 	@Pattern(regexp = "^([+-]\\d+\\s+)?(\\([0-9]+\\)\\s+)?([\\d\\w\\s-]+)$")
-	public String getPhoneCenter() {
+	public String getPhoneCenter()
+	{
+		
 		return phoneCenter;
+		
 	}
 
-	public void setPhoneCenter(String phoneCenter) {
+	public void setPhoneCenter(String phoneCenter)
+	{
+		
 		this.phoneCenter = phoneCenter;
+		
 	}
 
 	@NotBlank
 	@Email
-	public String getEmailCenter() {
+	public String getEmailCenter() 
+	{
+		
 		return emailCenter;
+		
 	}
 
-	public void setEmailCenter(String emailCenter) {
+	public void setEmailCenter(String emailCenter)
+	{
+		
 		this.emailCenter = emailCenter;
+		
 	}
 
 	@URL
-	public String getWeb() {
+	public String getWeb() 
+	{
+		
 		return web;
+		
 	}
 
-	public void setWeb(String web) {
+	public void setWeb(String web)
+	{
+		
 		this.web = web;
+		
 	}
 
 	@Valid
 	@NotNull
 	@ElementCollection
-	public Collection<Vote> getVotes() {
+	public Collection<Vote> getVotes() 
+	{
+		
 		return votes;
+		
 	}
 
-	public void setVotes(Collection<Vote> votes) {
+	public void setVotes(Collection<Vote> votes)
+	{
+		
 		this.votes = votes;
-	}
+		
+	}	
 
-	private Double rating;
+	@Transient
+	public Double getRating() 
+	{
 
-	public Double getRating() {
+		Double rating = 0.0;
+		
+		for(Vote itero : getVotes()){
+			rating+=itero.getScore();
+		}
+				
 		return rating;
+		
 	}
 
-	public void setRating(Double rat) {
-		rating = rat;
-	}
+	
 
 	// Relationships-------------------------------------------------------------------------
 	private Collection<Event> events;
@@ -154,34 +224,52 @@ public class Customer extends Actor {
 	@Valid
 	@NotNull
 	@OneToMany(mappedBy = "customer")
-	public Collection<Event> getEvents() {
+	public Collection<Event> getEvents() 
+	{
+		
 		return events;
+		
 	}
 
-	public void setEvents(Collection<Event> events) {
+	public void setEvents(Collection<Event> events) 
+	{
+		
 		this.events = events;
+		
 	}
 
 	@Valid
 	@NotNull
 	@OneToMany(mappedBy = "customer")
-	public Collection<Tournament> getTournaments() {
+	public Collection<Tournament> getTournaments()
+	{
+		
 		return tournaments;
+		
 	}
 
-	public void setTournaments(Collection<Tournament> tournaments) {
+	public void setTournaments(Collection<Tournament> tournaments)
+	{
+		
 		this.tournaments = tournaments;
+		
 	}
 
 	@Valid
 	@NotNull
 	@OneToMany(mappedBy = "customer")
-	public Collection<Invoice> getInvoices() {
+	public Collection<Invoice> getInvoices()
+	{
+		
 		return invoices;
+		
 	}
 
-	public void setInvoices(Collection<Invoice> invoices) {
+	public void setInvoices(Collection<Invoice> invoices) 
+	{
+		
 		this.invoices = invoices;
+		
 	}
 
 }

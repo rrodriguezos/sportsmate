@@ -46,13 +46,15 @@
 		<form:textarea path="body" readonly="true"/>
 	<br/>
 	<br/>	
-	<br>
+	<br>	
+	<jstl:if test="${destinatario }">
+		<input type="button" class="btn btn-md btn-success" name="reply" value="<spring:message code="message.reply"/>" 
+	   	   onclick="javascript: window.location.replace('message/actor/reply.do?messageId=${messageForm.id}');" />
+	</jstl:if>  	
+
 	<input type="button" class="btn btn-md btn-default" value="<spring:message code="message.back"/>" 
 	   	   onclick="javascript: window.location.replace('message/actor/list.do?folderId= ${folderId}')" /> 
 	   	   
-	<input type="button" class="btn btn-md btn-success" name="reply" value="<spring:message code="message.reply"/>" 
-	   	   onclick="javascript: window.location.replace('message/actor/reply.do?messageId=${messageForm.id}');" />
-
 </form:form>
 
 

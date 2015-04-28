@@ -29,7 +29,6 @@
 		<value>/views/actor/messages</value>
 		<value>/views/user/messages</value>
 		<value>/views/conditions/messages</value>
-		<value>/views/register/messages</value>
 		<value>/views/event/messages</value>
 		<value>/views/friendship/messages</value>
 		<value>/views/team/messages</value>

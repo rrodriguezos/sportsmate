@@ -98,6 +98,10 @@ public abstract class Actor extends DomainEntity{
 		return errorImagen;
 	}
 	
+	public String toString(){
+		return getName()+" "+getSurname()+" ("+getEmail()+")";
+	}
+	
 	
 	//Relationships-------------------------------------------------------------------------
 	private UserAccount userAccount;
