@@ -162,7 +162,7 @@ public class VoteUserController extends AbstractController {
 				result = new ModelAndView();
 				result.addObject("yaVotado", false);
 				result.addObject("voteCustomer", true);
-				result.addObject("message", "eventVote.commit.error");
+				result.addObject("message", "eventVote.commit.invalidvote");
 			}
 		} else {
 			try {
