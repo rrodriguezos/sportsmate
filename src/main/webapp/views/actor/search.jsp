@@ -32,17 +32,21 @@
 
 	<spring:message code="user.email" var="emailHeader" />
 	<display:column property="email" title="${emailHeader}" />
-	
+
 	<security:authorize access="hasRole('USER')">
-	<spring:message code="user.sendRequest" var="sendRequestHeader" />
-	<display:column title="${sendRequestHeader}">
-		<jstl:if test="${principal != row}">
-		<a href="friendship/user/sendRequest.do?userFriendId=${row.id}"> <spring:message
-				code="user.sendRequest" />
-		</a>
-		</jstl:if>
-	</display:column>
-	</security:authorize>	
+		<spring:message code="user.sendRequest" var="sendRequestHeader" />
+		<display:column title="${sendRequestHeader}">
+			<jstl:if test="${principal != row}">
+				<jstl:forEach var="friendship" items="${friendships}">
+					<jstl:if test="${friendship.userFriend != row}">
+						<a href="friendship/user/sendRequest.do?userFriendId=${row.id}">
+							<spring:message code="user.sendRequest" />
+						</a>
+					</jstl:if>
+				</jstl:forEach>
+			</jstl:if>
+		</display:column>
+	</security:authorize>
 
 
 </display:table>

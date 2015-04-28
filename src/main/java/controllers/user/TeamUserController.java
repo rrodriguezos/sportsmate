@@ -1,5 +1,6 @@
 package controllers.user;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import javax.validation.Valid;
@@ -12,10 +13,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import services.RequestTeamService;
 import services.TeamService;
 import services.UserService;
 
 import controllers.AbstractController;
+import domain.RequestTeam;
 import domain.Team;
 import domain.User;
 import forms.TeamForm;
@@ -30,6 +33,9 @@ public class TeamUserController extends AbstractController {
 
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	private RequestTeamService requestTeamService;
 
 	// Constructors -----------------------------------------------------------
 	public TeamUserController() 
@@ -69,17 +75,25 @@ public class TeamUserController extends AbstractController {
 		
 		ModelAndView result;
 		Collection<Team> teams;
+		Collection<Team> teamsRequested = new ArrayList<Team>();
 		User principal;
 		Boolean showSend = true;
-		
+		Collection<RequestTeam> requestTeam;
 		
 		principal = userService.findByPrincipal();
 		teams = teamService.findAllOtherUser(principal.getId());
+		requestTeam = requestTeamService.findAllRequestSendFromUser(principal.getId());
+		
+		for(RequestTeam r: requestTeam){
+			teamsRequested.add(r.getTeam());
+		}
 		
 		result = new ModelAndView("team/list");
 		
 		result.addObject("teams", teams);
+		result.addObject("teamsRequested", teamsRequested);
 		result.addObject("principal", principal);
+		result.addObject("requestTeam", requestTeam);
 		result.addObject("showSend", showSend);
 		result.addObject("requestURI", "team/user/listAllTeams.do");
 		

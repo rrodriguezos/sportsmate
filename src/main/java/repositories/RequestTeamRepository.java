@@ -15,4 +15,7 @@ public interface RequestTeamRepository extends JpaRepository<RequestTeam, Intege
 	@Query("select r from RequestTeam r where r.request = false and r.team.captain.id =?1")
 	Collection<RequestTeam> findAllRequestTeam(int userId);
 	
+	@Query("select r from RequestTeam r where r.request = false and r.user.id =?1")
+	Collection<RequestTeam> findAllRequestSendFromUser(int userId);
+	
 }

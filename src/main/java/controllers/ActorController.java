@@ -11,8 +11,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 import services.ActorService;
 import services.CustomerService;
+import services.FriendshipService;
 import services.UserService;
 import domain.Customer;
+import domain.Friendship;
 import domain.User;
 
 @Controller
@@ -30,6 +32,9 @@ public class ActorController extends AbstractController
 	@Autowired
 	private UserService userService;
 	
+	@Autowired
+	private FriendshipService friendshipService;
+	
 	
 	//Search----------------------------------------------------------
 	
@@ -41,14 +46,18 @@ public class ActorController extends AbstractController
 		Collection<Customer> customers;
 		Collection<User> users;
 		User principal;
+		Collection<Friendship> friendships;
+		
 		
 		customers = customerService.findByKeyword(keyword);
 		users = userService.findByKeyword(keyword);
 		principal = userService.findByPrincipal();
+		friendships = friendshipService.findAllFriendshipsByUserId();
 		
 		result = new ModelAndView("actor/search");
 		result.addObject("requestURI", "actor/search.do");
 		result.addObject("customers", customers);
+		result.addObject("friendships", friendships);
 		result.addObject("users", users);
 		result.addObject("principal",principal);
 		

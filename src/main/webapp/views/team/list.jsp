@@ -47,9 +47,11 @@
 		<spring:message code="team.sendRequest" var="sendRequestHeader" />
 		<display:column title="${sendRequestHeader}">
 				<security:authorize access="hasRole('USER')">
+					<jstl:if test="${!teamsRequested.contains(row)}">
 					<a href="requestTeam/user/sendRequest.do?teamId=${row.id}"> <spring:message
 							code="team.sendRequest" />
 					</a>
+					</jstl:if>
 				</security:authorize>
 		</display:column>
 	</jstl:if>

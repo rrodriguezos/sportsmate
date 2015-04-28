@@ -133,6 +133,8 @@ public class UserService {
 		Folder inbox;
 		Folder outbox;
 		Collection<Folder> folders;
+		
+		if(user.getId() == 0){
 
 		folders = new ArrayList<Folder>();
 
@@ -159,6 +161,10 @@ public class UserService {
 
 		folderService.save(inbox);
 		folderService.save(outbox);
+		
+		}else{
+			result = userRepository.save(user);
+		}
 
 		return result;
 		

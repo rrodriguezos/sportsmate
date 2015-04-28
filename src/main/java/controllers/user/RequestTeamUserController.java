@@ -1,5 +1,6 @@
 package controllers.user;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -87,15 +88,27 @@ public class RequestTeamUserController extends AbstractController {
 
 		ModelAndView result;
 		Collection<Team> teams;
+		Collection<Team> teamsRequested = new ArrayList<Team>();
 		Team team;
+		Boolean showSend = true;
+		Collection<RequestTeam> requestTeam;
+		User principal;
 		
+		principal = userService.findByPrincipal();
 		team = teamService.findOne(teamId);
 		requestTeamService.sendRequest(teamId);
-		teams = teamService.findAllOtherUser(team.getCaptain().getId());
+		teams = teamService.findAllOtherUser(principal.getId());
+		requestTeam = requestTeamService.findAllRequestSendFromUser(principal.getId());
+		
+		for(RequestTeam r: requestTeam){
+			teamsRequested.add(r.getTeam());
+		}
 
 		result = new ModelAndView("team/list");
 		
 		result.addObject("teams", teams);
+		result.addObject("teamsRequested", teamsRequested);
+		result.addObject("showSend", showSend);
 		result.addObject("requestURI", "team/user/listAllTeams.do");
 
 		return result;

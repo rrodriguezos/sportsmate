@@ -80,6 +80,15 @@ public class RequestTeamService {
 		return result;
 	}
 	
+	public Collection<RequestTeam> findAllRequestSendFromUser(int userId)
+	{
+		Collection<RequestTeam> result;
+		result = requestTeamRepository.findAllRequestSendFromUser(userId);
+		return result;
+	}
+	
+	
+	
 	public void sendRequest(int teamId)
 	{
 		User principal;
