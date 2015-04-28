@@ -23,42 +23,66 @@
 
 <div class="table-responsive">
 	<display:table name="tournaments" id="row" requestURI="${requestURI}"
-		pagesize="5" class="table table-bordered table-hover">
+		pagesize="5" class="">
+		
 		<display:column>
+		<div class="col-xs-12">
+			<div class="alert alert-info spm-no-margin-bottom">
+				<spring:message code="tournament.title" var="titleHeader" />
+				<jstl:out value="${row.title}"></jstl:out>
+			</div>
+		
+			<div class="well well-sm col-xs-12 spm-no-margin-bottom">
+				<div class="col-xs-12 col-md-4">
+					<div>
+						<b><spring:message code="tournament.startMoment" />: </b>
+						<spring:message code="tournament.startMoment" var="startMomentHeader" />
+						<jstl:out value="${row.startMoment}"></jstl:out>
+					</div>
+						
+					<div>
+						<b><spring:message code="tournament.finishMoment" />: </b>
+						<spring:message code="tournament.finishMoment" var="finishMomentHeader" />
+						<jstl:out value="${row.finishMoment}"></jstl:out>
+					</div>
+				</div>
 
-
-			<b><spring:message code="tournament.title" />: </b>
-			<spring:message code="tournament.title" var="titleHeader" />
-			<jstl:out value="${row.title}"></jstl:out>
-			<br />
-			<b><spring:message code="tournament.advertised" />: </b>
-			<spring:message code="tournament.advertised" var="advertisedHeader" />
-			<jstl:out value="${row.advertised}"></jstl:out>
-			<br />
-			<b><spring:message code="tournament.startMoment" />: </b>
-			<spring:message code="tournament.startMoment" var="startMomentHeader" />
-			<jstl:out value="${row.startMoment}"></jstl:out>
-			<br />
-			<b><spring:message code="tournament.finishMoment" />: </b>
-			<spring:message code="tournament.finishMoment"
-				var="finishMomentHeader" />
-			<jstl:out value="${row.finishMoment}"></jstl:out>
-			<br />
-			<b><spring:message code="tournament.numberOfTeams" />: </b>
-			<spring:message code="tournament.numberOfTeams"
-				var="numberOfTeamsHeader" />
-			<jstl:out value="${row.numberOfTeams}" />
-			<br />
-			<b><spring:message code="tournament.prize" />: </b>
-			<spring:message code="tournament.prize" var="prizeHeader" />
-			<jstl:out value="${row.prize}" />
-			<br />
-			<b><spring:message code="tournament.sport" />: </b>
-			<spring:message code="tournament.sport" var="sportHeader" />
-			<jstl:out value="${row.sport}" />
-			<br />
+				<div class="col-xs-12 col-md-3">										
+					<div>
+						<b><spring:message code="tournament.sport" />: </b>
+						<spring:message code="tournament.sport" var="sportHeader" />
+						<jstl:out value="${row.sport}" />
+					</div>
+					
+					<div>
+						<b><spring:message code="tournament.numberOfTeams" />: </b>
+						<spring:message code="tournament.numberOfTeams"
+							var="numberOfTeamsHeader" />
+							<jstl:out value="${row.numberOfTeams}" />
+					</div>				
+				</div>
+				
+				<div class="col-xs-12 col-md-3">
+					<div>
+						<b><spring:message code="tournament.advertised" />: </b>
+						<spring:message code="tournament.advertised" var="advertisedHeader" />
+						<jstl:out value="${row.advertised}"></jstl:out>
+					</div>
+					
+					<div>
+						<b><spring:message code="tournament.prize" />: </b>
+						<spring:message code="tournament.prize" var="prizeHeader" />
+						<jstl:out value="${row.prize}" />
+					</div>
+				</div>			
+			</div>
+		</div>
+		
+		<div class="col-xs-12 spm-spacing-list"></div>
+		
 		</display:column>
 
+		
 
 	</display:table>
 </div>
