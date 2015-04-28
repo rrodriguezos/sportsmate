@@ -108,6 +108,8 @@
 		<acme:submit code="event.save" name="saveEU" />
 		
 		<jstl:if test="${eventForm.id != 0 && users.size()==1}">
+			<form:hidden path="owner" />
+			
 			<input type="submit" class="btn btn-md btn-danger" name="deleteEU"
 				value="<spring:message code="event.delete" />"
 				onclick="return confirm('<spring:message code="event.confirm.delete" />')" />

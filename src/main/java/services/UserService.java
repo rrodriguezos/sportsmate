@@ -164,14 +164,6 @@ public class UserService {
 		
 		}else{
 			
-			password = user.getUserAccount().getPassword();
-			passwordCoded = HashPassword.encode(password);
-
-			userUserAccount = user.getUserAccount();
-			userUserAccount.setPassword(passwordCoded);
-
-			user.setUserAccount(userUserAccount);
-			
 			result = userRepository.save(user);
 		}
 		
@@ -418,7 +410,7 @@ public class UserService {
 			aux++;
 		}
 		
-		user.setRating(rating / aux);
+//		user.setRating(rating / aux);
 		userRepository.save(user);
 
 	}

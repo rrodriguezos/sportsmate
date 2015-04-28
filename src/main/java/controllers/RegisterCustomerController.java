@@ -11,102 +11,100 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import services.UserService;
-import domain.User;
-import forms.UserForm;
+import services.CustomerService;
+import domain.Customer;
+import forms.CustomerForm;
 
 @Controller
-@RequestMapping("/user")
-public class RegisterUserController extends AbstractController {
-	
+@RequestMapping("/customer")
+public class RegisterCustomerController extends AbstractController{
 	// Services ---------------------------------------------------------------
 	@Autowired
-	private UserService userService;
+	private CustomerService customerService;
 
 	// Constructors -----------------------------------------------------------
 
-	public RegisterUserController() {
+	public RegisterCustomerController() {
 		super();
 	}
-	
+
 	// Display-----------------------------------------------------------------
 
 	@RequestMapping(value = "/display", method = RequestMethod.GET)
 	public ModelAndView display() {
 
 		ModelAndView result;
-		User user;	
-		
-		user = userService.findByPrincipal();
-		
-		result = new ModelAndView("user/display");
-		
-		result.addObject("user", user);
-		result.addObject("rating", user.getRating());
+		Customer customer;
+
+		customer = customerService.findByPrincipal();
+
+		result = new ModelAndView("customer/display");
+
+		result.addObject("customer", customer);
+		result.addObject("rating", customer.getRating());
 
 		return result;
 
-	}	
+	}
 
 	// Create------------------------------------------------------------------
 
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public ModelAndView create() {
 		ModelAndView result;
-		UserForm userForm;	
-		
-		userForm = userService.construct();
-		result = createEditModelAndView(userForm);
+		CustomerForm customerForm;
+
+		customerForm = customerService.construct();
+		result = createEditModelAndView(customerForm);
 
 		return result;
 	}
-	
+
 	// Edition---------------------------------------------------------------
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
-	public ModelAndView edit(@RequestParam int userId) {
+	public ModelAndView edit(@RequestParam int customerId) {
 		ModelAndView result;
-		User user;
-		UserForm userForm;
+		Customer customer;
+		CustomerForm customerForm;
 
-		user = userService.findOneUserToEdit(userId);
-		userForm = userService.construct(user);
-		
-		userForm.setUsername(user.getUserAccount().getUsername());
-		userForm.setPassword(user.getUserAccount().getPassword());
-		userForm.setPassword2(user.getUserAccount().getPassword());
-		userForm.setTerms(true);
+		customer = customerService.findOneCustomerToEdit(customerId);
+		customerForm = customerService.construct(customer);
 
-		result = createEditModelAndView(userForm);
+		customerForm.setUsername(customer.getUserAccount().getUsername());
+		customerForm.setPassword(customer.getUserAccount().getPassword());
+		customerForm.setPassword2(customer.getUserAccount().getPassword());
+		customerForm.setTerms(true);
+
+		result = createEditModelAndView(customerForm);
 
 		return result;
 	}
 
-	
 	// Save-----------------------------------------------------------------
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
-	public ModelAndView save(@Valid UserForm userForm, BindingResult bindingResult) {
+	public ModelAndView save(@Valid CustomerForm customerForm, BindingResult bindingResult) {
 		ModelAndView result;
-		User user;
+		Customer customer;
 
 		if (bindingResult.hasErrors()) {
-			
-			result = createEditModelAndView(userForm);
-			
+
+			result = createEditModelAndView(customerForm);
+
 		} else {
 			try {
-				
-				user = userService.reconstruct(userForm);
-			
-				userService.save(user);
-				
+
+				customer = customerService.reconstruct(customerForm);
+
+				customerService.save(customer);
+
 				result = new ModelAndView("redirect:../welcome/index.do");
-				
+
 			} catch (Throwable oops) {
 				if (oops instanceof DataIntegrityViolationException) {
-					
-					result = createEditModelAndView(userForm, "user.duplicated.username");
+
+					result = createEditModelAndView(customerForm, "customer.duplicated.username");
 				} else {
-					result = createEditModelAndView(userForm, "user.commit.error");
+					result = createEditModelAndView(customerForm, "customer.commit.error");
 				}
 			}
 		}
@@ -116,20 +114,20 @@ public class RegisterUserController extends AbstractController {
 
 	// Ancillary methods ----------------------------------------------
 
-	protected ModelAndView createEditModelAndView(UserForm userForm) {
+	protected ModelAndView createEditModelAndView(CustomerForm customerForm) {
 		ModelAndView result;
 
-		result = createEditModelAndView(userForm, null);
+		result = createEditModelAndView(customerForm, null);
 
 		return result;
 	}
 
-	protected ModelAndView createEditModelAndView(UserForm userForm, String message) {
+	protected ModelAndView createEditModelAndView(CustomerForm customerForm, String message) {
 		ModelAndView result;
 
-		result = new ModelAndView("user/edit");
+		result = new ModelAndView("customer/edit");
 
-		result.addObject("userForm", userForm);
+		result.addObject("customerForm", customerForm);
 		result.addObject("message", message);
 
 		return result;

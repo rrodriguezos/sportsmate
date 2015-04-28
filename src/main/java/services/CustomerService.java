@@ -4,11 +4,13 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.HashSet;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
+
 import repositories.CustomerRepository;
 import security.Authority;
 import security.LoginService;
@@ -210,6 +212,38 @@ public class CustomerService {
 		}
 		
 		return invoice;
+		
+	}
+	
+	public CustomerForm construct() 
+	{
+		
+		CustomerForm customerForm;
+		Customer customer;
+
+		customerForm = new CustomerForm();
+		customer = create();
+
+		customerForm.setUsername(customer.getUserAccount().getUsername());
+		customerForm.setPassword(customer.getUserAccount().getPassword());
+
+		customerForm.setName(customer.getName());
+		customerForm.setSurname(customer.getSurname());
+		customerForm.setEmail(customer.getEmail());
+		customerForm.setPhone(customer.getPhone());
+		customerForm.setImagen(customer.getImagen());
+		
+		customerForm.setCif(customer.getCif());
+		customerForm.setStreet(customer.getStreet());
+		customerForm.setZip(customer.getZip());
+		customerForm.setProvinceCenter(customer.getProvinceCenter());
+		customerForm.setCity(customer.getCity());
+		customerForm.setNameCenter(customer.getNameCenter());
+		customerForm.setPhoneCenter(customer.getPhoneCenter());
+		customerForm.setEmailCenter(customer.getEmailCenter());
+		customerForm.setWeb(customer.getWeb());	
+
+		return customerForm;
 		
 	}
 
@@ -429,5 +463,18 @@ public class CustomerService {
 		}
 		
 		return customer;
+	}
+	
+	public Customer findOneCustomerToEdit(int customerId)
+	{
+		
+		Customer customer;
+		
+		customer = findOne(customerId);
+		
+		checkPrincipal(customer);
+		
+		return customer;
+		
 	}
 }

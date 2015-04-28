@@ -82,14 +82,14 @@
 						
 						<!-- PROFILE CUSTOMER -->
 						<security:authorize access="hasRole('CUSTOMER')">
-							<li><a href="profile/customer/display.do"><spring:message code="master.page.customer.listProfile" /></a></li>
-							<li><a href="profile/customer/edit.do"><spring:message code="master.page.customer.editProfile" /></a></li>
+							<li><a href="customer/display.do"><spring:message code="master.page.customer.listProfile" /></a></li>
+							<li><a href="customer/edit.do"><spring:message code="master.page.customer.editProfile" /></a></li>
 						</security:authorize>
 						
 						<!-- PROFILE USER -->
 						<security:authorize access="hasRole('USER')">
 							<li><a href="user/display.do"><spring:message code="master.page.user.listProfile" /></a></li>
-												
+							<li><a href="user/edit.do"><spring:message code="master.page.user.listProfile" /></a></li>					
 						</security:authorize>
 						
 						<li class='divider'></li>
@@ -225,7 +225,7 @@
 						<span class='caret'></span>
 					</a>
 					<ul class='dropdown-menu'>
-						<li><a href="register/registerCustomer.do"><spring:message code="master.page.register.customer" /></a></li>
+						<li><a href="customer/create.do"><spring:message code="master.page.register.customer" /></a></li>
 						<li><a href="user/create.do"><spring:message code="master.page.register.user" /></a></li>
 					</ul>
 				</li>

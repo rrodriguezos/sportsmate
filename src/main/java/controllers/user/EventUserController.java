@@ -219,6 +219,7 @@ public class EventUserController extends AbstractController {
 		} catch (Throwable oops) {
 			result = createEditModelAndView(eventForm, "event.commit.error");
 		}
+		
 		return result;
 
 	}

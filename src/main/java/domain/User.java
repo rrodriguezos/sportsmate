@@ -31,7 +31,6 @@ public class User extends Actor{
 	
 	//Attributes-------------------------------------------------------------------------
 	private Collection<Vote> votes;
-	private Double rating;
 	
 	@Valid
 	@NotNull
@@ -62,14 +61,8 @@ public class User extends Actor{
 				
 		return rating;
 		
-	}
+	}	
 	
-	public void setRating(Double rating) 
-	{
-		
-		rating = this.rating;
-		
-	}
 		
 	//Relationships----------------------------------------------------------------------
 	

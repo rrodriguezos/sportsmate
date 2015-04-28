@@ -33,7 +33,13 @@
 		<b><spring:message code="message.sender" />: </b>
 			<jstl:out value="${sender}" />
 		
-		<br><br>
+		<br><br>		
+		<jstl:if test="${distinto}">
+			<b><spring:message code="message.recipient" />: </b>
+			<jstl:out value="${recipient}" />
+			
+			<form:hidden path="recipient" />	
+		</jstl:if>
 	</div>
 	
 	<div class="col-xs-12 col-md-9">
@@ -51,8 +57,6 @@
 	</div>
 	
 	
-	<!--  <b><spring:message code="message.sender" />: </b> -->
-	<jstl:out value="${recipient}" />
 	
 	<acme:textbox code="message.subject" path="subject"/>
 	<br />
@@ -61,8 +65,15 @@
 	<br />
 	
 	<div class="col-xs-12"> 
-	<input type="submit" class="btn btn-md btn-success" name="send" value="<spring:message code="message.send" />" />&nbsp; 
+		<input type="submit" class="btn btn-md btn-success" name="send" value="<spring:message code="message.send" />" />&nbsp; 
+		
+		<jstl:if test="${messageForm.id == 0}">
+			<acme:cancel code="message.back" url="folder/actor/list.do" />&nbsp;
+		</jstl:if>
 	</div>
+	
+	
+	
 </form:form>
 
 
