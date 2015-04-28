@@ -25,32 +25,58 @@
 
 <div class='table-responsive'>
 	<display:table name="teams" id="row" requestURI="${requestURI}"
-		pagesize="5" class="table table-bordered table-hover">
+		pagesize="5" class="">
 		<display:column>
+		
+		<div class="well well-sm">
+		
+			<div class="col-xs-3">
+				<spring:message code="team.name" var="nameHeader" />
+				<jstl:out value="${row.name}"></jstl:out>
+			</div>
+			<!-- <b><spring:message code="team.name" />: </b> -->
+			
+			<div class="col-xs-4">
 
-			<b><spring:message code="team.name" />: </b>
-			<spring:message code="team.name" var="nameHeader" />
-			<jstl:out value="${row.name}"></jstl:out>
-			<br />
+					<b><spring:message code="team.maxNumber" />: </b>
+					<spring:message code="team.maxNumber" var="maxNumberHeader" />
+					<jstl:out value="${row.maxNumber}"></jstl:out>					
+			</div>
+			
+			<div class="col-xs-3">
+					<security:authorize access="hasRole('USER')">
+						<a href="team/user/display.do?teamId=${row.id}">
+							<button type="button" class="btn btn-sm btn-default">
+								<spring:message	code="team.display" />
+							</button>
+						</a>
+					</security:authorize>
+			</div>
 
-			<b><spring:message code="team.maxNumber" />: </b>
-			<spring:message code="team.maxNumber" var="maxNumberHeader" />
-			<jstl:out value="${row.maxNumber}"></jstl:out>
-			<br />
-
-			<spring:message code="team.display" var="displayHeader" />
-			<security:authorize access="hasRole('USER')">
-				<a href="team/user/display.do?teamId=${row.id}"> <spring:message
-						code="team.display" />
-				</a>
-			</security:authorize>
-
+		</div>
+		
+		</display:column>
+		
+		<spring:message code="team.display" var="displayHeader" />
+	</display:table>
+</div>
+	<br>
+			<jstl:if test="${showDisjoin == true }">
+				<br>
+				<security:authorize access="hasRole('USER')">
+					<input type="button" class="btn btn-md btn-success" name="create"
+						value="<spring:message code="team.create"/>"
+						onclick="javascript: window.location.replace('team/user/create.do');" />
+				</security:authorize>
+			</jstl:if>
 
 			<jstl:if test="${showSend == true }">
 				<spring:message code="team.sendRequest" var="sendRequestHeader" />
 				<security:authorize access="hasRole('USER')">
-					<a href="requestTeam/user/sendRequest.do?teamId=${row.id}"> <spring:message
-							code="team.sendRequest" />
+					<a href="requestTeam/user/sendRequest.do?teamId=${row.id}">
+						<button type="button" class="btn btn-md btn-success">
+							<spring:message	code="team.sendRequest" />
+						</button>
 					</a>
 				</security:authorize>
 			</jstl:if>
@@ -58,24 +84,12 @@
 			<jstl:if test="${showDisjoin == true }">
 				<spring:message code="team.disjoinTeam" var="disjoinTeamHeader" />
 				<security:authorize access="hasRole('USER')">
-					<a href="team/user/disjoinTeam.do?teamId=${row.id}"> <spring:message
-							code="team.disjoinTeam" />
+					<a href="team/user/disjoinTeam.do?teamId=${row.id}">
+						<button type="button" class="btn btn-md btn-warning">
+							<spring:message	code="team.disjoinTeam" />
+						</button>
 					</a>
 				</security:authorize>
 			</jstl:if>
-		</display:column>
-	</display:table>
-</div>
-
-<jstl:if test="${showDisjoin == true }">
-
-	<br>
-	<security:authorize access="hasRole('USER')">
-		<input type="button" class="btn btn-md btn-success" name="create"
-			value="<spring:message code="team.create"/>"
-			onclick="javascript: window.location.replace('team/user/create.do');" />
-	</security:authorize>
-</jstl:if>
-
 
 <acme:cancel code="team.back" url="welcome/index.do" />
