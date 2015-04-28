@@ -24,7 +24,7 @@ body {
 #header_image img {
  	max-width: 100%;
  	height: auto;
- 	margin-top: 30px;
+ 	margin-top: 40px;
 }
 
 #content_area{
@@ -94,6 +94,29 @@ body {
 .spm-spacing-list{
 	margin-bottom: 30px;
 }
+
+.spm-team-list{
+	display: inline;
+	padding: 14px 20px;
+	border-left-radius: 4px;
+	vertical-align: middle;
+}
+
+.spm-team-list-head{
+
+	
+}
+.spm-team-list-btn{
+	padding: 9px;
+}
+
+.spm-team-list-wrapper{
+	border: thin solid lightgray;
+	border-radius: 5px;
+	overflow: auto;
+	margin-bottom: 10px;
+}
+
 
 /* Details on tables */
 
