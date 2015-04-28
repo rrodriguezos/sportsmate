@@ -30,13 +30,13 @@
 		
 		<div class="spm-team-list-wrapper">
 		
-			<div class="spm-team-list spm-team-list-head bg-success col-xs-12 col-sm-3">
+			<div class="spm-team-list bg-success col-xs-12 col-sm-3">
 				<spring:message code="team.name" var="nameHeader" />
 				<jstl:out value="${row.name}"></jstl:out>
 			</div>
 			<!-- <b><spring:message code="team.name" />: </b> -->
 			
-			<div class="spm-team-list col-xs-12 col-sm-4">
+			<div class="spm-team-list col-xs-12 col-sm-6">
 
 					<b><spring:message code="team.maxNumber" />: </b>
 					<spring:message code="team.maxNumber" var="maxNumberHeader" />
