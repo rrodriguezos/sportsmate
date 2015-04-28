@@ -194,6 +194,7 @@ span.pagelinks {
 	background-color: #999;
 }
 
+.
 
 .spm-news h2{
 	margin:0px;
@@ -222,14 +223,9 @@ span.pagelinks {
 	font-size: 18px;
 }
 
-/* For non-tables "tables" */
-
-
-
-
-
-
-
+.spm-searchbar-wrapper{
+	padding: 8px;
+}
 /* Provisional & inherit from DP project*/
 
 .error {

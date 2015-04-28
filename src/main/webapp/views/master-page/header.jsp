@@ -60,7 +60,7 @@
 
 
 		<!-- Main headbar instructions -->
-		<ul class='nav navbar-nav navbar-right collapse navbar-collapse'>
+		<ul class='nav navbar-nav collapse navbar-collapse'>
 
 
 			<!-- ADMIN -->
@@ -194,21 +194,10 @@
 						<li><a href="tournament/user/rounds/list.do"><spring:message code="master.page.user.manageTournaments" /></a></li>
 					</ul>
 				</li>
-				
-				<!-- Here starts the search bar -->
-						
-			<li>
-				<form class="navbar-form navbar-right">
-					<div class="input-group">
-						<input type="text" class="form-control spm-search-input" id="idsearch" onkeypress="hidSearch(event);">
-						<span class="input-group-btn">
-        					<button class="btn btn-default spm-search-button" type="button" onclick="search()"><spring:message code="master.page.search" /></button>
-      					</span>
-      				</div>
-      			</form>			
-			</li>		
-
 			</security:authorize>
+			
+				
+			
 
 			<!-- TEAM -->
 			<security:authorize access="hasRole('USER')">
@@ -234,20 +223,34 @@
 							code="master.page.user.seeSportCenters" /></a></li>
 			</security:authorize>
 			
-				<!-- Here starts the search bar -->
-			<security:authorize access="hasRole('USER')">
-			<li>
-				<form class="navbar-form navbar-right">
+			
+			<!-- SEARCH BAR (CUSTOMER) -->
+			<security:authorize access="hasRole('CUSTOMER')">			
+			<li class="col-sm-3 col-md-4 spm-searchbar-wrapper navbar-right">
 					<div class="input-group">
 						<input type="text" class="form-control spm-search-input" id="idsearch" onkeypress="hidSearch(event);">
 						<span class="input-group-btn">
         					<button class="btn btn-default spm-search-button" type="button" onclick="search()"><spring:message code="master.page.search" /></button>
       					</span>
-      				</div>
-      			</form>			
+      				</div>		
+			</li>		
+
+			</security:authorize>
+			
+			
+			<!-- SEARCH BAR (USER) -->
+			<security:authorize access="hasRole('USER')">
+			<li class="col-sm-3 col-md-4 spm-searchbar-wrapper navbar-right">
+				<div class="input-group">
+						<input type="text" class="form-control spm-search-input" id="idsearch" onkeypress="hidSearch(event);">
+						<span class="input-group-btn">
+        					<button class="btn btn-default spm-search-button" type="button" onclick="search()"><spring:message code="master.page.search" /></button>
+      					</span>
+      			</div>		
 			</li>
 			</security:authorize>
 			
+			<!-- <form class="navbar-form navbar-right"> -->
 			
          	<!-- ANONYMOUS -->
          	<security:authorize access="isAnonymous()">
