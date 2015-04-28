@@ -69,7 +69,12 @@
 					<div>
 					<b><spring:message code="tournament.advertised" />: </b>
 					<spring:message code="tournament.advertised" var="advertisedHeader" />
-					<jstl:out value="${row.advertised}"></jstl:out>
+					<jstl:if test="${row.advertised==true}">
+					<spring:message code="tournament.yes"/>
+					</jstl:if>
+					<jstl:if test="${row.advertised==false}">
+					<spring:message code="tournament.no"/>
+					</jstl:if>
 					</div>
 					
 					<div>

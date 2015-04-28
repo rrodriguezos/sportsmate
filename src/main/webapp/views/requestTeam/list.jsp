@@ -23,28 +23,32 @@
 
 <br>
 <div class='table-responsive'>
-<display:table name="requestTeams" id="row" requestURI="${requestURI}"
-	pagesize="5" class="table table-bordered table-hover">
+	<display:table name="requestTeams" id="row" requestURI="${requestURI}"
+		pagesize="5" class="table table-bordered table-hover">
+		<display:column>
 
-	<spring:message code="requestTeam.user" var="userHeader" />
-	<display:column property="user.email" title="${userHeader}" />
+			<b><spring:message code="requestTeam.user" />: </b>
+			<spring:message code="user.email" var="userHeader" />
+			<jstl:out value="${row.user.email}"></jstl:out>
+			<br />
+			<b><spring:message code="requestTeam.team" />: </b>
+			<spring:message code="team.name" var="teamHeader" />
+			<jstl:out value="${row.team.name}"></jstl:out>
+			<br />
+			<b><spring:message code="requestTeam.requestDate" />: </b>
+			<spring:message code="requestTeam.requestDate" var="requestDateHeader" />
+			<jstl:out value="${row.requestDate}"></jstl:out>
+			<br />
+			<spring:message code="requestTeam.acceptRequest"
+				var="acceptRequestHeader" />
+			<security:authorize access="hasRole('USER')">
+				<a href="requestTeam/user/acceptRequest.do?requestTeamId=${row.id}">
+					<spring:message code="tournament.display" />
+				</a>
+			</security:authorize>
 
-	<spring:message code="requestTeam.team" var="teamHeader" />
-	<display:column property="team.name" title="${teamHeader}" />
-	
-	<spring:message code="requestTeam.requestDate" var="requestDateHeader" />
-	<display:column property="requestDate" title="${requestDateHeader}" format="{0,date,dd/MM/yyyy HH:mm}"/>
-
-	<spring:message code="requestTeam.acceptRequest" var="acceptRequestHeader" />
-	<display:column title="${acceptRequestHeader}">
-		<security:authorize access="hasRole('USER')">
-			<a href="requestTeam/user/acceptRequest.do?requestTeamId=${row.id}"> <spring:message
-					code="requestTeam.acceptRequest" />
-			</a>
-		</security:authorize>
-	</display:column>
-
-</display:table>
+		</display:column>
+	</display:table>
 </div>
 
 <br>

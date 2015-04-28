@@ -70,7 +70,12 @@
 
 				<div>
 					<b><spring:message code="tournament.advertised" />: </b>
-					<jstl:out value="${tournament.advertised}" />
+					<jstl:if test="${tournament.advertised==true}">
+					<spring:message code="tournament.yes"/>
+					</jstl:if>
+					<jstl:if test="${tournament.advertised==false}">
+					<spring:message code="tournament.no"/>
+					</jstl:if>
 				</div>
 				
 				<div class="col-xs-12 hidden-sm hidden-md hidden-lg">
