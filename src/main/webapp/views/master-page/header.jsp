@@ -37,7 +37,13 @@
 
 		<!-- BUTTON WHEN MOBILE OR EXTRA SMALL SIZE -->
 		<div class='navbar-header'>
-
+			
+			
+        	<a href="welcome/index.do" class="navbar-brand hidden-sm hidden-md hidden-lg">
+        		<img class="spm-mobile-logo" src="images/logotrans_inv.png"	alt="SportsMate" />
+			</a>
+      		
+			
 			<button type='button' class='navbar-toggle' data-toggle='collapse'
 				data-target='.navbar-collapse'>
 				<span class='sr-only'>Toggle Navigation</span> <span
@@ -54,7 +60,7 @@
 
 
 		<!-- Main headbar instructions -->
-		<ul class='nav navbar-nav collapse navbar-collapse'>
+		<ul class='nav navbar-nav navbar-right collapse navbar-collapse'>
 
 
 			<!-- ADMIN -->
@@ -272,14 +278,13 @@
 <br>
 <br>
 <br>
-<br>
 
 
 <!-- ******** -->
 <!-- LOGOTYPE -->
 <!-- ******** -->
 
-<div id='header_image' class='container'>
+<div id='header_image' class='container hidden-xs'>
 	<a href="welcome/index.do"> <img src="images/logotrans.png"
 		alt="SportsMate Co., Inc." />
 	</a>

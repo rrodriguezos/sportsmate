@@ -10,6 +10,11 @@ body {
 	background-size: cover;
 }
 
+.spm-mobile-logo{
+	height: 28px;		
+}
+
+
 #header_image{
 	text-align: center;
 	margin-bottom: 2em;
@@ -19,6 +24,7 @@ body {
 #header_image img {
  	max-width: 100%;
  	height: auto;
+ 	margin-top: 30px;
 }
 
 #content_area{
@@ -29,7 +35,7 @@ body {
 }
 
 #footer_area{
-	background-color: rgba(0,0,0,0.6);
+	background-color: rgba(0,0,0,0.7);
 	color: #ffffff;
 	border-radius: 5px;
 	padding: 2em 0em 1em 0em;
