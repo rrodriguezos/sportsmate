@@ -3,8 +3,6 @@ package controllers;
 
 import java.util.Collection;
 
-import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,13 +10,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-
-import domain.Team;
-import domain.Tournament;
-import domain.Tournament;
 import services.MatchService;
 import services.TeamService;
 import services.TournamentService;
+import services.UserService;
+import domain.Team;
+import domain.Tournament;
+import domain.User;
 
 @Controller
 @RequestMapping("/tournament")
@@ -34,6 +32,9 @@ public class TournamentsController extends AbstractController
 	@Autowired
 	private MatchService matchService;
 	
+	@Autowired
+	private UserService userService;
+	
 
 	//List--------------------------------------------------------------
 	@RequestMapping(value = "/listAll", method = RequestMethod.GET)
@@ -41,12 +42,15 @@ public class TournamentsController extends AbstractController
 		ModelAndView result;
 		Collection<Tournament> tournaments;
 		Boolean showJoin = true;
+		User principal;
 
 		tournaments = tournamentService.findAll();
+		principal = userService.findByPrincipal();
 
 		result = new ModelAndView("tournament/listAll");
 		result.addObject("tournaments", tournaments);
 		result.addObject("showJoin", showJoin);
+		result.addObject("userTournaments", principal.getTournaments());
 		result.addObject("requestURI", "tournament/listAll.do");
 
 		return result;
@@ -79,18 +83,16 @@ public class TournamentsController extends AbstractController
 
 		// DisJoin a
 		// Tournament------------------------------------------------------------------
-		@RequestMapping(value = "/disjoinTournament", method = RequestMethod.GET)
-		public ModelAndView DisjoinTournament(@RequestParam int tournamentId,@RequestParam int teamId) 
+		@RequestMapping(value = "/disjoinATeamToTournament", method = RequestMethod.GET)
+		public ModelAndView DisjoinTournament(@RequestParam int tournamentId) 
 		{
 
 			ModelAndView result;
 			Tournament tournament;
-			Team team;
 			Collection<Tournament> tournaments;
 
 			tournament = tournamentService.findOne(tournamentId);
-			team = teamService.findOne(teamId);
-			tournamentService.DisjoinTournament(tournament,team);
+			tournamentService.DisjoinTournament(tournament);
 			tournaments = tournamentService.findAll();
 
 			result = new ModelAndView("tournament/list");

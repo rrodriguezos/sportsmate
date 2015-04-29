@@ -349,11 +349,18 @@ public class TournamentService {
 
 	}
 
-	public void DisjoinTournament(Tournament tournament,Team team) {
+	public void DisjoinTournament(Tournament tournament) {
 
 		User user;
+		Team team = null;
 
 		user = userService.findByPrincipal();
+		
+		for(Team t : tournament.getTeams()){
+			if(user.getTeams().contains(t)){
+				team = t;
+			}
+		}
 		
 		Assert.isTrue(team.getCaptain().equals(user));
 

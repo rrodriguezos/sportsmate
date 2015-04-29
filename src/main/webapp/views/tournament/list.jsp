@@ -26,139 +26,155 @@
 		pagesize="5" class="">
 
 		<display:column>
-		
-		<div class="col-xs-12">
-			<div class="alert alert-success spm-no-margin-bottom">
-				<!--  <b><spring:message code="tournament.title" />: </b> -->
-				<spring:message code="tournament.title" var="titleHeader" />
-				<jstl:out value="${row.title}"></jstl:out>
-			</div>
-			
-			<div class="well well-sm col-xs-12 spm-no-margin-bottom">
-				<div class="col-xs-12 col-md-4">
-					<div>
-					<b><spring:message code="tournament.startMoment" />: </b>
-					<spring:message code="tournament.startMoment" var="startMomentHeader" />
-					<jstl:out value="${row.startMoment}"></jstl:out>
+
+			<div class="col-xs-12">
+				<div class="alert alert-success spm-no-margin-bottom">
+					<!--  <b><spring:message code="tournament.title" />: </b> -->
+					<spring:message code="tournament.title" var="titleHeader" />
+					<jstl:out value="${row.title}"></jstl:out>
+				</div>
+
+				<div class="well well-sm col-xs-12 spm-no-margin-bottom">
+					<div class="col-xs-12 col-md-4">
+						<div>
+							<b><spring:message code="tournament.startMoment" />: </b>
+							<spring:message code="tournament.startMoment"
+								var="startMomentHeader" />
+							<jstl:out value="${row.startMoment}"></jstl:out>
+						</div>
+
+						<div>
+							<b><spring:message code="tournament.finishMoment" />: </b>
+							<spring:message code="tournament.finishMoment"
+								var="finishMomentHeader" />
+							<jstl:out value="${row.finishMoment}"></jstl:out>
+						</div>
 					</div>
-					
-					<div>
-					<b><spring:message code="tournament.finishMoment" />: </b>
-					<spring:message code="tournament.finishMoment"
-						var="finishMomentHeader" />
-					<jstl:out value="${row.finishMoment}"></jstl:out>
+
+					<div class="col-xs-12 col-md-3">
+						<div>
+							<b><spring:message code="tournament.sport" />: </b>
+							<spring:message code="tournament.sport" var="sportHeader" />
+							<jstl:out value="${row.sport}" />
+						</div>
+
+						<div>
+							<b><spring:message code="tournament.numberOfTeams" />: </b>
+							<spring:message code="tournament.numberOfTeams"
+								var="numberOfTeamsHeader" />
+							<jstl:out value="${row.numberOfTeams}" />
+						</div>
+					</div>
+
+					<div class="col-xs-12 col-md-3">
+						<div>
+							<b><spring:message code="tournament.advertised" />: </b>
+							<spring:message code="tournament.advertised"
+								var="advertisedHeader" />
+							<jstl:if test="${row.advertised==true}">
+								<spring:message code="tournament.yes" />
+							</jstl:if>
+							<jstl:if test="${row.advertised==false}">
+								<spring:message code="tournament.no" />
+							</jstl:if>
+						</div>
+
+						<div>
+							<b><spring:message code="tournament.prize" />: </b>
+							<spring:message code="tournament.prize" var="prizeHeader" />
+							<jstl:out value="${row.prize}" />
+						</div>
 					</div>
 				</div>
-				
-				<div class="col-xs-12 col-md-3">
-					<div>
-					<b><spring:message code="tournament.sport" />: </b>
-					<spring:message code="tournament.sport" var="sportHeader" />
-					<jstl:out value="${row.sport}" />
-					</div>
-					
-					<div>
-					<b><spring:message code="tournament.numberOfTeams" />: </b>
-					<spring:message code="tournament.numberOfTeams"
-						var="numberOfTeamsHeader" />
-					<jstl:out value="${row.numberOfTeams}" />
-					</div>
-				</div>
-				
-				<div class="col-xs-12 col-md-3">
-					<div>
-					<b><spring:message code="tournament.advertised" />: </b>
-					<spring:message code="tournament.advertised" var="advertisedHeader" />
-					<jstl:if test="${row.advertised==true}">
-					<spring:message code="tournament.yes"/>
-					</jstl:if>
-					<jstl:if test="${row.advertised==false}">
-					<spring:message code="tournament.no"/>
-					</jstl:if>
-					</div>
-					
-					<div>
-					<b><spring:message code="tournament.prize" />: </b>
-					<spring:message code="tournament.prize" var="prizeHeader" />
-					<jstl:out value="${row.prize}" />
-					</div>
-				</div>	
-			</div>
-			
-			<div class="row">
-			<div class="col-xs-12 spm-button-list">
-				<spring:message code="tournament.display" var="displayHeader" />
-					
-					<security:authorize access="hasRole('USER')">
-							<a href="tournament/user/display.do?tournamentId=${row.id}"> 
-									<button type="button" class="btn btn-md btn-default col-xs-2">
-										<spring:message	code="tournament.display" />
-									</button>
+
+				<div class="row">
+					<div class="col-xs-12 spm-button-list">
+						<spring:message code="tournament.display" var="displayHeader" />
+
+						<security:authorize access="hasRole('USER')">
+							<a href="tournament/user/display.do?tournamentId=${row.id}">
+								<button type="button" class="btn btn-md btn-default col-xs-2">
+									<spring:message code="tournament.display" />
+								</button>
 							</a>
-					</security:authorize>
-					
-					<security:authorize access="hasRole('CUSTOMER')">
-						<a href="tournament/customer/display.do?tournamentId=${row.id}">
-							<button type="button" class="btn btn-md btn-default col-xs-2">
-								<spring:message code="tournament.display" />
-							</button>
-						</a>
-					</security:authorize>
+						</security:authorize>
+
+						<security:authorize access="hasRole('CUSTOMER')">
+							<a href="tournament/customer/display.do?tournamentId=${row.id}">
+								<button type="button" class="btn btn-md btn-default col-xs-2">
+									<spring:message code="tournament.display" />
+								</button>
+							</a>
+						</security:authorize>
+					</div>
+				</div>
 			</div>
-			</div>
-		</div>
 		</display:column>
-		
+
 		<jstl:if test="${showJoin == true}">
-		
-		<display:column title="${join }">
-		
-		<div class="col-xs-5 col-sm-3 spm-events-button">
-			<jstl:if test="${row.teams.size() == row.numberOfTeams }">
-				<spring:message code="tournament.full" var="full"/>
-				<jstl:out value="${full }"></jstl:out>
-			</jstl:if>
+			<security:authorize access="hasRole('USER')">
+				<display:column title="${join }">
 
-			<jstl:set var="contains" value="false" />
+					<div class="col-xs-5 col-sm-3 spm-events-button">
+						<jstl:if test="${row.teams.size() == row.numberOfTeams }">
+							<spring:message code="tournament.full" var="full" />
+							<jstl:out value="${full }"></jstl:out>
+						</jstl:if>
 
-			<jstl:if test="${userEvents.size() > 0 }">
+						<jstl:set var="contains" value="false" />
 
-				<jstl:forEach var="item" items="${userEvents}">
+						<jstl:if test="${userTournaments.size() > 0 }">
 
-					<jstl:if test="${item.id eq row.id}">
-						<jstl:set var="contains" value="true" />
+							<jstl:forEach var="item" items="${userTournaments}">
 
-					</jstl:if>
-				</jstl:forEach>
+								<jstl:if test="${item.id eq row.id}">
+									<jstl:set var="contains" value="true" />
 
-			</jstl:if>
+								</jstl:if>
+							</jstl:forEach>
 
-			<jstl:if test="${row.teams.size() < row.numberOfTeams }">
-				<jstl:if test="${contains == false}">
-					<spring:message code="tournament.join" var="join" />
-					<a href="event/user/joinEvent.do?eventId=${row.id }">
+						</jstl:if>
+
+						<jstl:if test="${row.teams.size() < row.numberOfTeams }">
+							<jstl:if test="${contains == false}">
+								<spring:message code="tournament.join" var="join" />
+								<a
+									href="event/user/joinATeamToTournament.do?tournamentId=${row.id }">
+									<button class="btn btn-md btn-default col-xs-12">
+										<jstl:out value="${join }"></jstl:out>
+									</button>
+								</a>
+							</jstl:if>
+
+
+							<jstl:if test="${contains == true}">
+
+								<span class="col-xs-12 bg-success spm-event-joined text-center">
+									<spring:message code="event.joined" var="joined" /> <jstl:out
+										value="${joined }"></jstl:out>
+								</span>
+							</jstl:if>
+						</jstl:if>
+
+					</div>
+				</display:column>
+			</security:authorize>
+		</jstl:if>
+
+		<jstl:if test="${showDisjoin == true}">
+			<security:authorize access="hasRole('USER')">
+				<display:column title="${Disjoin }">
+					<spring:message code="tournament.Disjoin" var="Disjoin" />
+					<a
+						href="event/user/disjoinATeamToTournament.do?tournamentId=${row.id }">
 						<button class="btn btn-md btn-default col-xs-12">
-							<jstl:out value="${join }"></jstl:out>
+							<jstl:out value="${Disjoin }"></jstl:out>
 						</button>
 					</a>
-				</jstl:if>
-			
-
-			<jstl:if test="${contains == true}">
-				
-				<span class="col-xs-12 bg-success spm-event-joined text-center">
-					<spring:message code="event.joined" var="joined" />
-					<jstl:out value="${joined }"></jstl:out>
-				</span>
-			</jstl:if>
-			</jstl:if>
-		
-		</div>
-		</display:column>
+				</display:column>
+			</security:authorize>
 		</jstl:if>
-		
 
-		
 	</display:table>
 </div>
 
