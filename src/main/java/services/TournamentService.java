@@ -14,9 +14,9 @@ import org.springframework.util.Assert;
 import repositories.TournamentRepository;
 import domain.Actor;
 import domain.Customer;
+import domain.Tournament;
 import domain.Match;
 import domain.Team;
-import domain.Tournament;
 import domain.User;
 import forms.TournamentForm;
 
@@ -31,6 +31,8 @@ public class TournamentService {
 	private UserService userService;
 	@Autowired
 	private ActorService actorService;
+	@Autowired
+	private TeamService teamService;
 
 	public Collection<Tournament> findAll() {
 		Collection<Tournament> all;
@@ -326,6 +328,42 @@ public class TournamentService {
 			new Throwable("Bad Tournaments from customer");
 
 		return result;
+
+	}
+	
+	public void joinTournament(Tournament tournament, Team team) {
+
+		User user;
+
+		user = userService.findByPrincipal();
+		
+		Assert.isTrue(team.getCaptain().equals(user));
+
+		tournament.getTeams().add(team);
+		user.getTournaments().add(tournament);
+		team.getTournaments().add(tournament);
+
+		save(tournament);
+		teamService.save(team);
+		userService.save(user);
+
+	}
+
+	public void DisjoinTournament(Tournament tournament,Team team) {
+
+		User user;
+
+		user = userService.findByPrincipal();
+		
+		Assert.isTrue(team.getCaptain().equals(user));
+
+		tournament.getTeams().remove(team);
+		user.getTournaments().remove(tournament);
+		team.getTournaments().remove(tournament);
+
+		save(tournament);
+		teamService.save(team);
+		userService.save(user);
 
 	}
 

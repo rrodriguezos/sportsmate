@@ -109,6 +109,54 @@
 		</div>
 		</display:column>
 		
+		<jstl:if test="${showJoin == true}">
+		
+		<display:column title="${join }">
+		
+		<div class="col-xs-5 col-sm-3 spm-events-button">
+			<jstl:if test="${row.teams.size() == row.numberOfTeams }">
+				<spring:message code="tournament.full" var="full"/>
+				<jstl:out value="${full }"></jstl:out>
+			</jstl:if>
+
+			<jstl:set var="contains" value="false" />
+
+			<jstl:if test="${userEvents.size() > 0 }">
+
+				<jstl:forEach var="item" items="${userEvents}">
+
+					<jstl:if test="${item.id eq row.id}">
+						<jstl:set var="contains" value="true" />
+
+					</jstl:if>
+				</jstl:forEach>
+
+			</jstl:if>
+
+			<jstl:if test="${row.teams.size() < row.numberOfTeams }">
+				<jstl:if test="${contains == false}">
+					<spring:message code="tournament.join" var="join" />
+					<a href="event/user/joinEvent.do?eventId=${row.id }">
+						<button class="btn btn-md btn-default col-xs-12">
+							<jstl:out value="${join }"></jstl:out>
+						</button>
+					</a>
+				</jstl:if>
+			
+
+			<jstl:if test="${contains == true}">
+				
+				<span class="col-xs-12 bg-success spm-event-joined text-center">
+					<spring:message code="event.joined" var="joined" />
+					<jstl:out value="${joined }"></jstl:out>
+				</span>
+			</jstl:if>
+			</jstl:if>
+		
+		</div>
+		</display:column>
+		</jstl:if>
+		
 
 		
 	</display:table>
