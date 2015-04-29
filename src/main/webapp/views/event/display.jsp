@@ -87,7 +87,7 @@
 	<!-- ---------------------------- //TODO @juanje --------------------------- -->
 
 	<security:authorize access="hasRole('USER')">
-		<jstl:if test="${today.after(finish)}">
+		<jstl:if test="${today.after(finish) and estoyApuntado==true}">
 			<a href="event/user/voteCustomer.do?placeString=${eventForm.place}"><spring:message
 					code="event.vote" /> </a>
 		</jstl:if>

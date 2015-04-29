@@ -37,7 +37,15 @@
 
 			<form:hidden path="id" />
 			<acme:textarea code="event.name" path="name" readonly="true" />
-			<acme:textbox code="event.score" path="score" />
+			<spring:message code="event.score" />
+			<form:select path="score" class="form-control">
+				<option value="0">0</option>
+				<option value="1">1</option>
+				<option value="2">2</option>
+				<option value="3">3</option>
+				<option value="4">4</option>
+				<option value="5">5</option>
+			</form:select>
 			<br />
 
 			<acme:submit name="save" code="event.vote" />
@@ -52,7 +60,15 @@
 
 			<form:hidden path="id" />
 			<acme:textarea code="event.place" path="name" readonly="true" />
-			<acme:textbox code="event.score" path="score" />
+			<spring:message code="event.score" />
+			<form:select path="score" class="form-control">
+				<option value="0">0</option>
+				<option value="1">1</option>
+				<option value="2">2</option>
+				<option value="3">3</option>
+				<option value="4">4</option>
+				<option value="5">5</option>
+			</form:select>
 			<br />
 
 			<acme:submit name="save" code="event.vote" />

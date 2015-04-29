@@ -97,6 +97,9 @@ public class TournamentService {
 		Tournament result;
 		tournament.setCustomer(customer);
 		Assert.notNull(tournament);
+		Date now = new Date(System.currentTimeMillis());
+		Assert.isTrue(tournament.getStartMoment().after(now));
+		Assert.isTrue(tournament.getFinishMoment().after(now));
 		Assert.isTrue(tournament.getStartMoment().compareTo(
 				tournament.getFinishMoment()) < 0);
 		tournament.setCreationMoment(new Date(
