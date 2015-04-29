@@ -27,5 +27,11 @@
 	</definition>
 	
 	
+	<definition name="event/user/calendar/seePerfilOfCustomer" extends="master.page">
+		<put-attribute name="title" value="Perfil de centrol" />
+		<put-attribute name="body" value="/views/calendar/seePerfil.jsp" />
+	</definition>
+	
+	
 		
 </tiles-definitions>
