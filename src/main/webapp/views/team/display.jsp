@@ -26,25 +26,29 @@
 <form:form action="${requestURI}" modelAttribute="teamForm">
 
 	<form:hidden path="id" />
-
-	<b><spring:message code="team.name" />: </b>
-	<form:input path="name" readonly="true" />
-	<br />
-	<br />
-
-	<b><spring:message code="team.captain" />: </b>
-	<form:input path="captain.email" readonly="true" />
-	<br />
-	<br />
-
-	<b><spring:message code="team.maxNumber" />: </b>
-	<form:input path="maxNumber" readonly="true" />
-	<br />
-	<br />
-
-	<h1>
+	
+	<div class="row">
+		<div class="col-xs-12">
+			<div class="col-xs-12 col-sm-8 well well-sm spm-message-field-spacing">
+				<b><spring:message code="team.name" />: </b>
+				<form:input path="name" readonly="true" class="spm-message-moment" />
+			</div>
+			
+			<div class="col-xs-12 col-sm-8 well well-sm spm-message-field-spacing">
+				<b><spring:message code="team.captain" />: </b>
+				<form:input path="captain.email" readonly="true" class="spm-message-moment" />
+			</div>
+			
+			<div class="col-xs-12 col-sm-8 well well-sm spm-message-field-spacing">
+				<b><spring:message code="team.maxNumber" />: </b>
+				<form:input path="maxNumber" readonly="true" class="spm-message-moment spm-mini-input" />
+			</div>
+		</div>
+	</div>	
+	
+	<h2>
 		<spring:message code="team.members" />
-	</h1>
+	</h2>
 	
 	<div class="table-responsive">
 	<display:table name="users" id="row" pagesize="5" class="table table-bordered table-hover">
