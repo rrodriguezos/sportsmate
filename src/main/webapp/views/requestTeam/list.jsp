@@ -24,33 +24,39 @@
 <br>
 <div class='table-responsive'>
 	<display:table name="requestTeams" id="row" requestURI="${requestURI}"
-		pagesize="5" class="table table-bordered table-hover">
+		pagesize="5" class="">
 		<display:column>
-
-			<b><spring:message code="requestTeam.user" />: </b>
-			<spring:message code="user.email" var="userHeader" />
-			<jstl:out value="${row.user.email}"></jstl:out>
-			<br />
-			<b><spring:message code="requestTeam.team" />: </b>
-			<spring:message code="team.name" var="teamHeader" />
-			<jstl:out value="${row.team.name}"></jstl:out>
-			<br />
-			<b><spring:message code="requestTeam.requestDate" />: </b>
-			<spring:message code="requestTeam.requestDate" var="requestDateHeader" />
-			<jstl:out value="${row.requestDate}"></jstl:out>
-			<br />
-			<spring:message code="requestTeam.acceptRequest"
-				var="acceptRequestHeader" />
-			<security:authorize access="hasRole('USER')">
-				<a href="requestTeam/user/acceptRequest.do?requestTeamId=${row.id}">
-					<spring:message code="tournament.display" />
-				</a>
-			</security:authorize>
-
+				<div class="col-xs-12 col-md-9 well well-sm">
+					<div class="col-xs-8 col-sm-9">
+						<b><spring:message code="requestTeam.user" />: </b>
+						<spring:message code="user.email" var="userHeader" />
+						<jstl:out value="${row.user.email}"></jstl:out>
+					<br />
+						<b><spring:message code="requestTeam.team" />: </b>
+						<spring:message code="team.name" var="teamHeader" />
+						<jstl:out value="${row.team.name}"></jstl:out>
+					<br />
+						<b><spring:message code="requestTeam.requestDate" />: </b>
+						<spring:message code="requestTeam.requestDate" var="requestDateHeader" />
+						<jstl:out value="${row.requestDate}"></jstl:out>					
+					</div>
+					
+					<spring:message code="requestTeam.acceptRequest"
+						var="acceptRequestHeader" />
+						
+					<security:authorize access="hasRole('USER')">
+						<div class="col-xs-4 col-sm-3">
+						<a href="requestTeam/user/acceptRequest.do?requestTeamId=${row.id}">
+							<button type="button" class="btn btn-sm btn-default col-xs-12 spm-event-detail-btn">
+								<spring:message code="tournament.display" />
+							</button>
+						</a>
+						</div>
+					</security:authorize>
+					
+				</div>
 		</display:column>
 	</display:table>
 </div>
-
-<br>
 
 <acme:cancel code="requestTeam.back" url="welcome/index.do" />
