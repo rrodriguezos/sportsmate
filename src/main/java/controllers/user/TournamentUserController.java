@@ -138,7 +138,7 @@ public class TournamentUserController extends AbstractController {
 			BindingResult binding) {
 		ModelAndView result;
 		Tournament tournament;
-
+		Date now = new Date(System.currentTimeMillis());
 		if (binding.hasErrors()) {
 			System.out.println("Binding " + binding.toString());
 			result = createEditModelAndView(tournamentForm);
@@ -151,8 +151,15 @@ public class TournamentUserController extends AbstractController {
 				result = new ModelAndView("redirect:list.do");
 			} catch (Throwable oops) {
 				System.out.println("oops " + oops.getLocalizedMessage());
-				result = createEditModelAndView(tournamentForm,
-						"tournament.commit.error");
+
+				if (tournamentForm.getStartMoment().after(now)
+						|| tournamentForm.getFinishMoment().after(now)) {
+					result = createEditModelAndView(tournamentForm,
+							"tournament.commit.error.fechas");
+				} else {
+					result = createEditModelAndView(tournamentForm,
+							"tournament.commit.error");
+				}
 			}
 		}
 		return result;

@@ -33,7 +33,7 @@
 			<div class="col-xs-12 col-sm-5">
 				<div>
 					<b><spring:message code="tournament.creationMoment" />: </b>
-					<fmt:formatDate value="${tournamentMoment}" pattern="dd/MM/yyyy" />
+					<fmt:formatDate value="${tournament.creationMoment}" pattern="dd/MM/yyyy" />
 				</div>
 					
 				<div>

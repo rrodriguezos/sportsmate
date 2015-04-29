@@ -25,8 +25,14 @@
 				<br><br>
 				<div>
 					
+						<jstl:if test="${rating == 0.0}">
+						<spring:message code="customer.rating.Empty" />
+					</jstl:if>
+
+					<jstl:if test="${rating != 0.0}">
 						<spring:message code="customer.rating" />
 						<jstl:out value="${rating}" />
+					</jstl:if>
 					
 
 				</div>

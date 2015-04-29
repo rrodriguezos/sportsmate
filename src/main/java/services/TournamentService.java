@@ -99,6 +99,9 @@ public class TournamentService {
 		Tournament result;
 		tournament.setCustomer(customer);
 		Assert.notNull(tournament);
+		Date now = new Date(System.currentTimeMillis());
+		Assert.isTrue(tournament.getStartMoment().after(now));
+		Assert.isTrue(tournament.getFinishMoment().after(now));
 		Assert.isTrue(tournament.getStartMoment().compareTo(
 				tournament.getFinishMoment()) < 0);
 		tournament.setCreationMoment(new Date(
@@ -231,23 +234,16 @@ public class TournamentService {
 	}
 
 	public Collection<String> places() {
+		Collection<String> allPlaces = new ArrayList<String>();
+		Collection<Customer> allCustomers;
+		String nameCenter;
 
-		Collection<String> all;
-
-		all = new ArrayList<String>();
-
-		all.add("IndorClub");
-		all.add("SportsClub");
-		all.add("Place 3");
-		all.add("Place 4");
-		all.add("Place 5");
-		all.add("Place 6");
-		all.add("Place 7");
-		all.add("Place 8");
-		all.add("Place 9");
-		all.add("Other center");
-
-		return all;
+		allCustomers = customerService.findAll();
+		for(Customer c: allCustomers){
+			nameCenter = c.getNameCenter();
+			allPlaces.add(nameCenter);
+			}
+		return allPlaces;
 
 	}
 

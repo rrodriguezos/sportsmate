@@ -2,6 +2,8 @@ package controllers;
 
 
 import java.util.Collection;
+import java.util.Date;
+import java.util.HashSet;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -40,9 +42,19 @@ public class TournamentsController extends AbstractController
 	@RequestMapping(value = "/listAll", method = RequestMethod.GET)
 	public ModelAndView listAll() {
 		ModelAndView result;
-		Collection<Tournament> tournaments;
 		Boolean showJoin = true;
+		Collection<Tournament> all;
+		Date now = new Date(System.currentTimeMillis());
 		User principal;
+		Collection<Tournament> tournaments = new HashSet<Tournament>();
+		
+		all = tournamentService.findAll();
+		
+		for (Tournament a : all) {
+			if (a.getFinishMoment().before(now)) {
+				tournaments.add(a);
+			}
+		}
 
 		tournaments = tournamentService.findAll();
 		principal = userService.findByPrincipal();
@@ -103,10 +115,5 @@ public class TournamentsController extends AbstractController
 			return result;
 
 		}
-	
-	
+
 }
-
-
-
-

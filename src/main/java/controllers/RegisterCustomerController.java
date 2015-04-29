@@ -17,7 +17,7 @@ import forms.CustomerForm;
 
 @Controller
 @RequestMapping("/customer")
-public class RegisterCustomerController extends AbstractController{
+public class RegisterCustomerController extends AbstractController {
 	// Services ---------------------------------------------------------------
 	@Autowired
 	private CustomerService customerService;
@@ -82,12 +82,16 @@ public class RegisterCustomerController extends AbstractController{
 
 	// Save-----------------------------------------------------------------
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
-	public ModelAndView save(@Valid CustomerForm customerForm, BindingResult bindingResult) {
+	public ModelAndView save(@Valid CustomerForm customerForm,
+			BindingResult bindingResult) {
 		ModelAndView result;
 		Customer customer;
 
-		if (bindingResult.hasErrors()) {
-
+		if (bindingResult.hasErrors() ||customerForm.getUsername().length() <= 3) {
+			if (customerForm.getUsername().length() <= 3) {
+				result = createEditModelAndView(customerForm,
+						"register.commit.penemuychico");
+			}
 			result = createEditModelAndView(customerForm);
 
 		} else {
@@ -102,9 +106,15 @@ public class RegisterCustomerController extends AbstractController{
 			} catch (Throwable oops) {
 				if (oops instanceof DataIntegrityViolationException) {
 
-					result = createEditModelAndView(customerForm, "customer.duplicated.username");
+					result = createEditModelAndView(customerForm,
+							"customer.duplicated.username");
+				}
+				if (customerForm.getUsername().length() <= 3) {
+					result = createEditModelAndView(customerForm,
+							"register.commit.penemuychico");
 				} else {
-					result = createEditModelAndView(customerForm, "customer.commit.error");
+					result = createEditModelAndView(customerForm,
+							"customer.commit.error");
 				}
 			}
 		}
@@ -122,7 +132,8 @@ public class RegisterCustomerController extends AbstractController{
 		return result;
 	}
 
-	protected ModelAndView createEditModelAndView(CustomerForm customerForm, String message) {
+	protected ModelAndView createEditModelAndView(CustomerForm customerForm,
+			String message) {
 		ModelAndView result;
 
 		result = new ModelAndView("customer/edit");
