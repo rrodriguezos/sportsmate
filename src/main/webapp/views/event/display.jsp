@@ -74,7 +74,7 @@
 			</div>
 
 		</div>
-		<div class="col-xs-12 col-sm-7 alert alert-info">
+		<div class="col-xs-12 col-sm-7 alert alert-success">
 			<div>
 				<b><spring:message code="event.description" />: </b>
 				<jstl:out value="${eventForm.description}" />

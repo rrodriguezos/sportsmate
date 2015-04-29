@@ -24,47 +24,72 @@
 <br>
 <div class='table-responsive'>
 	<display:table name="events" id="row" requestURI="${requestURI}"
-		pagesize="5" class="table table-bordered table-hover">
-
+		pagesize="5" class="spm-events-table">
+		
+		<!-- Espacio  spm-spacing-list -->
+		
 		<display:column>
+		<div class="col-xs-12 spm-event-header-spacing">
+			<div class="alert alert-success spm-no-margin-bottom col-xs-12">
+				<spring:message code="tournament.title" var="titleHeader" />
+				<jstl:out value="${row.title}"></jstl:out>
+			</div>
+			
+			<!-- <b><spring:message code="event.title" />: </b> -->
+			
+			<div class="well well-sm col-xs-12 spm-no-margin-bottom">
+				<div class="col-xs-12 col-sm-9 col-md-10">
+					<div>
+						<b><spring:message code="event.startMoment" />: </b>
+						<spring:message code="event.startMoment" var="startMomentHeader" />
+						<jstl:out value="${row.startMoment}"></jstl:out>
+					</div>
+				
+					<div>
+						<b><spring:message code="event.finishMoment" />: </b>
+						<spring:message code="event.finishMoment" var="finishMomentHeader" />
+						<jstl:out value="${row.finishMoment}"></jstl:out>
+					</div>
+					
+					<div>
+						<b><spring:message code="event.numberMaxParticipant" />: </b>
+						<spring:message code="event.numberMaxParticipant" var="numberMaxParticipantHeader" />
+						<jstl:out value="${row.numberMaxParticipant}"></jstl:out>
+					</div>
+				</div>
+				
+				<div class="col-xs-12 col-sm-3 col-md-2">
+					<security:authorize access="hasRole('USER')">
+						<a href="event/user/display.do?eventId=${row.id}">
+							<button type="button" class="btn btn-md btn-default col-xs-12 spm-event-detail-btn">
+								<spring:message code="event.display" />
+							</button>
+						</a>
+					</security:authorize>
+				
+					<security:authorize access="hasRole('CUSTOMER')">
+						<a href="event/customer/display.do?eventId=${row.id}">
+							<button type="button" class="btn btn-md btn-default col-xs-12 spm-event-detail-btn">
+								<spring:message code="event.display" />
+							</button>
+						</a>
+					</security:authorize>
+				</div>
+			</div>
 
-			<b><spring:message code="event.title" />: </b>
-			<spring:message code="tournament.title" var="titleHeader" />
-			<jstl:out value="${row.title}"></jstl:out>
-			<br />
-			
-			<b><spring:message code="event.startMoment" />: </b>
-			<spring:message code="event.startMoment" var="startMomentHeader" />
-			<jstl:out value="${row.startMoment}"></jstl:out>
-			<br />
-			
-			<b><spring:message code="event.finishMoment" />: </b>
-			<spring:message code="event.finishMoment" var="finishMomentHeader" />
-			<jstl:out value="${row.finishMoment}"></jstl:out>
-			<br />
-			
-			<b><spring:message code="event.numberMaxParticipant" />: </b>
-			<spring:message code="event.numberMaxParticipant" var="numberMaxParticipantHeader" />
-			<jstl:out value="${row.numberMaxParticipant}"></jstl:out>
-			<br />		
-			
-			<spring:message code="event.display"
-				var="displayHeader" />
-			<security:authorize access="hasRole('USER')">
-				<a href="event/user/display.do?eventId=${row.id}">
-					<spring:message code="event.display" />
-				</a>
-			</security:authorize>
-			<security:authorize access="hasRole('CUSTOMER')">
-				<a href="event/customer/display.do?eventId=${row.id}">
-					<spring:message code="event.display" />
-				</a>
-			</security:authorize>
+			<spring:message code="event.display" var="displayHeader" />
 
+		</div>
+		
 		</display:column>
+		
+		
+		
 		<jstl:if test="${showJoin == true}">
+		
 		<display:column title="${join }">
-
+		
+		<div class="col-xs-5 col-sm-3 spm-events-button">
 			<jstl:if test="${row.users.size() == row.numberMaxParticipant }">
 				<spring:message code="event.full" var="full"/>
 				<jstl:out value="${full }"></jstl:out>
@@ -87,8 +112,11 @@
 			<jstl:if test="${row.users.size() < row.numberMaxParticipant }">
 				<jstl:if test="${contains == false}">
 					<spring:message code="event.join" var="join" />
-					<a href="event/user/joinEvent.do?eventId=${row.id }"><jstl:out
-							value="${join }"></jstl:out></a>
+					<a href="event/user/joinEvent.do?eventId=${row.id }">
+						<button class="btn btn-md btn-default col-xs-12">
+							<jstl:out value="${join }"></jstl:out>
+						</button>
+					</a>
 				</jstl:if>
 			
 
@@ -98,11 +126,14 @@
 			</jstl:if>
 			</jstl:if>
 		
+		</div>
 		</display:column>
 		</jstl:if>
 
+	
 
 	</display:table>
+	
 </div>
 
 <br>

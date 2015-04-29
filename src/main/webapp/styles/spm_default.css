@@ -86,13 +86,21 @@ body {
 	margin-bottom: 8px;	
 }
 
+.spm-event-header-spacing{
+	margin-top: 14px;
+}
+
+.spm-events-button{
+	margin-top: 5px;
+}
+
 .spm-button-list{
 	margin-top: 5px;
 	margin-bottom: 30px;
 }
 
 .spm-spacing-list{
-	margin-bottom: 30px;
+	margin-bottom: 25px;
 }
 
 .spm-team-list{
@@ -113,7 +121,12 @@ body {
 	margin-bottom: 10px;
 }
 
-
+.spm-event-detail-btn{
+	padding-top: 10px;
+	padding-bottom: 10px;
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
 /* Details on tables */
 
 .spm-table{
@@ -128,12 +141,23 @@ body {
 	margin-bottom: 0px;
 }
 
+
+
+/* OVERWRITES BOOTSTRAP DEFAULT FOR REMOVE EXTRA-BORDER IN 'XS' TABLES */
+.table-responsive{
+	border: none; 
+}
+
 table{
 	margin: 20px 0 20px 0;
 }
 
 th{
 	background-color: #d6e9c6;
+}
+
+.spm-events-table td{
+	display: block;
 }
 
 span.pagebanner {
