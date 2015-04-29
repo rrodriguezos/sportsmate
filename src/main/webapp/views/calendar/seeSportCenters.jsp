@@ -24,6 +24,8 @@
 <spring:message code="sportCenter.city" var="city"/>
 <spring:message code="sportCenter.street" var="street"/>
 <spring:message code="sportCenter.CalendarOfEvents" var="calendarOfEvents"/>
+<spring:message code="sportCenter.perfil" var="perfil"/>
+
 
 <div class="table-responsive">
 <display:table name="centers" id="row"
@@ -37,6 +39,8 @@ pagesize="5" class="table table-bordered table-hover" >
 	<display:column title="${name }">  <jstl:out value="${row.nameCenter }"></jstl:out> </display:column>
 	<display:column title="${city }"> <jstl:out value="${row.city }"></jstl:out> </display:column>
 	<display:column title="${street }"> <jstl:out value="${row.street }"></jstl:out> </display:column>
+	<display:column title="${perfil }"> <a href="event/user/calendar/seePerfilOfCustomer.do?id=${row.id }"> 
+		<jstl:out value="${perfil}"></jstl:out></a></display:column>
 	<display:column title="${seeCalendar }"> <a href="event/user/calendar/seeSportCenterCalendar.do?id=${row.id }">
 		<jstl:out value="${calendarOfEvents}"></jstl:out>
 	</a></display:column>

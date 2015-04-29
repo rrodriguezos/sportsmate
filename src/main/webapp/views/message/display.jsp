@@ -23,38 +23,49 @@
 
 <form:form action="message/actor/display.do" modelAttribute="messageForm">
 
-	<form:hidden path="id" />		
-
-	<b><spring:message code="message.sendMoment" />: </b> 
-		<form:input path="sendMoment" readonly="true" format="{0,date,dd/MM/yyyy HH:mm}"/>
-	<br/>
-	<br/>
-	<b><spring:message code="message.sender" />: </b> 
-		<jstl:out value="${from}" />
-	<br/>
-	<br/>
-	<b><spring:message code="message.recipient" />: </b> 
-		<jstl:out value="${to}" />
-	<br/>
-	<br/>
+	<form:hidden path="id" />	
+		
+	<div class="row">
+	<div class="col-xs-12 col-sm-9">
 	
-	<b><spring:message code="message.subject" />: </b> 
-		<form:input path="subject" readonly="true" />
-	<br/>
-	<br/>
-	<b><spring:message code="message.body" />: </b> 
-		<form:textarea path="body" readonly="true"/>
-	<br/>
-	<br/>	
-	<br>	
-	<jstl:if test="${destinatario }">
-		<input type="button" class="btn btn-md btn-success" name="reply" value="<spring:message code="message.reply"/>" 
-	   	   onclick="javascript: window.location.replace('message/actor/reply.do?messageId=${messageForm.id}');" />
-	</jstl:if>  	
+	<div class="well well-sm spm-message-field-spacing">
+		<b><spring:message code="message.sendMoment" />: </b> 
+			<form:input class="spm-message-moment" path="sendMoment" readonly="true" format="{0,date,dd/MM/yyyy HH:mm}"/>
+	</div>
+	
+	<div class="well well-sm spm-message-field-spacing">
+		<b><spring:message code="message.sender" />: </b> 
+			<jstl:out value="${from}" />
+	</div>	
+	
+	<div class="well well-sm">
+		<b><spring:message code="message.recipient" />: </b> 
+		<jstl:out value="${to}" />
+	</div>
 
-	<input type="button" class="btn btn-md btn-default" value="<spring:message code="message.back"/>" 
-	   	   onclick="javascript: window.location.replace('message/actor/list.do?folderId= ${folderId}')" /> 
-	   	   
+	<div class="">
+		<b><spring:message code="message.subject" />: </b> 
+			<form:input path="subject" readonly="true" class="form-control" />
+		<br>
+		
+		<b><spring:message code="message.body" />: </b> 
+			<form:textarea path="body" rows="6" readonly="true" class="form-control" />
+	
+	</div>
+		
+	</div>
+	
+		<div class="col-xs-12">
+			<br>
+			<jstl:if test="${destinatario }">
+				<input type="button" class="btn btn-md btn-success" name="reply" value="<spring:message code="message.reply"/>" 
+			   	   onclick="javascript: window.location.replace('message/actor/reply.do?messageId=${messageForm.id}');" />
+			</jstl:if>  	
+
+			<input type="button" class="btn btn-md btn-default" value="<spring:message code="message.back"/>" 
+			   	   onclick="javascript: window.location.replace('message/actor/list.do?folderId= ${folderId}')" /> 
+		</div>
+	</div>  
 </form:form>
 
 

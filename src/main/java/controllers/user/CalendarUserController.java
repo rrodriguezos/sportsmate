@@ -171,6 +171,22 @@ public class CalendarUserController extends AbstractController
 		
 		
 	}
+	
+	@RequestMapping("seePerfilOfCustomer")
+	public ModelAndView seePerfilOfCustomer(@RequestParam int id)
+	{
+		
+		ModelAndView result = new ModelAndView("event/user/calendar/seePerfilOfCustomer");
+		
+		Customer customer= customerService.findOne(id);
+		
+		if (customer == null)
+			new Throwable("opps you can try to get bad id?");
+		
+		result.addObject("customer", customer);
+		
+		return result;
+	}
 
 	
 
