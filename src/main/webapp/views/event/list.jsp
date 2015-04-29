@@ -121,8 +121,11 @@
 			
 
 			<jstl:if test="${contains == true}">
-				<spring:message code="event.joined" var="joined" />
-				<jstl:out value="${joined }"></jstl:out>
+				
+				<span class="col-xs-12 bg-success spm-event-joined text-center">
+					<spring:message code="event.joined" var="joined" />
+					<jstl:out value="${joined }"></jstl:out>
+				</span>
 			</jstl:if>
 			</jstl:if>
 		

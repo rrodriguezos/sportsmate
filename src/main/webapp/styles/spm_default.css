@@ -127,6 +127,12 @@ body {
 	margin-top: 10px;
 	margin-bottom: 10px;
 }
+
+.spm-event-joined{
+	padding: 8px 30px;
+	border-radius: 5px;
+}
+
 /* Details on tables */
 
 .spm-table{
