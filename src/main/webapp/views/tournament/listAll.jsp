@@ -84,6 +84,27 @@
 						</div>
 					</div>
 				</div>
+				<div class="row">
+			<div class="col-xs-12 spm-button-list">
+				<spring:message code="tournament.display" var="displayHeader" />
+					
+					<security:authorize access="hasRole('USER')">
+							<a href="tournament/user/display.do?tournamentId=${row.id}"> 
+									<button type="button" class="btn btn-md btn-default col-xs-2">
+										<spring:message	code="tournament.display" />
+									</button>
+							</a>
+					</security:authorize>
+					
+					<security:authorize access="hasRole('CUSTOMER')">
+						<a href="tournament/customer/display.do?tournamentId=${row.id}">
+							<button type="button" class="btn btn-md btn-default col-xs-2">
+								<spring:message code="tournament.display" />
+							</button>
+						</a>
+					</security:authorize>
+			</div>
+			</div>
 			</div>
 
 			<div class="col-xs-12 spm-spacing-list"></div>
