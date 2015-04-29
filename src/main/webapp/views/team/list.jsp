@@ -36,11 +36,26 @@
 			</div>
 			<!-- <b><spring:message code="team.name" />: </b> -->
 			
-			<div class="spm-team-list col-xs-12 col-sm-6">
-
+			<div class="spm-team-list col-xs-12 col-sm-5">
 					<b><spring:message code="team.maxNumber" />: </b>
 					<spring:message code="team.maxNumber" var="maxNumberHeader" />
 					<jstl:out value="${row.maxNumber}"></jstl:out>					
+			</div>
+			
+			<div class="spm-team-list-btn col-xs-12 col-sm-2 pull-right">
+				<jstl:if test="${showSend == true }">
+				<spring:message code="team.sendRequest" var="sendRequestHeader" />
+				
+				<security:authorize access="hasRole('USER')">
+				<jstl:if test="${!teamsRequested.contains(row)}">
+					<a href="requestTeam/user/sendRequest.do?teamId=${row.id}">
+						<button type="button" class="btn btn-sm btn-success col-xs-12 ">
+							<spring:message	code="team.sendRequest" />
+						</button>
+					</a>
+					</jstl:if>
+				</security:authorize>
+				</jstl:if>
 			</div>
 			
 			<div class="spm-team-list-btn col-xs-12 col-sm-2 pull-right">
@@ -52,6 +67,8 @@
 						</a>
 					</security:authorize>
 			</div>
+			
+
 
 		</div>
 		
@@ -67,19 +84,6 @@
 					<input type="button" class="btn btn-md btn-success" name="create"
 						value="<spring:message code="team.create"/>"
 						onclick="javascript: window.location.replace('team/user/create.do');" />
-				</security:authorize>
-			</jstl:if>
-
-			<jstl:if test="${showSend == true }">
-				<spring:message code="team.sendRequest" var="sendRequestHeader" />
-				<security:authorize access="hasRole('USER')">
-				<jstl:if test="${!teamsRequested.contains(row)}">
-					<a href="requestTeam/user/sendRequest.do?teamId=${row.id}">
-						<button type="button" class="btn btn-md btn-success">
-							<spring:message	code="team.sendRequest" />
-						</button>
-					</a>
-					</jstl:if>
 				</security:authorize>
 			</jstl:if>
 
