@@ -45,6 +45,11 @@ body {
 	border: thin solid black;
 }
 
+.spm-message-moment{
+	border: 0px;
+	background-color: transparent;
+}
+
 .spm-footer-gly, .spm-footer-gly a{
 	color: #888888;
 }
@@ -141,6 +146,10 @@ body {
 
 #row{
 	width: 100%;
+}
+
+.spm-message-field-spacing{
+	margin-bottom: 6px;	
 }
 
 .spm-no-margin-bottom{
