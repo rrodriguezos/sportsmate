@@ -178,5 +178,6 @@
 	<bean id="cacheManager" class="org.springframework.cache.support.SimpleCacheManager">
 	    <property name="caches" ref="cacheSet" />	        
 	</bean>
+	
 
 </beans>

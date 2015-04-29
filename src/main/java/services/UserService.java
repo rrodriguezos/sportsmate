@@ -193,6 +193,7 @@ public class UserService {
 		userForm.setPhone(user.getPhone());
 
 		userForm.setImagen(user.getImagen());
+		userForm.setImagenMultipart(user.getImagenMultipart());
 
 		return userForm;
 		
@@ -215,6 +216,7 @@ public class UserService {
 		userForm.setPhone(user.getPhone());
 
 		userForm.setImagen(user.getImagen());
+		userForm.setImagenMultipart(user.getImagenMultipart());
 
 		return userForm;
 		
@@ -245,7 +247,8 @@ public class UserService {
 		user.setEmail(userForm.getEmail());
 		user.setPhone(userForm.getPhone());
 
-		user.setImagen(userForm.getImagen());		
+		user.setImagen(userForm.getImagen());	
+		user.setImagenMultipart(userForm.getImagenMultipart());
 		
 		Assert.isTrue(userForm.getTerms());
 

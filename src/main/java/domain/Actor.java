@@ -15,6 +15,8 @@ import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
+import org.springframework.web.multipart.MultipartFile;
+
 import security.UserAccount;
 
 @Entity
@@ -36,6 +38,16 @@ public abstract class Actor extends DomainEntity{
 	
 	private byte[] imagen;
 	private boolean errorImagen;
+	private MultipartFile imagenMultipart;
+	
+	@Transient
+	 public MultipartFile getImagenMultipart() {
+	  return imagenMultipart;
+	 }
+
+	 public void setImagenMultipart(MultipartFile imagenMultipart) {
+	  this.imagenMultipart = imagenMultipart;
+	 }
 
 	@NotBlank
 	public String getName() 

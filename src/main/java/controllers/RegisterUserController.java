@@ -36,12 +36,16 @@ public class RegisterUserController extends AbstractController {
 
 		ModelAndView result;
 		User user;	
+		UserForm userForm;
 		
 		user = userService.findByPrincipal();
+		userForm = userService.construct(user);
 		
 		result = new ModelAndView("user/display");
 		
 		result.addObject("user", user);
+		result.addObject("userForm", userForm);
+		result.addObject("imageSrc", org.apache.commons.codec.binary.Base64.encodeBase64String(user.getImagen()));
 		result.addObject("rating", user.getRating());
 
 		return result;

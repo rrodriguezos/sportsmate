@@ -44,7 +44,12 @@
 	</fieldset>
 
 <br>
-
+		<div class="row">
+		<div class='col-md-3 spm-profile-picture-div text-center'> 
+			<img src="images/default_profile.jpg" alt="Default profile" class="img-thumbnail .spm-profile-picture" />
+				<br><br>
+			<form:input type="file" name="file" path="imagen"/> 
+		</div>
 		<legend>
 			<spring:message code="user.user" />
 		</legend>
