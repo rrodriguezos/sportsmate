@@ -98,8 +98,7 @@
 
 
 
-			<br>
-			<br>
+			<br> <br>
 		</div>
 	</div>
 
@@ -125,7 +124,7 @@
 			<br>
 			<acme:submit code="tournament.save" name="saveTC" />
 
-			<jstl:if test="${tournamentForm.id != 0}">
+			<jstl:if test="${tournamentForm.id != 0 and matches.size()==0}">
 				<input type="submit" class="btn btn-md btn-danger" name="deleteTC"
 					value="<spring:message code="tournament.delete" />"
 					onclick="return confirm('<spring:message code="tournament.confirm.delete" />')" />
@@ -139,7 +138,7 @@
 			<br>
 			<acme:submit code="tournament.save" name="saveTU" />
 
-			<jstl:if test="${tournamentForm.id != 0}">
+			<jstl:if test="${tournamentForm.id != 0 and matches.size()==0}">
 				<input type="submit" class="btn btn-md btn-danger" name="deleteTU"
 					value="<spring:message code="tournament.delete" />"
 					onclick="return confirm('<spring:message code="tournament.confirm.delete" />')" />
