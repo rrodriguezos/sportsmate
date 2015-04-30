@@ -23,30 +23,31 @@
 </h1>
 <display:table name="users" id="row" requestURI="user/search.do"
 	pagesize="5" class="displaytag">
-
-	<spring:message code="user.name" var="nameHeader" />
-	<display:column property="name" title="${nameHeader}" />
-
-	<spring:message code="user.surname" var="surnameHeader" />
-	<display:column property="surname" title="${surnameHeader}" />
-
-	<spring:message code="user.email" var="emailHeader" />
-	<display:column property="email" title="${emailHeader}" />
-
-	<security:authorize access="hasRole('USER')">
-		<spring:message code="user.sendRequest" var="sendRequestHeader" />
-		<display:column title="${sendRequestHeader}">
+	<display:column>
+		<b><spring:message code="user.name" />: </b>
+		<jstl:out value="${row.name}"></jstl:out>
+		<br>
+		<b><spring:message code="user.surname" />: </b>
+		<jstl:out value="${row.surname}"></jstl:out>
+		<br>
+		<b><spring:message code="user.email" />: </b>
+		<jstl:out value="${row.email}"></jstl:out>
+		<br>
+		<security:authorize access="hasRole('USER')">
+			<spring:message code="user.sendRequest" var="sendRequestHeader" />
 			<jstl:if test="${principal != row}">
-					<jstl:if test="${!friendshipRequested.contains(row)}">
-						<a href="friendship/user/sendRequest.do?userFriendId=${row.id}">
+				<jstl:if test="${!friendshipRequested.contains(row)}">
+					<a href="friendship/user/sendRequest.do?userFriendId=${row.id}">
+						<button type="button">
 							<spring:message code="user.sendRequest" />
-						</a>
-					</jstl:if>
+						</button>
+					</a>
+				</jstl:if>
 			</jstl:if>
-		</display:column>
-	</security:authorize>
 
+		</security:authorize>
 
+	</display:column>
 </display:table>
 
 <h1>
@@ -55,18 +56,17 @@
 <display:table name="customers" id="row" requestURI="customer/search.do"
 	pagesize="5" class="displaytag">
 
-	<spring:message code="customer.nameCenter" var="nameCenterHeader" />
-	<display:column property="nameCenter" title="${nameCenterHeader}" />
-
-	<spring:message code="customer.provinceCenter"
-		var="provinceCenterHeader" />
-	<display:column property="provinceCenter"
-		title="${provinceCenterHeader}" />
-
-	<spring:message code="customer.emailCenter" var="emailCenterHeader" />
-	<display:column property="emailCenter" title="${emailCenterHeader}" />
-
-
+	<display:column>
+		<b><spring:message code="customer.nameCenter" />: </b>
+		<jstl:out value="${row.nameCenter}"></jstl:out>
+		<br>
+		<b><spring:message code="customer.provinceCenter" />: </b>
+		<jstl:out value="${row.provinceCenter}"></jstl:out>
+		<br>
+		<b><spring:message code="customer.emailCenter" />: </b>
+		<jstl:out value="${row.emailCenter}"></jstl:out>
+		<br>
+	</display:column>
 </display:table>
 
 

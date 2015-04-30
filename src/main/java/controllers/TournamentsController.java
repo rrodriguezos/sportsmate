@@ -37,7 +37,7 @@ public class TournamentsController extends AbstractController {
 		all = tournamentService.findAll();
 		Collection<Tournament> tournaments = new HashSet<Tournament>();
 		for (Tournament a : all) {
-			if (a.getFinishMoment().before(now)) {
+			if (a.getFinishMoment().after(now)) {
 				tournaments.add(a);
 			}
 		}
