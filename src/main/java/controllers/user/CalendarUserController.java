@@ -10,18 +10,25 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import services.ActorService;
 import services.CustomerService;
 import services.EventService;
+import services.TeamService;
 import services.TournamentService;
 import services.UserService;
 import controllers.AbstractController;
+import domain.Actor;
 import domain.Customer;
 import domain.Event;
+import domain.Match;
+import domain.Team;
 import domain.Tournament;
 import domain.User;
+import forms.EventForm;
 @Controller
 @RequestMapping("/event/user/calendar")
 public class CalendarUserController extends AbstractController
@@ -40,6 +47,15 @@ public class CalendarUserController extends AbstractController
 	
 	@Autowired
 	private TournamentService tournamentService;
+	
+	@Autowired
+	private ActorService actorService;
+	
+	@Autowired
+	private TeamService teamService;
+	
+	@Autowired
+	private services.MatchService matchService;
 	
 	
 	public CalendarUserController()
@@ -187,8 +203,76 @@ public class CalendarUserController extends AbstractController
 		
 		return result;
 	}
+	
+	
+	
+	@RequestMapping(value = "/display", method = RequestMethod.GET)
+	public ModelAndView display(@RequestParam int eventId) {
+
+		ModelAndView result;
+		Event event;
+		EventForm eventForm;
+		Collection<User> users;
+		Actor actor;
+		Boolean estoyApuntado = false;
+
+		event = eventService.findOne(eventId);
+		eventForm = eventService.construct(event);
+		users = userService.findAllUsersByEventId(eventId);
+		actor = actorService.findByPrincipal();
+
+		if (event.getUsers().contains(actor)) {
+			estoyApuntado = true;
+		}
+		result = new ModelAndView("event/user/calendar/display");
+
+		result.addObject("eventForm", eventForm);
+		result.addObject("users", users);
+		result.addObject("creationMoment", event.getCreationMoment());
+		result.addObject("estoyApuntado", estoyApuntado);
+		Date today = new Date(System.currentTimeMillis());
+		Date finish = eventForm.getFinishMoment();
+		result.addObject("today", today);
+		result.addObject("finish", finish);
+		int miId = actor.getId();
+		result.addObject("miId", miId);
+
+		if (actor instanceof User) {
+			User user = (User) actor;
+			result.addObject("user", user);
+		}
+
+		return result;
+
+	}
 
 	
+	@RequestMapping(value = "/displayTournament", method = RequestMethod.GET)
+	public ModelAndView displayTournament(@RequestParam int tournamentId) {
+		ModelAndView result;
+		Tournament tournament;
+		Collection<Team> teams;
+		Collection<Match> matches;
+
+		tournament = tournamentService.findOne(tournamentId);
+		teams = teamService.findAllTeamsByTournamentId(tournamentId);
+		matches = matchService.findAllMatchesByTournament(tournament);
+
+		result = new ModelAndView("event/user/calendar/displayTournament");
+		//result.addObject("miId", customerService.findByPrincipal().getId());
+		result.addObject("tournament", tournament);
+		result.addObject("tournamentId", tournamentId);
+		result.addObject("matches", matches);
+		result.addObject("teams", teams);
+		Boolean puedeEditar = true;
+		Date now = new Date(System.currentTimeMillis());
+		if (tournament.getStartMoment().before(now)) {
+			puedeEditar = false;
+		}
+		result.addObject("puedeEditar", puedeEditar);
+		return result;
+
+	}
 
 
 }

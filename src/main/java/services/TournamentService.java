@@ -14,9 +14,9 @@ import org.springframework.util.Assert;
 import repositories.TournamentRepository;
 import domain.Actor;
 import domain.Customer;
+import domain.Tournament;
 import domain.Match;
 import domain.Team;
-import domain.Tournament;
 import domain.User;
 import forms.TournamentForm;
 
@@ -31,6 +31,8 @@ public class TournamentService {
 	private UserService userService;
 	@Autowired
 	private ActorService actorService;
+	@Autowired
+	private TeamService teamService;
 
 	public Collection<Tournament> findAll() {
 		Collection<Tournament> all;
@@ -45,6 +47,17 @@ public class TournamentService {
 
 		result = tournamentRepository.findOne(tournamentId);
 		return result;
+	}
+	
+	public Tournament findOneToJoin(int tournamentId)
+	{
+		
+		Tournament result;
+		
+		result = tournamentRepository.findOne(tournamentId);
+		
+		return result;
+		
 	}
 
 	public Tournament create() {
@@ -121,6 +134,18 @@ public class TournamentService {
 		}
 
 	}
+	
+	public Tournament saveJoin(Tournament tournament)
+	{
+		
+		User principal;
+		
+		principal = userService.findByPrincipal();
+		
+		tournament = tournamentRepository.save(tournament);
+		
+		return tournament;
+	}
 
 	public void delete(TournamentForm tournamentForm) {
 		Tournament tournament = reconstruct(tournamentForm);
@@ -194,6 +219,27 @@ public class TournamentService {
 		all = tournamentRepository.findAllTournamentsCreatedByUserId(userId);
 
 		return all;
+	}
+	
+	public Collection<Tournament> findAllTournamentByPrincipal()
+	{
+		
+		Collection<Tournament> result;
+		Collection<Team> teams;
+		
+		teams = teamService.findAllTeamsByUserId();
+		result = new ArrayList<Tournament>();
+		
+		for(Team t: teams){
+			for(Tournament tour:t.getTournaments()){
+				if(!result.contains(tour)){
+					result.add(tour);
+				}
+			}
+		}
+		
+		return result;
+		
 	}
 
 	public Collection<Tournament> findAllTournamentsCreatedByCustomerId() {
@@ -322,6 +368,55 @@ public class TournamentService {
 
 		return result;
 
+	}
+	
+	public void joinTournament(Tournament tournament, Team team) {
+
+		User user;
+
+		user = userService.findByPrincipal();
+		
+		Assert.isTrue(team.getCaptain().equals(user));
+
+		tournament.getTeams().add(team);
+		user.getTournaments().add(tournament);
+		team.getTournaments().add(tournament);
+		
+		if(!team.getUsers().contains(user)){
+			team.getUsers().add(user);
+			user.getTeams().add(team);
+		}
+		
+		
+
+		saveJoin(tournament);
+		teamService.saveJoin(team);
+		userService.save(user);
+
+	}
+
+	public void DisjoinTournament(Tournament tournament) {
+
+		User user;
+		Team team = null;
+
+		user = userService.findByPrincipal();
+		
+		for(Team t : tournament.getTeams()){
+			if(user.getTeams().contains(t)){
+				team = t;
+			}
+		}
+		
+		Assert.isTrue(team.getCaptain().equals(user));
+
+		tournament.getTeams().remove(team);
+		user.getTournaments().remove(tournament);
+		team.getTournaments().remove(tournament);
+
+		saveJoin(tournament);
+		teamService.saveJoin(team);
+		userService.save(user);
 	}
 
 }
