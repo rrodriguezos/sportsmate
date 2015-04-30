@@ -26,28 +26,29 @@
 	<display:table name="friendships" id="row" requestURI="${requestURI}"
 		pagesize="5" class="table table-bordered table-hover">
 
-		<display:column>
-			<b><spring:message code="friendship.user" />: </b>
-			<jstl:out value="${row.user.name}"></jstl:out>
-			<br>
-			<b><spring:message code="friendship.userfriend" />: </b>
-			<jstl:out value="${row.userFriend.name}"></jstl:out>
-			<br>
-			<b><spring:message code="friendship.date" />: </b>
-			<fmt:formatDate value="${row.date}"
-				pattern="{0,date,dd/MM/yyyy HH:mm}"></fmt:formatDate>
-			<br>
-			<b><spring:message code="friendship.acceptRequest" />: </b>
-			<jstl:out value="${acceptRequestHeader}"></jstl:out>
-			<br>
+		<b><spring:message code="event.startMoment" />: </b>
+		<jstl:out value="${row.startMoment}"></jstl:out>
+
+		<spring:message code="friendship.user" var="userHeader" />
+		<display:column property="user.name" title="${userHeader}" />
+
+		<spring:message code="friendship.userfriend" var="userfriendHeader" />
+		<display:column property="userFriend.name" title="${userfriendHeader}" />
+
+		<spring:message code="friendship.date" var="dateHeader" />
+		<display:column property="date" title="${dateHeader}"
+			format="{0,date,dd/MM/yyyy HH:mm}" />
+
+		<spring:message code="friendship.acceptRequest"
+			var="acceptRequestHeader" />
+		<display:column title="${acceptRequestHeader}">
 			<security:authorize access="hasRole('USER')">
 				<a href="friendship/user/acceptRequest.do?friendshipId=${row.id}">
-					<button type="button">
-						<spring:message code="friendship.acceptRequest" />
-					</button>
+					<spring:message code="friendship.acceptRequest" />
 				</a>
 			</security:authorize>
 		</display:column>
+
 	</display:table>
 </div>
 

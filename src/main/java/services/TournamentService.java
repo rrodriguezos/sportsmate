@@ -137,11 +137,7 @@ public class TournamentService {
 	
 	public Tournament saveJoin(Tournament tournament)
 	{
-		
-		User principal;
-		
-		principal = userService.findByPrincipal();
-		
+			
 		tournament = tournamentRepository.save(tournament);
 		
 		return tournament;
