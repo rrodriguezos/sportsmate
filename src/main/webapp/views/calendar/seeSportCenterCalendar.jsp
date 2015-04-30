@@ -139,7 +139,7 @@ pagesize="20" class="table table-bordered table-hover" defaultsort="1" defaultor
 <display:column title="${Details }">
 
 	
-	<a href="event/user/display.do?eventId=${row.id }">${Details }</a>
+	<a href="event/user/calendar/display.do?eventId=${row.id }">${Details }</a>
 
 </display:column>
 

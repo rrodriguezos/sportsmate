@@ -32,6 +32,10 @@
 		<put-attribute name="body" value="/views/calendar/seePerfil.jsp" />
 	</definition>
 	
+	<definition name="event/user/calendar/display" extends="master.page">
+		<put-attribute name="title" value="Details" />
+		<put-attribute name="body" value="/views/calendar/eventDetails.jsp" />
+	</definition>
 	
 		
 </tiles-definitions>

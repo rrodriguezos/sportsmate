@@ -32,6 +32,14 @@
 	</definition>
 	
 	
+	<definition name="event/user/calendar/display" extends="master.page">
+		<put-attribute name="title" value="Detalles del evento" />
+		<put-attribute name="body" value="/views/calendar/eventDetails.jsp" />
+	</definition>
+	
+	
+	
+	
 	
 	
 	

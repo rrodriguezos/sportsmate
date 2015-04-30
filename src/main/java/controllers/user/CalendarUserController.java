@@ -10,18 +10,22 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import services.ActorService;
 import services.CustomerService;
 import services.EventService;
 import services.TournamentService;
 import services.UserService;
 import controllers.AbstractController;
+import domain.Actor;
 import domain.Customer;
 import domain.Event;
 import domain.Tournament;
 import domain.User;
+import forms.EventForm;
 @Controller
 @RequestMapping("/event/user/calendar")
 public class CalendarUserController extends AbstractController
@@ -40,6 +44,9 @@ public class CalendarUserController extends AbstractController
 	
 	@Autowired
 	private TournamentService tournamentService;
+	
+	@Autowired
+	private ActorService actorService;
 	
 	
 	public CalendarUserController()
@@ -186,6 +193,48 @@ public class CalendarUserController extends AbstractController
 		result.addObject("customer", customer);
 		
 		return result;
+	}
+	
+	
+	
+	@RequestMapping(value = "/display", method = RequestMethod.GET)
+	public ModelAndView display(@RequestParam int eventId) {
+
+		ModelAndView result;
+		Event event;
+		EventForm eventForm;
+		Collection<User> users;
+		Actor actor;
+		Boolean estoyApuntado = false;
+
+		event = eventService.findOne(eventId);
+		eventForm = eventService.construct(event);
+		users = userService.findAllUsersByEventId(eventId);
+		actor = actorService.findByPrincipal();
+
+		if (event.getUsers().contains(actor)) {
+			estoyApuntado = true;
+		}
+		result = new ModelAndView("event/user/calendar/display");
+
+		result.addObject("eventForm", eventForm);
+		result.addObject("users", users);
+		result.addObject("creationMoment", event.getCreationMoment());
+		result.addObject("estoyApuntado", estoyApuntado);
+		Date today = new Date(System.currentTimeMillis());
+		Date finish = eventForm.getFinishMoment();
+		result.addObject("today", today);
+		result.addObject("finish", finish);
+		int miId = actor.getId();
+		result.addObject("miId", miId);
+
+		if (actor instanceof User) {
+			User user = (User) actor;
+			result.addObject("user", user);
+		}
+
+		return result;
+
 	}
 
 	
