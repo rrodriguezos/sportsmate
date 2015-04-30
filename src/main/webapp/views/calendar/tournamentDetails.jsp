@@ -143,7 +143,7 @@
 	<br>
 
 	<security:authorize access="hasRole('CUSTOMER')">
-		<acme:cancel code="tournament.back" url="tournament/customer/list.do" />
+		<acme:cancel code="tournament.back" url="event/user/calendar/seeSportCenters.do" />
 		<jstl:if test="${miId==tournament.customer.id and puedeEditar}">
 			<input type="button" class="btn btn-md btn-success" name="edit"
 				value="<spring:message code="tournament.edit"/>"
@@ -152,7 +152,7 @@
 	</security:authorize>
 
 	<security:authorize access="hasRole('USER')">
-		<acme:cancel code="tournament.back" url="tournament/user/list.do" />
+		<acme:cancel code="tournament.back" url="event/user/calendar/seeSportCenters.do" />
 		<jstl:if test="${miId==tournament.user.id and puedeEditar}">
 			<input type="button" class="btn btn-md btn-success" name="edit"
 				value="<spring:message code="tournament.edit"/>"

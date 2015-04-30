@@ -169,7 +169,7 @@ public class CustomerService {
 		
 		userAccount = loginService.getPrincipal();
 		userAccountId = userAccount.getId();
-		all = customerRepository.getAllInvoices(userAccountId);
+		all = customerRepository.getAllInvoices(findByPrincipal().getId());
 		
 		return all;
 		
