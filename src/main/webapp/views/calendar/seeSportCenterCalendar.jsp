@@ -181,5 +181,13 @@ pagesize="5" class="table table-bordered table-hover" >
 </display:column>
 
 
+<display:column title="${Details }">
+
+	
+	<a href="tournament/user/display.do?tournamentId=${row.id }">${Details }</a>
+
+</display:column>
+
+
 </display:table>
 </div>
