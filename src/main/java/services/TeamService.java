@@ -199,20 +199,37 @@ public class TeamService {
 		
 	}
 	
-public Collection<Team> findAllTeamsByTournament(TournamentForm tournamentForm) {
-	Collection<Team> all;
+	public Collection<Team> findAllTeamsByTournament
+	(
+			TournamentForm tournamentForm) {
+		Collection<Team> all;
 
-	all = tournamentForm.getTeams();	
+		all = tournamentForm.getTeams();
+
+		return all;
+	}
+
+	public Collection<Team> findAllTeamsByTournamentId(int tournamentId) 
+	{
+		Collection<Team> all;
+
+		all = teamRepository.findAllTeamsByTournamentId(tournamentId);
+
+		return all;
+	}
 	
-	return all;
-}
-public Collection<Team> findAllTeamsByTournamentId(int tournamentId) {
-	Collection<Team> all;
-	
-	all = teamRepository.findAllTeamsByTournamentId(tournamentId);
-	
-	return all;
-}
+	public Collection<Team> findAllTeamsUserCaptain(int userId)
+	{
+		
+		Collection<Team> result;
+		
+		result = teamRepository.findAllTeamsUserCaptain(userId);
+		
+		return result;
+		
+	}
+
+
 
 }
 

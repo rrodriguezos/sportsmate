@@ -2,6 +2,7 @@ package controllers.user;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 
@@ -23,6 +24,7 @@ import controllers.AbstractController;
 import domain.Match;
 import domain.Team;
 import domain.Tournament;
+import domain.User;
 import forms.TournamentForm;
 
 @Controller
@@ -190,6 +192,106 @@ public class TournamentUserController extends AbstractController {
 			}
 		}
 		return result;
+	}
+	
+	// Choose a team--------------------------------------------------------
+	@RequestMapping(value = "/chooseATeam", method = RequestMethod.GET)
+	public ModelAndView chooseATeam(@RequestParam int tournamentId) 
+	{
+		
+		ModelAndView result;
+		Collection<Team> teams;
+		User principal;
+		TournamentForm tournamentForm;
+		Tournament tournament;
+		Collection<Team> empty;
+		String requestURI;
+		
+		principal = userService.findByPrincipal();
+		empty = new ArrayList<Team>();
+		teams = teamService.findAllTeamsUserCaptain(principal.getId());
+		tournament	= tournamentService.findOneToJoin(tournamentId);
+		tournamentForm	= tournamentService.construct(tournament);
+		tournamentForm.setTeams(empty);
+		requestURI = "tournament/user/joinATeamToTournament.do?tournamentId="+tournamentId;
+		
+		result = new ModelAndView("tournament/chooseATeam");
+		result.addObject("teams", teams);
+		result.addObject("tournamentForm", tournamentForm);
+		result.addObject("principal", principal);
+		result.addObject("requestURI", requestURI);
+		
+		
+		return result;
+		
+	}
+	
+	// Join a Tournament--------------------------------------------------------
+	@RequestMapping(value = "/joinATeamToTournament", method = RequestMethod.POST, params = "join")
+	public ModelAndView joinATeamToTournament(TournamentForm tournamentForm,BindingResult binding, @RequestParam int tournamentId) 
+	{
+
+//		ModelAndView result;
+//		Tournament tournament;
+//		Collection<Tournament> tournaments;
+//
+//		tournament = tournamentService.findOne(tournamentId);
+//		tournamentService.joinTournament(tournament, team);
+//		tournaments = tournamentService.findAll();
+//
+//		result = new ModelAndView("tournament/list");
+//
+//		result.addObject("tournaments", tournaments);
+//		result.addObject("requestURI", "tournament/user/list.do");
+
+//		return result;
+		
+		ModelAndView result;
+		Team team = null;
+		Tournament tournament;
+//		if (binding.hasErrors()) {
+//			System.out.println("Binding " + binding.toString());
+//			result = createEditModelAndView(null);
+//		} else {
+			try {
+				for(Team t: tournamentForm.getTeams()){
+					team = t;
+				}
+				
+				tournament = tournamentService.findOneToJoin(tournamentId);
+
+				tournamentService.joinTournament(tournament, team);
+
+				result = new ModelAndView("redirect:list.do");
+			} catch (Throwable oops) {
+					result = createEditModelAndView(null,
+							"tournament.commit.error");
+				}
+//			}
+		return result;
+
+	}
+
+	//DisJoin aTournament-------------------------------------------------------
+	@RequestMapping(value = "/disjoinATeamToTournament", method = RequestMethod.GET)
+	public ModelAndView disjoinATeamToTournament(@RequestParam int tournamentId) 
+	{
+
+		ModelAndView result;
+		Tournament tournament;
+		Collection<Tournament> tournaments;
+
+		tournament = tournamentService.findOne(tournamentId);
+		tournamentService.DisjoinTournament(tournament);
+		tournaments = tournamentService.findAll();
+
+		result = new ModelAndView("tournament/list");
+
+		result.addObject("tournaments", tournaments);
+		result.addObject("requestURI", "tournament/user/list.do");
+
+		return result;
+
 	}
 
 	// Ancillary

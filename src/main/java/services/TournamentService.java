@@ -51,6 +51,17 @@ public class TournamentService {
 						customerService.findByPrincipal()));
 		return result;
 	}
+	
+	public Tournament findOneToJoin(int tournamentId)
+	{
+		
+		Tournament result;
+		
+		result = tournamentRepository.findOne(tournamentId);
+		
+		return result;
+		
+	}
 
 	public Tournament create() {
 

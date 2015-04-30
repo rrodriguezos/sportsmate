@@ -78,7 +78,10 @@
 		<security:intercept-url pattern="/tournament/user/list.do" access="hasRole('USER')" />
 		<security:intercept-url pattern="/tournament/user/display.do" access="hasRole('USER')" />
 		<security:intercept-url pattern="/tournament/user/create.do" access="hasRole('USER')" />
-		<security:intercept-url pattern="/tournament/user/edit.do" access="hasRole('USER')" />		
+		<security:intercept-url pattern="/tournament/user/edit.do" access="hasRole('USER')" />
+		<security:intercept-url pattern="/tournament/user/chooseATeam.do" access="hasRole('USER')" />
+		<security:intercept-url pattern="/tournament/user/joinATeamToTournament.do" access="hasRole('USER')" />	
+		<security:intercept-url pattern="/tournament/user/disjoinATeamToTournament.do" access="hasRole('USER')" />	
 		
 		<security:intercept-url pattern="/event/user/vote.do" access="hasRole('USER')" />
 		<security:intercept-url pattern="/event/user/voteCustomer.do" access="hasRole('USER')" />

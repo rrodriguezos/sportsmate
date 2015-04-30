@@ -68,52 +68,6 @@ public class TournamentsController extends AbstractController
 		return result;
 	}
 	
-	// Join a
-		// Tournament------------------------------------------------------------------
-		@RequestMapping(value = "/joinTournament", method = RequestMethod.GET)
-		public ModelAndView joinTournament(@RequestParam int tournamentId,@RequestParam int teamId) 
-		{
-
-			ModelAndView result;
-			Tournament tournament;
-			Team team;
-			Collection<Tournament> tournaments;
-
-			tournament = tournamentService.findOne(tournamentId);
-			team = teamService.findOne(teamId);
-			tournamentService.joinTournament(tournament,team);
-			tournaments = tournamentService.findAll();
-
-			result = new ModelAndView("tournament/list");
-
-			result.addObject("tournaments", tournaments);
-			result.addObject("requestURI", "tournament/user/list.do");
-
-			return result;
-
-		}
-
-		// DisJoin a
-		// Tournament------------------------------------------------------------------
-		@RequestMapping(value = "/disjoinATeamToTournament", method = RequestMethod.GET)
-		public ModelAndView DisjoinTournament(@RequestParam int tournamentId) 
-		{
-
-			ModelAndView result;
-			Tournament tournament;
-			Collection<Tournament> tournaments;
-
-			tournament = tournamentService.findOne(tournamentId);
-			tournamentService.DisjoinTournament(tournament);
-			tournaments = tournamentService.findAll();
-
-			result = new ModelAndView("tournament/list");
-
-			result.addObject("tournaments", tournaments);
-			result.addObject("requestURI", "tournament/user/list.do");
-
-			return result;
-
-		}
+	
 
 }
