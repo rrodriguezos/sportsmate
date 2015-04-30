@@ -17,12 +17,15 @@ import org.springframework.web.servlet.ModelAndView;
 import services.ActorService;
 import services.CustomerService;
 import services.EventService;
+import services.TeamService;
 import services.TournamentService;
 import services.UserService;
 import controllers.AbstractController;
 import domain.Actor;
 import domain.Customer;
 import domain.Event;
+import domain.Match;
+import domain.Team;
 import domain.Tournament;
 import domain.User;
 import forms.EventForm;
@@ -47,6 +50,12 @@ public class CalendarUserController extends AbstractController
 	
 	@Autowired
 	private ActorService actorService;
+	
+	@Autowired
+	private TeamService teamService;
+	
+	@Autowired
+	private services.MatchService matchService;
 	
 	
 	public CalendarUserController()
@@ -238,6 +247,32 @@ public class CalendarUserController extends AbstractController
 	}
 
 	
+	@RequestMapping(value = "/displayTournament", method = RequestMethod.GET)
+	public ModelAndView displayTournament(@RequestParam int tournamentId) {
+		ModelAndView result;
+		Tournament tournament;
+		Collection<Team> teams;
+		Collection<Match> matches;
+
+		tournament = tournamentService.findOne(tournamentId);
+		teams = teamService.findAllTeamsByTournamentId(tournamentId);
+		matches = matchService.findAllMatchesByTournament(tournament);
+
+		result = new ModelAndView("event/user/calendar/displayTournament");
+		//result.addObject("miId", customerService.findByPrincipal().getId());
+		result.addObject("tournament", tournament);
+		result.addObject("tournamentId", tournamentId);
+		result.addObject("matches", matches);
+		result.addObject("teams", teams);
+		Boolean puedeEditar = true;
+		Date now = new Date(System.currentTimeMillis());
+		if (tournament.getStartMoment().before(now)) {
+			puedeEditar = false;
+		}
+		result.addObject("puedeEditar", puedeEditar);
+		return result;
+
+	}
 
 
 }

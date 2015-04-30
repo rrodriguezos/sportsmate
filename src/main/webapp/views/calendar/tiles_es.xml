@@ -37,6 +37,12 @@
 		<put-attribute name="body" value="/views/calendar/eventDetails.jsp" />
 	</definition>
 	
+	<definition name="event/user/calendar/displayTournament" extends="master.page">
+		<put-attribute name="title" value="Detalles del torneo" />
+		<put-attribute name="body" value="/views/calendar/tournamentDetails.jsp" />
+	</definition>
+	
+	
 	
 	
 	

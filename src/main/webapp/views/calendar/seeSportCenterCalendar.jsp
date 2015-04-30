@@ -184,7 +184,7 @@ pagesize="5" class="table table-bordered table-hover" >
 <display:column title="${Details }">
 
 	
-	<a href="tournament/user/display.do?tournamentId=${row.id }">${Details }</a>
+	<a href="event/user/calendar/displayTournament.do?tournamentId=${row.id }">${Details }</a>
 
 </display:column>
 
