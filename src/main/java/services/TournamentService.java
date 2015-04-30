@@ -231,9 +231,11 @@ public class TournamentService {
 	public Collection<String> places() {
 		Collection<String> allPlaces = new ArrayList<String>();
 		Collection<Customer> allCustomers;
-		String nameCenter;
-
+		String nameCenter;	
+		
 		allCustomers = customerService.findAll();
+		String alternativePlace = "----------";
+		allPlaces.add(alternativePlace);
 		for(Customer c: allCustomers){
 			nameCenter = c.getNameCenter();
 			allPlaces.add(nameCenter);
