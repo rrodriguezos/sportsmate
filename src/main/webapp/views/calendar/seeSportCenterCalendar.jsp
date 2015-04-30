@@ -43,6 +43,8 @@
 <spring:message code="sportCenter.joined" var="joined"/>
 
 <spring:message code="sportCenter.full" var="full"/>
+<spring:message code="sportCenter.details" var="Details"/>
+
 
 
 
@@ -130,6 +132,14 @@ pagesize="20" class="table table-bordered table-hover" defaultsort="1" defaultor
 		</jstl:if>
 	
 	
+
+</display:column>
+
+
+<display:column title="${Details }">
+
+	
+	<a href="event/user/display.do?eventId=${row.id }">${Details }</a>
 
 </display:column>
 
