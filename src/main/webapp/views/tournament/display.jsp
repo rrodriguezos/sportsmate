@@ -152,7 +152,7 @@
 	</security:authorize>
 
 	<security:authorize access="hasRole('USER')">
-		<acme:cancel code="tournament.back" url="tournament/user/list.do" />
+		<acme:cancel code="tournament.back" url="welcome/index.do" />
 		<jstl:if test="${miId==tournament.user.id and puedeEditar}">
 			<input type="button" class="btn btn-md btn-success" name="edit"
 				value="<spring:message code="tournament.edit"/>"

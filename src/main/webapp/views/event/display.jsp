@@ -148,7 +148,7 @@
 	</security:authorize>
 
 	<security:authorize access="hasRole('USER')">
-		<acme:cancel code="event.back" url="event/user/list.do" />
+		<acme:cancel code="event.back" url="welcome/index.do" />
 		<jstl:if test="${eventForm.owner.id == user.id}">
 			<input type="button" class="btn btn-md btn-success" name="edit"
 				value="<spring:message code="event.edit"/>"
