@@ -72,7 +72,7 @@
 				</jstl:if>
 			
 			<!-- DISJOIN BUTTON -->
-			<jstl:if test="${row.captain == principal}">
+			<jstl:if test="${row.captain != principal}">
 			<jstl:if test="${showDisjoin == true }">
 				<spring:message code="team.disjoinTeam" var="disjoinTeamHeader" />
 				<security:authorize access="hasRole('USER')">
