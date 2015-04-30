@@ -234,8 +234,6 @@ span.pagelinks {
 	background-color: #999;
 }
 
-.
-
 .spm-news h2{
 	margin:0px;
 	padding-top: 0px;
@@ -266,6 +264,21 @@ span.pagelinks {
 .spm-searchbar-wrapper{
 	padding: 8px;
 }
+
+.spm-search-row{
+	overflow: auto;
+	padding: 10px 0px;
+	border: thin solid lightgray;
+	border-radius: 5px;
+	background-color: #fafafa;
+	margin-bottom: 10px;
+}
+
+.spm-search-glyphicon .glyphicon {
+	font-size: 18px;
+	padding-top: 10px;
+}
+
 /* Provisional & inherit from DP project*/
 
 .error {
