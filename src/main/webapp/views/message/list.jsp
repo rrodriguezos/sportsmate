@@ -32,6 +32,8 @@
 	</h1>
 </jstl:if>
 
+<br>
+
 <div class='table-responsive'>
 	<display:table name="messages" id="row"
 		requestURI="message/actor/list.do" pagesize="5"
@@ -71,7 +73,7 @@
 		</display:column>
 	</display:table>
 </div>
-
+<br>
 <acme:cancel code="message.back" url="folder/actor/list.do" />
 
 <jstl:if test="${nameFolder == Inbox}">
