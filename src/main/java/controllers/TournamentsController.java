@@ -44,6 +44,7 @@ public class TournamentsController extends AbstractController
 		ModelAndView result;
 		Boolean showJoin = true;
 		Collection<Tournament> all;
+		Collection<Tournament> userTournaments;
 		Date now = new Date(System.currentTimeMillis());
 		User principal;
 		Collection<Tournament> tournaments = new HashSet<Tournament>();
@@ -51,23 +52,21 @@ public class TournamentsController extends AbstractController
 		all = tournamentService.findAll();
 		
 		for (Tournament a : all) {
-			if (a.getFinishMoment().before(now)) {
+			if (a.getFinishMoment().after(now)) {
 				tournaments.add(a);
 			}
 		}
+		
+		userTournaments = tournamentService.findAllTournamentByPrincipal();
 
-		tournaments = tournamentService.findAll();
 		principal = userService.findByPrincipal();
 
 		result = new ModelAndView("tournament/listAll");
 		result.addObject("tournaments", tournaments);
 		result.addObject("showJoin", showJoin);
-		result.addObject("userTournaments", principal.getTournaments());
+		result.addObject("userTournaments", userTournaments);
 		result.addObject("requestURI", "tournament/listAll.do");
 
 		return result;
 	}
-	
-	
-
 }

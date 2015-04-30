@@ -137,6 +137,18 @@ public class TournamentService {
 		}
 
 	}
+	
+	public Tournament saveJoin(Tournament tournament)
+	{
+		
+		User principal;
+		
+		principal = userService.findByPrincipal();
+		
+		tournament = tournamentRepository.save(tournament);
+		
+		return tournament;
+	}
 
 	public void delete(TournamentForm tournamentForm) {
 		Tournament tournament = reconstruct(tournamentForm);
@@ -210,6 +222,27 @@ public class TournamentService {
 		all = tournamentRepository.findAllTournamentsCreatedByUserId(userId);
 
 		return all;
+	}
+	
+	public Collection<Tournament> findAllTournamentByPrincipal()
+	{
+		
+		Collection<Tournament> result;
+		Collection<Team> teams;
+		
+		teams = teamService.findAllTeamsByUserId();
+		result = new ArrayList<Tournament>();
+		
+		for(Team t: teams){
+			for(Tournament tour:t.getTournaments()){
+				if(!result.contains(tour)){
+					result.add(tour);
+				}
+			}
+		}
+		
+		return result;
+		
 	}
 
 	public Collection<Tournament> findAllTournamentsCreatedByCustomerId() {
@@ -349,9 +382,16 @@ public class TournamentService {
 		tournament.getTeams().add(team);
 		user.getTournaments().add(tournament);
 		team.getTournaments().add(tournament);
+		
+		if(!team.getUsers().contains(user)){
+			team.getUsers().add(user);
+			user.getTeams().add(team);
+		}
+		
+		
 
-		save(tournament);
-		teamService.save(team);
+		saveJoin(tournament);
+		teamService.saveJoin(team);
 		userService.save(user);
 
 	}
@@ -375,10 +415,9 @@ public class TournamentService {
 		user.getTournaments().remove(tournament);
 		team.getTournaments().remove(tournament);
 
-		save(tournament);
-		teamService.save(team);
+		saveJoin(tournament);
+		teamService.saveJoin(team);
 		userService.save(user);
-
 	}
 
 }

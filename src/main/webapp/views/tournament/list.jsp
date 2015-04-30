@@ -116,9 +116,9 @@
 		<jstl:if test="${showDisjoin == true}">
 			<security:authorize access="hasRole('USER')">
 				<display:column title="${Disjoin }">
-					<spring:message code="tournament.Disjoin" var="Disjoin" />
+					<spring:message code="tournament.disjoin" var="Disjoin" />
 					<a
-						href="event/user/disjoinATeamToTournament.do?tournamentId=${row.id }">
+						href="tournament/user/disjoinATeamToTournament.do?tournamentId=${row.id }">
 						<button class="btn btn-md btn-default col-xs-12">
 							<jstl:out value="${Disjoin }"></jstl:out>
 						</button>

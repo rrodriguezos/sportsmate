@@ -50,7 +50,7 @@ public class TournamentUserController extends AbstractController {
 		Collection<Tournament> tournaments;
 		Boolean showDisjoin=true;
 
-		tournaments = tournamentService.findAllTournamentsCreatedByUserId();
+		tournaments = tournamentService.findAllTournamentByPrincipal();
 
 		result = new ModelAndView("tournament/list");
 
@@ -72,7 +72,7 @@ public class TournamentUserController extends AbstractController {
 		Collection<Team> teams;
 		Collection<Match> matches;
 
-		tournament = tournamentService.findOne(tournamentId);
+		tournament = tournamentService.findOneToJoin(tournamentId);
 		teams = teamService.findAllTeamsByTournamentId(tournamentId);
 		matches = matchService.findAllMatchesByTournament(tournament);
 
@@ -231,28 +231,10 @@ public class TournamentUserController extends AbstractController {
 	public ModelAndView joinATeamToTournament(TournamentForm tournamentForm,BindingResult binding, @RequestParam int tournamentId) 
 	{
 
-//		ModelAndView result;
-//		Tournament tournament;
-//		Collection<Tournament> tournaments;
-//
-//		tournament = tournamentService.findOne(tournamentId);
-//		tournamentService.joinTournament(tournament, team);
-//		tournaments = tournamentService.findAll();
-//
-//		result = new ModelAndView("tournament/list");
-//
-//		result.addObject("tournaments", tournaments);
-//		result.addObject("requestURI", "tournament/user/list.do");
-
-//		return result;
 		
 		ModelAndView result;
 		Team team = null;
 		Tournament tournament;
-//		if (binding.hasErrors()) {
-//			System.out.println("Binding " + binding.toString());
-//			result = createEditModelAndView(null);
-//		} else {
 			try {
 				for(Team t: tournamentForm.getTeams()){
 					team = t;
@@ -264,8 +246,7 @@ public class TournamentUserController extends AbstractController {
 
 				result = new ModelAndView("redirect:list.do");
 			} catch (Throwable oops) {
-					result = createEditModelAndView(null,
-							"tournament.commit.error");
+					result = createEditModelAndView("tournament.commit.error.Join",tournamentId);
 				}
 //			}
 		return result;
@@ -281,9 +262,9 @@ public class TournamentUserController extends AbstractController {
 		Tournament tournament;
 		Collection<Tournament> tournaments;
 
-		tournament = tournamentService.findOne(tournamentId);
+		tournament = tournamentService.findOneToJoin(tournamentId);
 		tournamentService.DisjoinTournament(tournament);
-		tournaments = tournamentService.findAll();
+		tournaments = tournamentService.findAllTournamentByPrincipal();
 
 		result = new ModelAndView("tournament/list");
 
@@ -330,6 +311,34 @@ public class TournamentUserController extends AbstractController {
 		result.addObject("teams", teams);
 		result.addObject("message", message);
 
+		return result;
+	}
+	
+	public ModelAndView createEditModelAndView(String message,int tournamentId)
+	{
+		ModelAndView result;
+		Collection<Team> teams;
+		User principal;
+		TournamentForm tournamentForm;
+		Tournament tournament;
+		Collection<Team> empty;
+		String requestURI;
+		
+		principal = userService.findByPrincipal();
+		empty = new ArrayList<Team>();
+		teams = teamService.findAllTeamsUserCaptain(principal.getId());
+		tournament	= tournamentService.findOneToJoin(tournamentId);
+		tournamentForm	= tournamentService.construct(tournament);
+		tournamentForm.setTeams(empty);
+		requestURI = "tournament/user/joinATeamToTournament.do?tournamentId="+tournamentId;
+		
+		result = new ModelAndView("tournament/chooseATeam");
+		result.addObject("teams", teams);
+		result.addObject("message", message);
+		result.addObject("tournamentForm", tournamentForm);
+		result.addObject("principal", principal);
+		result.addObject("requestURI", requestURI);
+		
 		return result;
 	}
 

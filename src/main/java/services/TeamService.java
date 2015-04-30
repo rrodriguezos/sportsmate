@@ -90,6 +90,15 @@ public class TeamService {
 		return result;
 	}
 	
+	public Team saveJoin(Team team)
+	{
+		
+		team = teamRepository.save(team);
+		
+		return team;
+		
+	}
+	
 	public void delete(Team team)
 	{
 		Assert.notNull(team);
