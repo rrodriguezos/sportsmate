@@ -44,9 +44,6 @@ public class TournamentService {
 		Tournament result;
 
 		result = tournamentRepository.findOne(tournamentId);
-		Assert.isTrue(result.getUser().equals(userService.findByPrincipal())
-				|| result.getCustomer().equals(
-						customerService.findByPrincipal()));
 		return result;
 	}
 

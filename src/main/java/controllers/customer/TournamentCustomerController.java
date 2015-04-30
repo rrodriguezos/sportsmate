@@ -72,12 +72,17 @@ public class TournamentCustomerController extends AbstractController {
 		matches = matchService.findAllMatchesByTournament(tournament);
 
 		result = new ModelAndView("tournament/display");
-
+		result.addObject("miId", customerService.findByPrincipal().getId());
 		result.addObject("tournament", tournament);
 		result.addObject("tournamentId", tournamentId);
 		result.addObject("matches", matches);
 		result.addObject("teams", teams);
-
+		Boolean puedeEditar = true;
+		Date now = new Date(System.currentTimeMillis());
+		if (tournament.getStartMoment().before(now)) {
+			puedeEditar = false;
+		}
+		result.addObject("puedeEditar", puedeEditar);
 		return result;
 
 	}
