@@ -2,6 +2,7 @@ package controllers.admin;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,6 +14,7 @@ import services.CustomerService;
 import services.InvoiceService;
 import controllers.AbstractController;
 import domain.Customer;
+import domain.Invoice;
 
 @Controller
 @RequestMapping("/admin/invoice")
@@ -60,5 +62,22 @@ public class AdminInvoiceController extends AbstractController {
 		result.addObject("invoices", c.getInvoices());
 		
 		return result;
+	}
+	
+	@RequestMapping("/makedAsPayed")
+	public ModelAndView makeAsPayed( @RequestParam int id)
+	{
+		
+		Invoice i = invoiceService.findOne(id);
+		
+		if (i == null)
+			new Throwable("opps you are try to hack with bad id?");
+		
+		i.setDatePay(new Date());
+		
+		invoiceService.save(i);
+		
+		return manageInvoices(i.getCustomer().getId());
+		
 	}
 }
