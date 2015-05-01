@@ -10,12 +10,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.FriendshipService;
-import services.TeamService;
 import services.UserService;
 import controllers.AbstractController;
 import domain.Friendship;
-import domain.Friendship;
-import domain.Team;
 import domain.User;
 
 @Controller
@@ -49,7 +46,7 @@ public class FriendshipUserController extends AbstractController {
 		principal = userService.findByPrincipal();
 		friendships = friendshipService.findAllRequestFriendship(principal.getId());
 
-		result = new ModelAndView("friendship/list");
+		result = new ModelAndView("friendship/user/list");
 
 		result.addObject("friendships", friendships);
 		result.addObject("principal",principal);

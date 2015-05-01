@@ -48,16 +48,15 @@ public class TournamentService {
 		result = tournamentRepository.findOne(tournamentId);
 		return result;
 	}
-	
-	public Tournament findOneToJoin(int tournamentId)
-	{
-		
+
+	public Tournament findOneToJoin(int tournamentId) {
+
 		Tournament result;
-		
+
 		result = tournamentRepository.findOne(tournamentId);
-		
+
 		return result;
-		
+
 	}
 
 	public Tournament create() {
@@ -106,7 +105,6 @@ public class TournamentService {
 				.getPlace());
 		Tournament result;
 		tournament.setCustomer(customer);
-		Assert.notNull(tournament);
 		Date now = new Date(System.currentTimeMillis());
 		Assert.isTrue(tournament.getStartMoment().after(now));
 		Assert.isTrue(tournament.getFinishMoment().after(now));
@@ -134,12 +132,11 @@ public class TournamentService {
 		}
 
 	}
-	
-	public Tournament saveJoin(Tournament tournament)
-	{
-			
+
+	public Tournament saveJoin(Tournament tournament) {
+
 		tournament = tournamentRepository.save(tournament);
-		
+
 		return tournament;
 	}
 
@@ -216,26 +213,25 @@ public class TournamentService {
 
 		return all;
 	}
-	
-	public Collection<Tournament> findAllTournamentByPrincipal()
-	{
-		
+
+	public Collection<Tournament> findAllTournamentByPrincipal() {
+
 		Collection<Tournament> result;
 		Collection<Team> teams;
-		
+
 		teams = teamService.findAllTeamsByUserId();
 		result = new ArrayList<Tournament>();
-		
-		for(Team t: teams){
-			for(Tournament tour:t.getTournaments()){
-				if(!result.contains(tour)){
+
+		for (Team t : teams) {
+			for (Tournament tour : t.getTournaments()) {
+				if (!result.contains(tour)) {
 					result.add(tour);
 				}
 			}
 		}
-		
+
 		return result;
-		
+
 	}
 
 	public Collection<Tournament> findAllTournamentsCreatedByCustomerId() {
@@ -273,15 +269,15 @@ public class TournamentService {
 	public Collection<String> places() {
 		Collection<String> allPlaces = new ArrayList<String>();
 		Collection<Customer> allCustomers;
-		String nameCenter;	
-		
+		String nameCenter;
+
 		allCustomers = customerService.findAll();
 		String alternativePlace = "----------";
 		allPlaces.add(alternativePlace);
-		for(Customer c: allCustomers){
+		for (Customer c : allCustomers) {
 			nameCenter = c.getNameCenter();
 			allPlaces.add(nameCenter);
-			}
+		}
 		return allPlaces;
 
 	}
@@ -365,25 +361,23 @@ public class TournamentService {
 		return result;
 
 	}
-	
+
 	public void joinTournament(Tournament tournament, Team team) {
 
 		User user;
 
 		user = userService.findByPrincipal();
-		
+
 		Assert.isTrue(team.getCaptain().equals(user));
 
 		tournament.getTeams().add(team);
 		user.getTournaments().add(tournament);
 		team.getTournaments().add(tournament);
-		
-		if(!team.getUsers().contains(user)){
+
+		if (!team.getUsers().contains(user)) {
 			team.getUsers().add(user);
 			user.getTeams().add(team);
 		}
-		
-		
 
 		saveJoin(tournament);
 		teamService.saveJoin(team);
@@ -397,13 +391,13 @@ public class TournamentService {
 		Team team = null;
 
 		user = userService.findByPrincipal();
-		
-		for(Team t : tournament.getTeams()){
-			if(user.getTeams().contains(t)){
+
+		for (Team t : tournament.getTeams()) {
+			if (user.getTeams().contains(t)) {
 				team = t;
 			}
 		}
-		
+
 		Assert.isTrue(team.getCaptain().equals(user));
 
 		tournament.getTeams().remove(team);
@@ -413,6 +407,12 @@ public class TournamentService {
 		saveJoin(tournament);
 		teamService.saveJoin(team);
 		userService.save(user);
+	}
+
+	public Collection<Tournament> findAllTournamentByUser() {
+		return tournamentRepository
+				.findAllTournamentsCreatedByUserId(userService
+						.findByPrincipal().getId());
 	}
 
 }

@@ -45,12 +45,6 @@
 			</div>
 
 			<div>
-				<b><spring:message code="tournament.finishMoment" />: </b>
-				<fmt:formatDate value="${tournament.finishMoment}"
-					pattern="dd/MM/yyyy HH:mm" />
-			</div>
-
-			<div>
 				<b><spring:message code="tournament.sport" />: </b>
 				<jstl:out value="${tournament.sport}" />
 			</div>

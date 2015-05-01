@@ -145,8 +145,8 @@ public class TournamentCustomerController extends AbstractController {
 
 				result = new ModelAndView("redirect:list.do");
 			} catch (Throwable oops) {
-				if (tournamentForm.getStartMoment().after(now)
-						|| tournamentForm.getFinishMoment().after(now)) {
+				if (tournamentForm.getStartMoment().before(now)
+						|| tournamentForm.getFinishMoment().before(now)) {
 					result = createEditModelAndView(tournamentForm,
 							"tournament.commit.error.fechas");
 				} else {

@@ -22,9 +22,10 @@
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
 <br>
-<div class='table-responsive'>
-	<display:table name="friendships" id="row" requestURI="${requestURI}"
-		pagesize="5" class="table table-bordered table-hover">
+<div>
+	<display:table name="friendships" id="row"
+		requestURI="friendships/user/list.do" pagesize="5"
+		class="table table-bordered table-hover">
 
 		<display:column>
 			<b><spring:message code="friendship.user" />: </b>
@@ -34,8 +35,7 @@
 			<jstl:out value="${row.userFriend.name}"></jstl:out>
 			<br>
 			<b><spring:message code="friendship.date" />: </b>
-			<fmt:formatDate value="${row.date}"
-				pattern="{0,date,dd/MM/yyyy HH:mm}"></fmt:formatDate>
+			<fmt:formatDate value="${row.date}" pattern="dd/MM/yyyy HH:mm"></fmt:formatDate>
 			<br>
 			<b><spring:message code="friendship.acceptRequest" />: </b>
 			<jstl:out value="${acceptRequestHeader}"></jstl:out>

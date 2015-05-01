@@ -50,7 +50,7 @@ public class TournamentUserController extends AbstractController {
 		Collection<Tournament> tournaments;
 		Boolean showDisjoin=true;
 
-		tournaments = tournamentService.findAllTournamentByPrincipal();
+		tournaments = tournamentService.findAllTournamentByUser();
 
 		result = new ModelAndView("tournament/list");
 
@@ -154,15 +154,15 @@ public class TournamentUserController extends AbstractController {
 		} else {
 			try {
 				tournament = tournamentService.reconstruct(tournamentForm);
-
+				
 				tournamentService.save(tournament);
 
 				result = new ModelAndView("redirect:list.do");
 			} catch (Throwable oops) {
 				System.out.println("oops " + oops.getLocalizedMessage());
 
-				if (tournamentForm.getStartMoment().after(now)
-						|| tournamentForm.getFinishMoment().after(now)) {
+				if (tournamentForm.getStartMoment().before(now)
+						|| tournamentForm.getFinishMoment().before(now)) {
 					result = createEditModelAndView(tournamentForm,
 							"tournament.commit.error.fechas");
 				} else {

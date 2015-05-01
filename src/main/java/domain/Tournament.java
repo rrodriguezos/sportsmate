@@ -22,14 +22,13 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Access(AccessType.PROPERTY)
-public class Tournament extends DomainEntity{
-	//Constructors----------------------------------------------------------------------	
-	public Tournament()
-	{
+public class Tournament extends DomainEntity {
+	// Constructors----------------------------------------------------------------------
+	public Tournament() {
 		super();
 	}
-	
-	//Attributes-------------------------------------------------------------------------
+
+	// Attributes-------------------------------------------------------------------------
 	private boolean advertised;
 	private String title;
 	private Date creationMoment;
@@ -37,184 +36,160 @@ public class Tournament extends DomainEntity{
 	private Date finishMoment;
 	private String description;
 	private String sport;
-	
 
 	private String place;
 	private int numberOfTeams;
 	private Double prize;
-	
-	public boolean isAdvertised() 
-	{
+
+	public boolean isAdvertised() {
 		return advertised;
 	}
-	public void setAdvertised(boolean advertised) 
-	{
+
+	public void setAdvertised(boolean advertised) {
 		this.advertised = advertised;
 	}
-	
+
 	@NotBlank
-	public String getTitle()
-	{
+	public String getTitle() {
 		return title;
 	}
-	public void setTitle(String title)
-	{
+
+	public void setTitle(String title) {
 		this.title = title;
 	}
-	
+
 	@NotNull
 	@Past
 	@Temporal(TemporalType.TIMESTAMP)
 	@DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")
-	public Date getCreationMoment() 
-	{
+	public Date getCreationMoment() {
 		return creationMoment;
 	}
-	public void setCreationMoment(Date creationMoment) 
-	{
+
+	public void setCreationMoment(Date creationMoment) {
 		this.creationMoment = creationMoment;
 	}
-	
+
 	@NotNull
 	@Temporal(TemporalType.TIMESTAMP)
 	@DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")
-	public Date getStartMoment() 
-	{
+	public Date getStartMoment() {
 		return startMoment;
 	}
-	public void setStartMoment(Date startMoment) 
-	{
+
+	public void setStartMoment(Date startMoment) {
 		this.startMoment = startMoment;
 	}
-	
-	@NotNull	
+
+	@NotNull
 	@Temporal(TemporalType.TIMESTAMP)
 	@DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")
-	public Date getFinishMoment()
-	{
+	public Date getFinishMoment() {
 		return finishMoment;
 	}
-	public void setFinishMoment(Date finishMoment) 
-	{
+
+	public void setFinishMoment(Date finishMoment) {
 		this.finishMoment = finishMoment;
 	}
-	
+
 	@NotBlank
-	public String getDescription() 
-	{
+	public String getDescription() {
 		return description;
 	}
-	public void setDescription(String description) 
-	{
+
+	public void setDescription(String description) {
 		this.description = description;
 	}
-	
-	public String getSport() 
-	{
+
+	public String getSport() {
 		return sport;
 	}
-	public void setSport(String sport) 
-	{
+
+	public void setSport(String sport) {
 		this.sport = sport;
 	}
-	
-	
-	@NotBlank
-	public String getPlace() 
-	{
+
+	public String getPlace() {
 		return place;
 	}
-	public void setPlace(String place) 
-	{
+
+	public void setPlace(String place) {
 		this.place = place;
 	}
-	
+
 	@Min(2)
 	public int getNumberOfTeams() {
 		return numberOfTeams;
 	}
+
 	public void setNumberOfTeams(int numberOfTeams) {
 		this.numberOfTeams = numberOfTeams;
 	}
-	
-	
-	public Double getPrize() 
-	{
+
+	public Double getPrize() {
 		return prize;
 	}
-	public void setPrize(Double prize) 
-	{
+
+	public void setPrize(Double prize) {
 		this.prize = prize;
-	}	
-		
-	//Relationships-------------------------------------------------------------------------
+	}
+
+	// Relationships-------------------------------------------------------------------------
 	private Collection<Match> matches;
 	private User user;
 	private Customer customer;
-	private Collection<Team> teams;	
+	private Collection<Team> teams;
 	private Team winner;
-	
-	
-	
-	@ManyToOne(optional=true, cascade = CascadeType.ALL)
+
+	@ManyToOne(optional = true, cascade = CascadeType.ALL)
 	public Team getWinner() {
 		return winner;
 	}
+
 	public void setWinner(Team winner) {
 		this.winner = winner;
 	}
-	
-	
+
 	@Valid
 	@NotNull
 	@OneToMany(cascade = CascadeType.ALL)
-	public Collection<Match> getMatches() 
-	{
+	public Collection<Match> getMatches() {
 		return matches;
 	}
-	public void setMatches(Collection<Match> matches) 
-	{
+
+	public void setMatches(Collection<Match> matches) {
 		this.matches = matches;
 	}
-	
+
 	@Valid
-	@NotNull
-	@ManyToOne(optional=false)
-	public User getUser() 
-	{
+	@ManyToOne(optional = true)
+	public User getUser() {
 		return user;
 	}
-	public void setUser(User user) 
-	{
+
+	public void setUser(User user) {
 		this.user = user;
 	}
-	
+
 	@Valid
-	@NotNull
-	@ManyToOne(optional=false)
-	public Customer getCustomer() 
-	{
+	@ManyToOne(optional = true)
+	public Customer getCustomer() {
 		return customer;
 	}
-	public void setCustomer(Customer customer) 
-	{
+
+	public void setCustomer(Customer customer) {
 		this.customer = customer;
 	}
-	
+
 	@Valid
 	@NotNull
-	@ManyToMany(cascade = {CascadeType.ALL})
-	public Collection<Team> getTeams()
-	{
+	@ManyToMany(cascade = { CascadeType.ALL })
+	public Collection<Team> getTeams() {
 		return teams;
 	}
-	public void setTeams(Collection<Team> teams) 
-	{
+
+	public void setTeams(Collection<Team> teams) {
 		this.teams = teams;
 	}
-	
-	
-	
 
 }
-

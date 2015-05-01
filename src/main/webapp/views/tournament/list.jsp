@@ -24,7 +24,13 @@
 <div class="table-responsive">
 	<display:table name="tournaments" id="row" requestURI="${requestURI}"
 		pagesize="5" class="">
+		<div class="col-xs-12">
+			<div class="alert alert-success spm-no-margin-bottom">
+				<display:column property="sport" sortable="true">
 
+				</display:column>
+			</div>
+		</div>
 		<display:column>
 
 			<div class="col-xs-12">
@@ -41,13 +47,6 @@
 							<spring:message code="tournament.startMoment"
 								var="startMomentHeader" />
 							<jstl:out value="${row.startMoment}"></jstl:out>
-						</div>
-
-						<div>
-							<b><spring:message code="tournament.finishMoment" />: </b>
-							<spring:message code="tournament.finishMoment"
-								var="finishMomentHeader" />
-							<jstl:out value="${row.finishMoment}"></jstl:out>
 						</div>
 					</div>
 
@@ -111,7 +110,7 @@
 			</div>
 		</display:column>
 
-		
+
 
 		<jstl:if test="${showDisjoin == true}">
 			<security:authorize access="hasRole('USER')">

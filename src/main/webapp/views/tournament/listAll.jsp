@@ -40,13 +40,6 @@
 								var="startMomentHeader" />
 							<jstl:out value="${row.startMoment}"></jstl:out>
 						</div>
-
-						<div>
-							<b><spring:message code="tournament.finishMoment" />: </b>
-							<spring:message code="tournament.finishMoment"
-								var="finishMomentHeader" />
-							<jstl:out value="${row.finishMoment}"></jstl:out>
-						</div>
 					</div>
 
 					<div class="col-xs-12 col-md-3">
@@ -85,35 +78,35 @@
 					</div>
 				</div>
 				<div class="row">
-			<div class="col-xs-12 spm-button-list">
-				<spring:message code="tournament.display" var="displayHeader" />
-					
-					<security:authorize access="hasRole('USER')">
-							<a href="tournament/user/display.do?tournamentId=${row.id}"> 
-									<button type="button" class="btn btn-md btn-default col-xs-2">
-										<spring:message	code="tournament.display" />
-									</button>
+					<div class="col-xs-12 spm-button-list">
+						<spring:message code="tournament.display" var="displayHeader" />
+
+						<security:authorize access="hasRole('USER')">
+							<a href="tournament/user/display.do?tournamentId=${row.id}">
+								<button type="button" class="btn btn-md btn-default col-xs-2">
+									<spring:message code="tournament.display" />
+								</button>
 							</a>
-					</security:authorize>
-					
-					<security:authorize access="hasRole('CUSTOMER')">
-						<a href="tournament/customer/display.do?tournamentId=${row.id}">
-							<button type="button" class="btn btn-md btn-default col-xs-2">
-								<spring:message code="tournament.display" />
-							</button>
-						</a>
-					</security:authorize>
-					
+						</security:authorize>
+
+						<security:authorize access="hasRole('CUSTOMER')">
+							<a href="tournament/customer/display.do?tournamentId=${row.id}">
+								<button type="button" class="btn btn-md btn-default col-xs-2">
+									<spring:message code="tournament.display" />
+								</button>
+							</a>
+						</security:authorize>
+
+					</div>
+				</div>
 			</div>
-			</div>
-			</div>
-			
-			
+
+
 
 			<div class="col-xs-12 spm-spacing-list"></div>
 
 		</display:column>
-		
+
 		<jstl:if test="${showJoin == true}">
 			<security:authorize access="hasRole('USER')">
 				<display:column title="${join }">
@@ -141,8 +134,7 @@
 						<jstl:if test="${row.teams.size() < row.numberOfTeams }">
 							<jstl:if test="${contains == false}">
 								<spring:message code="tournament.join" var="join" />
-								<a
-									href="tournament/user/chooseATeam.do?tournamentId=${row.id }">
+								<a href="tournament/user/chooseATeam.do?tournamentId=${row.id }">
 									<button class="btn btn-md btn-default col-xs-12">
 										<jstl:out value="${join }"></jstl:out>
 									</button>
@@ -163,8 +155,8 @@
 				</display:column>
 			</security:authorize>
 		</jstl:if>
-		
-		
+
+
 
 
 
