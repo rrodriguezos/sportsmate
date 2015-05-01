@@ -67,11 +67,3 @@
 
 </div>
 
-
-<div class='table-responsive'>
-	<display:table name="items" id="row"
-		requestURI="customer/ownItemList.do" pagesize="5"
-		class="table table-bordered table-hover">
-
-	</display:table>
-</div>
