@@ -19,13 +19,12 @@
 
 <!-- <p><spring:message code="welcome.greeting.current.time" /> ${moment}</p> -->
 
-<br>
 
 <!-------------->
 <!-- Carousel -->
 <!-------------->
 
-<div class="col-xs-12 col-lg-10 col-lg-offset-1">
+<div class="row">
 	<div id="carousel-example-generic" class="carousel slide" data-ride="carousel" data-interval="4000">
 	  
 	  <!-- Indicators -->
@@ -43,8 +42,10 @@
 	      <img src="images/carousel_01.jpg" alt="Carousel_image_01">
 	      <div class="carousel-caption">
 	      <div class="spm-carousel-text-bck">
-	        <span class="spm-carousel-text">Centro Deportivo Antonio Álvarez</span>
-	        <p>Ronda de Triana, 5 41010 Sevilla</p>
+	        <span class="spm-carousel-text hidden-xs">Centro Deportivo Antonio Álvarez</span>
+	        <span class="spm-carousel-text-xs hidden-sm hidden-md hidden-lg">Centro Deportivo Antonio Álvarez</span>
+	        <p class="hidden-xs">Ronda de Triana, 5 41010 Sevilla</p>
+	        <p class="spm-carousel-text-caption-xs hidden-sm hidden-md hidden-lg">Ronda de Triana, 5 41010 Sevilla</p>
 	      </div>
 	      </div>
 	    </div>
@@ -53,8 +54,10 @@
 	      <img src="images/carousel_02.jpg" alt="Carousel_image_02">
 	      <div class="carousel-caption">
 	      <div class="spm-carousel-text-bck">
-	        <span class="spm-carousel-text">Centro Deportivo Antonio Álvarez</span>
-	        <p>Ronda de Triana, 5 41010 Sevilla</p>
+	        <span class="spm-carousel-text hidden-xs">Centro Deportivo Antonio Álvarez</span>
+	        <span class="spm-carousel-text-xs hidden-sm hidden-md hidden-lg">Centro Deportivo Antonio Álvarez</span>
+	       	<p class="hidden-xs">Ronda de Triana, 5 41010 Sevilla</p>
+	        <p class="spm-carousel-text-caption-xs hidden-sm hidden-md hidden-lg">Ronda de Triana, 5 41010 Sevilla</p>
 	      </div>
 	      </div>
 	    </div>
@@ -63,8 +66,10 @@
 	      <img src="images/carousel_03.jpg" alt="Carousel_image_03">
 	      <div class="carousel-caption">
 	      <div class="spm-carousel-text-bck">
-	        <span class="spm-carousel-text">Centro Deportivo Antonio Álvarez</span>
-	        <p>Ronda de Triana, 5 41010 Sevilla</p>
+	        <span class="spm-carousel-text hidden-xs">Centro Deportivo Antonio Álvarez</span>
+	        <span class="spm-carousel-text-xs hidden-sm hidden-md hidden-lg">Centro Deportivo Antonio Álvarez</span>
+	        <p class="hidden-xs">Ronda de Triana, 5 41010 Sevilla</p>
+	        <p class="spm-carousel-text-caption-xs hidden-sm hidden-md hidden-lg">Ronda de Triana, 5 41010 Sevilla</p>
 	      </div>
 	      </div>
 	    </div>
