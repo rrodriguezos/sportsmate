@@ -349,7 +349,16 @@ span.pagelinks {
 
 
 /* media query for some fixes in xs */
+
 @media (max-width: 768px){
+	
+	body {
+		background: url(../images/cespedestadio.jpg) repeat center center fixed;
+		-webkit-background-size: inherit;
+		-moz-background-size: inherit;
+		-o-background-size: inherit;
+		background-size: inherit;
+	}
 	
 	#content_area{
 		border-radius: 0px;
@@ -358,8 +367,12 @@ span.pagelinks {
 	
 	#footer_area{
 		margin-top: 0em;
-		border: thin solid #222222;
+		border: none;
 		border-radius: 0px;
 	}
-
+	
+	.spm-copyright{
+		color: #cccccc;
+	}
+	
 } 
