@@ -203,7 +203,7 @@ public class TeamUserController extends AbstractController {
 	
 	// Delete-------------------------------------------------
 
-	@RequestMapping(value = "/display", method = RequestMethod.POST, params = "delete")
+	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "delete")
 	public ModelAndView delete(@Valid TeamForm teamForm,
 			BindingResult binding) 
 	{
@@ -216,7 +216,7 @@ public class TeamUserController extends AbstractController {
 			result = new ModelAndView("team/list");
 		} catch (Throwable oops) {
 			result = createEditModelAndView(teamForm,
-					"team.commit.error");
+					"team.commit.errorDelete");
 		}
 		
 		return result;
@@ -262,10 +262,16 @@ public class TeamUserController extends AbstractController {
 	{
 
 		ModelAndView result;
-
+		Collection<User> users;
+		Team team;
+		
+		team = teamService.reconstruct(teamForm);
+		users = team.getUsers();
+		
 		result = new ModelAndView("team/edit");
 
 		result.addObject("teamForm", teamForm);
+		result.addObject("users", users);
 		result.addObject("message", message);
 
 		return result;

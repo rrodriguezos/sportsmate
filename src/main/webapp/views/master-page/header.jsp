@@ -63,75 +63,122 @@
 		<ul class='nav navbar-nav collapse navbar-collapse'>
 
 
-			<!-- ADMIN -->
-			<security:authorize access="hasRole('ADMIN')">
-				<li><a href='#' data-toggle='dropdown'> <spring:message
-							code="master.page.administrator" /> <span class='caret'></span>
-				</a>
 
-					<ul class='dropdown-menu'>
-						<li><a href="folder/actor/list.do"><spring:message
-									code="master.page.folders" /></a></li>
-					</ul></li>
-			</security:authorize>
-
+			
+				<!-- Antiguo enlace de nombre de administrador -> <spring:message code="master.page.administrator" /> -->
 
 			<!-- AUTENTICATED -->
 			<security:authorize access="isAuthenticated()">
-				<li><a href='#' data-toggle='dropdown' class="text-capitalize">
+				<li>
+					<a href='#' data-toggle='dropdown' class="text-capitalize">
 						<!-- Mayus la primera por css --> <security:authentication
 							property="principal.username" /> <span class='caret'></span>
-				</a>
+					</a>
 					<ul class='dropdown-menu'>
 
 						<!-- PROFILE CUSTOMER -->
 						<security:authorize access="hasRole('CUSTOMER')">
-							<li><a href="customer/display.do"><spring:message
-										code="master.page.customer.listProfile" /></a></li>
+							<li>
+								<a href="customer/display.do">
+									<spring:message code="master.page.customer.listProfile" />
+								</a>
+							</li>
+							<li class='divider'></li>
 						</security:authorize>
 
 						<!-- PROFILE USER -->
 						<security:authorize access="hasRole('USER')">
-							<li><a href="user/display.do"><spring:message
-										code="master.page.user.listProfile" /></a></li>
+							<li>
+								<a href="user/display.do">
+									<spring:message	code="master.page.user.listProfile" />
+								</a>
+							</li>
+							<li class='divider'></li>
 						</security:authorize>
 
-						<li class='divider'></li>
-
+						
+						
 						<!-- FOLDERS USER -->
 						<security:authorize access="hasRole('USER')">
-							<li><a href="folder/actor/list.do"><spring:message
-										code="master.page.folders" /></a></li>
+							<li>
+								<a href="folder/actor/list.do">
+									<spring:message code="master.page.folders" />
+								</a>
+							</li>
+							<li class='divider'></li>
 						</security:authorize>
 
 						<!-- FOLDERS CUSTOMER -->
 						<security:authorize access="hasRole('CUSTOMER')">
-							<li><a href="folder/actor/list.do"><spring:message
-										code="master.page.folders" /></a></li>
+							<li>
+								<a href="folder/actor/list.do"><spring:message
+										code="master.page.folders" />
+								</a>
+							</li>
+							<li class='divider'></li>
 						</security:authorize>
+						
 
-						<li class='divider'></li>
-
+						<!-- FOLDERS ADMIN  ( DISABLED ) -->
+						<!--  
+						<security:authorize access="hasRole('ADMIN')">
+							<li>
+								<a href="folder/actor/list.do">
+									<spring:message	code="master.page.folders" />
+								</a>
+							</li>
+							<li class='divider'></li>
+						</security:authorize>
+						-->
+						
+						<!-- INVOICES ADMIN -->
+						<security:authorize access="hasRole('ADMIN')">
+							<li>
+								<a href="admin/invoice/listCustomers.do">
+									<spring:message code="master.page.admin.manageInvoices" />
+								</a>
+							</li>
+							<li class='divider'></li>
+						</security:authorize>
+						
+						
+						
 						<!-- INVOICES CUSTOMER -->
 						<security:authorize access="hasRole('CUSTOMER')">
-							<li><a href="customer/seeInvoices.do"><spring:message
-										code="master.page.customer.seeInvoices" /></a></li>
+							<li>
+								<a href="customer/seeInvoices.do"><spring:message
+										code="master.page.customer.seeInvoices" />
+								</a>
+							</li>
+							<li class='divider'></li>
 						</security:authorize>
 
 						<!-- FRIENDSHIPS USER -->
 						<security:authorize access="hasRole('USER')">
-							<li><a href="friendships/user/list.do"><spring:message
-										code="master.page.user.friendships" /></a></li>
-							<li><a href="friendship/user/list.do"><spring:message
-										code="master.page.user.friendshipRequest" /></a></li>
+							<li>
+								<a href="friendships/user/list.do">
+									<spring:message	code="master.page.user.friendships" />
+								</a>
+							</li>
+							<li>
+								<a href="friendship/user/list.do">
+									<spring:message code="master.page.user.friendshipRequest" />
+								</a>
+							</li>
+										
+							<li class='divider'></li>
 						</security:authorize>
 
-						<li class='divider'></li>
+						
 
 						<!-- LOGOUT -->
-						<li><a href="j_spring_security_logout"><spring:message
-									code="master.page.logout" /> </a></li>
-					</ul></li>
+						<li>
+							<a href="j_spring_security_logout">
+								<spring:message code="master.page.logout" />
+							</a>
+						</li>
+					</ul>
+				</li>
 			</security:authorize>
 
 
@@ -226,7 +273,7 @@
 			
 			<!-- SEARCH BAR (CUSTOMER) -->
 			<security:authorize access="hasRole('CUSTOMER')">			
-			<li class="col-sm-3 col-md-4 spm-searchbar-wrapper navbar-right">
+			<li class="col-sm-4 col-md-4 spm-searchbar-wrapper navbar-right">
 					<div class="input-group">
 						<input type="text" class="form-control spm-search-input" id="idsearch" onkeypress="hidSearch(event);">
 						<span class="input-group-btn">
@@ -250,7 +297,20 @@
 			</li>
 			</security:authorize>
 			
-			<!-- <form class="navbar-form navbar-right"> -->
+			
+			<!-- SEARCH BAR (ADMIN)  (DISABLED)-->
+			<!--  
+			<security:authorize access="hasRole('ADMIN')">
+			<li class="col-sm-4 col-md-4 spm-searchbar-wrapper navbar-right">
+				<div class="input-group">
+						<input type="text" class="form-control spm-search-input" id="idsearch" onkeypress="hidSearch(event);">
+						<span class="input-group-btn">
+        					<button class="btn btn-default spm-search-button" type="button" onclick="search()"><spring:message code="master.page.search" /></button>
+      					</span>
+      			</div>		
+			</li>
+			</security:authorize>
+			-->
 			
          	<!-- ANONYMOUS -->
          	<security:authorize access="isAnonymous()">

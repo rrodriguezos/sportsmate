@@ -2,6 +2,7 @@ package services;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -31,6 +32,9 @@ public class TeamService {
 	
 	@Autowired
 	private RequestTeamService requestTeamService;
+	
+	@Autowired
+	private TournamentService tournamentService;
 	
 	// Constructors-----------------------------------------------------------
 	public TeamService(){
@@ -101,9 +105,23 @@ public class TeamService {
 	
 	public void delete(Team team)
 	{
+		
+		User captain;
+		
+		captain = team.getCaptain();
+		
+		for(Tournament t: team.getTournaments()){
+		Assert.isTrue(t.getFinishMoment().before(new Date()));
+		}
+		
+		captain.getTeams().remove(team);
+		captain.getTeamsCreated().remove(team);
+		
 		Assert.notNull(team);
 		checkPrincipal(team);
 		teamRepository.delete(team);
+		
+		userService.save(captain);
 	}
 	
 	
