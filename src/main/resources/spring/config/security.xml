@@ -42,8 +42,7 @@
 		
 		<security:intercept-url pattern="/register/registerCustomer.do" access="permitAll" /> 
  		<security:intercept-url pattern="/register/registerUser.do" access="permitAll" />
- 		<security:intercept-url pattern="/actor/search.do" access="permitAll" />
-		 
+ 		<security:intercept-url pattern="/actor/search.do" access="permitAll" />		 
 
 		<security:intercept-url pattern="/welcome/index.do" access="permitAll" /> 
 		<security:intercept-url pattern="/fonts/**" access="permitAll" /> 
@@ -120,7 +119,8 @@
 		<security:intercept-url pattern="/tournament/user/rounds/declareWinnerOfTournament.do" access="hasAnyRole('CUSTOMER','ADMIN', 'USER')" />
 				
 		<security:intercept-url pattern="/user/display.do" access="hasRole('USER')" />	
-		<security:intercept-url pattern="/user/edit.do" access="isAnonymous() or hasRole('USER')" /> 	
+		<security:intercept-url pattern="/user/edit.do" access="isAnonymous() or hasRole('USER')" /> 
+		<security:intercept-url pattern="/upload/imageUser.do" access="hasRole('USER')" /> 	
 			
 		<security:intercept-url pattern="/customer/display.do" access="hasRole('CUSTOMER')" />	
 		<security:intercept-url pattern="/customer/edit.do" access="isAnonymous() or hasRole('CUSTOMER')" /> 	

@@ -1,14 +1,19 @@
 package controllers;
 
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.ServletRequestDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.support.ByteArrayMultipartFileEditor;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.UserService;
@@ -43,10 +48,9 @@ public class RegisterUserController extends AbstractController {
 
 		result = new ModelAndView("user/display");
 
-		result.addObject("user", user);
+		result.addObject("userImagen", user.isErrorImagen());
 		result.addObject("userForm", userForm);
-		result.addObject("imageSrc", org.apache.commons.codec.binary.Base64
-				.encodeBase64String(user.getImagen()));
+		result.addObject("user", user);
 		result.addObject("rating", user.getRating());
 
 		return result;
@@ -93,12 +97,18 @@ public class RegisterUserController extends AbstractController {
 		ModelAndView result;
 		User user;
 
-		if (bindingResult.hasErrors() || userForm.getUsername().length() <= 3) {
+//		if (bindingResult.hasErrors() || userForm.getUsername().length() <= 3) {
+//
+//			result = createEditModelAndView(userForm);
+//			if (userForm.getUsername().length() <= 3) {
+//				result.addObject("message", "register.commit.penemuychico");
+//			}
+		if (bindingResult.hasErrors()) {
 
 			result = createEditModelAndView(userForm);
-			if (userForm.getUsername().length() <= 3) {
-				result.addObject("message", "register.commit.penemuychico");
-			}
+//			if (userForm.getUsername().length() <= 3) {
+//				result.addObject("message", "register.commit.penemuychico");
+//			}
 		} else {
 			try {
 
@@ -113,10 +123,12 @@ public class RegisterUserController extends AbstractController {
 
 					result = createEditModelAndView(userForm,
 							"user.duplicated.username");
-				} else if (userForm.getUsername().length() <= 3) {
-					result = createEditModelAndView(userForm,
-							"register.commit.penemuychico");
-				} else {
+				} 
+//				else if (userForm.getUsername().length() <= 3) {
+//					result = createEditModelAndView(userForm,
+//							"register.commit.penemuychico");
+//			}	
+				 else {
 					result = createEditModelAndView(userForm,
 							"user.commit.error");
 				}
@@ -147,4 +159,14 @@ public class RegisterUserController extends AbstractController {
 
 		return result;
 	}
+	
+	@InitBinder
+	protected void initBinder(HttpServletRequest request, 
+							  ServletRequestDataBinder binder) throws ServletException 
+	{
+		
+		binder.registerCustomEditor(byte[].class, new ByteArrayMultipartFileEditor());
+	
+	}
+	
 }

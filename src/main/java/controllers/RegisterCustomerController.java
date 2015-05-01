@@ -87,11 +87,13 @@ public class RegisterCustomerController extends AbstractController {
 		ModelAndView result;
 		Customer customer;
 
-		if (bindingResult.hasErrors() ||customerForm.getUsername().length() <= 3) {
-			if (customerForm.getUsername().length() <= 3) {
-				result = createEditModelAndView(customerForm,
-						"register.commit.penemuychico");
-			}
+//		if (bindingResult.hasErrors() ||customerForm.getUsername().length() <= 3) {
+//			if (customerForm.getUsername().length() <= 3) {
+//				result = createEditModelAndView(customerForm,
+//						"register.commit.penemuychico");
+//			}
+		if (bindingResult.hasErrors() ) {
+			
 			result = createEditModelAndView(customerForm);
 
 		} else {
@@ -109,10 +111,11 @@ public class RegisterCustomerController extends AbstractController {
 					result = createEditModelAndView(customerForm,
 							"customer.duplicated.username");
 				}
-				if (customerForm.getUsername().length() <= 3) {
-					result = createEditModelAndView(customerForm,
-							"register.commit.penemuychico");
-				} else {
+//				if (customerForm.getUsername().length() <= 3) {
+//					result = createEditModelAndView(customerForm,
+//							"register.commit.penemuychico");
+//				} 
+				else {
 					result = createEditModelAndView(customerForm,
 							"customer.commit.error");
 				}

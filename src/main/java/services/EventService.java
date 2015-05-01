@@ -3,6 +3,9 @@ package services;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -253,19 +256,18 @@ public class EventService {
 
 	public Collection<String> places() {
 
-		Collection<String> all;
-
-		all = new ArrayList<String>();
-
-		all.add("IndorClub");
-		all.add("SportClub");
-		all.add("Place 3");
-		all.add("Place 4");
-		all.add("Place 5");
-		all.add("Place 6");
-		all.add("Place 7");
-		all.add("Place 8");
-		all.add("Place 9");
+		Set<String> all;
+		Collection<Customer> customers;
+		
+		all = new HashSet<String>();
+		customers = customerService.findAll();
+		
+		for(Customer itero : customers){
+			
+			all.add(itero.getNameCenter());			
+			
+		}
+		
 		all.add("Other center");
 
 		return all;

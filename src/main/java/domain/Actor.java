@@ -1,6 +1,7 @@
 package domain;
 
 import java.util.Collection;
+
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.CascadeType;
@@ -13,9 +14,9 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
+
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
-import org.springframework.web.multipart.MultipartFile;
 
 import security.UserAccount;
 
@@ -36,18 +37,8 @@ public abstract class Actor extends DomainEntity{
 	private String email;
 	private String phone;
 	
-	private byte[] imagen;
+	private byte[] imagen;	
 	private boolean errorImagen;
-	private MultipartFile imagenMultipart;
-	
-	@Transient
-	 public MultipartFile getImagenMultipart() {
-	  return imagenMultipart;
-	 }
-
-	 public void setImagenMultipart(MultipartFile imagenMultipart) {
-	  this.imagenMultipart = imagenMultipart;
-	 }
 
 	@NotBlank
 	public String getName() 
@@ -91,29 +82,37 @@ public abstract class Actor extends DomainEntity{
 	}
 	
 	@Transient
-	public String getCadena(){
+	public String getCadena()
+	{
+		
 		return getName()+" "+getSurname()+" ("+getEmail()+")";
+		
 	}
 	
 	 @Lob
-	 public byte[] getImagen() {
+	 public byte[] getImagen() 
+	 {
+		 
 	  return imagen;
+	  
 	 }
 	 
-	 public void setImagen(byte[] imagen) {
+	 public void setImagen(byte[] imagen) 
+	 {
+		 
 	  this.imagen = imagen;
-	 }
+	  
+	 }	
 	 
 	@Transient
-	public boolean isErrorImagen() {
+	public boolean isErrorImagen() 
+	{
+		
 		errorImagen = (getImagen() == null || getImagen().length == 0);
+		
 		return errorImagen;
+		
 	}
-	
-	public String toString(){
-		return getName()+" "+getSurname()+" ("+getEmail()+")";
-	}
-	
 	
 	//Relationships-------------------------------------------------------------------------
 	private UserAccount userAccount;

@@ -21,14 +21,20 @@
 			
 	<div class="row">
 		<div class='col-md-3 spm-profile-picture-div text-center'> 
-			<img src="images/default_profile.jpg" alt="Default profile" class="img-thumbnail .spm-profile-picture" />
+			<jstl:if test="${userImagen==true}">
+				<img src="images/default_profile.jpg" alt="Default profile" class="img-thumbnail .spm-profile-picture" />
+			</jstl:if>
+			
+	
+			<jstl:if test="${userImagen == false}">
+				
+					<img style="position: relative; width: 70px; height: 70px;" src="${userForm.imagen}"/>
+					<img style="position: relative; width: 70px; height: 70px;" src="upload/imageUser.do?userId=${user.id}"/>
+			</jstl:if>
+			
 				<br><br>
 				<div>
 					
-						<jstl:if test="${rating == 0.0}">
-						<spring:message code="actor.rating.Empty" />
-					</jstl:if>
-
 					<jstl:if test="${rating != 0.0}">
 						<spring:message code="user.rating" />
 						<jstl:out value="${rating}" />

@@ -59,5 +59,26 @@ return actorRepository.save(actor);
 	
 	}
 	
+//	public byte[] findImagenOfActorId()
+//	{
+//		
+//		byte[] arrayImagen;
+//		Actor actor;
+//		int actorId;
+//		
+//		int tam;
+//		
+//		actor = findByPrincipal();
+//		actorId = actor.getId();		
+//		arrayImagen = actorRepository.findImagenOfActorId(actorId);
+//		
+//		tam = arrayImagen.length;
+//		
+//		System.out.println(tam);
+//		
+//		return arrayImagen;
+//		
+//	}
+	
 
 }

@@ -14,4 +14,8 @@ public interface ActorRepository extends JpaRepository<Actor, Integer> {
 	
 	@Query("select p from Actor p where p.name like concat('%', ?1, '%') or p.surname like concat('%', ?1, '%') or p.email like concat('%', ?1, '%')")
 	Collection<Actor> findActorBySingleKeyword (String keyWord);
+	
+	@Query("select a.imagen from Actor a where a.id=?1")
+	byte[] findImagenOfActorId(int actorId);
+	
 }

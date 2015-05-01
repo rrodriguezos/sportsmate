@@ -1,5 +1,8 @@
 package services;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
@@ -41,6 +44,9 @@ public class UserService {
 
 	@Autowired
 	private FolderService folderService;
+	
+	@Autowired
+	private ActorService actorService;
 
 	// Constructor ------------------------------------------------------------
 	public UserService() 
@@ -154,6 +160,24 @@ public class UserService {
 		folders.add(outbox);
 
 		user.setFolders(folders);
+		
+		byte[] imagen = user.getImagen();
+		
+		try {
+			File a=new File("edwin.png");
+			FileOutputStream file =new FileOutputStream(a);
+			
+			file.write(imagen);
+			System.out.println(a.getAbsolutePath());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		
+		if (user.getId() != 0 && (imagen.equals(null) || user.getImagen().length==0))
+			user.setImagen(findOne(user.getId()).getImagen());
 
 		result = userRepository.save(user);
 
@@ -193,7 +217,6 @@ public class UserService {
 		userForm.setPhone(user.getPhone());
 
 		userForm.setImagen(user.getImagen());
-		userForm.setImagenMultipart(user.getImagenMultipart());
 
 		return userForm;
 		
@@ -214,15 +237,18 @@ public class UserService {
 		userForm.setSurname(user.getSurname());
 		userForm.setEmail(user.getEmail());
 		userForm.setPhone(user.getPhone());
-
-		userForm.setImagen(user.getImagen());
-		userForm.setImagenMultipart(user.getImagenMultipart());
+		
+//		if(actorService.findImagenOfActorId()== null){
+//			userForm.setImagen(actorService.findImagenOfActorId());
+//		}else{
+			userForm.setImagen(user.getImagen());
+		
 
 		return userForm;
 		
 	}
 
-	public User reconstruct(UserForm userForm)
+	public User reconstruct(UserForm userForm) 
 	{
 		
 		User user;
@@ -248,7 +274,9 @@ public class UserService {
 		user.setPhone(userForm.getPhone());
 
 		user.setImagen(userForm.getImagen());	
-		user.setImagenMultipart(userForm.getImagenMultipart());
+		
+		if (user.getId() != 0 && !(userForm.getImagen().equals(null) || userForm.getImagen().length==0))
+			user.setImagen(userForm.getImagen());
 		
 		Assert.isTrue(userForm.getTerms());
 

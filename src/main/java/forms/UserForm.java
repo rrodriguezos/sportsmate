@@ -10,7 +10,6 @@ import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.Range;
 import org.hibernate.validator.constraints.SafeHtml;
-import org.springframework.web.multipart.MultipartFile;
 
 @Access(AccessType.PROPERTY)
 public class UserForm {
@@ -147,7 +146,7 @@ public class UserForm {
 
 	@NotBlank
 	@SafeHtml
-	@Range(min = 3, max = 10)
+//	@Range(min = 3, max = 10)
 	public String getUsername() {
 
 		return username;
@@ -171,15 +170,4 @@ public class UserForm {
 		this.terms = terms;
 
 	}
-
-	private MultipartFile imagenMultipart;
-
-	public MultipartFile getImagenMultipart() {
-		return imagenMultipart;
-	}
-
-	public void setImagenMultipart(MultipartFile imagenMultipart) {
-		this.imagenMultipart = imagenMultipart;
-	}
-
 }
