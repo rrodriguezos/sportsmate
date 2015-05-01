@@ -91,8 +91,10 @@
 		
 		<div class="col-xs-5 col-sm-3 spm-events-button">
 			<jstl:if test="${row.users.size() == row.numberMaxParticipant }">
+			<span class="col-xs-12 bg-danger spm-event-full text-center">
 				<spring:message code="event.full" var="full"/>
 				<jstl:out value="${full }"></jstl:out>
+			</span>
 			</jstl:if>
 
 			<jstl:set var="contains" value="false" />
