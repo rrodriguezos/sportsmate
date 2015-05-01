@@ -32,34 +32,49 @@
 	</h1>
 </jstl:if>
 
+<br>
+
 <div class='table-responsive'>
 	<display:table name="messages" id="row"
 		requestURI="message/actor/list.do" pagesize="5"
-		class="table table-bordered table-hover">
+		class="">
+		
 		<display:column>
+			<div class="col-xs-12">
+			<div class="spm-message-list-item">
+				
+				<div class="spm-message-glyphicon col-xs-1 hidden-xs"><span class="glyphicon glyphicon-envelope">&nbsp</span></div>
+				
+				<div class="col-sm-8 col-xs-12">
+					<div class="col-sm-7">
+						<b><spring:message code="message.sendMoment" />: </b>
+						<jstl:out value="${row.sendMoment}"></jstl:out>
+					</div>
+					<div class="col-sm-5">
+						<b><spring:message code="message.subject" />: </b>
+						<jstl:out value="${row.subject}"></jstl:out>
+					</div>
+				</div>
+				
+				<div class="col-xs-12 hidden-sm hidden-md hidden-lg"><br></div>
+				
+				<div class="col-sm-2 col-xs-12 pull-right spm-message-list-btn">
+					<a href="message/actor/display.do?messageId=${row.id}">
+						<button type="button" class="btn btn-sm btn-default col-xs-12">
+							<spring:message code="message.details" />
+						</button>
+					</a>
+				</div>
 
-			<b><spring:message code="message.sendMoment" />: </b>
-			<jstl:out value="${row.sendMoment}"></jstl:out>
-			<br>
-			<b><spring:message code="message.subject" />: </b>
-			<jstl:out value="${row.subject}"></jstl:out>
-			<br>
-			<spring:message code="message.details" var="detailsHeader" />
-			<br>
-			<a href="message/actor/display.do?messageId=${row.id}">
-				<button type="button">
-					<spring:message code="message.details" />
-				</button>
-
-
-			</a>
-
+				<spring:message code="message.details" var="detailsHeader" />
+				<br>
+			</div>
+			</div>
 		</display:column>
 	</display:table>
 </div>
-
+<br>
 <acme:cancel code="message.back" url="folder/actor/list.do" />
-&nbsp;
 
 <jstl:if test="${nameFolder == Inbox}">
 	<input type="button" class="btn btn-md btn-success" name="create"

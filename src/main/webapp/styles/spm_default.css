@@ -50,6 +50,24 @@ body {
 	background-color: transparent;
 }
 
+.spm-message-glyphicon{
+	font-size: 18px;
+}
+
+.spm-message-list-item{
+	overflow: auto;
+	border-radius: 5px;
+	border: thin solid lightgray;
+	margin-bottom: 10px;
+	padding: 15px 0px 10px 0px;
+	background-color: #f8f8f8;
+
+}
+
+.spm-message-list-btn{
+	margin-top: -5px;
+}
+
 .spm-footer-gly, .spm-footer-gly a{
 	color: #888888;
 }
@@ -270,7 +288,7 @@ span.pagelinks {
 	padding: 10px 0px;
 	border: thin solid lightgray;
 	border-radius: 5px;
-	background-color: #fafafa;
+	background-color: #f8f8f8;
 	margin-bottom: 10px;
 }
 
