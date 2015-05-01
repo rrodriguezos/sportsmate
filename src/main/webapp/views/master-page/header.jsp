@@ -63,22 +63,9 @@
 		<ul class='nav navbar-nav collapse navbar-collapse'>
 
 
-			<!-- ADMIN -->
-			<security:authorize access="hasRole('ADMIN')">
-				<li><a href='#' data-toggle='dropdown'> <spring:message
-							code="master.page.administrator" /> <span class='caret'></span>
-				</a>
-				<li><a href="admin/invoice/listCustomers.do"><spring:message
-										code="master.page.admin.manageInvoices" /></a></li>
-					<ul class='dropdown-menu'>
-						<li><a href="folder/actor/list.do"><spring:message
-									code="master.page.folders" /></a></li>
-					</ul></li>
-			</security:authorize>
+
 			
 				<!-- Antiguo enlace de nombre de administrador -> <spring:message code="master.page.administrator" /> -->
-
-
 
 			<!-- AUTENTICATED -->
 			<security:authorize access="isAuthenticated()">
@@ -110,7 +97,7 @@
 						</security:authorize>
 
 						
-
+						
 						<!-- FOLDERS USER -->
 						<security:authorize access="hasRole('USER')">
 							<li>
@@ -142,6 +129,17 @@
 							</li>
 							<li class='divider'></li>
 						</security:authorize>
+						
+						<!-- INVOICES ADMIN -->
+						<security:authorize access="hasRole('ADMIN')">
+							<li>
+								<a href="admin/invoice/listCustomers.do">
+									<spring:message code="master.page.admin.manageInvoices" />
+								</a>
+							</li>
+							<li class='divider'></li>
+						</security:authorize>
+						
 						
 						
 						<!-- INVOICES CUSTOMER -->
