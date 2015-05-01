@@ -35,19 +35,61 @@ body {
 }
 
 #footer_area{
-	background-color: rgba(0,0,0,0.7);
+	background-color: rgba(20,20,20,0.8);
 	color: #ffffff;
 	border-radius: 5px;
 	padding: 2em 0em 1em 0em;
 	text-align: center;
 	margin-top: 0.3em;
 	margin-bottom: 10px;
-	border: thin solid black;
+	border: thin solid #222222;
+}
+
+.welcome-group{
+	padding: 0px 15px 10px 15px;
+}
+
+.welcome-group-inner{
+	border-radius: 8px;
+	border: thin solid #e0e0e0;
+	padding: 25px;
+	background-color: #f8f8f8;
+}
+
+.welcome-group-header{
+	margin-bottom: 8px;
+}
+
+.spm-glyphicon-welcome-text{
+	font-size: 20px;	
+}
+
+.welcome-group .glyphicon{
+	font-size: 18px;
+	margin-right: 5px;
 }
 
 .spm-message-moment{
 	border: 0px;
 	background-color: transparent;
+}
+
+.spm-message-glyphicon{
+	font-size: 18px;
+}
+
+.spm-message-list-item{
+	overflow: auto;
+	border-radius: 5px;
+	border: thin solid lightgray;
+	margin-bottom: 10px;
+	padding: 15px 0px 10px 0px;
+	background-color: #f8f8f8;
+
+}
+
+.spm-message-list-btn{
+	margin-top: -5px;
 }
 
 .spm-footer-gly, .spm-footer-gly a{
@@ -64,8 +106,8 @@ body {
 
 .spm-copyright{
 	vertical-align: middle;
-	padding-top: 20px;
-	color: #FFFFFF;
+	margin-bottom: 10px;
+	color: #888888;
 }
 
 #innercontent_area{
@@ -137,6 +179,11 @@ body {
 	border-radius: 5px;
 }
 
+.spm-event-full{
+	padding: 8px 30px;
+	border-radius: 5px;
+}
+
 /* Details on tables */
 
 .spm-table{
@@ -196,8 +243,10 @@ span.pagelinks {
 
 
 /* Carousel */
+
+
 #carousel-example-generic{
-	margin-bottom: 30px;
+	margin-bottom: 5px;
 }
 
 #carousel-example-generic img{
@@ -209,10 +258,23 @@ span.pagelinks {
 	font-size: 25px;
 }
 
+.spm-carousel-text-xs{
+	font-size: 14px;	
+}
+
+.spm-carousel-text-caption-xs{
+	font-size: 11px;
+}
+
 .spm-carousel-text-bck{
 	background-color: rgba(0,0,0,0.7);
 	border-radius: 7px;
 	padding: 4px 2px 2px 2px;
+}
+
+.spm-advertise{
+	color: darkgray;
+	margin-bottom: 25px;
 }
 
 /* Custom search bar */
@@ -232,14 +294,6 @@ span.pagelinks {
 	border-color: black;
 	color: white;
 	background-color: #999;
-}
-
-.
-
-.spm-news h2{
-	margin:0px;
-	padding-top: 0px;
-	padding-bottom: 10px;
 }
 
 .spm-profile-picture-div{
@@ -266,6 +320,21 @@ span.pagelinks {
 .spm-searchbar-wrapper{
 	padding: 8px;
 }
+
+.spm-search-row{
+	overflow: auto;
+	padding: 10px 0px;
+	border: thin solid lightgray;
+	border-radius: 5px;
+	background-color: #f8f8f8;
+	margin-bottom: 10px;
+}
+
+.spm-search-glyphicon .glyphicon {
+	font-size: 18px;
+	padding-top: 10px;
+}
+
 /* Provisional & inherit from DP project*/
 
 .error {
@@ -279,9 +348,31 @@ span.pagelinks {
 }
 
 
-/* media query for some fixes in sm
+/* media query for some fixes in xs */
+
 @media (max-width: 768px){
-
+	
+	body {
+		background: url(../images/cespedestadio.jpg) repeat center center fixed;
+		-webkit-background-size: inherit;
+		-moz-background-size: inherit;
+		-o-background-size: inherit;
+		background-size: inherit;
 	}
-
-}*/
+	
+	#content_area{
+		border-radius: 0px;
+		border: 0;
+	}
+	
+	#footer_area{
+		margin-top: 0em;
+		border: none;
+		border-radius: 0px;
+	}
+	
+	.spm-copyright{
+		color: #cccccc;
+	}
+	
+} 

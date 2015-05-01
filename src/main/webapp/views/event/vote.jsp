@@ -21,6 +21,7 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
+<br>
 
 <security:authorize access="hasRole('USER')">
 
@@ -30,13 +31,20 @@
 		</h2>
 		<acme:cancel code="event.cancel" url="event/user/list.do" />
 	</jstl:if>
-
+	
+	<div class="col-xs-12">
+	
 	<jstl:if test="${yaVotado==false and voteCustomer==false}">
 
 		<form:form action="event/user/vote.do" modelAttribute="userVoteForm">
 
 			<form:hidden path="id" />
-			<acme:textarea code="event.name" path="name" readonly="true" />
+			
+		<div class="col-xs-12 col-md-9">
+			<acme:textbox code="event.name" path="name" readonly="true" />
+		</div>
+		
+		<div class="col-xs-12 col-md-9">
 			<spring:message code="event.score" />
 			<form:select path="score" class="form-control">
 				<option value="0">0</option>
@@ -46,10 +54,15 @@
 				<option value="4">4</option>
 				<option value="5">5</option>
 			</form:select>
-			<br />
-
+		</div>
+		
+		<br>
+		
+		<div class="col-xs-12">
 			<acme:submit name="save" code="event.vote" />
 			<acme:cancel code="event.cancel" url="event/user/list.do" />
+		</div>
+		
 		</form:form>
 	</jstl:if>
 
@@ -59,7 +72,12 @@
 			modelAttribute="userVoteForm">
 
 			<form:hidden path="id" />
-			<acme:textarea code="event.place" path="name" readonly="true" />
+			
+			<div class="col-xs-12 col-md-9">
+				<acme:textbox code="event.place" path="name" readonly="true" />
+			</div>
+			
+			<div class="col-xs-12 col-md-9">
 			<spring:message code="event.score" />
 			<form:select path="score" class="form-control">
 				<option value="0">0</option>
@@ -69,12 +87,17 @@
 				<option value="4">4</option>
 				<option value="5">5</option>
 			</form:select>
+			</div>
+			
 			<br />
-
-			<acme:submit name="save" code="event.vote" />
-			<acme:cancel code="event.cancel" url="event/user/list.do" />
+			
+			<div class="col-xs-12">
+				<acme:submit name="save" code="event.vote" />
+				<acme:cancel code="event.cancel" url="event/user/list.do" />
+			</div>
 		</form:form>
 	</jstl:if>
+	</div>
 </security:authorize>
 
 

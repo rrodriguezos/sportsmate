@@ -9,8 +9,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.UserService;
-import services.UserService;
-import domain.User;
 import domain.User;
 
 @Controller
@@ -22,24 +20,23 @@ public class UserController extends AbstractController {
 	private UserService userService;
 
 	// Constructors -----------------------------------------------------------
-	public UserController() 
-	{
+	public UserController() {
 
 		super();
 
 	}
-	
-	//Listing friendships------------------------------------------------------------------
+
+	// Listing
+	// friendships------------------------------------------------------------------
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
-	public ModelAndView list() 
-	{
+	public ModelAndView list() {
 
 		ModelAndView result;
 		Collection<User> users;
 
 		users = userService.findFriendshipFromUser();
 
-		result = new ModelAndView("user/list");
+		result = new ModelAndView("friendships/user/list");
 
 		result.addObject("users", users);
 		result.addObject("requestURI", "friendships/user/list.do");

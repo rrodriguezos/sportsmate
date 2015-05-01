@@ -303,6 +303,8 @@
 			<list>
 			</list>
 		</property>
+		
+		
 	</bean>
 
 	<!-- FOLDER -->
@@ -720,6 +722,16 @@
 			<list>
 			</list>
 		</property>
+		
+		<property name="defeats">
+			<list>
+			</list>
+		</property>
+		
+		<property name="tournamentWinner">
+			<list>
+			</list>
+		</property>
 	</bean>
 
 	<bean id="team2" class="domain.Team">
@@ -747,6 +759,16 @@
 		</property>
 		
 		<property name="requests">
+			<list>
+			</list>
+		</property>
+		
+		<property name="defeats">
+			<list>
+			</list>
+		</property>
+		
+		<property name="tournamentWinner">
 			<list>
 			</list>
 		</property>
@@ -824,7 +846,7 @@
 
 	<!-- MATCH -->
 
-	<bean id="match1" class="domain.Match">
+	<!-- <bean id="match1" class="domain.Match">
 		<property name="title" value="The incredible match1 " />
 		<property name="creationMoment" value="01/02/2014 09:00" />
 		<property name="startMoment" value="10/04/2014 20:00" />
@@ -918,7 +940,7 @@
 				<ref bean="team2" />
 			</list>
 		</property>
-	</bean>
+	</bean> -->
 
 
 

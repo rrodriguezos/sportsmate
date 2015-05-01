@@ -71,17 +71,12 @@
 	<br>
 	
 	<security:authorize access="hasRole('USER')">
-		<acme:cancel code="team.back" url="team/user/listAllTeams.do" />
+		<acme:cancel code="team.back" url="welcome/index.do" />
 		<jstl:if test="${principal.teamsCreated.contains(team)}">
 			<input type="button" class="btn btn-md btn-success" name="edit"
 				value="<spring:message code="team.edit"/>"
 				onclick="javascript: window.location.replace('team/user/edit.do?teamId= ${teamForm.id}')" />
 
-			<jstl:if test="${teamForm.id != 0 && users.size()==1}">
-				<input type="submit" class="btn btn-md btn-danger" name="delete"
-					value="<spring:message code="team.delete" />"
-					onclick="return confirm('<spring:message code="team.confirm.delete" />')" />
-			</jstl:if>
 		</jstl:if>
 	</security:authorize>
 

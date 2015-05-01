@@ -91,9 +91,4 @@
 	</div>
 </div>
 
-<br>
-<div class="col-xs-12 spm-copyright">
-	<div class="spm-footer-gly text-center">
-		Copyright &copy; <fmt:formatDate value="${date}" pattern="yyyy" /> SportsMate Co., Inc.
-	</div>
-</div>
+

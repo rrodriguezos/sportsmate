@@ -101,7 +101,6 @@ public class TournamentForm {
 		this.sport = sport;
 	}
 
-	@NotBlank
 	public String getPlace() {
 		return place;
 	}
@@ -156,7 +155,7 @@ public class TournamentForm {
 	public void setUser(User user) {
 		this.user = user;
 	}
-	
+
 	@Valid
 	public Collection<Team> getTeams() {
 		return teams;

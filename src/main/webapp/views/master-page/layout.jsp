@@ -93,6 +93,12 @@
 	<div id='footer_area' class='container'>
 		<tiles:insertAttribute name="footer" />
 	</div>
+	
+	<div class="container">
+		<div class="spm-copyright text-center">
+			Copyright &copy; <fmt:formatDate value="${date}" pattern="yyyy" /> SportsMate Co., Inc.
+		</div>	
+	</div>
 
 	<script src="scripts/jquery-1.11.2.min.js"></script>
     <script src="scripts/bootstrap.js"></script>

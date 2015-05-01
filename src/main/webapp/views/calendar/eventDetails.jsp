@@ -80,27 +80,26 @@
 				<jstl:out value="${eventForm.description}" />
 			</div>
 		</div>
-		
-		<security:authorize access="hasRole('USER')">
-		<jstl:if test="${today.after(finish) and estoyApuntado==true}">
-				<div>
-					<a href="event/user/voteCustomer.do?placeString=${eventForm.place}">
-						<button type="button" class="btn btn-md btn-default col-xs-12 col-sm-2">
-							<span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-							<spring:message	code="event.vote" />
-						</button>
-					</a>
-				</div>
-		</jstl:if>
-		</security:authorize>
-		
-		<jstl:if test="${otherSportCenter != null }">
-			<jstl:out value="${eventForm.otherSportCenter}" />
-		</jstl:if>
 
 	</div>
 
 	<br>
+	<!-- ---------------------------- //TODO @juanje --------------------------- -->
+
+	<security:authorize access="hasRole('USER')">
+		<jstl:if test="${today.after(finish) and estoyApuntado==true}">
+			<a href="event/user/voteCustomer.do?placeString=${eventForm.place}"><spring:message
+					code="event.vote" /> </a>
+		</jstl:if>
+	</security:authorize>
+
+	<br />
+
+	<jstl:if test="${otherSportCenter != null }">
+		<jstl:out value="${eventForm.otherSportCenter}" />
+	</jstl:if>
+
+	<!-- --------------------------------------------------------------------------------- -->
 
 	<h3>
 		<spring:message code="event.participants" />
@@ -127,9 +126,9 @@
 					<jstl:if
 						test="${today.after(finish) and estoyApuntado==true and miId!=row.id}">
 
-						<a href="event/user/vote.do?eventId=${eventForm.id}&userId=${row.id}">
-							<spring:message	code="event.vote" />
-						</a>
+						<a
+							href="event/user/vote.do?eventId=${eventForm.id}&userId=${row.id}"><spring:message
+								code="event.vote" /> </a>
 
 					</jstl:if>
 				</display:column>
@@ -149,7 +148,7 @@
 	</security:authorize>
 
 	<security:authorize access="hasRole('USER')">
-		<acme:cancel code="event.back" url="welcome/index.do" />
+		<acme:cancel code="event.back" url="event/user/calendar/seeSportCenters.do" />
 		<jstl:if test="${eventForm.owner.id == user.id}">
 			<input type="button" class="btn btn-md btn-success" name="edit"
 				value="<spring:message code="event.edit"/>"

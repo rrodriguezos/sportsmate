@@ -1,34 +1,28 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
-<!-- 
- * tiles.xml
- *
- * Copyright (C) 2014 Universidad de Sevilla
- * 
- * The use of this project is hereby constrained to the conditions of the 
- * TDG Licence, a copy of which you may download from 
- * http://www.tdg-seville.info/License.html
- -->
+<!-- * tiles.xml * * Copyright (C) 2014 Universidad de Sevilla * * The use 
+	of this project is hereby constrained to the conditions of the * TDG Licence, 
+	a copy of which you may download from * http://www.tdg-seville.info/License.html -->
 
 <!DOCTYPE tiles-definitions PUBLIC
        "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
        "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
-       
+
 <tiles-definitions>
 
-	<definition name="friendship/list" extends="master.page">	
+	<definition name="friendship/user/list" extends="master.page">
 		<put-attribute name="title" value="Requests friendship" />
 		<put-attribute name="body" value="/views/friendship/list.jsp" />
 	</definition>
-	
-	<definition name="friendship/acceptRequest" extends="master.page">	
+
+	<definition name="friendship/acceptRequest" extends="master.page">
 		<put-attribute name="title" value="List friends" />
 		<put-attribute name="body" value="/views/friendship/list.jsp" />
 	</definition>
-	
-	<definition name="friendship/sendRequest" extends="master.page">	
+
+	<definition name="friendship/sendRequest" extends="master.page">
 		<put-attribute name="title" value="List friends" />
 		<put-attribute name="body" value="/views/friendship/list.jsp" />
 	</definition>
-	
+
 </tiles-definitions>

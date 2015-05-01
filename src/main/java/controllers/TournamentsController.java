@@ -13,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 import services.MatchService;
 import services.TeamService;
 import services.TournamentService;
+import services.UserService;
 import domain.Tournament;
 
 @Controller
@@ -28,24 +29,35 @@ public class TournamentsController extends AbstractController {
 	@Autowired
 	private MatchService matchService;
 
+	@Autowired
+	private UserService userService;
+
 	// List--------------------------------------------------------------
 	@RequestMapping(value = "/listAll", method = RequestMethod.GET)
 	public ModelAndView listAll() {
 		ModelAndView result;
+		Boolean showJoin = true;
 		Collection<Tournament> all;
+		Collection<Tournament> userTournaments;
 		Date now = new Date(System.currentTimeMillis());
-		all = tournamentService.findAll();
 		Collection<Tournament> tournaments = new HashSet<Tournament>();
+
+		all = tournamentService.findAll();
+
 		for (Tournament a : all) {
-			if (a.getFinishMoment().after(now)) {
+			if (a.getStartMoment().after(now)) {
 				tournaments.add(a);
 			}
 		}
+
+		userTournaments = tournamentService.findAllTournamentByPrincipal();
+
 		result = new ModelAndView("tournament/listAll");
 		result.addObject("tournaments", tournaments);
+		result.addObject("showJoin", showJoin);
+		result.addObject("userTournaments", userTournaments);
 		result.addObject("requestURI", "tournament/listAll.do");
 
 		return result;
 	}
-
 }

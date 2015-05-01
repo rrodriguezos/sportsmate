@@ -48,7 +48,7 @@
 						<div class="col-xs-4 col-sm-3">
 						<a href="requestTeam/user/acceptRequest.do?requestTeamId=${row.id}">
 							<button type="button" class="btn btn-sm btn-default col-xs-12 spm-event-detail-btn">
-								<spring:message code="tournament.display" />
+								<spring:message code="requestTeam.acceptRequest" />
 							</button>
 						</a>
 						</div>

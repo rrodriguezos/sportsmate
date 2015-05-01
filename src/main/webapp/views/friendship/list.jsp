@@ -22,33 +22,54 @@
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
 <br>
-<div class='table-responsive'>
-	<display:table name="friendships" id="row" requestURI="${requestURI}"
-		pagesize="5" class="table table-bordered table-hover">
+
+<div>
+	<display:table name="friendships" id="row"
+		requestURI="friendships/user/list.do" pagesize="5"
+		class="">
 
 		<display:column>
-			<b><spring:message code="friendship.user" />: </b>
-			<jstl:out value="${row.user.name}"></jstl:out>
-			<br>
-			<b><spring:message code="friendship.userfriend" />: </b>
-			<jstl:out value="${row.userFriend.name}"></jstl:out>
-			<br>
-			<b><spring:message code="friendship.date" />: </b>
-			<fmt:formatDate value="${row.date}"
-				pattern="{0,date,dd/MM/yyyy HH:mm}"></fmt:formatDate>
-			<br>
-			<b><spring:message code="friendship.acceptRequest" />: </b>
-			<jstl:out value="${acceptRequestHeader}"></jstl:out>
-			<br>
-			<security:authorize access="hasRole('USER')">
-				<a href="friendship/user/acceptRequest.do?friendshipId=${row.id}">
-					<button type="button">
-						<spring:message code="friendship.acceptRequest" />
-					</button>
-				</a>
-			</security:authorize>
+				<div class="col-xs-12">
+				<div class="spm-message-list-item">
+					<div class="spm-message-glyphicon col-xs-1 hidden-xs"><span class="glyphicon glyphicon-user">&nbsp</span></div>
+					
+					<div class="col-xs-12 col-sm-3">
+						<div>
+							<b><spring:message code="friendship.user" />: </b>
+							<jstl:out value="${row.user.name}"></jstl:out>
+						</div>
+						<!--  
+						<div>
+							<b><spring:message code="friendship.userfriend" />: </b>
+							<jstl:out value="${row.userFriend.name}"></jstl:out>
+						</div>
+						-->
+					</div>
+					
+					<div class="col-xs-12 col-sm-6">
+						<b><spring:message code="friendship.date" />: </b>
+						<fmt:formatDate value="${row.date}" pattern="dd/MM/yyyy HH:mm"></fmt:formatDate>
+					</div>
+					
+					<div class="col-xs-12 hidden-sm hidden-md hidden-lg"><br></div>
+					
+					<div class="col-sm-2 col-xs-12 pull-right spm-message-list-btn">
+						<!--  <b><spring:message code="friendship.acceptRequest" />: </b>
+						<jstl:out value="${acceptRequestHeader}"></jstl:out> -->
+						
+						<security:authorize access="hasRole('USER')">
+							<a href="friendship/user/acceptRequest.do?friendshipId=${row.id}">
+								<button type="button" class="btn btn-sm btn-success col-xs-12">
+									<spring:message code="friendship.acceptRequest" />
+								</button>
+							</a>
+						</security:authorize>
+					</div>
+				</div>
+				</div>
+
 		</display:column>
 	</display:table>
 </div>
-
+<br>
 <acme:cancel code="friendship.back" url="welcome/index.do" />

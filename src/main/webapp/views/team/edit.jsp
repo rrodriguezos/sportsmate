@@ -37,6 +37,11 @@
 	<div class="col-xs-12">
 		<br>
 		<acme:submit code="team.save" name="saveEU" />
+		<jstl:if test="${teamForm.id != 0 && users.size()==1}">
+				<input type="submit" class="btn btn-md btn-danger" name="delete"
+					value="<spring:message code="team.delete" />"
+					onclick="return confirm('<spring:message code="team.confirm.delete" />')" />
+			</jstl:if>
 		<acme:cancel code="team.cancel" url="team/user/list.do" />
 	</div>
 	</security:authorize>
