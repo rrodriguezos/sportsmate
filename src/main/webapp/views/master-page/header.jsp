@@ -68,7 +68,8 @@
 				<li><a href='#' data-toggle='dropdown'> <spring:message
 							code="master.page.administrator" /> <span class='caret'></span>
 				</a>
-
+				<li><a href="admin/invoice/listCustomers.do"><spring:message
+										code="master.page.customer.listProfile" /></a></li>
 					<ul class='dropdown-menu'>
 						<li><a href="folder/actor/list.do"><spring:message
 									code="master.page.folders" /></a></li>
