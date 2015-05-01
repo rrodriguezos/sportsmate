@@ -64,7 +64,7 @@ public class AdminInvoiceController extends AbstractController {
 		return result;
 	}
 	
-	@RequestMapping("/makedAsPayed")
+	@RequestMapping("/makeAsPayed")
 	public ModelAndView makeAsPayed( @RequestParam int id)
 	{
 		

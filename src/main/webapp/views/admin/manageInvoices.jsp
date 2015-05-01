@@ -51,7 +51,7 @@
 		<%-- <display:column title="${deadLine}">${row.deadLine }</display:column>> --%>
 
 		<display:column title="${details}">
-			<a href="admin/invoice/makeAsPayed.do?id=${row.id}">${details }</a>
+			<a href="admin/invoice/makeAsPayed.do?id=${row.id}">${makePayed }</a>
 		</display:column>
 
 
