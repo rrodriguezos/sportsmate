@@ -63,7 +63,6 @@
 		<ul class='nav navbar-nav collapse navbar-collapse'>
 
 
-<<<<<<< HEAD
 			<!-- ADMIN -->
 			<security:authorize access="hasRole('ADMIN')">
 				<li><a href='#' data-toggle='dropdown'> <spring:message
@@ -76,11 +75,9 @@
 									code="master.page.folders" /></a></li>
 					</ul></li>
 			</security:authorize>
-=======
 			
 				<!-- Antiguo enlace de nombre de administrador -> <spring:message code="master.page.administrator" /> -->
 
->>>>>>> 6ff7d46a7137c0b7f1ba7c5d6c14af5d76dd5698
 
 
 			<!-- AUTENTICATED -->
