@@ -63,10 +63,9 @@
 		<ul class='nav navbar-nav collapse navbar-collapse'>
 
 
+
 			
 				<!-- Antiguo enlace de nombre de administrador -> <spring:message code="master.page.administrator" /> -->
-
-
 
 			<!-- AUTENTICATED -->
 			<security:authorize access="isAuthenticated()">
@@ -98,7 +97,7 @@
 						</security:authorize>
 
 						
-
+						
 						<!-- FOLDERS USER -->
 						<security:authorize access="hasRole('USER')">
 							<li>
@@ -120,8 +119,8 @@
 						</security:authorize>
 						
 
-						<!-- FOLDERS ADMIN -->
-						
+						<!-- FOLDERS ADMIN  ( DISABLED ) -->
+						<!--  
 						<security:authorize access="hasRole('ADMIN')">
 							<li>
 								<a href="folder/actor/list.do">
@@ -130,6 +129,18 @@
 							</li>
 							<li class='divider'></li>
 						</security:authorize>
+						-->
+						
+						<!-- INVOICES ADMIN -->
+						<security:authorize access="hasRole('ADMIN')">
+							<li>
+								<a href="admin/invoice/listCustomers.do">
+									<spring:message code="master.page.admin.manageInvoices" />
+								</a>
+							</li>
+							<li class='divider'></li>
+						</security:authorize>
+						
 						
 						
 						<!-- INVOICES CUSTOMER -->
@@ -287,7 +298,8 @@
 			</security:authorize>
 			
 			
-			<!-- SEARCH BAR (ADMIN) -->
+			<!-- SEARCH BAR (ADMIN)  (DISABLED)-->
+			<!--  
 			<security:authorize access="hasRole('ADMIN')">
 			<li class="col-sm-4 col-md-4 spm-searchbar-wrapper navbar-right">
 				<div class="input-group">
@@ -298,8 +310,7 @@
       			</div>		
 			</li>
 			</security:authorize>
-			
-			<!-- <form class="navbar-form navbar-right"> -->
+			-->
 			
          	<!-- ANONYMOUS -->
          	<security:authorize access="isAnonymous()">
