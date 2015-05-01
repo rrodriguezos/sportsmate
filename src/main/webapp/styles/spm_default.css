@@ -35,14 +35,14 @@ body {
 }
 
 #footer_area{
-	background-color: rgba(0,0,0,0.7);
+	background-color: rgba(20,20,20,0.8);
 	color: #ffffff;
 	border-radius: 5px;
 	padding: 2em 0em 1em 0em;
 	text-align: center;
 	margin-top: 0.3em;
 	margin-bottom: 10px;
-	border: thin solid black;
+	border: thin solid #222222;
 }
 
 .welcome-group{
@@ -106,8 +106,8 @@ body {
 
 .spm-copyright{
 	vertical-align: middle;
-	padding-top: 20px;
-	color: #FFFFFF;
+	margin-bottom: 10px;
+	color: #888888;
 }
 
 #innercontent_area{
@@ -348,9 +348,18 @@ span.pagelinks {
 }
 
 
-/* media query for some fixes in sm
+/* media query for some fixes in xs */
 @media (max-width: 768px){
-
+	
+	#content_area{
+		border-radius: 0px;
+		border: 0;
+	}
+	
+	#footer_area{
+		margin-top: 0em;
+		border: thin solid #222222;
+		border-radius: 0px;
 	}
 
-}*/
+} 
