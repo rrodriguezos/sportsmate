@@ -25,6 +25,7 @@
 <spring:message code="customer.invoice.deadLine" var="deadLine"></spring:message>
 <spring:message code="customer.invoice.details" var="details"></spring:message>
 <spring:message code="admin.invoice.makePayed" var="makePayed"></spring:message>
+<spring:message code="admin.invoice.payed" var="payed"></spring:message>
 
 
 
@@ -50,8 +51,15 @@
 		</display:column>
 		<%-- <display:column title="${deadLine}">${row.deadLine }</display:column>> --%>
 
-		<display:column title="${details}">
+		<display:column title="${makePayed}">
+		
+			<jstl:if test="${row.datePay ==null}">
 			<a href="admin/invoice/makeAsPayed.do?id=${row.id}">${makePayed }</a>
+			</jstl:if>
+			
+			<jstl:if test="${row.datePay !=null}">
+				<jstl:out value="${payed }"></jstl:out>
+			</jstl:if>
 		</display:column>
 
 
