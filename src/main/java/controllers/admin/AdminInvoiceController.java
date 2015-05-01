@@ -6,6 +6,7 @@ import java.util.Collection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.CustomerService;
@@ -40,6 +41,23 @@ public class AdminInvoiceController extends AbstractController {
 			 new Throwable("oopps no found customers in db ");
 		
 		result.addObject("customers", customers);
+		
+		return result;
+	}
+	
+	@RequestMapping("/manageInvoices")
+	public ModelAndView manageInvoices(@RequestParam int idCustomer)
+	{
+		
+		ModelAndView result= new ModelAndView("admin/invoice/manageInvoices");
+		
+		Customer c = customerService.findOne(idCustomer);
+		
+		if (c == null)
+			new Throwable("oppps you are try to hack? or bad id?");
+		
+		result.addObject("customer", c);
+		result.addObject("invoices", c.getInvoices());
 		
 		return result;
 	}
