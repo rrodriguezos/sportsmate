@@ -131,7 +131,7 @@ public ModelAndView makePayPaypal(@RequestParam int id) throws IOException, PayP
 	payment.setTransactions(transactions);
 	RedirectUrls redirectUrls = new RedirectUrls();
 	redirectUrls.setCancelUrl("https://devtools-paypal.com/guide/pay_paypal?cancel=true");
-	redirectUrls.setReturnUrl("http://caballeroalba.cf:8080/SportsMate/customer/executePayment.do");
+	redirectUrls.setReturnUrl("http://sportsmate.cf:8080/SportsMate/customer/executePayment.do");
 	payment.setRedirectUrls(redirectUrls);
 
 	Payment createdPayment = payment.create(apiContext);	
