@@ -26,23 +26,25 @@
 <spring:message code="admin.invoices.admin" var="adminInvoices"/>
 
 
+<div class="table-responsive">
 
-
-<display:table name="customers" id="row">
-
-	<display:column title="${clients }">
+	<display:table name="customers" id="row" class="table table-bordered table-hover">
 	
-		<jstl:out value="${row.name }"></jstl:out>
+		<display:column title="${clients }">
+		
+			<jstl:out value="${row.name }"></jstl:out>
+		
+		</display:column>
+		
+		<display:column title="${invoices }">
+		
+			<a href="admin/invoice/manageInvoices.do?idCustomer=${row.id }"> <jstl:out value="${adminInvoices }"></jstl:out> </a>
+		
+		</display:column>
 	
-	</display:column>
+	</display:table>
 	
-	<display:column title="${invoices }">
+</div>
 	
-		<a href="admin/invoice/manageInvoices.do?idCustomer=${row.id }"> <jstl:out value="${adminInvoices }"></jstl:out> </a>
 	
-	</display:column>
-
-
-
-</display:table>
 
