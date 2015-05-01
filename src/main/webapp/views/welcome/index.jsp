@@ -107,7 +107,7 @@
 					<span class="glyphicon glyphicon-user"></span>
 					<span class="spm-glyphicon-welcome-text"><spring:message code="welcome.users" /></span>
 				</div>
-				<div class="text-justify">
+				<div class="text-center">
 					<p><spring:message code="welcome.users.caption" /></p>
 				</div>
 			</div>
@@ -119,7 +119,7 @@
 					<span class="glyphicon glyphicon-home"></span>
 					<span class="spm-glyphicon-welcome-text"><spring:message code="welcome.customers" /></span>
 				</div>
-				<div class="text-justify">
+				<div class="text-center">
 					<p><spring:message code="welcome.customers.caption" /></p>
 				</div>
 			</div>
@@ -130,7 +130,7 @@
 					<span class="glyphicon glyphicon-flag"></span>
 					<span class="spm-glyphicon-welcome-text"><spring:message code="welcome.events" /></span>
 				</div>
-				<div class="text-justify">
+				<div class="text-center">
 					<p><spring:message code="welcome.events.caption" /></p>
 				</div>
 			</div>
