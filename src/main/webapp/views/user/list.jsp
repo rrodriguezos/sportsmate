@@ -25,20 +25,33 @@
 <div class='table-responsive'>
 	<display:table name="users" id="row"
 		requestURI="friendships/user/list.do" pagesize="5"
-		class="table table-bordered table-hover">
+		class="">
 		<display:column>
-			<b><spring:message code="friendship.name" />: </b>
-			<jstl:out value="${row.name}"></jstl:out>
-			<br>
-			<b><spring:message code="friendship.surname" />: </b>
-			<jstl:out value="${row.surname}"></jstl:out>
-			<br>
-			<b><spring:message code="friendship.email" />: </b>
-			<jstl:out value="${row.email}"></jstl:out>
-			<br>
+			<div class="col-xs-12">
+				<div class="spm-message-list-item">
+					<div class="spm-message-glyphicon col-xs-1 hidden-xs"><span class="glyphicon glyphicon-user">&nbsp</span></div>
+					
+					<div class="col-xs-12 col-sm-3">
+						<b><spring:message code="friendship.name" />: </b>
+						<jstl:out value="${row.name}"></jstl:out>
+					</div>
+					
+					<div class="col-xs-12 col-sm-4">
+						<b><spring:message code="friendship.surname" />: </b>
+						<jstl:out value="${row.surname}"></jstl:out>
+					</div>
+					
+					<div class="col-xs-12 col-sm-4">
+						<b><spring:message code="friendship.email" />: </b>
+						<jstl:out value="${row.email}"></jstl:out>
+					</div>
+	
+				</div>
+			</div>
 		</display:column>
 	</display:table>
 </div>
 
+<br>
+
 <acme:cancel code="user.back" url="welcome/index.do" />
-&nbsp;
