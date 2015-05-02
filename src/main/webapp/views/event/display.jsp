@@ -73,6 +73,11 @@
 				<b><spring:message code="event.numberMaxParticipant" />: </b>
 				<jstl:out value="${eventForm.numberMaxParticipant}" />
 			</div>
+			
+			<div>
+				<b><spring:message code="event.price" />: </b>
+				<jstl:out value="${eventForm.price}" />
+			</div>
 
 			<div class="col-xs-12 hidden-sm hidden-md hidden-lg">
 				<br>

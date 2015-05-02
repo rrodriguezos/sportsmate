@@ -237,8 +237,10 @@ public class EventUserController extends AbstractController {
 		Event event;
 		try {
 
-			event = eventService.reconstruct(eventForm);
-
+			event = eventService.findOne(eventForm.getId());
+			
+			eventService.checkPrincipalByActor(event);
+			
 			eventService.delete(event);
 
 			result = new ModelAndView("redirect:list.do");

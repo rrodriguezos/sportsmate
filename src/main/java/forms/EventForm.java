@@ -25,6 +25,7 @@ public class EventForm {
 	private String sport;
 	private String place;	
 	private String address;
+	private double price;
 	
 	private String otherSportCenter;	
 	private Customer customer;
@@ -150,9 +151,8 @@ public class EventForm {
 		
 		this.owner = owner;
 		
-	}
+	}	
 	
-	@NotBlank
 	public String getAddress() 
 	{
 		
@@ -164,6 +164,18 @@ public class EventForm {
 	{
 		
 		this.address = address;
+		
+	}
+	public double getPrice() 
+	{
+		
+		return price;
+		
+	}
+	public void setPrice(double price) 
+	{
+		
+		this.price = price;
 		
 	}	
 	

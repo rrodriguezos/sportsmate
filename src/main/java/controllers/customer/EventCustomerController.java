@@ -73,7 +73,7 @@ public class EventCustomerController extends AbstractController{
 		events = new ArrayList<Event>();
 		
 		for(Event itero : all){
-			if(itero.getStartMoment().before(new Date()) || itero.getFinishMoment().before(new Date())){
+			if(itero.getStartMoment().after(new Date()) || itero.getFinishMoment().after(new Date())){
 				events.add(itero);
 			}
 		}		

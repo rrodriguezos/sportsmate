@@ -37,6 +37,7 @@ public class Event extends DomainEntity{
 	private String sport;
 	private String place;
 	private String address;
+	private double price;
 	
 	@NotBlank
 	public String getTitle() 
@@ -119,14 +120,32 @@ public class Event extends DomainEntity{
 	public void setPlace(String place) 
 	{
 		this.place = place;
-	}	
-			
-	@NotBlank
-	public String getAddress() {
+	}				
+	
+	public String getAddress() 
+	{
+		
 		return address;
+		
 	}
-	public void setAddress(String address) {
+	public void setAddress(String address) 
+	{
+		
 		this.address = address;
+		
+	}	
+
+	public double getPrice() 
+	{
+		
+		return price;
+		
+	}
+	public void setPrice(double price) 
+	{
+		
+		this.price = price;
+		
 	}
 
 	//Relationships-------------------------------------------------------------------------
