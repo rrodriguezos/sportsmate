@@ -48,7 +48,7 @@ public class TournamentUserController extends AbstractController {
 	public ModelAndView list() {
 		ModelAndView result;
 		Collection<Tournament> tournaments;
-		Boolean showDisjoin=true;
+		Boolean showDisjoin = true;
 
 		tournaments = tournamentService.findAllTournamentByUser();
 
@@ -106,6 +106,8 @@ public class TournamentUserController extends AbstractController {
 		tournamentForm = tournamentService.construct(tournament);
 		result = createEditModelAndView(tournamentForm);
 		result.addObject("tournamentForm", tournamentForm);
+		Integer torneosActicvos = userService.getAllTournamentsActive().size();
+		result.addObject("activos", torneosActicvos);
 		result.addObject("requestURI", "tournament/user/edit.do");
 
 		return result;
@@ -146,29 +148,42 @@ public class TournamentUserController extends AbstractController {
 	public ModelAndView save(@Valid TournamentForm tournamentForm,
 			BindingResult binding) {
 		ModelAndView result;
+		System.out.println(tournamentForm.getPlace());
 		Tournament tournament;
 		Date now = new Date(System.currentTimeMillis());
-		if (binding.hasErrors()) {
+		Boolean croqueta = !tournamentForm.getPlace().equals("Other")
+				&& tournamentForm.getOtherSportCenter().length() > 0;
+		if (binding.hasErrors() || croqueta) {
 			System.out.println("Binding " + binding.toString());
-			result = createEditModelAndView(tournamentForm);
+			if (croqueta) {
+				result = createEditModelAndView(tournamentForm,
+						"tournament.choose.one");
+			} else {
+				result = createEditModelAndView(tournamentForm);
+			}
 		} else {
 			try {
 				tournament = tournamentService.reconstruct(tournamentForm);
-				
+
 				tournamentService.save(tournament);
 
 				result = new ModelAndView("redirect:list.do");
 			} catch (Throwable oops) {
 				System.out.println("oops " + oops.getLocalizedMessage());
+				System.out.println(tournamentForm.getPlace() + ","
+						+ tournamentForm.getOtherSportCenter().length());
+				String message = "tournament.commit.error";
 
 				if (tournamentForm.getStartMoment().before(now)
 						|| tournamentForm.getFinishMoment().before(now)) {
-					result = createEditModelAndView(tournamentForm,
-							"tournament.commit.error.fechas");
-				} else {
-					result = createEditModelAndView(tournamentForm,
-							"tournament.commit.error");
+					message = "tournament.commit.error.fechas";
+				} else if (!tournamentForm.getPlace().equals("Other")
+						&& tournamentForm.getOtherSportCenter().length() > 0
+						|| tournamentForm.getPlace().equals("Other")
+						&& tournamentForm.getOtherSportCenter().length() == 0) {
+					message = "tournament.choose";
 				}
+				result = createEditModelAndView(tournamentForm, message);
 			}
 		}
 		return result;
@@ -200,12 +215,11 @@ public class TournamentUserController extends AbstractController {
 		}
 		return result;
 	}
-	
+
 	// Choose a team--------------------------------------------------------
 	@RequestMapping(value = "/chooseATeam", method = RequestMethod.GET)
-	public ModelAndView chooseATeam(@RequestParam int tournamentId) 
-	{
-		
+	public ModelAndView chooseATeam(@RequestParam int tournamentId) {
+
 		ModelAndView result;
 		Collection<Team> teams;
 		User principal;
@@ -213,57 +227,57 @@ public class TournamentUserController extends AbstractController {
 		Tournament tournament;
 		Collection<Team> empty;
 		String requestURI;
-		
+
 		principal = userService.findByPrincipal();
 		empty = new ArrayList<Team>();
 		teams = teamService.findAllTeamsUserCaptain(principal.getId());
-		tournament	= tournamentService.findOneToJoin(tournamentId);
-		tournamentForm	= tournamentService.construct(tournament);
+		tournament = tournamentService.findOneToJoin(tournamentId);
+		tournamentForm = tournamentService.construct(tournament);
 		tournamentForm.setTeams(empty);
-		requestURI = "tournament/user/joinATeamToTournament.do?tournamentId="+tournamentId;
-		
+		requestURI = "tournament/user/joinATeamToTournament.do?tournamentId="
+				+ tournamentId;
+
 		result = new ModelAndView("tournament/chooseATeam");
 		result.addObject("teams", teams);
 		result.addObject("tournamentForm", tournamentForm);
 		result.addObject("principal", principal);
 		result.addObject("requestURI", requestURI);
-		
-		
+
 		return result;
-		
+
 	}
-	
+
 	// Join a Tournament--------------------------------------------------------
 	@RequestMapping(value = "/joinATeamToTournament", method = RequestMethod.POST, params = "join")
-	public ModelAndView joinATeamToTournament(TournamentForm tournamentForm,BindingResult binding, @RequestParam int tournamentId) 
-	{
+	public ModelAndView joinATeamToTournament(TournamentForm tournamentForm,
+			BindingResult binding, @RequestParam int tournamentId) {
 
-		
 		ModelAndView result;
 		Team team = null;
 		Tournament tournament;
-			try {
-				for(Team t: tournamentForm.getTeams()){
-					team = t;
-				}
-				
-				tournament = tournamentService.findOneToJoin(tournamentId);
+		try {
+			for (Team t : tournamentForm.getTeams()) {
+				team = t;
+			}
 
-				tournamentService.joinTournament(tournament, team);
+			tournament = tournamentService.findOneToJoin(tournamentId);
 
-				result = new ModelAndView("redirect:list.do");
-			} catch (Throwable oops) {
-					result = createEditModelAndView("tournament.commit.error.Join",tournamentId);
-				}
-//			}
+			tournamentService.joinTournament(tournament, team);
+
+			result = new ModelAndView("redirect:list.do");
+		} catch (Throwable oops) {
+			result = createEditModelAndView("tournament.commit.error.Join",
+					tournamentId);
+		}
+		// }
 		return result;
 
 	}
 
-	//DisJoin aTournament-------------------------------------------------------
+	// DisJoin
+	// aTournament-------------------------------------------------------
 	@RequestMapping(value = "/disjoinATeamToTournament", method = RequestMethod.GET)
-	public ModelAndView disjoinATeamToTournament(@RequestParam int tournamentId) 
-	{
+	public ModelAndView disjoinATeamToTournament(@RequestParam int tournamentId) {
 
 		ModelAndView result;
 		Tournament tournament;
@@ -290,7 +304,8 @@ public class TournamentUserController extends AbstractController {
 		ModelAndView result;
 
 		result = createEditModelAndView(tournamentForm, null);
-
+		Integer torneosActicvos = userService.getAllTournamentsActive().size();
+		result.addObject("activos", torneosActicvos);
 		return result;
 
 	}
@@ -317,12 +332,13 @@ public class TournamentUserController extends AbstractController {
 		result.addObject("matches", matches);
 		result.addObject("teams", teams);
 		result.addObject("message", message);
+		Integer torneosActicvos = userService.getAllTournamentsActive().size();
+		result.addObject("activos", torneosActicvos);
 
 		return result;
 	}
-	
-	public ModelAndView createEditModelAndView(String message,int tournamentId)
-	{
+
+	public ModelAndView createEditModelAndView(String message, int tournamentId) {
 		ModelAndView result;
 		Collection<Team> teams;
 		User principal;
@@ -330,22 +346,24 @@ public class TournamentUserController extends AbstractController {
 		Tournament tournament;
 		Collection<Team> empty;
 		String requestURI;
-		
+
 		principal = userService.findByPrincipal();
 		empty = new ArrayList<Team>();
 		teams = teamService.findAllTeamsUserCaptain(principal.getId());
-		tournament	= tournamentService.findOneToJoin(tournamentId);
-		tournamentForm	= tournamentService.construct(tournament);
+		tournament = tournamentService.findOneToJoin(tournamentId);
+		tournamentForm = tournamentService.construct(tournament);
 		tournamentForm.setTeams(empty);
-		requestURI = "tournament/user/joinATeamToTournament.do?tournamentId="+tournamentId;
-		
+		requestURI = "tournament/user/joinATeamToTournament.do?tournamentId="
+				+ tournamentId;
+
 		result = new ModelAndView("tournament/chooseATeam");
 		result.addObject("teams", teams);
 		result.addObject("message", message);
 		result.addObject("tournamentForm", tournamentForm);
 		result.addObject("principal", principal);
 		result.addObject("requestURI", requestURI);
-		
+		Integer torneosActicvos = userService.getAllTournamentsActive().size();
+		result.addObject("activos", torneosActicvos);
 		return result;
 	}
 

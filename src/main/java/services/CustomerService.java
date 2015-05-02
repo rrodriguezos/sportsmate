@@ -482,4 +482,16 @@ public class CustomerService {
 		return customer;
 		
 	}
+	public Collection<Tournament> getAllTournamentsActive() {
+		Collection<Tournament> all = customerRepository.findAllTournaments(this
+				.findByPrincipal().getId());
+		Collection<Tournament> res = new HashSet<Tournament>();
+		Date now = new Date(System.currentTimeMillis());
+		for (Tournament a : all) {
+			if (a.getStartMoment().after(now)) {
+				res.add(a);
+			}
+		}
+		return res;
+	}
 }

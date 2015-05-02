@@ -5,6 +5,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -458,5 +459,18 @@ public class UserService {
 		
 		return user;
 		
+	}
+	
+	public Collection<Tournament> getAllTournamentsActive() {
+		Collection<Tournament> all = userRepository.findAllTournaments(this
+				.findByPrincipal().getId());
+		Collection<Tournament> res = new HashSet<Tournament>();
+		Date now = new Date(System.currentTimeMillis());
+		for (Tournament a : all) {
+			if (a.getStartMoment().after(now)) {
+				res.add(a);
+			}
+		}
+		return res;
 	}
 }

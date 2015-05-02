@@ -98,6 +98,9 @@ public class TournamentCustomerController extends AbstractController {
 		tournamentForm = tournamentService.construct(tournament);
 
 		result = createEditModelAndView(tournamentForm);
+		Integer torneosActicvos = customerService.getAllTournamentsActive()
+				.size();
+		result.addObject("activos", torneosActicvos);
 		result.addObject("tournamentForm", tournamentForm);
 		result.addObject("requestURI", "tournament/customer/edit.do");
 
@@ -135,6 +138,7 @@ public class TournamentCustomerController extends AbstractController {
 		Tournament tournament;
 		Date now = new Date(System.currentTimeMillis());
 		if (binding.hasErrors()) {
+
 			System.out.println("Binding " + binding.toString());
 			result = createEditModelAndView(tournamentForm);
 		} else {
@@ -145,6 +149,8 @@ public class TournamentCustomerController extends AbstractController {
 
 				result = new ModelAndView("redirect:list.do");
 			} catch (Throwable oops) {
+				
+				System.out.println(oops.getLocalizedMessage());
 				if (tournamentForm.getStartMoment().before(now)
 						|| tournamentForm.getFinishMoment().before(now)) {
 					result = createEditModelAndView(tournamentForm,
@@ -184,7 +190,9 @@ public class TournamentCustomerController extends AbstractController {
 		ModelAndView result;
 
 		result = createEditModelAndView(tournamentForm, null);
-
+		Integer torneosActicvos = customerService.getAllTournamentsActive()
+				.size();
+		result.addObject("activos", torneosActicvos);
 		return result;
 
 	}
@@ -208,7 +216,9 @@ public class TournamentCustomerController extends AbstractController {
 		result.addObject("matches", matches);
 		result.addObject("teams", teams);
 		result.addObject("message", message);
-
+		Integer torneosActicvos = customerService.getAllTournamentsActive()
+				.size();
+		result.addObject("activos", torneosActicvos);
 		return result;
 	}
 
