@@ -19,12 +19,11 @@
 
 <!-- <p><spring:message code="welcome.greeting.current.time" /> ${moment}</p> -->
 
-
 <!-------------->
 <!-- Carousel -->
 <!-------------->
 
-<div class="row">
+<div class="row col-lg-10 col-lg-offset-1">
 	<div id="carousel-example-generic" class="carousel slide" data-ride="carousel" data-interval="4000">
 	  
 	  <!-- Indicators -->
@@ -89,21 +88,15 @@
 	  </a>
 	</div>
 </div>
-
 <!-- Carousel's end -->
 
-
 <!-- Label -->
-
 <div class="col-xs-12 text-center spm-advertise">
 	<span class="glyphicon glyphicon-bookmark" aria-hidden="true">&nbsp</span>
 	<span class=""><spring:message code="welcome.adverisewithus" /></span>
 </div>
 
-
-
 <!-- Groups -->
-
 <div class="row">
 	<div class="col-xs-12 text-center">
 		<div class="col-xs-12 col-md-4 welcome-group">
@@ -139,7 +132,6 @@
 					<p><spring:message code="welcome.events.caption" /></p>
 				</div>
 			</div>
-		</div>
-		
+		</div>	
 	</div>
 </div>
