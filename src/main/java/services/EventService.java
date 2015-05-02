@@ -84,10 +84,12 @@ public class EventService {
 		if (actor instanceof User) {
 
 			owner = (User) actor;
+			
+			Assert.isTrue(owner.getEventsCreated().size()== 5);			
 
 			event.setOwner(owner);
 			users.add(owner);
-			event.setUsers(users);
+			event.setUsers(users);			
 
 		} else if (actor instanceof Customer) {
 
@@ -98,7 +100,8 @@ public class EventService {
 			event.setAddress(event.getCustomer().getProvinceCenter()+", "+
 							 event.getCustomer().getCity()+", "+
 					         event.getCustomer().getStreet());
-		}
+			
+		}			
 
 		event.setCreationMoment(creationMoment);
 		event.setNumberMaxParticipant(2);
