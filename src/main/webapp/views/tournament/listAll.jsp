@@ -22,10 +22,11 @@
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
 <div class="table-responsive">
+	<div class="spm-table-hook">
 	<display:table name="tournaments" id="row" requestURI="${requestURI}"
 		pagesize="5" class="">
-
-		<display:column property="sport" sortable="true">
+		
+		<display:column property="sport" sortable="true" class="spm-tournaments-sportcolumn">
 
 		</display:column>
 		
@@ -196,6 +197,7 @@
 
 
 	</display:table>
+	</div>
 </div>
 
 <acme:cancel code="tournament.back" url="welcome/index.do" />

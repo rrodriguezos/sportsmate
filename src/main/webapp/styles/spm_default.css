@@ -210,6 +210,24 @@ body {
 .table-responsive{
 	border: none; 
 }
+/* ************* */
+
+.spm-table-hook th{
+	background-color: transparent;
+}
+
+.spm-table-hook .sortable{
+	background-color: #d6e9c6;
+	text-align: center;
+	border-radius: 5px;
+}
+
+.spm-tournaments-sportcolumn{
+	width: 10%;
+	vertical-align: top;
+	text-align: center;
+	padding-top: 15px;
+}
 
 table{
 	margin: 20px 0 20px 0;
