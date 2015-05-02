@@ -1,7 +1,10 @@
 package controllers.customer;
 
 import java.util.Collection;
+import java.util.Date;
+
 import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -57,6 +60,25 @@ public class EventCustomerController extends AbstractController{
 		return result;
 
 	}
+	
+	@RequestMapping(value = "/listAllEvents", method = RequestMethod.GET)
+	public ModelAndView listAllEvents() {
+
+		ModelAndView result;
+		Collection<Event> events;
+		
+		events = eventService.findAll();
+		
+
+		result = new ModelAndView("event/list");
+
+		result.addObject("events", events);
+		
+		result.addObject("requestURI", "event/customer/listAllEvents.do");
+
+		return result;
+
+	}
 
 	// Display------------------------------------------------------------------
 	@RequestMapping(value = "/display", method = RequestMethod.GET)
@@ -67,11 +89,13 @@ public class EventCustomerController extends AbstractController{
 		EventForm eventForm;
 		Collection<User> users;
 		Actor actor;
+		Date currentDate;
 
 		event = eventService.findOne(eventId);
 		eventForm = eventService.construct(event);		
 		actor = actorService.findByPrincipal();
 		users = userService.findAllUsersByEventId(eventId);
+		currentDate = new Date();
 		
 		result = new ModelAndView("event/display");		
 
@@ -83,6 +107,8 @@ public class EventCustomerController extends AbstractController{
 			Customer customer = (Customer)actor;
 			result.addObject("customer", customer);
 		}
+		
+		result.addObject("currentDate", currentDate);
 
 		return result;
 
@@ -115,14 +141,17 @@ public class EventCustomerController extends AbstractController{
 		Event event;
 		EventForm eventForm;
 		Collection<User> users;
+		Date currentDate;
 
 		event = eventService.findOneToEdit(eventId);
 		eventForm = eventService.construct(event);
 		users = userService.findAllUsersByEventId(eventId);
+		currentDate = new Date();
 
 		result = createEditModelAndView(eventForm);
 		
 		result.addObject("users", users);
+		result.addObject("currentDate", currentDate);
 
 		return result;
 	}

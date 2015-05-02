@@ -39,15 +39,6 @@
 		<spring:message code="event.finish" />
 	</div>
 	
-	<div class="col-xs-12"><br></div>
-
-	<acme:textarea code="event.description" path="description" />
-	<br />
-
-	<acme:textbox code="event.numberMaxParticipant"
-		path="numberMaxParticipant" />
-	<br />
-	
 	<div class="col-xs-12">
 		<div class="row">
 		<div class="col-xs-12 col-sm-3 form-group">
@@ -78,14 +69,28 @@
 	</div>
 	
 	<security:authorize access="hasRole('USER')">
-		<acme:textbox code="event.otherSportCenter" path="otherSportCenter" />
+		<acme:textbox code="event.otherSportCenter" path="otherSportCenter" />		
 	</security:authorize>
 	
 	<security:authorize access="hasRole('CUSTOMER')">
-		<acme:textbox code="event.place" path="place" readonly="true" />
-	</security:authorize>
+		<acme:textbox code="event.address" path="address" readonly="true" />
+	</security:authorize>	
 	<br />
 	
+	<security:authorize access="hasRole('CUSTOMER')">
+		<acme:textbox code="event.place" path="place" readonly="true" />
+	</security:authorize>		
+	
+	<security:authorize access="hasRole('USER')">
+		<acme:textbox code="event.address" path="address" />		
+	</security:authorize>
+
+	<acme:textarea code="event.description" path="description" />
+	<br />	
+	
+	<acme:textbox code="event.numberMaxParticipant"
+		path="numberMaxParticipant" />
+	<br />	
 
 	<!-- Buttons -->
 	
@@ -95,7 +100,7 @@
 
 		<acme:submit code="event.save" name="saveEC" />
 		
-		<jstl:if test="${eventForm.id != 0 && users.size()==0}">
+		<jstl:if test="${eventForm.id != 0 && users.size()==0 && currentDate < eventForm.startMoment}">
 			<input type="submit" name="deleteEC"
 				value="<spring:message code="event.delete" />"
 				onclick="return confirm('<spring:message code="event.confirm.delete" />')" />
@@ -107,7 +112,7 @@
 	<security:authorize access="hasRole('USER')">
 		<acme:submit code="event.save" name="saveEU" />
 		
-		<jstl:if test="${eventForm.id != 0 && users.size()==1}">
+		<jstl:if test="${eventForm.id != 0 && users.size()==1 && currentDate < eventForm.startMoment}">
 			<form:hidden path="owner" />
 			
 			<input type="submit" class="btn btn-md btn-danger" name="deleteEU"

@@ -566,6 +566,7 @@
 		<property name="numberMaxParticipant" value="4" />
 		<property name="sport" value="PADDLE" />
 		<property name="place" value="IndorClub" />
+		<property name="address" value="Andalucía, Sevilla, C/ Ronda de Triana, 5" />
 		<property name="owner" ref="user1" />
 		<property name="users">
 			<list>
@@ -583,6 +584,7 @@
 		<property name="numberMaxParticipant" value="2" />
 		<property name="sport" value="TENNIS" />
 		<property name="place" value="IndorClub" />
+		<property name="address" value="Andalucía, Sevilla, C/ Ronda de Triana, 5" />
 		<property name="owner" ref="user1" />
 		<property name="users">
 			<list>
@@ -600,6 +602,7 @@
 		<property name="numberMaxParticipant" value="30" />
 		<property name="sport" value="FOOTBALL" />
 		<property name="place" value="IndorClub" />
+		<property name="address" value="Andalucía, Sevilla, C/ Ronda de Triana, 5" />
 		<property name="customer" ref="customer2" />
 		<property name="users">
 			<list>
@@ -617,6 +620,7 @@
 		<property name="numberMaxParticipant" value="4" />
 		<property name="sport" value="PADDLE" />
 		<property name="place" value="IndorClub" />
+		<property name="address" value="Andalucía, Sevilla, C/ Ronda de Triana, 5" />
 		<property name="owner" ref="user2" />
 		<property name="users">
 			<list>
@@ -634,6 +638,7 @@
 		<property name="numberMaxParticipant" value="8" />
 		<property name="sport" value="RACE" />
 		<property name="place" value="SportClub" />
+		<property name="address" value="Andalucía, Sevilla,  C/ Gaspar Calderas, s/n" />
 		<property name="customer" ref="customer2" />
 		<property name="users">
 			<list>
@@ -651,6 +656,7 @@
 		<property name="numberMaxParticipant" value="30" />
 		<property name="sport" value="FOOTBALL_7" />
 		<property name="place" value="IndorClub" />
+		<property name="address" value="Andalucía, Sevilla, C/ Ronda de Triana, 5" />
 		<property name="owner" ref="user1" />
 		<property name="users">
 			<list>
@@ -668,6 +674,7 @@
 		<property name="numberMaxParticipant" value="4" />
 		<property name="sport" value="PADDLE" />
 		<property name="place" value="IndorClub" />
+		<property name="address" value="Andalucía, Sevilla, C/ Ronda de Triana, 5" />
 		<property name="owner" ref="user1" />
 		<property name="users">
 			<list>
@@ -685,6 +692,7 @@
 		<property name="numberMaxParticipant" value="16" />
 		<property name="sport" value="BASKETBALL" />
 		<property name="place" value="IndorClub" />
+		<property name="address" value="Andalucía, Sevilla, C/ Ronda de Triana, 5" />
 		<property name="customer" ref="customer2" />
 		<property name="users">
 			<list>

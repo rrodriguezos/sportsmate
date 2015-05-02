@@ -159,7 +159,7 @@ public class CustomerForm {
 
 	@NotBlank
 	@SafeHtml
-	@Range(min = 3, max = 10)
+	@Size(min = 3, max = 10)
 	public String getUsername() {
 
 		return username;

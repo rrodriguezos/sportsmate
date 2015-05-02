@@ -203,6 +203,8 @@
 						<span class='caret'></span>
 				</a>
 					<ul class='dropdown-menu'>
+						<li><a href="event/customer/listAllEvents.do"><spring:message
+									code="master.page.user.listAllEvents" /></a></li>
 						<li><a href="event/customer/list.do"><spring:message
 									code="master.page.customer.events" /></a></li>
 						<li><a href="event/customer/create.do"><spring:message

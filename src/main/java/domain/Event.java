@@ -36,6 +36,7 @@ public class Event extends DomainEntity{
 	private int numberMaxParticipant;
 	private String sport;
 	private String place;
+	private String address;
 	
 	@NotBlank
 	public String getTitle() 
@@ -118,8 +119,16 @@ public class Event extends DomainEntity{
 	public void setPlace(String place) 
 	{
 		this.place = place;
-	}		
-		
+	}	
+			
+	@NotBlank
+	public String getAddress() {
+		return address;
+	}
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
 	//Relationships-------------------------------------------------------------------------
 	private User owner;
 	private Collection<User> users;

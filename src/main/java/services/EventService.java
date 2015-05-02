@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
+
 import repositories.EventRepository;
 import domain.Actor;
 import domain.Customer;
@@ -94,7 +95,9 @@ public class EventService {
 
 			event.setCustomer(customer);
 			event.setPlace(event.getCustomer().getNameCenter());
-
+			event.setAddress(event.getCustomer().getProvinceCenter()+", "+
+							 event.getCustomer().getCity()+", "+
+					         event.getCustomer().getStreet());
 		}
 
 		event.setCreationMoment(creationMoment);
@@ -110,9 +113,21 @@ public class EventService {
 		User owner;
 		Customer customer;
 		Event aux;
+		Date startMoment;
+		
+		long miliOfDay;
+		long miliseconds;
+		long total;
+		
+		miliseconds = System.currentTimeMillis();
+		miliOfDay = 86400000;
+		total = miliseconds+miliOfDay;
+		startMoment = new Date(total);		
 
-		Assert.notNull(event);
-		Assert.isTrue(event.getStartMoment().compareTo(event.getFinishMoment()) < 0);
+		Assert.notNull(event);		
+		
+		Assert.isTrue(event.getStartMoment().after(startMoment));
+		Assert.isTrue(event.getFinishMoment().after(event.getStartMoment()));
 
 		aux = eventRepository.save(event);
 
@@ -221,6 +236,24 @@ public class EventService {
 		return all;
 
 	}
+	
+	public Collection<Event> findAllEventsJoinUser(){
+		Collection<Event> all;
+		Collection<Event> myEvents;
+		User user;
+		
+		all = findAll();
+		user = userService.findByPrincipal();
+		myEvents = new ArrayList<Event>();
+		
+		for(Event itero : all){
+			if(itero.getUsers().contains(user)){
+				myEvents.add(itero);
+			}
+		}				
+		
+		return myEvents;
+	}
 
 	public Collection<Event> findAllEventsCreatedByCustomerId() {
 
@@ -258,9 +291,11 @@ public class EventService {
 
 		Set<String> all;
 		Collection<Customer> customers;
+		Collection<Event> events;
 		
 		all = new HashSet<String>();
 		customers = customerService.findAll();
+		events = findAll();
 		
 		for(Customer itero : customers){
 			
@@ -288,6 +323,8 @@ public class EventService {
 		result.setNumberMaxParticipant(event.getNumberMaxParticipant());
 		result.setSport(event.getSport());
 		result.setPlace(event.getPlace());
+		result.setAddress(event.getAddress());
+		
 		if (event.getOwner() instanceof User) {
 			result.setOwner(event.getOwner());
 		} else if (event.getCustomer() instanceof Customer) {
@@ -318,11 +355,24 @@ public class EventService {
 		event.setNumberMaxParticipant(eventForm.getNumberMaxParticipant());
 		event.setSport(eventForm.getSport());
 
-		if (event.getOwner() instanceof User) {
+		if (event.getOwner() instanceof User) {					
+			
 			if (eventForm.getOtherSportCenter() != "") {
+				
 				event.setPlace(eventForm.getOtherSportCenter());
+				event.setAddress(eventForm.getAddress());
+				
 			} else {
+				
 				event.setPlace(eventForm.getPlace());
+				for(Customer itero : customerService.findAll()){
+					if(itero.getNameCenter().equals(eventForm.getPlace())){
+						event.setAddress(itero.getProvinceCenter()+", "+
+										 itero.getCity()+", "+
+										 itero.getStreet());
+					}
+				}
+				
 			}
 		}
 
@@ -335,7 +385,6 @@ public class EventService {
 	}
 
 	public Collection<Event> findAllEventsCalendar(int id) {
-		// TODO Auto-generated method stub
 
 		Collection<Event> result;
 

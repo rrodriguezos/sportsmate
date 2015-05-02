@@ -55,6 +55,7 @@
 		
 
 		<security:intercept-url pattern="/event/customer/list.do" access="hasRole('CUSTOMER')" /> 
+		<security:intercept-url pattern="/event/customer/listAllEvents.do" access="hasRole('CUSTOMER')" />
 		<security:intercept-url pattern="/event/customer/display.do" access="hasRole('CUSTOMER')" />
 		<security:intercept-url pattern="/event/customer/create.do" access="hasRole('CUSTOMER')" />
 		<security:intercept-url pattern="/event/customer/edit.do" access="hasRole('CUSTOMER')" />

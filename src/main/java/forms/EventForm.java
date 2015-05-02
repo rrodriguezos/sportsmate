@@ -23,7 +23,8 @@ public class EventForm {
 	private String description;
 	private int numberMaxParticipant;
 	private String sport;
-	private String place;		
+	private String place;	
+	private String address;
 	
 	private String otherSportCenter;	
 	private Customer customer;
@@ -124,19 +125,46 @@ public class EventForm {
 	}
 	
 	@Valid
-	public Customer getCustomer() {
+	public Customer getCustomer() 
+	{
+		
 		return customer;
+		
 	}
-	public void setCustomer(Customer customer) {
+	public void setCustomer(Customer customer) 
+	{
+		
 		this.customer = customer;
+		
 	}
 	
 	@Valid
-	public User getOwner() {
+	public User getOwner() 
+	{
+		
 		return owner;
+		
 	}
-	public void setOwner(User owner) {
+	public void setOwner(User owner) 
+	{
+		
 		this.owner = owner;
+		
+	}
+	
+	@NotBlank
+	public String getAddress() 
+	{
+		
+		return address;
+		
+	}
+	
+	public void setAddress(String address) 
+	{
+		
+		this.address = address;
+		
 	}	
 	
 	

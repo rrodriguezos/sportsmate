@@ -63,6 +63,11 @@
 				<b><spring:message code="event.place" />: </b>
 				<jstl:out value="${eventForm.place}" />
 			</div>
+			
+			<div>
+				<b><spring:message code="event.address" />: </b>
+				<jstl:out value="${eventForm.address}" />
+			</div>
 
 			<div>
 				<b><spring:message code="event.numberMaxParticipant" />: </b>
@@ -140,7 +145,7 @@
 
 	<security:authorize access="hasRole('CUSTOMER')">
 		<acme:cancel code="event.back" url="event/customer/list.do" />
-		<jstl:if test="${eventForm.customer.id == customer.id}">
+		<jstl:if test="${eventForm.customer.id == customer.id && eventForm.startMoment > currentDate && eventForm.finishMoment > currentDate}">
 			<input type="button" name="edit" class="btn btn-md btn-success"
 				value="<spring:message code="event.edit"/>"
 				onclick="javascript: window.location.replace('event/customer/edit.do?eventId= ${eventForm.id}')" />
@@ -149,8 +154,8 @@
 	</security:authorize>
 
 	<security:authorize access="hasRole('USER')">
-		<acme:cancel code="event.back" url="welcome/index.do" />
-		<jstl:if test="${eventForm.owner.id == user.id}">
+		<acme:cancel code="event.back" url="event/user/list.do" />
+		<jstl:if test="${eventForm.owner.id == user.id && eventForm.startMoment > currentDate && eventForm.finishMoment > currentDate}">
 			<input type="button" class="btn btn-md btn-success" name="edit"
 				value="<spring:message code="event.edit"/>"
 				onclick="javascript: window.location.replace('event/user/edit.do?eventId= ${eventForm.id}')" />

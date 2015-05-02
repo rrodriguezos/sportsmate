@@ -52,7 +52,7 @@ public class EventUserController extends AbstractController {
 		Collection<Event> events;
 		User principal;
 
-		events = eventService.findAllEventsCreatedByUserId();
+		events = eventService.findAllEventsJoinUser();
 		principal = userService.findByPrincipal();
 
 		result = new ModelAndView("event/list");
@@ -111,11 +111,13 @@ public class EventUserController extends AbstractController {
 		Collection<User> users;
 		Actor actor;
 		Boolean estoyApuntado = false;
+		Date currentDate;
 
 		event = eventService.findOne(eventId);
 		eventForm = eventService.construct(event);
 		users = userService.findAllUsersByEventId(eventId);
 		actor = actorService.findByPrincipal();
+		currentDate = new Date();
 
 		if (event.getUsers().contains(actor)) {
 			estoyApuntado = true;
@@ -137,6 +139,8 @@ public class EventUserController extends AbstractController {
 			User user = (User) actor;
 			result.addObject("user", user);
 		}
+		
+		result.addObject("currentDate", currentDate);
 
 		return result;
 
@@ -170,12 +174,14 @@ public class EventUserController extends AbstractController {
 		EventForm eventForm;
 		Collection<String> places;
 		Collection<User> users;
+		Date currentDate;
 
 		places = eventService.places();
 		event = eventService.findOneToEdit(eventId);
 		users = userService.findAllUsersByEventId(eventId);
-
 		eventForm = eventService.construct(event);
+		currentDate = new Date();
+		
 		if (!places.contains(event.getPlace())) {
 
 			eventForm.setOtherSportCenter(event.getPlace());
@@ -184,6 +190,7 @@ public class EventUserController extends AbstractController {
 		result = createEditModelAndView(eventForm);
 
 		result.addObject("users", users);
+		result.addObject("currentDate", currentDate);
 
 		return result;
 	}
