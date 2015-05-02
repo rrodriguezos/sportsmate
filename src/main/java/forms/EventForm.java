@@ -150,9 +150,8 @@ public class EventForm {
 		
 		this.owner = owner;
 		
-	}
+	}	
 	
-	@NotBlank
 	public String getAddress() 
 	{
 		

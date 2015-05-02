@@ -135,12 +135,12 @@ public class EventService {
 		if (actorService.findByPrincipal() instanceof User) {
 
 			owner = (User) actorService.findByPrincipal();
+			Assert.isTrue(owner.getEventsCreated().size()<5);
+			
 			if (event.getId() == 0) {
 				owner.getEventsCreated().add(aux);
 				owner.getEvents().add(aux);
-			}			
-
-			Assert.isTrue(owner.getEventsCreated().size()== 5);		
+			}		
 			
 			userService.save(owner);
 

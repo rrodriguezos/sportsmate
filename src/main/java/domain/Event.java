@@ -119,9 +119,8 @@ public class Event extends DomainEntity{
 	public void setPlace(String place) 
 	{
 		this.place = place;
-	}	
-			
-	@NotBlank
+	}				
+	
 	public String getAddress() {
 		return address;
 	}
