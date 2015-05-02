@@ -188,8 +188,14 @@
 							code="master.page.user.eventsgroup" /> <span class='caret'></span>
 				</a>
 					<ul class='dropdown-menu'>
-						<li><a href="event/user/listAllEvents.do"><spring:message
-									code="master.page.user.listAllEvents" /></a></li>
+						<li><a href="event/user/listFootballEvents.do"><spring:message
+									code="master.page.user.listFootballEvents" /></a></li>
+						<li><a href="event/user/listTennisEvents.do"><spring:message
+									code="master.page.user.listTennisEvents" /></a></li>
+						<li><a href="event/user/listPaddleEvents.do"><spring:message
+									code="master.page.user.listPaddleEvents" /></a></li>
+						<li><a href="event/user/listOtherEvents.do"><spring:message
+									code="master.page.user.listOtherEvents" /></a></li>
 						<li><a href="event/user/list.do"><spring:message
 									code="master.page.user.events" /></a></li>
 						<li><a href="event/user/create.do"><spring:message
@@ -203,8 +209,14 @@
 						<span class='caret'></span>
 				</a>
 					<ul class='dropdown-menu'>
-						<li><a href="event/customer/listAllEvents.do"><spring:message
-									code="master.page.user.listAllEvents" /></a></li>
+						<li><a href="event/customer/listFootballEvents.do"><spring:message
+									code="master.page.user.listFootballEvents" /></a></li>
+						<li><a href="event/customer/listTennisEvents.do"><spring:message
+									code="master.page.user.listTennisEvents" /></a></li>
+						<li><a href="event/customer/listPaddleEvents.do"><spring:message
+									code="master.page.user.listPaddleEvents" /></a></li>
+						<li><a href="event/customer/listOtherEvents.do"><spring:message
+									code="master.page.user.listOtherEvents" /></a></li>
 						<li><a href="event/customer/list.do"><spring:message
 									code="master.page.customer.events" /></a></li>
 						<li><a href="event/customer/create.do"><spring:message

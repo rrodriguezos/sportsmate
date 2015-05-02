@@ -65,8 +65,8 @@ public class EventUserController extends AbstractController {
 
 	}
 
-	@RequestMapping(value = "/listAllEvents", method = RequestMethod.GET)
-	public ModelAndView listAllEvents() {
+	@RequestMapping(value = "/listOtherEvents", method = RequestMethod.GET)
+	public ModelAndView listOtherEvents() {
 
 		ModelAndView result;
 		Collection<Event> events;
@@ -77,7 +77,7 @@ public class EventUserController extends AbstractController {
 
 		actualDate = new Date();
 		eventsToRemove = new ArrayList<Event>();
-		events = eventService.findAll();
+		events = eventService.findAllOtherEvents();
 		principal = userService.findByPrincipal();
 		
 		for(Event e: events){
@@ -93,7 +93,112 @@ public class EventUserController extends AbstractController {
 		result.addObject("events", events);
 		result.addObject("principal", principal);
 		result.addObject("showJoin", showJoin);
-		result.addObject("requestURI", "event/user/listAllEvents.do");
+		result.addObject("requestURI", "event/user/listOthersEvents.do");
+		result.addObject("userEvents", principal.getEvents());
+
+		return result;
+
+	}
+	
+	@RequestMapping(value = "/listFootballEvents", method = RequestMethod.GET)
+	public ModelAndView listFootballEvents() {
+
+		ModelAndView result;
+		Collection<Event> events;
+		User principal;
+		Date actualDate;
+		Collection<Event> eventsToRemove;
+		boolean showJoin = true;
+
+		actualDate = new Date();
+		eventsToRemove = new ArrayList<Event>();
+		events = eventService.findAllFootballEvents();
+		principal = userService.findByPrincipal();
+		
+		for(Event e: events){
+			if(e.getStartMoment().before(actualDate)){
+				eventsToRemove.add(e);
+			}
+		}
+		
+		events.removeAll(eventsToRemove);
+
+		result = new ModelAndView("event/list");
+
+		result.addObject("events", events);
+		result.addObject("principal", principal);
+		result.addObject("showJoin", showJoin);
+		result.addObject("requestURI", "event/user/listFootballEvents.do");
+		result.addObject("userEvents", principal.getEvents());
+
+		return result;
+
+	}
+	
+	@RequestMapping(value = "/listTennisEvents", method = RequestMethod.GET)
+	public ModelAndView listTennisEvents() {
+
+		ModelAndView result;
+		Collection<Event> events;
+		User principal;
+		Date actualDate;
+		Collection<Event> eventsToRemove;
+		boolean showJoin = true;
+
+		actualDate = new Date();
+		eventsToRemove = new ArrayList<Event>();
+		events = eventService.findAllTennisEvents();
+		principal = userService.findByPrincipal();
+		
+		for(Event e: events){
+			if(e.getStartMoment().before(actualDate)){
+				eventsToRemove.add(e);
+			}
+		}
+		
+		events.removeAll(eventsToRemove);
+
+		result = new ModelAndView("event/list");
+
+		result.addObject("events", events);
+		result.addObject("principal", principal);
+		result.addObject("showJoin", showJoin);
+		result.addObject("requestURI", "event/user/listTennisEvents.do");
+		result.addObject("userEvents", principal.getEvents());
+
+		return result;
+
+	}
+	
+	@RequestMapping(value = "/listPaddleEvents", method = RequestMethod.GET)
+	public ModelAndView listPaddleEvents() {
+
+		ModelAndView result;
+		Collection<Event> events;
+		User principal;
+		Date actualDate;
+		Collection<Event> eventsToRemove;
+		boolean showJoin = true;
+
+		actualDate = new Date();
+		eventsToRemove = new ArrayList<Event>();
+		events = eventService.findAllPaddleEvents();
+		principal = userService.findByPrincipal();
+		
+		for(Event e: events){
+			if(e.getStartMoment().before(actualDate)){
+				eventsToRemove.add(e);
+			}
+		}
+		
+		events.removeAll(eventsToRemove);
+
+		result = new ModelAndView("event/list");
+
+		result.addObject("events", events);
+		result.addObject("principal", principal);
+		result.addObject("showJoin", showJoin);
+		result.addObject("requestURI", "event/user/listPaddleEvents.do");
 		result.addObject("userEvents", principal.getEvents());
 
 		return result;
@@ -264,7 +369,7 @@ public class EventUserController extends AbstractController {
 
 		event = eventService.findOne(eventId);
 		eventService.joinEvent(event);
-		events = eventService.findAll();
+		events = eventService.findAllEventsJoinUser();
 
 		result = new ModelAndView("event/list");
 

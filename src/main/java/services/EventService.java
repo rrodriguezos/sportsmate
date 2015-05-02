@@ -435,5 +435,81 @@ public class EventService {
 		userService.save(user);
 
 	}
+	
+	public Collection<Event> findAllFootballEvents()
+	{
+	
+		Collection<Event> all;
+		Collection<Event> result;
+		
+		all = eventRepository.findAll();
+		result = new ArrayList<Event>();
+		
+		for(Event e: all){
+			if(e.getSport().equals("FOOTBALL")){
+				result.add(e);
+			}
+		}
+		
+		return result;
+		
+	}
+	
+	public Collection<Event> findAllTennisEvents()
+	{
+	
+		Collection<Event> all;
+		Collection<Event> result;
+		
+		all = eventRepository.findAll();
+		result = new ArrayList<Event>();
+		
+		for(Event e: all){
+			if(e.getSport().equals("TENNIS")){
+				result.add(e);
+			}
+		}
+		
+		return result;
+		
+	}
+	
+	public Collection<Event> findAllPaddleEvents()
+	{
+	
+		Collection<Event> all;
+		Collection<Event> result;
+		
+		all = eventRepository.findAll();
+		result = new ArrayList<Event>();
+		
+		for(Event e: all){
+			if(e.getSport().equals("PADDLE")){
+				result.add(e);
+			}
+		}
+		
+		return result;
+		
+	}
+	
+	public Collection<Event> findAllOtherEvents()
+	{
+	
+		Collection<Event> all;
+		Collection<Event> result;
+		
+		all = eventRepository.findAll();
+		result = new ArrayList<Event>();
+		
+		for(Event e: all){
+			if(!(e.getSport().equals("FOOTBALL") || e.getSport().equals("TENNIS") || e.getSport().equals("PADDLE"))){
+				result.add(e);
+			}
+		}
+		
+		return result;
+		
+	}
 
 }

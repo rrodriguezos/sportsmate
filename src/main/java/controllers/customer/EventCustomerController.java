@@ -62,27 +62,118 @@ public class EventCustomerController extends AbstractController{
 
 	}
 	
-	@RequestMapping(value = "/listAllEvents", method = RequestMethod.GET)
-	public ModelAndView listAllEvents() {
+	
+	@RequestMapping(value = "/listOtherEvents", method = RequestMethod.GET)
+	public ModelAndView listOtherEvents() {
 
 		ModelAndView result;
-		Collection<Event> all;
 		Collection<Event> events;
+		Date actualDate;
+		Collection<Event> eventsToRemove;
+
+		actualDate = new Date();
+		eventsToRemove = new ArrayList<Event>();
+		events = eventService.findAllOtherEvents();
 		
-		all = eventService.findAll();
-		events = new ArrayList<Event>();
-		
-		for(Event itero : all){
-			if(itero.getStartMoment().after(new Date()) || itero.getFinishMoment().after(new Date())){
-				events.add(itero);
+		for(Event e: events){
+			if(e.getStartMoment().before(actualDate)){
+				eventsToRemove.add(e);
 			}
-		}		
+		}
+		
+		events.removeAll(eventsToRemove);
 
 		result = new ModelAndView("event/list");
 
 		result.addObject("events", events);
+		result.addObject("requestURI", "event/customer/listOthersEvents.do");
+
+		return result;
+
+	}
+	
+	@RequestMapping(value = "/listFootballEvents", method = RequestMethod.GET)
+	public ModelAndView listFootballEvents() {
+
+		ModelAndView result;
+		Collection<Event> events;
+		Date actualDate;
+		Collection<Event> eventsToRemove;
+
+		actualDate = new Date();
+		eventsToRemove = new ArrayList<Event>();
+		events = eventService.findAllFootballEvents();
 		
-		result.addObject("requestURI", "event/customer/listAllEvents.do");
+		for(Event e: events){
+			if(e.getStartMoment().before(actualDate)){
+				eventsToRemove.add(e);
+			}
+		}
+		
+		events.removeAll(eventsToRemove);
+
+		result = new ModelAndView("event/list");
+
+		result.addObject("events", events);
+		result.addObject("requestURI", "event/customer/listFootballEvents.do");
+
+		return result;
+
+	}
+	
+	@RequestMapping(value = "/listTennisEvents", method = RequestMethod.GET)
+	public ModelAndView listTennisEvents() {
+
+		ModelAndView result;
+		Collection<Event> events;
+		Date actualDate;
+		Collection<Event> eventsToRemove;
+
+		actualDate = new Date();
+		eventsToRemove = new ArrayList<Event>();
+		events = eventService.findAllTennisEvents();
+		
+		for(Event e: events){
+			if(e.getStartMoment().before(actualDate)){
+				eventsToRemove.add(e);
+			}
+		}
+		
+		events.removeAll(eventsToRemove);
+
+		result = new ModelAndView("event/list");
+
+		result.addObject("events", events);
+		result.addObject("requestURI", "event/customer/listTennisEvents.do");
+
+		return result;
+
+	}
+	
+	@RequestMapping(value = "/listPaddleEvents", method = RequestMethod.GET)
+	public ModelAndView listPaddleEvents() {
+
+		ModelAndView result;
+		Collection<Event> events;
+		Date actualDate;
+		Collection<Event> eventsToRemove;
+
+		actualDate = new Date();
+		eventsToRemove = new ArrayList<Event>();
+		events = eventService.findAllPaddleEvents();
+		
+		for(Event e: events){
+			if(e.getStartMoment().before(actualDate)){
+				eventsToRemove.add(e);
+			}
+		}
+		
+		events.removeAll(eventsToRemove);
+
+		result = new ModelAndView("event/list");
+
+		result.addObject("events", events);
+		result.addObject("requestURI", "event/customer/listPaddleEvents.do");
 
 		return result;
 
