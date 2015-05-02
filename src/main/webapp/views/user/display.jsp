@@ -26,10 +26,8 @@
 			</jstl:if>
 			
 	
-			<jstl:if test="${userImagen == false}">
-				
-					<img style="position: relative; width: 70px; height: 70px;" src="${userForm.imagen}"/>
-					<img style="position: relative; width: 70px; height: 70px;" src="upload/imageUser.do?userId=${user.id}"/>
+			<jstl:if test="${userImagen == false}">					
+					<img style="position: relative; width: 250px; height: 250px;" src="upload/imageUser.do?userId=${user.id}"/>
 			</jstl:if>
 			
 				<br><br>

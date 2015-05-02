@@ -6,6 +6,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.orm.jpa.JpaSystemException;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.ServletRequestDataBinder;
@@ -97,18 +98,10 @@ public class RegisterUserController extends AbstractController {
 		ModelAndView result;
 		User user;
 
-//		if (bindingResult.hasErrors() || userForm.getUsername().length() <= 3) {
-//
-//			result = createEditModelAndView(userForm);
-//			if (userForm.getUsername().length() <= 3) {
-//				result.addObject("message", "register.commit.penemuychico");
-//			}
 		if (bindingResult.hasErrors()) {
 
 			result = createEditModelAndView(userForm);
-//			if (userForm.getUsername().length() <= 3) {
-//				result.addObject("message", "register.commit.penemuychico");
-//			}
+
 		} else {
 			try {
 
@@ -119,16 +112,15 @@ public class RegisterUserController extends AbstractController {
 				result = new ModelAndView("redirect:../welcome/index.do");
 
 			} catch (Throwable oops) {
-				if (oops instanceof DataIntegrityViolationException) {
+				System.out.println(oops);
+				if(oops instanceof DataIntegrityViolationException || oops instanceof JpaSystemException){
+					result = createEditModelAndView(userForm,
+							"user.imagen"); 
+				}else if (oops instanceof DataIntegrityViolationException) {
 
 					result = createEditModelAndView(userForm,
 							"user.duplicated.username");
-				} 
-//				else if (userForm.getUsername().length() <= 3) {
-//					result = createEditModelAndView(userForm,
-//							"register.commit.penemuychico");
-//			}	
-				 else {
+				} else {
 					result = createEditModelAndView(userForm,
 							"user.commit.error");
 				}

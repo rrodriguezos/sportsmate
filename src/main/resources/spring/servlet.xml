@@ -185,7 +185,10 @@
 
 		<!-- Setting maximum upload size -->
 	
-		<property name="maxUploadSize" value="1000000" />
+		<property name="maxUploadSize" >
+			<value>1000000000</value>
+		</property>
+		
 	
 	</bean>
 

@@ -18,7 +18,7 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
-<form:form action="user/edit.do" modelAttribute="userForm" class="form-horizontal">
+<form:form action="user/edit.do" modelAttribute="userForm" class="form-horizontal" method="post" enctype="multipart/form-data">
 	
 	<form:hidden path="id"/>
 	
@@ -65,7 +65,7 @@
 		<div class='col-md-3 spm-profile-picture-div text-center'> 
 			<img src="images/default_profile.jpg" alt="Default profile" class="img-thumbnail .spm-profile-picture" />
 				<br><br>
-			<form:input type="file" name="file" path="imagen"/> 
+			<form:input type="file" id="imagen" path="imagen"/> 
 		</div>
 	</div>
 	
