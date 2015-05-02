@@ -24,13 +24,11 @@
 <div class="table-responsive">
 	<display:table name="tournaments" id="row" requestURI="${requestURI}"
 		pagesize="5" class="">
-		<div class="col-xs-12">
-			<div class="alert alert-success spm-no-margin-bottom">
-				<display:column property="sport" sortable="true">
 
-				</display:column>
-			</div>
-		</div>
+		<display:column property="sport" sortable="true">
+
+		</display:column>
+
 		<display:column>
 
 			<div class="col-xs-12">
@@ -56,7 +54,11 @@
 							<spring:message code="tournament.sport" var="sportHeader" />
 							<jstl:out value="${row.sport}" />
 						</div>
-
+						<div>
+							<b><spring:message code="tournament.fee" />: </b>
+							<spring:message code="tournament.fee" var="feeHeader" />
+							<jstl:out value="${row.userFee}" />
+						</div>
 						<div>
 							<b><spring:message code="tournament.numberOfTeams" />: </b>
 							<spring:message code="tournament.numberOfTeams"
@@ -83,6 +85,30 @@
 							<spring:message code="tournament.prize" var="prizeHeader" />
 							<jstl:out value="${row.prize}" />
 						</div>
+					</div>
+					<div>
+						<jstl:if test="${row.customer!=null}">
+							<div>
+								<b><spring:message code="tournament.place" />: </b>
+								<spring:message code="tournament.place" var="placeHeader" />
+								<jstl:out value="${row.customer.nameCenter}"></jstl:out>
+							</div>
+							<div>
+								<b><spring:message code="tournament.placeplace" />: </b>
+								<spring:message code="tournament.placeplace" var="placeHeader" />
+								<jstl:out value="${row.customer.street}"></jstl:out>
+								,
+								<jstl:out value="${row.customer.city}"></jstl:out>
+							</div>
+
+						</jstl:if>
+						<jstl:if test="${row.customer==null}">
+							<div>
+								<b><spring:message code="tournament.placeplace" />: </b>
+								<spring:message code="tournament.placeplace" var="placeHeader" />
+								<jstl:out value="${row.place}"></jstl:out>
+							</div>
+						</jstl:if>
 					</div>
 				</div>
 

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import domain.Customer;
 import domain.Invoice;
+import domain.Tournament;
 @Repository
 public interface CustomerRepository extends JpaRepository<Customer, Integer> {
 
@@ -24,6 +25,9 @@ public interface CustomerRepository extends JpaRepository<Customer, Integer> {
 
 	@Query("select c from Customer c where c.userAccount.username=?1")
 	Customer getCustomerByUserName(String username);
+	
+	@Query("select c.tournaments from Customer c where c.id=?1")
+	Collection<Tournament> findAllTournaments(int id);
 	
 
 }

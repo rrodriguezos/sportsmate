@@ -22,133 +22,137 @@
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
 <br>
+<jstl:if test="${activos>=5}">
+	<h2>
+		<spring:message code="tournament.no.moar.paco"></spring:message>
+	</h2>
+</jstl:if>
+<jstl:if test="${activos<5}">
+	<form:form action="${requestURI}" modelAttribute="tournamentForm">
 
-<form:form action="${requestURI}" modelAttribute="tournamentForm">
+		<form:hidden path="id" />
 
-	<form:hidden path="id" />
+		<acme:textbox code="tournament.title" path="title" />
+		<br />
 
-	<acme:textbox code="tournament.title" path="title" />
-	<br />
+		<acme:textbox code="tournament.startMoment" path="startMoment" />
 
-	<acme:textbox code="tournament.startMoment" path="startMoment" />
+		<div class="col-xs-12">
+			<span><spring:message code="tournament.start" /></span>
+		</div>
+		<br />
+		<br />
 
-	<div class="col-xs-12">
-		<span><spring:message code="tournament.start" /></span>
-	</div>
-	<br />
-	<br />
-
-	<acme:textbox code="tournament.finishMoment" path="finishMoment" />
-	<div class="col-xs-12">
-		<span><spring:message code="tournament.finish" /></span>
-	</div>
-
-	<div class="col-xs-12">
-		<br>
-	</div>
-
-	<acme:textarea code="tournament.description" path="description" />
-	<br />
-
-	<acme:textbox code="tournament.numberOfTeams" path="numberOfTeams" />
-
-
-	<!-- --------------------------------------------------------------------------------------------- -->
-
-	<div class="col-xs-12">
-		<div class="row">
+		<acme:textbox code="tournament.finishMoment" path="finishMoment" />
+		<div class="col-xs-12">
+			<span><spring:message code="tournament.finish" /></span>
+		</div>
+		<acme:textbox code="tournament.fee" path="userFee" />
+		<br />
+		<div class="col-xs-12">
 			<br>
+		</div>
 
-			<div class="form-group col-xs-12 col-md-3">
-				<form:label path="advertised">
-					<spring:message code="tournament.advertised" />
-				</form:label>
+		<acme:textarea code="tournament.description" path="description" />
+		<br />
 
-				<form:select path="advertised" class="form-control">
-					<option value="true">Yes</option>
-					<option value="false">No</option>
-				</form:select>
-			</div>
+		<acme:textbox code="tournament.numberOfTeams" path="numberOfTeams" />
 
 
-			<div class="form-group col-xs-12 col-md-3">
-				<form:label path="sport">
-					<spring:message code="tournament.sport" />
-				</form:label>
+		<!-- --------------------------------------------------------------------------------------------- -->
 
-				<form:select path="sport" class="form-control">
-					<form:options items="${sports}" />
-				</form:select>
-				<form:errors class="alert alert-danger spm-form-error" path="sport" />
-			</div>
-
-
-			<security:authorize access="hasRole('USER')">
+		<div class="col-xs-12">
+			<div class="row">
+				<br>
 
 				<div class="form-group col-xs-12 col-md-3">
-					<form:label path="place">
-						<spring:message code="tournament.place" />
+					<form:label path="advertised">
+						<spring:message code="tournament.advertised" />
 					</form:label>
-					<form:select path="place" class="form-control">
-						<form:options items="${places}" />
+
+					<form:select path="advertised" class="form-control">
+						<option value="true">Yes</option>
+						<option value="false">No</option>
 					</form:select>
-					<form:errors class="alert alert-danger spm-form-error" path="place" />
 				</div>
-			</security:authorize>
+
+
+				<div class="form-group col-xs-12 col-md-3">
+					<form:label path="sport">
+						<spring:message code="tournament.sport" />
+					</form:label>
+
+					<form:select path="sport" class="form-control">
+						<form:options items="${sports}" />
+					</form:select>
+					<form:errors class="alert alert-danger spm-form-error" path="sport" />
+				</div>
+
+
+				<security:authorize access="hasRole('USER')">
+
+					<div class="form-group col-xs-12 col-md-3">
+						<form:label path="place">
+							<spring:message code="tournament.place" />
+						</form:label>
+						<form:select path="place" class="form-control">
+							<form:options items="${places}" />
+						</form:select>
+						<form:errors class="alert alert-danger spm-form-error"
+							path="place" />
+					</div>
+				</security:authorize>
 
 
 
-			<br> <br>
+				<br> <br>
+			</div>
 		</div>
-	</div>
 
-	<!-- --------------------------------------------------------------------------------------------- -->
+		<!-- --------------------------------------------------------------------------------------------- -->
 
-	<div class="col-xs-12">
-		<br>
-	</div>
-
-	<security:authorize access="hasRole('USER')">
-		<acme:textbox code="tournament.otherSportCenter"
-			path="otherSportCenter" />
-	</security:authorize>
-
-	<security:authorize access="hasRole('CUSTOMER')">
-		<br>
-		<acme:textbox code="tournament.place" path="place" readonly="true" />
-	</security:authorize>
-
-
-	<div class="col-xs-12">
-		<security:authorize access="hasRole('CUSTOMER')">
+		<div class="col-xs-12">
 			<br>
-			<acme:submit code="tournament.save" name="saveTC" />
-
-			<jstl:if test="${tournamentForm.id != 0 and matches.size()==0}">
-				<input type="submit" class="btn btn-md btn-danger" name="deleteTC"
-					value="<spring:message code="tournament.delete" />"
-					onclick="return confirm('<spring:message code="tournament.confirm.delete" />')" />
-			</jstl:if>
-
-			<acme:cancel code="tournament.cancel"
-				url="tournament/customer/list.do" />
-		</security:authorize>
+		</div>
 
 		<security:authorize access="hasRole('USER')">
-			<br>
-			<acme:submit code="tournament.save" name="saveTU" />
-
-			<jstl:if test="${tournamentForm.id != 0 and matches.size()==0}">
-				<input type="submit" class="btn btn-md btn-danger" name="deleteTU"
-					value="<spring:message code="tournament.delete" />"
-					onclick="return confirm('<spring:message code="tournament.confirm.delete" />')" />
-			</jstl:if>
-
-			<acme:cancel code="tournament.cancel" url="tournament/user/list.do" />
+			<acme:textbox code="tournament.otherSportCenter"
+				path="otherSportCenter" />
 		</security:authorize>
-	</div>
-</form:form>
+
+		<security:authorize access="hasRole('CUSTOMER')">
+			<br>
+			<acme:textbox code="tournament.place" path="place" readonly="true" />
+		</security:authorize>
 
 
+		<div class="col-xs-12">
+			<security:authorize access="hasRole('CUSTOMER')">
+				<br>
+				<acme:submit code="tournament.save" name="saveTC" />
 
+				<jstl:if test="${tournamentForm.id != 0 and matches.size()==0}">
+					<input type="submit" class="btn btn-md btn-danger" name="deleteTC"
+						value="<spring:message code="tournament.delete" />"
+						onclick="return confirm('<spring:message code="tournament.confirm.delete" />')" />
+				</jstl:if>
 
+				<acme:cancel code="tournament.cancel"
+					url="tournament/customer/list.do" />
+			</security:authorize>
+
+			<security:authorize access="hasRole('USER')">
+				<br>
+				<acme:submit code="tournament.save" name="saveTU" />
+
+				<jstl:if test="${tournamentForm.id != 0 and matches.size()==0}">
+					<input type="submit" class="btn btn-md btn-danger" name="deleteTU"
+						value="<spring:message code="tournament.delete" />"
+						onclick="return confirm('<spring:message code="tournament.confirm.delete" />')" />
+				</jstl:if>
+
+				<acme:cancel code="tournament.cancel" url="tournament/user/list.do" />
+			</security:authorize>
+		</div>
+	</form:form>
+</jstl:if>

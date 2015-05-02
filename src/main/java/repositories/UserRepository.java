@@ -5,6 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import domain.Tournament;
 import domain.User;
 @Repository
 public interface UserRepository extends JpaRepository<User, Integer> {
@@ -17,6 +18,9 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 	
 	@Query("select e.users from Event e where e.id=?1")
 	Collection<User> findAllUsersByEventId(int eventId);
+	
+	@Query("select e.tournamentsCreated from User e where e.id=?1")
+	Collection<Tournament> findAllTournaments(int id);
 	
 	
 }

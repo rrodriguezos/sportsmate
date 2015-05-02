@@ -99,7 +99,7 @@ public class TournamentService {
 	}
 
 	public void save(Tournament tournament) {
-
+		System.out.println("entra en el save");
 		User owner;
 		Customer customer = customerService.findOneFromPlaceString(tournament
 				.getPlace());
@@ -272,7 +272,7 @@ public class TournamentService {
 		String nameCenter;
 
 		allCustomers = customerService.findAll();
-		String alternativePlace = "----------";
+		String alternativePlace = "Other";
 		allPlaces.add(alternativePlace);
 		for (Customer c : allCustomers) {
 			nameCenter = c.getNameCenter();
@@ -287,7 +287,7 @@ public class TournamentService {
 		TournamentForm result;
 
 		result = new TournamentForm();
-
+		result.setUserFee(tournament.getUserFee());
 		result.setId(tournament.getId());
 		result.setTitle(tournament.getTitle());
 		result.setAdvertised(tournament.isAdvertised());
@@ -296,12 +296,12 @@ public class TournamentService {
 		result.setDescription(tournament.getDescription());
 		result.setNumberOfTeams(tournament.getNumberOfTeams());
 		result.setSport(tournament.getSport());
-		result.setPlace(tournament.getPlace());
 		result.setPrize(tournament.getPrize());
 		if (tournament.getUser() instanceof User) {
 			result.setUser(tournament.getUser());
 		} else if (tournament.getCustomer() instanceof Customer) {
 			result.setCustomer(tournament.getCustomer());
+			result.setPlace(tournament.getPlace());
 		}
 
 		return result;
@@ -309,7 +309,14 @@ public class TournamentService {
 	}
 
 	public Tournament reconstruct(TournamentForm tournamentForm) {
-
+		if (userService.findByPrincipal() != null) {
+			if ((!tournamentForm.getPlace().equals("Other") && tournamentForm
+					.getOtherSportCenter().length() > 0)
+					|| (tournamentForm.getPlace().equals("Other") && tournamentForm
+							.getOtherSportCenter().length() == 0)) {
+				throw new IllegalArgumentException("PACO");
+			}
+		}
 		Tournament tournament;
 
 		if (tournamentForm.getId() != 0) {
@@ -328,7 +335,7 @@ public class TournamentService {
 		tournament.setDescription(tournamentForm.getDescription());
 		tournament.setNumberOfTeams(tournamentForm.getNumberOfTeams());
 		tournament.setSport(tournamentForm.getSport());
-
+		tournament.setUserFee(tournamentForm.getUserFee());
 		if (tournament.getUser() instanceof User) {
 			if (tournamentForm.getOtherSportCenter() != "") {
 				tournament.setPlace(tournamentForm.getOtherSportCenter());

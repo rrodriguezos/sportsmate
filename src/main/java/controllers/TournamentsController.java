@@ -49,9 +49,11 @@ public class TournamentsController extends AbstractController {
 				tournaments.add(a);
 			}
 		}
-
-		userTournaments = tournamentService.findAllTournamentByPrincipal();
-
+		if (userService.findByPrincipal() != null) {
+			userTournaments = tournamentService.findAllTournamentByPrincipal();
+		} else {
+			userTournaments = tournaments;
+		}
 		result = new ModelAndView("tournament/listAll");
 		result.addObject("tournaments", tournaments);
 		result.addObject("showJoin", showJoin);

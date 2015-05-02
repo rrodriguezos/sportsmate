@@ -6,6 +6,7 @@ import java.util.Date;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.Valid;
+import javax.validation.constraints.Digits;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
@@ -29,7 +30,7 @@ public class TournamentForm {
 	private String place;
 	private int numberOfTeams;
 	private Double prize;
-
+	private Double userFee;
 	private Customer customer;
 	private User user;
 	private Collection<Team> teams;
@@ -163,6 +164,16 @@ public class TournamentForm {
 
 	public void setTeams(Collection<Team> teams) {
 		this.teams = teams;
+	}
+
+	@Min(0)
+	@Digits(fraction = 2, integer = 4)
+	public Double getUserFee() {
+		return userFee;
+	}
+
+	public void setUserFee(Double userFee) {
+		this.userFee = userFee;
 	}
 
 }

@@ -58,12 +58,37 @@
 				<b><spring:message code="tournament.numberOfTeams" />: </b>
 				<jstl:out value="${tournament.numberOfTeams}" />
 			</div>
-
+			<div>
+				<b><spring:message code="tournament.fee" />: </b>
+							<spring:message code="tournament.fee" var="feeHeader" />
+							<jstl:out value="${tournament.userFee}" />
+			</div>
 			<div>
 				<b><spring:message code="tournament.prize" />: </b>
 				<jstl:out value="${tournament.prize}" />
 			</div>
+			<jstl:if test="${tournament.customer!=null}">
+				<div>
+					<b><spring:message code="tournament.place" />: </b>
+					<spring:message code="tournament.place" var="placeHeader" />
+					<jstl:out value="${tournament.customer.nameCenter}"></jstl:out>
+				</div>
+				<div>
+					<b><spring:message code="tournament.placeplace" />: </b>
+					<spring:message code="tournament.placeplace" var="placeHeader" />
+					<jstl:out value="${tournament.customer.street}"></jstl:out>
+					,
+					<jstl:out value="${tournament.customer.city}"></jstl:out>
+				</div>
 
+			</jstl:if>
+			<jstl:if test="${tournament.customer==null}">
+				<div>
+					<b><spring:message code="tournament.placeplace" />: </b>
+					<spring:message code="tournament.placeplace" var="placeHeader" />
+					<jstl:out value="${tournament.place}"></jstl:out>
+				</div>
+			</jstl:if>
 			<div>
 				<b><spring:message code="tournament.advertised" />: </b>
 				<jstl:if test="${tournament.advertised==true}">

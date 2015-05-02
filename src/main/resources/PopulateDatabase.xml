@@ -784,6 +784,7 @@
 		<property name="advertised" value="true" />
 		<property name="sport" value="PADDLE" />
 		<property name="numberOfTeams" value="8" />
+		<property name="userFee" value="5.3" />
 		<property name="prize" value="100" />
 		<property name="place" value="IndorClub" />
 		<property name="user" ref="user1" />
@@ -808,6 +809,7 @@
 		<property name="sport" value="PADDLE" />
 		<property name="numberOfTeams" value="8" />
 		<property name="prize" value="100" />
+		<property name="userFee" value="25.2" />
 		<property name="place" value="IndorClub" />
 		<property name="user" ref="user1" />
 		<property name="customer" ref="customer1" />
@@ -831,6 +833,7 @@
 		<property name="sport" value="TENNIS" />
 		<property name="numberOfTeams" value="6" />
 		<property name="prize" value="50" />
+		<property name="userFee" value="58.3" />
 		<property name="place" value="IndorClub" />
 		<property name="user" ref="user2" />
 		<property name="customer" ref="customer1" />
