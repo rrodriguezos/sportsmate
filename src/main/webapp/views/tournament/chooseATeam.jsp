@@ -21,6 +21,8 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
+<br>
+
 <form:form action="${requestURI}" modelAttribute="tournamentForm">
 
 <div class="col-xs-12 col-md-9">
