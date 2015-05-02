@@ -83,9 +83,7 @@ public class EventService {
 
 		if (actor instanceof User) {
 
-			owner = (User) actor;
-			
-			Assert.isTrue(owner.getEventsCreated().size()== 5);			
+			owner = (User) actor;				
 
 			event.setOwner(owner);
 			users.add(owner);
@@ -140,7 +138,10 @@ public class EventService {
 			if (event.getId() == 0) {
 				owner.getEventsCreated().add(aux);
 				owner.getEvents().add(aux);
-			}
+			}			
+
+			Assert.isTrue(owner.getEventsCreated().size()== 5);		
+			
 			userService.save(owner);
 
 		} else if (actorService.findByPrincipal() instanceof Customer) {
@@ -294,11 +295,9 @@ public class EventService {
 
 		Set<String> all;
 		Collection<Customer> customers;
-		Collection<Event> events;
 		
 		all = new HashSet<String>();
 		customers = customerService.findAll();
-		events = findAll();
 		
 		for(Customer itero : customers){
 			

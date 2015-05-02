@@ -215,8 +215,12 @@ public class EventUserController extends AbstractController {
 				result = new ModelAndView("redirect:list.do");
 
 			} catch (Throwable oops) {
-
-				result = createEditModelAndView(eventForm, "event.commit.error");
+				if(oops instanceof IllegalArgumentException){
+					result = createEditModelAndView(eventForm, "event.commit.maxEvent");
+					
+				}else{
+					result = createEditModelAndView(eventForm, "event.commit.error");
+				}				
 			}
 		}
 

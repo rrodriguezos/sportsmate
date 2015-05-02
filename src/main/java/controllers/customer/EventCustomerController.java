@@ -1,5 +1,6 @@
 package controllers.customer;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 
@@ -65,10 +66,17 @@ public class EventCustomerController extends AbstractController{
 	public ModelAndView listAllEvents() {
 
 		ModelAndView result;
+		Collection<Event> all;
 		Collection<Event> events;
 		
-		events = eventService.findAll();
+		all = eventService.findAll();
+		events = new ArrayList<Event>();
 		
+		for(Event itero : all){
+			if(itero.getStartMoment().before(new Date()) || itero.getFinishMoment().before(new Date())){
+				events.add(itero);
+			}
+		}		
 
 		result = new ModelAndView("event/list");
 
