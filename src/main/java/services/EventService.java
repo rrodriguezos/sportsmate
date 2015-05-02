@@ -104,6 +104,7 @@ public class EventService {
 		event.setCreationMoment(creationMoment);
 		event.setNumberMaxParticipant(2);
 		event.setUsers(users);
+		event.setPrice(0.0);
 
 		return event;
 
@@ -130,14 +131,16 @@ public class EventService {
 		Assert.isTrue(event.getStartMoment().after(startMoment));
 		Assert.isTrue(event.getFinishMoment().after(event.getStartMoment()));
 
-		aux = eventRepository.save(event);
+
+		aux = eventRepository.save(event);	
 
 		if (actorService.findByPrincipal() instanceof User) {
 
 			owner = (User) actorService.findByPrincipal();
-			Assert.isTrue(owner.getEventsCreated().size()<5);
+			
 			
 			if (event.getId() == 0) {
+				Assert.isTrue(owner.getEventsCreated().size()<5);
 				owner.getEventsCreated().add(aux);
 				owner.getEvents().add(aux);
 			}		
@@ -326,6 +329,7 @@ public class EventService {
 		result.setSport(event.getSport());
 		result.setPlace(event.getPlace());
 		result.setAddress(event.getAddress());
+		result.setPrice(event.getPrice());
 		
 		if (event.getOwner() instanceof User) {
 			result.setOwner(event.getOwner());
@@ -381,6 +385,8 @@ public class EventService {
 		if (event.getCustomer() instanceof Customer) {
 			event.setPlace(eventForm.getPlace());
 		}
+		
+		event.setPrice(eventForm.getPrice());
 
 		return event;
 

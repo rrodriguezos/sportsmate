@@ -91,6 +91,10 @@
 	<acme:textbox code="event.numberMaxParticipant"
 		path="numberMaxParticipant" />
 	<br />	
+	
+	<acme:textbox code="event.price"
+		path="price" />
+	<br />	
 
 	<!-- Buttons -->
 	

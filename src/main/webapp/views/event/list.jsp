@@ -52,6 +52,12 @@
 					</div>
 					
 					<div>
+						<b><spring:message code="event.price" />: </b>
+						<spring:message code="event.price" var="priceHeader" />
+						<jstl:out value="${row.price}"></jstl:out>
+					</div>
+					
+					<div>
 						<b><spring:message code="event.numberMaxParticipant" />: </b>
 						<spring:message code="event.numberMaxParticipant" var="numberMaxParticipantHeader" />
 						<jstl:out value="${row.numberMaxParticipant}"></jstl:out>
