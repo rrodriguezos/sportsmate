@@ -25,9 +25,7 @@
 	<display:table name="tournaments" id="row" requestURI="${requestURI}"
 		pagesize="5" class="">
 
-		<display:column property="sport" sortable="true">
-
-		</display:column>
+		<display:column property="sport" sortable="true"></display:column>
 
 		<display:column>
 
@@ -39,16 +37,41 @@
 				</div>
 
 				<div class="well well-sm col-xs-12 spm-no-margin-bottom">
-					<div class="col-xs-12 col-md-4">
+					<div class="col-xs-12 col-md-5">
 						<div>
 							<b><spring:message code="tournament.startMoment" />: </b>
 							<spring:message code="tournament.startMoment"
 								var="startMomentHeader" />
 							<jstl:out value="${row.startMoment}"></jstl:out>
 						</div>
+						
+						<div>
+							<jstl:if test="${row.customer!=null}">
+								<div>
+									<b><spring:message code="tournament.place" />: </b>
+									<spring:message code="tournament.place" var="placeHeader" />
+									<jstl:out value="${row.customer.nameCenter}"></jstl:out>
+								</div>
+								<div>
+									<b><spring:message code="tournament.placeplace" />: </b>
+									<spring:message code="tournament.placeplace" var="placeHeader" />
+									<jstl:out value="${row.customer.street}"></jstl:out>
+									,
+									<jstl:out value="${row.customer.city}"></jstl:out>
+								</div>
+	
+							</jstl:if>
+							<jstl:if test="${row.customer==null}">
+								<div>
+									<b><spring:message code="tournament.placeplace" />: </b>
+									<spring:message code="tournament.placeplace" var="placeHeader" />
+									<jstl:out value="${row.place}"></jstl:out>
+								</div>
+							</jstl:if>
+						</div>
 					</div>
 
-					<div class="col-xs-12 col-md-3">
+					<div class="col-xs-12 col-md-4">
 						<div>
 							<b><spring:message code="tournament.sport" />: </b>
 							<spring:message code="tournament.sport" var="sportHeader" />
@@ -86,71 +109,49 @@
 							<jstl:out value="${row.prize}" />
 						</div>
 					</div>
-					<div>
-						<jstl:if test="${row.customer!=null}">
-							<div>
-								<b><spring:message code="tournament.place" />: </b>
-								<spring:message code="tournament.place" var="placeHeader" />
-								<jstl:out value="${row.customer.nameCenter}"></jstl:out>
-							</div>
-							<div>
-								<b><spring:message code="tournament.placeplace" />: </b>
-								<spring:message code="tournament.placeplace" var="placeHeader" />
-								<jstl:out value="${row.customer.street}"></jstl:out>
-								,
-								<jstl:out value="${row.customer.city}"></jstl:out>
-							</div>
-
-						</jstl:if>
-						<jstl:if test="${row.customer==null}">
-							<div>
-								<b><spring:message code="tournament.placeplace" />: </b>
-								<spring:message code="tournament.placeplace" var="placeHeader" />
-								<jstl:out value="${row.place}"></jstl:out>
-							</div>
-						</jstl:if>
-					</div>
 				</div>
-
-				<div class="row">
-					<div class="col-xs-12 spm-button-list">
+				
+	<!-- HERE STARTS BUTTON SECTION -->
+				
+				<div class="row spm-spacing-list">
+					<div class="col-xs-12 col-sm-3">
 						<spring:message code="tournament.display" var="displayHeader" />
 
 						<security:authorize access="hasRole('USER')">
 							<a href="tournament/user/display.do?tournamentId=${row.id}">
-								<button type="button" class="btn btn-md btn-default col-xs-2">
-									<spring:message code="tournament.display" />
-								</button>
-							</a>
-						</security:authorize>
-
-						<security:authorize access="hasRole('CUSTOMER')">
-							<a href="tournament/customer/display.do?tournamentId=${row.id}">
-								<button type="button" class="btn btn-md btn-default col-xs-2">
+								<button type="button" class="btn btn-md btn-default col-xs-12 spm-events-button">
 									<spring:message code="tournament.display" />
 								</button>
 							</a>
 						</security:authorize>
 					</div>
+					
+						<security:authorize access="hasRole('CUSTOMER')">
+						<div class="col-xs-12 col-sm-3">
+							<a href="tournament/customer/display.do?tournamentId=${row.id}">
+								<button type="button" class="btn btn-md btn-default col-xs-12 spm-events-button">
+									<spring:message code="tournament.display" />
+								</button>
+							</a>
+						</div>
+						</security:authorize>
+						
+						<jstl:if test="${showDisjoin == true}">
+							<security:authorize access="hasRole('USER')">
+							<div class="col-xs-12 col-sm-5 col-md-4">
+								<spring:message code="tournament.disjoin" var="Disjoin" />
+									<a href="tournament/user/disjoinATeamToTournament.do?tournamentId=${row.id }">
+										<button class="btn btn-md btn-warning col-xs-12 spm-events-button">
+											<jstl:out value="${Disjoin }"></jstl:out>
+										</button>
+									</a>
+							</div>
+							</security:authorize>
+						</jstl:if>
+					
 				</div>
 			</div>
 		</display:column>
-
-
-
-		<jstl:if test="${showDisjoin == true}">
-			<security:authorize access="hasRole('USER')">
-				<display:column title="${Disjoin }">
-					<spring:message code="tournament.disjoin" var="Disjoin" />
-					<a
-						href="tournament/user/disjoinATeamToTournament.do?tournamentId=${row.id }">
-						<button class="btn btn-md btn-default col-xs-12">
-							<jstl:out value="${Disjoin }"></jstl:out>
-						</button>
-					</a>
-				</display:column>
-			</security:authorize>
-		</jstl:if>
 
 	</display:table>
 </div>
