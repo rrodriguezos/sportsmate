@@ -15,12 +15,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.ActorService;
+import services.CustomerService;
 import services.EventService;
 import services.UserService;
 import controllers.AbstractController;
 import domain.Actor;
 import domain.Customer;
 import domain.Event;
+import domain.Invoice;
 import domain.User;
 import forms.EventForm;
 
@@ -36,6 +38,9 @@ public class EventCustomerController extends AbstractController{
 	
 	@Autowired
 	private ActorService actorService;
+	
+	@Autowired
+	private CustomerService customerService;
 
 	// Constructors -----------------------------------------------------------
 	public EventCustomerController() {
@@ -217,6 +222,25 @@ public class EventCustomerController extends AbstractController{
 
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public ModelAndView create() {
+		
+		/* for debtors */
+		
+		Customer e = customerService.findByPrincipal();
+		if( e.isDebtor()){
+			
+			ModelAndView result;
+			
+			Collection<Invoice> invoices=customerService.getAllInvoices();
+			
+			result=new ModelAndView("customer/seeInvoices");
+			result.addObject("invoices", invoices);
+			return result;
+		}
+		
+		
+		
+		
+		/* -------------*/
 
 		ModelAndView result;
 		Event event;
