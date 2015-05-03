@@ -42,15 +42,12 @@ public class RegisterUserController extends AbstractController {
 
 		ModelAndView result;
 		User user;
-		UserForm userForm;
 
 		user = userService.findByPrincipal();
-		userForm = userService.construct(user);
 
 		result = new ModelAndView("user/display");
 
 		result.addObject("userImagen", user.isErrorImagen());
-		result.addObject("userForm", userForm);
 		result.addObject("user", user);
 		result.addObject("rating", user.getRating());
 
@@ -112,17 +109,19 @@ public class RegisterUserController extends AbstractController {
 				result = new ModelAndView("redirect:../welcome/index.do");
 
 			} catch (Throwable oops) {
-				System.out.println(oops);
+				
 				if(oops instanceof DataIntegrityViolationException || oops instanceof JpaSystemException){
-					result = createEditModelAndView(userForm,
-							"user.imagen"); 
+					
+					result = createEditModelAndView(userForm, "user.imagen"); 
+					
 				}else if (oops instanceof DataIntegrityViolationException) {
 
-					result = createEditModelAndView(userForm,
-							"user.duplicated.username");
+					result = createEditModelAndView(userForm, "user.duplicated.username");
+					
 				} else {
-					result = createEditModelAndView(userForm,
-							"user.commit.error");
+					
+					result = createEditModelAndView(userForm, "user.commit.error");
+					
 				}
 			}
 		}

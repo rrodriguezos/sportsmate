@@ -59,31 +59,32 @@
 	<jstl:if test="${id == 0}">
 		<form:hidden path="terms"/>
 	</jstl:if>
-		<div class="col-xs-12"> 
-		
-	<div class="row">
-		<div class='col-md-3 spm-profile-picture-div text-center'> 
-			<img src="images/default_profile.jpg" alt="Default profile" class="img-thumbnail .spm-profile-picture" />
-				<br><br>
-			<form:input type="file" id="imagen" path="imagen"/> 
-		</div>
-	</div>
 	
-	<jstl:if test="${userForm.id == 0}">
-		<br>
-		<b><spring:message code="user.terms" /></b>
-		<br>
-			
-		<form:checkbox path="terms" />
-			<a href="conditions/laws.do" target="_blank">
-				<spring:message code="user.conditions"/>
-			</a> 
-	</jstl:if>
+	<div class="col-xs-12"> 
+		
+		<div class="row">
+			<div class='col-md-3 spm-profile-picture-div text-center'> 
+				<img src="images/default_profile.jpg" alt="Default profile" class="img-thumbnail .spm-profile-picture" />
+					<br><br>
+				<form:input type="file" id="imagen" path="imagen"/> 
+			</div>
+		</div>
+	
+		<jstl:if test="${userForm.id == 0}">
+			<br>
+			<b><spring:message code="user.terms" /></b>
+			<br>
+				
+			<form:checkbox path="terms" />
+				<a href="conditions/laws.do" target="_blank">
+					<spring:message code="user.conditions"/>
+				</a> 
+		</jstl:if>
 		<br><br>
 	
-	<acme:submit name="save" code="user.save" />
+		<acme:submit name="save" code="user.save" />
 	
-	<acme:cancel url="welcome/index.do" code="user.cancel" />
+		<acme:cancel url="welcome/index.do" code="user.cancel" />
 	</div>
 	</form:form>
 	
