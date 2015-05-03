@@ -26,8 +26,6 @@
 	<display:table name="events" id="row" requestURI="${requestURI}"
 		pagesize="5" class="spm-events-table">
 		
-		<!-- Espacio  spm-spacing-list -->
-		
 		<display:column>
 		<div class="col-xs-12 spm-event-header-spacing">
 			<div class="alert alert-success spm-no-margin-bottom col-xs-12">
@@ -86,7 +84,6 @@
 			<spring:message code="event.display" var="displayHeader" />
 
 		</div>
-		
 		</display:column>
 		
 		
@@ -96,28 +93,28 @@
 		<display:column title="${join }">
 		
 		<div class="col-xs-5 col-sm-3 spm-events-button">
+			
+			<!-- FULL MESSAGE -->
 			<jstl:if test="${row.users.size() == row.numberMaxParticipant }">
-			<span class="col-xs-12 bg-danger spm-event-full text-center">
-				<spring:message code="event.full" var="full"/>
-				<jstl:out value="${full }"></jstl:out>
-			</span>
+				<span class="col-xs-12 bg-danger spm-event-full text-center">
+					<spring:message code="event.full" var="full"/>
+					<jstl:out value="${full }"></jstl:out>
+				</span>
 			</jstl:if>
 
 			<jstl:set var="contains" value="false" />
 
 			<jstl:if test="${userEvents.size() > 0 }">
-
 				<jstl:forEach var="item" items="${userEvents}">
-
 					<jstl:if test="${item.id eq row.id}">
 						<jstl:set var="contains" value="true" />
-
 					</jstl:if>
 				</jstl:forEach>
-
 			</jstl:if>
 
 			<jstl:if test="${row.users.size() < row.numberMaxParticipant }">
+				
+				<!-- JOIN BUTTON -->
 				<jstl:if test="${contains == false}">
 					<spring:message code="event.join" var="join" />
 					<a href="event/user/joinEvent.do?eventId=${row.id }">
@@ -127,22 +124,18 @@
 					</a>
 				</jstl:if>
 			
-
-			<jstl:if test="${contains == true}">
-				
-				<span class="col-xs-12 bg-success spm-event-joined text-center">
-					<spring:message code="event.joined" var="joined" />
-					<jstl:out value="${joined }"></jstl:out>
-				</span>
-			</jstl:if>
+				<!-- JOINED MESSAGE -->
+				<jstl:if test="${contains == true}">	
+					<span class="col-xs-12 bg-success spm-event-joined text-center">
+						<spring:message code="event.joined" var="joined" />
+						<jstl:out value="${joined }"></jstl:out>
+					</span>
+				</jstl:if>
 			</jstl:if>
 		
 		</div>
 		</display:column>
 		</jstl:if>
-
-	
-
 	</display:table>
 	
 </div>
