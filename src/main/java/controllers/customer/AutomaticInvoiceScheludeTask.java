@@ -69,7 +69,8 @@ public class AutomaticInvoiceScheludeTask {
 	        		}
 	        		
 	        	}else{//aun no esta pagada, por lo tango no podemos generar otra factura hasta que pague
-	        		
+	        		/* le asignamos que es un deudor */
+	        		e.setDebtor(true);
 	        		
 	        		
 	        	}
@@ -84,6 +85,7 @@ public class AutomaticInvoiceScheludeTask {
         			newInvoiceToSave.setDeadLine(deadLine);
         			newInvoiceToSave.setFee(15.0);
         			invoiceService.save(newInvoiceToSave);
+        			e.setDebtor(true);
 	        		
 	        	}catch (Throwable e2) {
 	        		System.out.println("usuario con id: "+ e.getId()+ "no tiene facturas creadas (nuevo usuario?)");
