@@ -63,16 +63,16 @@
 	<div class="col-xs-12"> 
 		
 		<div class="row">
-			<div class='col-md-3 spm-profile-picture-div text-center'> 
-				<img src="images/default_profile.jpg" alt="Default profile" class="img-thumbnail .spm-profile-picture" />
+			<div class='spm-profile-picture-div text-left'> 
+				<img src="images/default_profile.jpg" alt="Default profile" class="img-thumbnail spm-profile-picture-static" />
 					<br><br>
-				<form:input type="file" id="imagen" path="imagen"/> 
+				<form:input type="file" id="imagen" path="imagen" class="col-xs-12"/> 
 			</div>
 		</div>
 	
 		<jstl:if test="${userForm.id == 0}">
 			<br>
-			<b><spring:message code="user.terms" /></b>
+				<b><spring:message code="user.terms" /></b>
 			<br>
 				
 			<form:checkbox path="terms" />

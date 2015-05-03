@@ -327,6 +327,13 @@ span.pagelinks {
 	height: auto;
 }
 
+.spm-profile-picture-static{
+	max-width: 200px;
+	min-width: 150px;
+	height: auto;
+	margin-left: 15px;
+}
+
 .spm-message-fixing{
 	padding-top: 10px;
 }

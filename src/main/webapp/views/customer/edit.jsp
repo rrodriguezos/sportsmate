@@ -62,17 +62,17 @@
 	
 	</fieldset>
 	
-<!-- IGNORE THE WARNING, IT'S BEACUSE THE <FORM> -->	
+
 	<jstl:if test="${id == 0}">
 		<form:hidden path="terms"/>
 	</jstl:if>
 	
 	<div class="col-xs-12">
 		<div class="row">
-			<div class='col-md-3 spm-profile-picture-div text-center'> 
-				<img src="images/default_profile.jpg" alt="Default profile" class="img-thumbnail .spm-profile-picture" />
+			<div class='spm-profile-picture-div text-left'> 
+				<img src="images/default_profile.jpg" alt="Default profile" class="img-thumbnail spm-profile-picture-static" />
 					<br><br>
-				<form:input type="file" id="imagen" path="imagen"/> 
+				<form:input type="file" id="imagen" path="imagen" class="col-xs-12"/> 
 			</div>
 		</div>
 		
