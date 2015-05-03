@@ -115,17 +115,19 @@
 	<!-- HERE STARTS BUTTON SECTION -->
 				
 				<div class="row spm-spacing-list">
-					<div class="col-xs-12 col-sm-3">
+					
 						<spring:message code="tournament.display" var="displayHeader" />
 
 						<security:authorize access="hasRole('USER')">
+						<div class="col-xs-12 col-sm-3">
 							<a href="tournament/user/display.do?tournamentId=${row.id}">
 								<button type="button" class="btn btn-md btn-default col-xs-12 spm-events-button">
 									<spring:message code="tournament.display" />
 								</button>
 							</a>
+						</div>
 						</security:authorize>
-					</div>
+					
 					
 						<security:authorize access="hasRole('CUSTOMER')">
 						<div class="col-xs-12 col-sm-3">
