@@ -390,15 +390,20 @@ public class EventUserController extends AbstractController {
 		ModelAndView result;
 		Event event;
 		Collection<Event> events;
+		User principal;
+		Boolean showdisjoin = true;
 		
 
 		event = eventService.findOne(eventId);
 		eventService.DisjoinEvent(event);
-		events = eventService.findAll();
+		events = eventService.findAllEventsJoinUser();
+		principal = userService.findByPrincipal();
 
 		result = new ModelAndView("event/list");
 
 		result.addObject("events", events);
+		result.addObject("principal", principal);
+		result.addObject("showdisjoin", showdisjoin);
 		result.addObject("requestURI", "event/user/list.do");
 
 		return result;

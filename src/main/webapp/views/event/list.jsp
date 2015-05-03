@@ -139,7 +139,7 @@
 
 		<jstl:if test="${showdisjoin == true}">
 			<jstl:if test="${row.users.contains(principal)}">
-				<display:column title="${join }">
+				<display:column title="${disjoin }">
 					<div class="col-xs-5 col-sm-3 spm-events-button">
 						<!-- DISJOIN BUTTON -->
 						<spring:message code="event.disjoin" var="disjoin" />
