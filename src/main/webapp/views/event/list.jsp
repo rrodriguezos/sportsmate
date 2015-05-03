@@ -40,13 +40,13 @@
 					<div>
 						<b><spring:message code="event.startMoment" />: </b>
 						<spring:message code="event.startMoment" var="startMomentHeader" />
-						<jstl:out value="${row.startMoment}"></jstl:out>
+						<fmt:formatDate value="${row.startMoment}" pattern="dd/MM/yyyy HH:mm" />
 					</div>
 				
 					<div>
 						<b><spring:message code="event.finishMoment" />: </b>
 						<spring:message code="event.finishMoment" var="finishMomentHeader" />
-						<jstl:out value="${row.finishMoment}"></jstl:out>
+						<fmt:formatDate value="${row.finishMoment}" pattern="dd/MM/yyyy HH:mm" />
 					</div>
 					
 					<div>
@@ -123,7 +123,7 @@
 						</button>
 					</a>
 				</jstl:if>
-			
+				
 				<!-- JOINED MESSAGE -->
 				<jstl:if test="${contains == true}">	
 					<span class="col-xs-12 bg-success spm-event-joined text-center">
@@ -136,7 +136,26 @@
 		</div>
 		</display:column>
 		</jstl:if>
+
+		<jstl:if test="${showdisjoin == true}">
+			<jstl:if test="${row.users.contains(principal)}">
+				<display:column title="${join }">
+					<div class="col-xs-5 col-sm-3 spm-events-button">
+						<!-- DISJOIN BUTTON -->
+						<spring:message code="event.disjoin" var="disjoin" />
+						<a href="event/user/disjoinEvent.do?eventId=${row.id }">
+							<button class="btn btn-md btn-warning col-xs-12">
+								<jstl:out value="${disjoin }"></jstl:out>
+							</button>
+						</a>
+					</div>
+				</display:column>
+			</jstl:if>
+		</jstl:if>
+
 	</display:table>
+	
+	
 	
 </div>
 

@@ -246,18 +246,26 @@ public class EventService {
 	
 	public Collection<Event> findAllEventsJoinUser(){
 		Collection<Event> all;
+		Collection<Event> createdByUser;
 		Collection<Event> myEvents;
 		User user;
 		
 		all = findAll();
 		user = userService.findByPrincipal();
 		myEvents = new ArrayList<Event>();
+		createdByUser = eventRepository.findAllEventsCreatedByUserId(user.getId());
 		
 		for(Event itero : all){
 			if(itero.getUsers().contains(user)){
 				myEvents.add(itero);
 			}
-		}				
+		}
+		
+		for(Event itero : createdByUser){
+			if(!myEvents.contains(itero)){
+				myEvents.add(itero);
+			}
+		}
 		
 		return myEvents;
 	}

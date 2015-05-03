@@ -14,6 +14,7 @@ import org.springframework.util.Assert;
 import repositories.TournamentRepository;
 import domain.Actor;
 import domain.Customer;
+import domain.Event;
 import domain.Tournament;
 import domain.Match;
 import domain.Team;
@@ -417,9 +418,31 @@ public class TournamentService {
 	}
 
 	public Collection<Tournament> findAllTournamentByUser() {
-		return tournamentRepository
-				.findAllTournamentsCreatedByUserId(userService
-						.findByPrincipal().getId());
+		Collection<Tournament> all;
+		Collection<Tournament> createdByUser;
+		Collection<Tournament> myTournaments;
+		User user;
+		
+		all = findAll();
+		user = userService.findByPrincipal();
+		myTournaments = new ArrayList<Tournament>();
+		createdByUser = tournamentRepository.findAllTournamentsCreatedByUserId(user.getId());
+		
+		for (Tournament itero : all) {
+			for (Team t : user.getTeams()) {
+				if (itero.getTeams().contains(t)) {
+					myTournaments.add(itero);
+				}
+			}
+		}
+		
+		for(Tournament itero : createdByUser){
+			if(!myTournaments.contains(itero)){
+				myTournaments.add(itero);
+			}
+		}
+		
+		return myTournaments;
 	}
 
 }

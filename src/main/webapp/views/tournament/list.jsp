@@ -43,7 +43,7 @@
 							<b><spring:message code="tournament.startMoment" />: </b>
 							<spring:message code="tournament.startMoment"
 								var="startMomentHeader" />
-							<jstl:out value="${row.startMoment}"></jstl:out>
+							<fmt:formatDate value="${row.startMoment}" pattern="dd/MM/yyyy HH:mm" />
 						</div>
 						
 						<div>
@@ -139,20 +139,32 @@
 						</div>
 						</security:authorize>
 						
+						<jstl:set var="show" value="false" />
+
+						<jstl:forEach var="team" items="${principal.teams}">
+							<jstl:if test="${row.teams.contains(team)}">
+								<jstl:set var="show" value="true" />
+							</jstl:if>
+						</jstl:forEach>
+
 						<jstl:if test="${showDisjoin == true}">
-							<security:authorize access="hasRole('USER')">
-							<div class="col-xs-12 col-sm-5 col-md-4">
-								<spring:message code="tournament.disjoin" var="Disjoin" />
-									<a href="tournament/user/disjoinATeamToTournament.do?tournamentId=${row.id }">
-										<button class="btn btn-md btn-warning col-xs-12 spm-events-button">
-											<jstl:out value="${Disjoin }"></jstl:out>
-										</button>
-									</a>
-							</div>
-							</security:authorize>
+							<jstl:if test="${show == true}">
+								<security:authorize access="hasRole('USER')">
+									<div class="col-xs-12 col-sm-5 col-md-4">
+										<spring:message code="tournament.disjoin" var="Disjoin" />
+										<a
+											href="tournament/user/disjoinATeamToTournament.do?tournamentId=${row.id }">
+											<button
+												class="btn btn-md btn-warning col-xs-12 spm-events-button">
+												<jstl:out value="${Disjoin }"></jstl:out>
+											</button>
+										</a>
+									</div>
+								</security:authorize>
+							</jstl:if>
 						</jstl:if>
-					
-				</div>
+
+					</div>
 			</div>
 		</display:column>
 

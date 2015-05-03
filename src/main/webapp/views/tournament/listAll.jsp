@@ -44,7 +44,7 @@
 							<b><spring:message code="tournament.startMoment" />: </b>
 							<spring:message code="tournament.startMoment"
 								var="startMomentHeader" />
-							<jstl:out value="${row.startMoment}"></jstl:out>
+							<fmt:formatDate value="${row.startMoment}" pattern="dd/MM/yyyy HH:mm" />
 						</div>
 						
 						<jstl:if test="${row.customer!=null}">

@@ -49,13 +49,16 @@ public class TournamentUserController extends AbstractController {
 		ModelAndView result;
 		Collection<Tournament> tournaments;
 		Boolean showDisjoin = true;
+		User principal;
 
 		tournaments = tournamentService.findAllTournamentByUser();
-
+		principal = userService.findByPrincipal();
+		
 		result = new ModelAndView("tournament/list");
 
 		result.addObject("tournaments", tournaments);
 		result.addObject("showDisjoin", showDisjoin);
+		result.addObject("principal", principal);
 		result.addObject("requestURI", "tournament/user/list.do");
 
 		return result;
@@ -285,7 +288,7 @@ public class TournamentUserController extends AbstractController {
 
 		tournament = tournamentService.findOneToJoin(tournamentId);
 		tournamentService.DisjoinTournament(tournament);
-		tournaments = tournamentService.findAllTournamentByPrincipal();
+		tournaments = tournamentService.findAllTournamentByUser();
 
 		result = new ModelAndView("tournament/list");
 
