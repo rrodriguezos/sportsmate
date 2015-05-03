@@ -63,7 +63,7 @@ public class TournamentUserRoundsController
 			tournaments=(List<Tournament>) tournamentService.findAllTournamentsCreatedByUserId();
 		}
 		
-		Tournament tournament=tournaments.get(1);
+		Tournament tournament=tournaments.get(3);
 		
 		String [] abecedario = {"A", "B", "C", "D", "E", "F", "G", "H", "I", "J",
 				"K", "L", "M","N","O","P","Q","R","S","T","U","V","W", "X","Y","Z" };
@@ -93,7 +93,7 @@ public class TournamentUserRoundsController
 		teams.add(team);
 		
 		tournament.setTeams(teams);
-		teamService.save(team);
+		//teamService.save(team);
 		tournamentService.save(tournament);
 		
 		return null;
@@ -120,7 +120,7 @@ public class TournamentUserRoundsController
 				match.setDescription(".");
 				match.setFinishMoment(new Date(new Date().getTime()+604800000));
 				match.setStartMoment(new Date());
-				match.setTitle("Match");
+				
 				match.setTournament(tournament);
 				List<Team> teams=(List<Team>) tournament.getTeams();
 				Collection<Team> teams1=new ArrayList<Team>();
@@ -141,14 +141,14 @@ public class TournamentUserRoundsController
 				match.setPlayed(false);
 				matchs.add(match);
 				
-			
+				match.setTitle("Match "+ i+1 + " "+ teams.get(i).getName()+ "vs "+ teams.get(i+1).getName());
 				
 				tournament.setMatches(matchs);
 				
 				
 				tournamentService.save(tournament);
-				teamService.save(team1);
-				teamService.save(team2);
+				//teamService.save(team1);
+				//teamService.save(team2);
 				matchService.save(match);
 
 				
@@ -262,7 +262,7 @@ public class TournamentUserRoundsController
 			result.addObject("AllTeamC", false);
 			
 			return result;
-			}
+		}
 		
 		
 			for (Match a : tournament.getMatches()){
@@ -313,6 +313,7 @@ public class TournamentUserRoundsController
 				int result1 = Collections.frequency(winners, a);
 				if( result1 > counter){
 					counter= result1;
+					needRounds=true;
 					
 				}else if( result1 == counter){
 					
@@ -379,8 +380,8 @@ public class TournamentUserRoundsController
 		
 		
 		matchService.save(match);
-		teamService.save(team);
-		teamService.save(team2);
+		//teamService.save(team);
+		//teamService.save(team2);
 		
 		
 		

@@ -47,7 +47,7 @@ pagesize="5" class="table table-bordered table-hover" >
 		
 		<jstl:forEach items="${row.matches }" var="a">
 			
-			<jstl:out value="a.title"></jstl:out>
+			<jstl:out value="${ a.title} "></jstl:out>
 		
 		</jstl:forEach>
 	
