@@ -196,6 +196,7 @@
 									code="master.page.user.listPaddleEvents" /></a></li>
 						<li><a href="event/user/listOtherEvents.do"><spring:message
 									code="master.page.user.listOtherEvents" /></a></li>
+						<li class='divider'></li>
 						<li><a href="event/user/list.do"><spring:message
 									code="master.page.user.events" /></a></li>
 						<li><a href="event/user/create.do"><spring:message
