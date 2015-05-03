@@ -1,14 +1,20 @@
 package controllers;
 
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.orm.jpa.JpaSystemException;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.ServletRequestDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.support.ByteArrayMultipartFileEditor;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.CustomerService;
@@ -40,6 +46,7 @@ public class RegisterCustomerController extends AbstractController {
 
 		result = new ModelAndView("customer/display");
 
+		result.addObject("customerImagen", customer.isErrorImagen());
 		result.addObject("customer", customer);
 		result.addObject("rating", customer.getRating());
 
@@ -87,11 +94,6 @@ public class RegisterCustomerController extends AbstractController {
 		ModelAndView result;
 		Customer customer;
 
-//		if (bindingResult.hasErrors() ||customerForm.getUsername().length() <= 3) {
-//			if (customerForm.getUsername().length() <= 3) {
-//				result = createEditModelAndView(customerForm,
-//						"register.commit.penemuychico");
-//			}
 		if (bindingResult.hasErrors() ) {
 			
 			result = createEditModelAndView(customerForm);
@@ -106,18 +108,18 @@ public class RegisterCustomerController extends AbstractController {
 				result = new ModelAndView("redirect:../welcome/index.do");
 
 			} catch (Throwable oops) {
-				if (oops instanceof DataIntegrityViolationException) {
+				if(oops instanceof DataIntegrityViolationException || oops instanceof JpaSystemException){
+					
+					result = createEditModelAndView(customerForm, "customer.imagen"); 
+					
+				}else if (oops instanceof DataIntegrityViolationException) {
 
-					result = createEditModelAndView(customerForm,
-							"customer.duplicated.username");
+					result = createEditModelAndView(customerForm, "customer.duplicated.username");
 				}
-//				if (customerForm.getUsername().length() <= 3) {
-//					result = createEditModelAndView(customerForm,
-//							"register.commit.penemuychico");
-//				} 
+
 				else {
-					result = createEditModelAndView(customerForm,
-							"customer.commit.error");
+					
+					result = createEditModelAndView(customerForm, "customer.commit.error");
 				}
 			}
 		}
@@ -145,5 +147,14 @@ public class RegisterCustomerController extends AbstractController {
 		result.addObject("message", message);
 
 		return result;
+	}
+	
+	@InitBinder
+	protected void initBinder(HttpServletRequest request, 
+							  ServletRequestDataBinder binder) throws ServletException 
+	{
+		
+		binder.registerCustomEditor(byte[].class, new ByteArrayMultipartFileEditor());
+	
 	}
 }

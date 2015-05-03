@@ -1,8 +1,5 @@
 package services;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
@@ -46,9 +43,7 @@ public class UserService {
 	@Autowired
 	private FolderService folderService;
 	
-	@Autowired
-	private ActorService actorService;
-
+	
 	// Constructor ------------------------------------------------------------
 	public UserService() 
 	{
@@ -143,50 +138,37 @@ public class UserService {
 		
 		if(user.getId() == 0){
 
-		folders = new ArrayList<Folder>();
-
-		
-		password = user.getUserAccount().getPassword();
-		passwordCoded = HashPassword.encode(password);
-
-		userUserAccount = user.getUserAccount();
-		userUserAccount.setPassword(passwordCoded);
-
-		user.setUserAccount(userUserAccount);
-
-		inbox = folderService.create(user, "Inbox");
-		outbox = folderService.create(user, "Outbox");
-
-		folders.add(inbox);
-		folders.add(outbox);
-
-		user.setFolders(folders);
-		
-		byte[] imagen = user.getImagen();
-		
-		try {
-			File a=new File("edwin.png");
-			FileOutputStream file =new FileOutputStream(a);
+			folders = new ArrayList<Folder>();
+	
 			
-			file.write(imagen);
-			System.out.println(a.getAbsolutePath());
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		
-		
-		if (user.getId() != 0 && (imagen.equals(null) || user.getImagen().length==0))
-			user.setImagen(findOne(user.getId()).getImagen());
-
-		result = userRepository.save(user);
-
-		inbox.setActor(result);
-		outbox.setActor(result);
-
-		folderService.save(inbox);
-		folderService.save(outbox);
+			password = user.getUserAccount().getPassword();
+			passwordCoded = HashPassword.encode(password);
+	
+			userUserAccount = user.getUserAccount();
+			userUserAccount.setPassword(passwordCoded);
+	
+			user.setUserAccount(userUserAccount);
+	
+			inbox = folderService.create(user, "Inbox");
+			outbox = folderService.create(user, "Outbox");
+	
+			folders.add(inbox);
+			folders.add(outbox);
+	
+			user.setFolders(folders);
+			
+			byte[] imagen = user.getImagen();
+					
+			if (user.getId() != 0 && (imagen.equals(null) || user.getImagen().length==0))
+				user.setImagen(findOne(user.getId()).getImagen());
+	
+			result = userRepository.save(user);
+	
+			inbox.setActor(result);
+			outbox.setActor(result);
+	
+			folderService.save(inbox);
+			folderService.save(outbox);
 		
 		}else{
 			
@@ -216,7 +198,6 @@ public class UserService {
 		userForm.setSurname(user.getSurname());
 		userForm.setEmail(user.getEmail());
 		userForm.setPhone(user.getPhone());
-
 		userForm.setImagen(user.getImagen());
 
 		return userForm;
@@ -237,13 +218,8 @@ public class UserService {
 		userForm.setName(user.getName());
 		userForm.setSurname(user.getSurname());
 		userForm.setEmail(user.getEmail());
-		userForm.setPhone(user.getPhone());
-		
-//		if(actorService.findImagenOfActorId()== null){
-//			userForm.setImagen(actorService.findImagenOfActorId());
-//		}else{
-			userForm.setImagen(user.getImagen());
-		
+		userForm.setPhone(user.getPhone());		
+		userForm.setImagen(user.getImagen());		
 
 		return userForm;
 		
@@ -257,10 +233,7 @@ public class UserService {
 		if(userForm.getId()!= 0){
 			user = findByPrincipal();
 			user.getUserAccount().setUsername(userForm.getUsername());
-			user.getUserAccount().setPassword(userForm.getPassword());
-			userForm.setTerms(true);//Esta sobra
-			
-			Assert.isTrue(user.getUserAccount().getPassword().equals(userForm.getPassword2()));
+			user.getUserAccount().setPassword(userForm.getPassword());			
 			
 		}else{
 			
@@ -280,6 +253,7 @@ public class UserService {
 			user.setImagen(userForm.getImagen());
 		
 		Assert.isTrue(userForm.getTerms());
+		Assert.isTrue(user.getUserAccount().getPassword().equals(userForm.getPassword2()));
 
 		return user;
 		

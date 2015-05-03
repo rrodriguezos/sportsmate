@@ -8,7 +8,7 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
-<form:form action="customer/edit.do" modelAttribute="customerForm" class="form-horizontal">
+<form:form action="customer/edit.do" modelAttribute="customerForm" class="form-horizontal" method="post" enctype="multipart/form-data">
 
 	<form:hidden path="id"/>
 	
@@ -63,18 +63,33 @@
 	</fieldset>
 	
 <!-- IGNORE THE WARNING, IT'S BEACUSE THE <FORM> -->	
-<div class="col-xs-12">
-
-	<br>	
-	<b><spring:message code="customer.terms" /></b>
-	<br>
+	<jstl:if test="${id == 0}">
+		<form:hidden path="terms"/>
+	</jstl:if>
+	
+	<div class="col-xs-12">
+		<div class="row">
+			<div class='col-md-3 spm-profile-picture-div text-center'> 
+				<img src="images/default_profile.jpg" alt="Default profile" class="img-thumbnail .spm-profile-picture" />
+					<br><br>
+				<form:input type="file" id="imagen" path="imagen"/> 
+			</div>
+		</div>
 		
-	<form:checkbox path="terms" /><a href="conditions/laws.do" target="_blank"><spring:message code="customer.conditions"/></a> 
-
-	<br><br>
+		<jstl:if test="${customerForm.id == 0 }">
+			<br>	
+				<b><spring:message code="customer.terms" /></b>
+			<br>
+		
+			<form:checkbox path="terms" />
+				<a href="conditions/laws.do" target="_blank">
+					<spring:message code="customer.conditions"/>
+				</a> 
+		</jstl:if>
+		<br><br>
 	
-	<acme:submit name="save" code="customer.save" />
-	<acme:cancel url="welcome/index.do" code="customer.cancel" />
+		<acme:submit name="save" code="customer.save" />
 	
+		<acme:cancel url="welcome/index.do" code="customer.cancel" />
+	</div>
 </form:form>
-</div>

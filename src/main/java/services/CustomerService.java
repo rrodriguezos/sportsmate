@@ -35,8 +35,6 @@ public class CustomerService {
 	private CustomerRepository customerRepository;
 	
 	// Supporting services ---------------------------------------------------
-	@Autowired
-	private LoginService loginService;
 
 	@Autowired
 	private UserService userService;
@@ -126,31 +124,38 @@ public class CustomerService {
 		
 		if(customer.getId() == 0){
 
-		folders = new ArrayList<Folder>();
-
-		password = customer.getUserAccount().getPassword();
-		passwordCoded = HashPassword.encode(password);
-		
-		userUserAccount = customer.getUserAccount();
-		userUserAccount.setPassword(passwordCoded);
-
-		customer.setUserAccount(userUserAccount);
-		
-		inbox = folderService.create(customer, "Inbox");
-		outbox = folderService.create(customer, "Outbox");
-
-		folders.add(inbox);
-		folders.add(outbox);
-
-		customer.setFolders(folders);
-
-		result = customerRepository.save(customer);
-
-		inbox.setActor(result);
-		outbox.setActor(result);
-
-		folderService.save(inbox);
-		folderService.save(outbox);
+			folders = new ArrayList<Folder>();
+	
+			password = customer.getUserAccount().getPassword();
+			passwordCoded = HashPassword.encode(password);
+			
+			userUserAccount = customer.getUserAccount();
+			userUserAccount.setPassword(passwordCoded);
+	
+			customer.setUserAccount(userUserAccount);
+			
+			inbox = folderService.create(customer, "Inbox");
+			outbox = folderService.create(customer, "Outbox");
+	
+			folders.add(inbox);
+			folders.add(outbox);
+	
+			customer.setFolders(folders);
+			
+			byte[] imagen = customer.getImagen();
+			
+			if (customer.getId() != 0 && (imagen.equals(null) || customer.getImagen().length==0))
+				customer.setImagen(findOne(customer.getId()).getImagen());
+	
+			result = customerRepository.save(customer);
+	
+			inbox.setActor(result);
+			outbox.setActor(result);
+	
+			folderService.save(inbox);
+			folderService.save(outbox);
+			
+			
 		}else{
 			result = customerRepository.save(customer);
 		}
@@ -164,12 +169,13 @@ public class CustomerService {
 	{
 		
 		Collection<Invoice> all;
-		UserAccount userAccount;
-		int userAccountId;
+		Customer customer;
+		int customerId;
 		
-		userAccount = loginService.getPrincipal();
-		userAccountId = userAccount.getId();
-		all = customerRepository.getAllInvoices(findByPrincipal().getId());
+		customer = findByPrincipal();
+		customerId = customer.getId();
+		
+		all = customerRepository.getAllInvoices(customerId);
 		
 		return all;
 		
@@ -262,6 +268,7 @@ public class CustomerService {
 		customerForm.setUsername(customer.getUserAccount().getUsername());
 		customerForm.setPassword(customer.getUserAccount().getPassword());
 
+		customerForm.setId(customer.getId());
 		customerForm.setName(customer.getName());		
 		customerForm.setSurname(customer.getSurname());
 		customerForm.setEmail(customer.getEmail());
@@ -287,7 +294,13 @@ public class CustomerService {
 		Collection<Invoice> invoices;
 		Invoice invoice;
 		
-		customer = create();
+		if(customerForm.getId()!= 0){
+			customer = findByPrincipal();
+		}else{
+			customer = create();
+		}
+		
+		
 		invoices = new ArrayList<Invoice>();
 		invoice = new Invoice();
 		
@@ -297,6 +310,9 @@ public class CustomerService {
 		customer.setEmail(customerForm.getEmail());
 		customer.setPhone(customerForm.getPhone());
 		customer.setImagen(customerForm.getImagen());
+		
+		if (customer.getId() != 0 && !(customerForm.getImagen().equals(null) || customerForm.getImagen().length==0))
+			customer.setImagen(customerForm.getImagen());
 		
 		customer.setCif(customerForm.getCif());
 		customer.setStreet(customerForm.getStreet());

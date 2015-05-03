@@ -21,21 +21,26 @@
 			
 	<div class="row">
 		<div class='col-md-3 spm-profile-picture-div text-center'> 
-			<img src="images/default_profile.jpg" alt="Default profile" class="img-thumbnail .spm-profile-picture" />
-				<br><br>
-				<div>
-					
-						<jstl:if test="${rating == 0.0}">
-						<spring:message code="customer.rating.Empty" />
-					</jstl:if>
+		
+			<jstl:if test="${customerImagen==true}">
+				<img src="images/default_profile.jpg" alt="Default profile" class="img-thumbnail .spm-profile-picture" />
+			</jstl:if>			
+	
+			<jstl:if test="${customerImagen == false}">					
+					<img style="position: relative; width: 250px; height: 250px;" src="upload/imageCustomer.do?customerId=${customer.id}"/>
+			</jstl:if>			
+			<br><br>
+			
+			<div>				
+				<jstl:if test="${rating == 0.0}">
+					<spring:message code="customer.rating.Empty" />
+				</jstl:if>
 
-					<jstl:if test="${rating != 0.0}">
-						<spring:message code="customer.rating" />
-						<jstl:out value="${rating}" />
-					</jstl:if>
-					
-
-				</div>
+				<jstl:if test="${rating != 0.0}">
+					<spring:message code="customer.rating" />
+					<jstl:out value="${rating}" />
+				</jstl:if>
+			</div>			
 		</div>
 			
 			<div class="col-md-1 hidden-sm hidden-xs spm-profile-margin"></div>
