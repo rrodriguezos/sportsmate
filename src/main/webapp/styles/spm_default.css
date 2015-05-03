@@ -243,20 +243,24 @@ th{
 
 span.pagebanner {
 	background-color: #eee;
-	border: thin solid #999;
+	border: thin solid lightgray;
 	padding: 4px 8px 4px 8px;
 	margin-top: 10px;
 	display: block;
 	border-bottom: none;
+	border-top-left-radius: 5px;
+	border-top-right-radius: 5px;
 }
 
 span.pagelinks {
 	background-color: #eee;
-	border: thin solid #999;
+	border: thin solid lightgray;
 	padding: 4px 8px 4px 8px;
 	display: block;
 	border-top: none;
 	margin-bottom: -5px;
+	border-bottom-left-radius: 5px;
+	border-bottom-right-radius: 5px;
 }
 
 
