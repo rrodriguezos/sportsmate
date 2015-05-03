@@ -177,7 +177,12 @@ public ModelAndView makePayPaypal(@RequestParam String PayerID, @RequestParam St
 	}
 	
 	invoice.setDatePay(new Date());
+	
 	invoiceService.save(invoice);
+	
+	Customer e =customerService.findByPrincipal();
+	
+	e.setDebtor(false);
 	
 	ModelAndView result =seeInvoices();
 	return result;
