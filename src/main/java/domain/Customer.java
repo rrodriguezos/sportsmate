@@ -44,6 +44,15 @@ public class Customer extends Actor {
 	private String emailCenter;
 	private String web;
 	private Collection<Vote> votes;
+	private boolean debtor;
+
+	public boolean isDebtor() {
+		return debtor;
+	}
+
+	public void setDebtor(boolean debtor) {
+		this.debtor = debtor;
+	}
 
 	@NotBlank
 	@Size(min = 9, max = 9)
