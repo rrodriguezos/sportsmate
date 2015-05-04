@@ -135,10 +135,9 @@ public ModelAndView makePayPaypal(@RequestParam int id) throws IOException, PayP
 	redirectUrls.setReturnUrl("http://sportsmate.cf/SportsMate/customer/executePayment.do");
 	payment.setRedirectUrls(redirectUrls);
 	
-
 	Payment createdPayment = payment.create(apiContext);	
 	
-	ModelAndView redirect=new ModelAndView("redirect:"+createdPayment.getLinks().get(1).getHref());
+	ModelAndView redirect=new ModelAndView("redirect:"+createdPayment.getLinks().get(1).getHref()+"&useraction=commit");
 	
 		return redirect;
 	
