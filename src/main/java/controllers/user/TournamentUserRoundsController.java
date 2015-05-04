@@ -16,9 +16,12 @@ import javax.validation.Valid;
 
 import security.Authority;
 import security.LoginService;
+import services.CustomerService;
 import services.TeamService;
 import services.TournamentService;
 import services.UserService;
+import domain.Customer;
+import domain.Invoice;
 import domain.Match;
 import domain.Team;
 import domain.Tournament;
@@ -47,6 +50,9 @@ public class TournamentUserRoundsController
 		
 		@Autowired
 		private LoginService loginService;
+		
+		@Autowired
+		private CustomerService customerService;
 	
 	
 	
@@ -220,6 +226,12 @@ public class TournamentUserRoundsController
 	@RequestMapping("/list")
 	public ModelAndView list(){
 		
+		
+		
+		
+		
+		
+		
 		Authority authority =new Authority();
 		authority.setAuthority("CUSTOMER");
 		
@@ -229,6 +241,34 @@ public class TournamentUserRoundsController
 		}else{
 			tournaments=tournamentService.findAllTournamentsCreatedByUserId();
 		}
+		
+/* for debtors */
+		
+		Customer e = customerService.findByPrincipal();
+		
+		if (e != null )
+		{
+			if( e.isDebtor()){
+				
+				ModelAndView result;
+				
+				Collection<Invoice> invoices=customerService.getAllInvoices();
+				
+				result=new ModelAndView("customer/seeInvoices");
+				result.addObject("invoices", invoices);
+				return result;
+			}
+		}
+		
+		
+		
+		/* -------------*/
+		
+		
+		
+		
+		
+		
 		if(tournaments== null)
 			new Throwable("no tournaments for this user");
 		

@@ -18,6 +18,8 @@ import services.MatchService;
 import services.TeamService;
 import services.TournamentService;
 import controllers.AbstractController;
+import domain.Customer;
+import domain.Invoice;
 import domain.Match;
 import domain.Team;
 import domain.Tournament;
@@ -90,6 +92,29 @@ public class TournamentCustomerController extends AbstractController {
 	// Create-----------------------------------------------------------------------
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public ModelAndView create() {
+		
+		
+/* for debtors */
+		
+		Customer e = customerService.findByPrincipal();
+		if( e.isDebtor()){
+			
+			ModelAndView result;
+			
+			Collection<Invoice> invoices=customerService.getAllInvoices();
+			
+			result=new ModelAndView("customer/seeInvoices");
+			result.addObject("invoices", invoices);
+			return result;
+		}
+		
+		
+		
+		
+		/* -------------*/
+		
+		
+		
 		ModelAndView result;
 		Tournament tournament;
 		TournamentForm tournamentForm;
