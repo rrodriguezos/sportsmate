@@ -116,8 +116,9 @@ public ModelAndView makePayPaypal(@RequestParam int id) throws IOException, PayP
 	amount.setTotal("15");
 
 	Transaction transaction = new Transaction();
-	transaction.setDescription("creating a payment");
+	transaction.setDescription("SportsMate monthly fee");
 	transaction.setAmount(amount);
+	
 
 	List<Transaction> transactions = new ArrayList<Transaction>();
 	transactions.add(transaction);
@@ -133,6 +134,7 @@ public ModelAndView makePayPaypal(@RequestParam int id) throws IOException, PayP
 	redirectUrls.setCancelUrl("https://devtools-paypal.com/guide/pay_paypal?cancel=true");
 	redirectUrls.setReturnUrl("http://sportsmate.cf/SportsMate/customer/executePayment.do");
 	payment.setRedirectUrls(redirectUrls);
+	
 
 	Payment createdPayment = payment.create(apiContext);	
 	
