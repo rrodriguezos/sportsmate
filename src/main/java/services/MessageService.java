@@ -2,6 +2,7 @@
 package services;
 import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,8 +11,10 @@ import org.springframework.util.Assert;
 
 import repositories.MessageRepository;
 import domain.Actor;
+import domain.Customer;
 import domain.Folder;
 import domain.Message;
+import domain.User;
 import forms.MessageForm;
 
 @Service
@@ -28,6 +31,9 @@ public class MessageService {
 	
 	@Autowired
 	private FolderService folderService;
+	
+	@Autowired
+	private CustomerService customerService;
 	
 	// Constructors-----------------------------------------------------------
 	public MessageService()
@@ -92,9 +98,42 @@ public class MessageService {
 		sendMoment = new Date(miliseconds);	
 		
 		message.setSendMoment(sendMoment);
-
-		messageRepository.save(message);
 		
+		
+		//Para hacer otro método/////////////////////////////
+		
+		Actor actor;
+		List<Folder> folders;
+		Folder inbox;
+		Folder outbox;		
+		
+		actor = actorService.findByPrincipal();	
+		folders = (List<Folder>) actor.getFolders();
+		inbox = folders.get(0);
+		outbox = folders.get(1);
+		
+		int aux1 = 0;
+		for(Message itero : inbox.getMessages()){
+			if(itero.getSender().getId()==(message.getSender().getId())){
+				aux1 = aux1 + 1;
+			}
+		}
+		
+		int aux2 = 0;
+		for(Message itero : outbox.getMessages()){
+			if(itero.getRecipient().getId()==(message.getRecipient().getId())){
+				aux2 = aux2 + 1;
+			}
+		}		
+		
+		if(message.getRecipient() instanceof Customer){
+			if(aux1 == aux2){
+				messageRepository.save(message);
+			}
+			
+		}else if(message.getRecipient() instanceof User){
+			messageRepository.save(message);
+		}		
 	}
 	
 	//Other business methods ------------------------------------------------

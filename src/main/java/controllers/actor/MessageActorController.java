@@ -156,12 +156,16 @@ public class MessageActorController extends AbstractController{
 			result = createEditModelAndView(messageForm);
 		}else{
 			try{
+				
 				message = messageService.reconstruct(messageForm);
 				outBox = message.getFolder();
 				messageService.sendMessage(message);
 				result = new ModelAndView("redirect:list.do?folderId="+outBox.getId());
+				
 			}catch(Throwable oops){
+				
 				result = createEditModelAndView(messageForm, "message.commit.error");
+				
 			}
 		}
 		return result;
