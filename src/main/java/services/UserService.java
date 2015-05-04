@@ -229,11 +229,15 @@ public class UserService {
 	{
 		
 		User user;
+		String password;
 		
 		if(userForm.getId()!= 0){
 			user = findByPrincipal();
 			user.getUserAccount().setUsername(userForm.getUsername());
-			user.getUserAccount().setPassword(userForm.getPassword());			
+			password = HashPassword.encode(userForm.getPassword());
+			userForm.setPassword2(password);
+			user.getUserAccount().setPassword(password);
+			userForm.setTerms(true);
 			
 		}else{
 			

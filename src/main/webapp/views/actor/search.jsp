@@ -63,6 +63,15 @@
 							</a>
 						</jstl:if>
 					</jstl:if>
+					
+					<spring:message code="user.profile" var="profileHeader" />
+						<jstl:if test="${principal != row}">
+							<a href="user/displayOtherUser.do?userId=${row.id}">
+								<button type="button" class=" btn btn-md btn-default col-xs-12">
+									<spring:message code="user.profile" />
+								</button>
+							</a>
+						</jstl:if>
 				</div>
 				</security:authorize>		
 	</div>	

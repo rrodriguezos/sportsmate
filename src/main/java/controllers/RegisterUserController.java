@@ -49,11 +49,35 @@ public class RegisterUserController extends AbstractController {
 
 		result.addObject("userImagen", user.isErrorImagen());
 		result.addObject("user", user);
+		result.addObject("principal", user);
 		result.addObject("rating", user.getRating());
 
 		return result;
 
 	}
+	
+	// Display other user-----------------------------------------------------------------
+
+		@RequestMapping(value = "/displayOtherUser", method = RequestMethod.GET)
+		public ModelAndView display(@RequestParam int userId) {
+
+			ModelAndView result;
+			User user;
+			User principal;
+
+			principal = userService.findByPrincipal();
+			user = userService.findOne(userId);
+
+			result = new ModelAndView("user/display");
+
+			result.addObject("userImagen", user.isErrorImagen());
+			result.addObject("user", user);
+			result.addObject("principal", principal);
+			result.addObject("rating", user.getRating());
+
+			return result;
+
+		}
 
 	// Create------------------------------------------------------------------
 

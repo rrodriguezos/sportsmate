@@ -63,7 +63,8 @@
 
 		
 		</div>
-			<br>			
+			<br>
+			<jstl:if test="${principal == user }">		
 			<div class="row">	
 				<div class="col-xs-12 col-md-3">
 					<a href="user/edit.do?userId=${user.id}">
@@ -72,7 +73,8 @@
 						</button>
 					</a>
 				</div>
-			</div>	   
+			</div>	 
+			</jstl:if>  
 		   
 		   
 		   
