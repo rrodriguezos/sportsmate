@@ -325,6 +325,7 @@ span.pagelinks {
 .spm-profile-picture{
 	width: 100%;
 	height: auto;
+	min-width: 150px;
 }
 
 .spm-profile-picture-static{
