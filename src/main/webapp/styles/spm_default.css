@@ -14,6 +14,9 @@ body {
 	height: 28px;		
 }
 
+.spm-button-nopaddingleft{
+	padding-left: 0px;
+}
 
 #header_image{
 	text-align: center;
@@ -403,6 +406,10 @@ span.pagelinks {
 	
 	.spm-copyright{
 		color: #cccccc;
+	}
+	
+	.spm-button-nopaddingleft{
+		padding-left: 15px;
 	}
 	
 } 

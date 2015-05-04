@@ -52,22 +52,27 @@
 				<br></div>
 				
 				<security:authorize access="hasRole('USER')">
-				<div class="col-sm-4 col-md-3 col-xs-12 pull-right">
+				
+				<div class="col-sm-3 col-md-3 col-xs-12 pull-right spm-button-nopaddingleft">
 					<spring:message code="user.sendRequest" var="sendRequestHeader" />
 					<jstl:if test="${principal != row}">
 						<jstl:if test="${!friendshipRequested.contains(row)}">
 							<a href="friendship/user/sendRequest.do?userFriendId=${row.id}">
-								<button type="button" class=" btn btn-md btn-default col-xs-12">
+								<button type="button" class="btn btn-sm btn-success col-xs-12">
 									<spring:message code="user.sendRequest" />
 								</button>
 							</a>
 						</jstl:if>
 					</jstl:if>
-					
+				</div>
+				
+				<div class="col-xs-12 hidden-sm hidden-md hidden-lg"><br></div>
+				
+				<div class="col-sm-2 col-md-2 col-xs-12 pull-right spm-button-nopaddingleft">	
 					<spring:message code="user.profile" var="profileHeader" />
 						<jstl:if test="${principal != row}">
 							<a href="user/displayOtherUser.do?userId=${row.id}">
-								<button type="button" class=" btn btn-md btn-default col-xs-12">
+								<button type="button" class="btn btn-sm btn-default col-xs-12">
 									<spring:message code="user.profile" />
 								</button>
 							</a>
