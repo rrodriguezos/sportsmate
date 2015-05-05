@@ -23,6 +23,9 @@
 <spring:message code="tournament.title" var="title"></spring:message>
 <spring:message code="tournament.matches" var="matches"></spring:message>
 <spring:message code="tournament.admin" var="admin"></spring:message>
+<spring:message code="tournament.play" var="play"></spring:message>
+<spring:message code="tournament.noPlay" var="noPlay"></spring:message>
+
 
 
 
@@ -45,11 +48,17 @@ pagesize="5" class="table table-bordered table-hover" >
 	
 	<display:column title="${matches }">
 		
-		<jstl:forEach items="${row.matches }" var="a">
-			
-			<jstl:out value="${ a.title} "></jstl:out>
+		<jstl:if test="${row.matches.size()==0 }">
+				
+				<jstl:out value="${noPlay }"></jstl:out>
 		
-		</jstl:forEach>
+		</jstl:if>
+		
+		<jstl:if test="${row.matches.size()!=0 }">
+				
+				<jstl:out value="${play }"></jstl:out>
+		
+		</jstl:if>
 	
 	
 	

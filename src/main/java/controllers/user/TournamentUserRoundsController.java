@@ -451,7 +451,7 @@ public class TournamentUserRoundsController
 		
 		
 		
-		return list();
+		return manageTournament(match.getTournament().getId());
 		
 		
 	}
