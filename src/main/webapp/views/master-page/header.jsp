@@ -249,18 +249,14 @@
 							code="master.page.tournament" /> <span class='caret'></span>
 				</a>
 					<ul class='dropdown-menu'>
-
+						<li><a href="tournament/listAll.do"><spring:message code="master.page.actor.all.tournaments" /></a></li>
 						<li><a href="tournament/customer/list.do"><spring:message code="master.page.actor.list.tournaments" /></a></li>
 						<li><a href="tournament/customer/create.do"><spring:message code="master.page.actor.create.tournaments" /></a></li>
-						<li><a href="tournament/listAll.do"><spring:message code="master.page.actor.all.tournaments" /></a></li>
 						<li><a href="tournament/user/rounds/list.do"><spring:message code="master.page.user.manageTournaments" /></a></li>
 					</ul>
 				</li>
 			</security:authorize>
 			
-				
-			
-
 			<!-- TEAM -->
 			<security:authorize access="hasRole('USER')">
 				<li><a href='#' data-toggle='dropdown'> <spring:message
