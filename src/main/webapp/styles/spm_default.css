@@ -368,6 +368,63 @@ span.pagelinks {
 	padding-top: 10px;
 }
 
+.spm-football-event{
+	background-color: #058032;
+	color: white;
+}
+
+.spm-football-event img{
+	width: 18px;
+	height: 18px;
+	 -webkit-filter: invert(100%);
+    filter: invert(100%);
+}
+
+.spm-tennis-event{
+	background-color: #C48E54;
+	color: white;
+}
+
+.spm-tennis-event img{
+	width: 18px;
+	height: 18px;
+	 -webkit-filter: invert(100%);
+    filter: invert(100%);
+}
+
+.spm-paddle-event{
+	background-color: #4F93B8;
+	color: white;
+}
+
+.spm-paddle-event img{
+	width: 18px;
+	height: 18px;
+	 -webkit-filter: invert(100%);
+    filter: invert(100%);
+}
+
+.spm-others-event{
+	background-color: #7A7A7A;
+	color: white;
+}
+
+.spm-others-event img{
+	width: 18px;
+	height: 18px;
+	 -webkit-filter: invert(100%);
+    filter: invert(100%);
+}
+
+.spm-my-event{
+	color: black;
+}
+
+.spm-my-event img{
+	width: 14px;
+	height: 14px;
+}
+
 /* Provisional & inherit from DP project*/
 
 .error {

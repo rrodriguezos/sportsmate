@@ -52,7 +52,7 @@ public class EventUserController extends AbstractController {
 		Collection<Event> events;
 		User principal;
 		boolean showdisjoin = true;
-		boolean remnant = true;
+		boolean my = true;
 
 		events = eventService.findAllEventsJoinUser();
 		principal = userService.findByPrincipal();
@@ -60,7 +60,7 @@ public class EventUserController extends AbstractController {
 		result = new ModelAndView("event/list");
 
 		result.addObject("events", events);
-		result.addObject("remnant", remnant);
+		result.addObject("my", my);
 		result.addObject("showdisjoin", showdisjoin);
 		result.addObject("principal", principal);
 		result.addObject("requestURI", "event/user/list.do");

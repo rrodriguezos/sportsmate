@@ -32,32 +32,50 @@
 		
 		
 		<jstl:if test="${football == true }">
-			<div class="alert alert-danger spm-no-margin-bottom col-xs-12">
+			<div class="alert alert-danger spm-no-margin-bottom col-xs-12 spm-football-event">
+				<img src="images/football.png" alt="soccer ball" class="">
+				<span>&nbsp</span>
 				<spring:message code="tournament.title" var="titleHeader" />
 				<jstl:out value="${row.title}"></jstl:out>
+				
 			</div>		
 		</jstl:if>
 		
 		<jstl:if test="${tennis == true }">
-			<div class="alert alert-warning spm-no-margin-bottom col-xs-12">
-				<spring:message code="tournament.title" var="titleHeader" />
+			<div class="alert alert-warning spm-no-margin-bottom col-xs-12 spm-tennis-event">
+				<img src="images/tennis.png" alt="soccer ball" class="">
+				<span>&nbsp</span>
+				<spring:message code="tournament.title" var="titleHeader" />		
 				<jstl:out value="${row.title}"></jstl:out>
 			</div>		
 		</jstl:if>
 		
 		<jstl:if test="${paddle==true }">
-			<div class="alert alert-info spm-no-margin-bottom col-xs-12">
+			<div class="alert alert-info spm-no-margin-bottom col-xs-12 spm-paddle-event">
+				<img src="images/paddle.png" alt="soccer ball" class="">
+				<span>&nbsp</span>
 				<spring:message code="tournament.title" var="titleHeader" />
 				<jstl:out value="${row.title}"></jstl:out>
 			</div>		
 		</jstl:if>
 		
 		<jstl:if test="${remnant==true}">
-			<div class="alert alert-success spm-no-margin-bottom col-xs-12">
+			<div class="alert alert-success spm-no-margin-bottom col-xs-12 spm-others-event">
+				<img src="images/others.png" alt="soccer ball" class="">
+				<span>&nbsp</span>
 				<spring:message code="tournament.title" var="titleHeader" />
 				<jstl:out value="${row.title}"></jstl:out>
 			</div>		
-		</jstl:if>		
+		</jstl:if>
+		
+		<jstl:if test="${my==true}">
+			<div class="alert alert-success spm-no-margin-bottom col-xs-12 spm-my-event">
+				<img src="images/starevent.png" alt="soccer ball" class="">
+				<span>&nbsp</span>
+				<spring:message code="tournament.title" var="titleHeader" />
+				<jstl:out value="${row.title}"></jstl:out>
+			</div>		
+		</jstl:if>	
 			
 			
 			<!-- <b><spring:message code="event.title" />: </b> -->
@@ -167,7 +185,7 @@
 		<jstl:if test="${showdisjoin == true}">
 			<jstl:if test="${row.users.contains(principal)}">
 				<display:column title="${disjoin }">
-					<div class="col-xs-5 col-sm-3 spm-events-button">
+					<div class="col-xs-6 col-sm-4 col-md-3 spm-events-button">
 						<!-- DISJOIN BUTTON -->
 						<spring:message code="event.disjoin" var="disjoin" />
 						<a href="event/user/disjoinEvent.do?eventId=${row.id }">
