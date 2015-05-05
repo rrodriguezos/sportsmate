@@ -27,15 +27,7 @@
 			<span class="glyphicon glyphicon-user"></span>
 		</form:label>
 		
-	<!--  Pendiente: placeholders
-		
-		<spring:message code="security.username" />
-		<spring:message code="security.password" />
-		
-	 -->
-	
-	
-		<form:input path="username" class="form-control" aria-describedby="sizing-addon1"/>	
+		<form:input path="username" class="form-control" aria-describedby="sizing-addon1" placeholder="Username"/>	
 		<form:errors class="alert alert-danger" path="username" />
 	</div>
 	
@@ -45,7 +37,7 @@
 		<form:label path="password" class="spm-login-label input-group-addon" id="sizing-addon1">
 			<span class="glyphicon glyphicon-lock"></span>
 		</form:label>
-		<form:password path="password" class="form-control" aria-describedby="sizing-addon1"/>
+		<form:password path="password" class="form-control" aria-describedby="sizing-addon1" placeholder="Password"/>
 		<form:errors class="alert alert-danger" path="password" />
 	</div>
 	
