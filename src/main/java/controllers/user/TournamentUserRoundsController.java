@@ -1,5 +1,6 @@
 package controllers.user;
 
+import java.security.AllPermission;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -129,7 +130,9 @@ public class TournamentUserRoundsController
 				
 				match.setTournament(tournament);
 				List<Team> teams=(List<Team>) tournament.getTeams();
+				
 				Collection<Team> teams1=new ArrayList<Team>();
+				
 				Team team1=teams.get(i);
 				
 				Team team2=teams.get(i+1);
@@ -180,6 +183,7 @@ public class TournamentUserRoundsController
 				match.setTitle("Match");
 				match.setTournament(tournament);
 				List<Team> teams=(List<Team>) tournament.getTeams();
+				
 				Collection<Team> teams1=new ArrayList<Team>();
 				Team team1=teams.get(i);
 				
@@ -312,28 +316,22 @@ public class TournamentUserRoundsController
 					break;
 				}
 			}
-			
+			System.out.println("numero de teams"+ tournament.getTeams().size());
 			for ( Team c : tournament.getTeams()){
-				
-				if( c.getMatchs().size()==0){
-					AllTeamPlays=false;
+				if(tournament.getTeams().size()==1)
 					break;
 				
-				}
 					
-				for (Match d : c.getMatchs()){
-					if(tournament.getMatches().contains(d)){
-						
-					}else{
+				System.out.println(c.getMatchs().size()+ "sd");
+				for (Match d : tournament.getMatches()){
+					if(!c.getWinners().contains(d) && !c.getDefeats().contains(d)){
 						AllTeamPlays=false;
 						break;
+					}else{
+						AllTeamPlays=true;
+						
 					}
 				}
-				
-				
-				
-						
-					
 				
 				
 			}
@@ -347,22 +345,41 @@ public class TournamentUserRoundsController
 				winners.add(a.getWinner());
 			}
 			
+			int result1 = 1;
+			int result2= 0;
+			int aux = 0;
 			
+			System.out.println("tamaño de teams "+tournament.getTeams().size()+ "numero de ganadores "+ winners.size());
 			for (Team a : tournament.getTeams()){
 				
-				int result1 = Collections.frequency(winners, a);
+				if(winners.size()==1)
+					break;
+				
+				 result1 = Collections.frequency(winners, a);
+				 
+				
+				System.out.println(result1);
+				System.out.println("1"+needRounds);
 				if( result1 > counter){
 					counter= result1;
+					result2= counter;
 					needRounds=true;
+					aux++;
+					System.out.println("mayhor");
 					
-				}else if( result1 == counter){
-					
-					needRounds=false;
 				}
 				
+				System.out.println(result1);
 			}
+			System.out.println("valor de result 1 "+ result1+ "y de counter "+ counter);
+			 if( result1 == counter && aux!=1 ){
+				aux=counter;
+				needRounds=false;
+			}
+			 
+			 
 	
-		
+		System.out.println(AllMatchesPlays +" " +AllTeamPlays +" "+ needRounds);
 		result.addObject("AllPlaysC", AllMatchesPlays);
 		result.addObject("AllTeamC", AllTeamPlays);
 		result.addObject("needRounds", needRounds);
@@ -407,6 +424,14 @@ public class TournamentUserRoundsController
 		
 		match.setWinner(team);
 		match.setDefeat(team2);
+		Tournament tournament = match.getTournament();
+		List<Team> defeteated = new ArrayList<Team>();
+		defeteated = (List<Team>) tournament.getTeams();
+		defeteated.remove(team2);
+		tournament.setTeams(defeteated);
+		
+		
+		
 		match.setPlayed(true);
 		
 		Collection<Match> winners = team.getWinners();
@@ -418,7 +443,7 @@ public class TournamentUserRoundsController
 		team2.setDefeats(defeats);
 		
 		
-		
+		tournamentService.save(tournament);
 		matchService.save(match);
 		//teamService.save(team);
 		//teamService.save(team2);
@@ -435,13 +460,14 @@ public class TournamentUserRoundsController
 	public ModelAndView secondRounds (@RequestParam int idTournament){
 		
 		Tournament tournament=tournamentService.findOne(idTournament);
+		
 		/* obtenemos los ganadores actuales */
 		
 		List<Team> ganadores =new ArrayList<Team>();
 		
 		for (Match c : tournament.getMatches()){
-			
-			ganadores.add(c.getWinner());
+			if(tournament.getTeams().contains(c.getWinner()))
+				ganadores.add(c.getWinner());
 			
 			
 		}
@@ -450,28 +476,40 @@ public class TournamentUserRoundsController
 		
 		for ( Team c : tournament.getTeams()){
 			
-			if( c.getMatchs().size()==0){
+			if( c.getMatchs().size()==0 ){
 				sinjugar.add(c);
 				continue;
 				
 			
 			}
+			
+			for ( Match x : tournament.getMatches()){
 				
-			for (Match d : c.getMatchs()){
-				if(tournament.getMatches().contains(d)){
-					
-				}else{
+				if(!c.getWinners().contains(x) && !c.getDefeats().contains(x)){
 					sinjugar.add(c);
-					
 				}
+					
 			}
+
 		
 		}
 		
 		ganadores.addAll(sinjugar);
 		
 		
+		/* quitamos los repetidos */
 		
+		List<Team> repetidos =new ArrayList<Team>();
+		
+		for (Team a: ganadores){
+			
+			if(!repetidos.contains(a)){
+				repetidos.add(a);
+			}
+		}
+		
+		ganadores=repetidos;
+		System.out.println(ganadores.toString());
 		
 		if((ganadores.size() % 2) == 0){
 			
@@ -621,7 +659,7 @@ public class TournamentUserRoundsController
 			}
 			
 		}
-		
+		System.out.println("el winner es: "+winner.getName());
 		tournament.setWinner(winner);
 		tournamentService.save(tournament);
 		
