@@ -28,10 +28,37 @@
 		
 		<display:column>
 		<div class="col-xs-12 spm-event-header-spacing">
+		
+		
+		
+		<jstl:if test="${football == true }">
+			<div class="alert alert-danger spm-no-margin-bottom col-xs-12">
+				<spring:message code="tournament.title" var="titleHeader" />
+				<jstl:out value="${row.title}"></jstl:out>
+			</div>		
+		</jstl:if>
+		
+		<jstl:if test="${tennis == true }">
+			<div class="alert alert-warning spm-no-margin-bottom col-xs-12">
+				<spring:message code="tournament.title" var="titleHeader" />
+				<jstl:out value="${row.title}"></jstl:out>
+			</div>		
+		</jstl:if>
+		
+		<jstl:if test="${paddle==true }">
+			<div class="alert alert-info spm-no-margin-bottom col-xs-12">
+				<spring:message code="tournament.title" var="titleHeader" />
+				<jstl:out value="${row.title}"></jstl:out>
+			</div>		
+		</jstl:if>
+		
+		<jstl:if test="${remnant==true}">
 			<div class="alert alert-success spm-no-margin-bottom col-xs-12">
 				<spring:message code="tournament.title" var="titleHeader" />
 				<jstl:out value="${row.title}"></jstl:out>
-			</div>
+			</div>		
+		</jstl:if>		
+			
 			
 			<!-- <b><spring:message code="event.title" />: </b> -->
 			

@@ -52,6 +52,7 @@ public class EventUserController extends AbstractController {
 		Collection<Event> events;
 		User principal;
 		boolean showdisjoin = true;
+		boolean remnant = true;
 
 		events = eventService.findAllEventsJoinUser();
 		principal = userService.findByPrincipal();
@@ -59,6 +60,7 @@ public class EventUserController extends AbstractController {
 		result = new ModelAndView("event/list");
 
 		result.addObject("events", events);
+		result.addObject("remnant", remnant);
 		result.addObject("showdisjoin", showdisjoin);
 		result.addObject("principal", principal);
 		result.addObject("requestURI", "event/user/list.do");
@@ -76,6 +78,7 @@ public class EventUserController extends AbstractController {
 		Date actualDate;
 		Collection<Event> eventsToRemove;
 		boolean showJoin = true;
+		boolean remnant = true;
 
 		actualDate = new Date();
 		eventsToRemove = new ArrayList<Event>();
@@ -93,6 +96,7 @@ public class EventUserController extends AbstractController {
 		result = new ModelAndView("event/list");
 
 		result.addObject("events", events);
+		result.addObject("remnant", remnant);
 		result.addObject("principal", principal);
 		result.addObject("showJoin", showJoin);
 		result.addObject("requestURI", "event/user/listOthersEvents.do");
@@ -111,6 +115,7 @@ public class EventUserController extends AbstractController {
 		Date actualDate;
 		Collection<Event> eventsToRemove;
 		boolean showJoin = true;
+		boolean football = true;
 
 		actualDate = new Date();
 		eventsToRemove = new ArrayList<Event>();
@@ -128,6 +133,7 @@ public class EventUserController extends AbstractController {
 		result = new ModelAndView("event/list");
 
 		result.addObject("events", events);
+		result.addObject("football", football);
 		result.addObject("principal", principal);
 		result.addObject("showJoin", showJoin);
 		result.addObject("requestURI", "event/user/listFootballEvents.do");
@@ -146,7 +152,8 @@ public class EventUserController extends AbstractController {
 		Date actualDate;
 		Collection<Event> eventsToRemove;
 		boolean showJoin = true;
-
+		boolean tennis = true;
+		
 		actualDate = new Date();
 		eventsToRemove = new ArrayList<Event>();
 		events = eventService.findAllTennisEvents();
@@ -163,6 +170,7 @@ public class EventUserController extends AbstractController {
 		result = new ModelAndView("event/list");
 
 		result.addObject("events", events);
+		result.addObject("tennis", tennis);
 		result.addObject("principal", principal);
 		result.addObject("showJoin", showJoin);
 		result.addObject("requestURI", "event/user/listTennisEvents.do");
@@ -181,6 +189,7 @@ public class EventUserController extends AbstractController {
 		Date actualDate;
 		Collection<Event> eventsToRemove;
 		boolean showJoin = true;
+		boolean paddle = true;
 
 		actualDate = new Date();
 		eventsToRemove = new ArrayList<Event>();
@@ -198,6 +207,7 @@ public class EventUserController extends AbstractController {
 		result = new ModelAndView("event/list");
 
 		result.addObject("events", events);
+		result.addObject("paddle", paddle);
 		result.addObject("principal", principal);
 		result.addObject("showJoin", showJoin);
 		result.addObject("requestURI", "event/user/listPaddleEvents.do");
