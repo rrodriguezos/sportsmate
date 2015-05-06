@@ -140,7 +140,7 @@
 						</div>
 					</div>
 					
-					<div class="col-xs-12 col-sm-4 col-md-3">
+					<div class="col-xs-12 col-sm-5 col-md-4">
 						<div>
 							<b><spring:message code="team.user.email" />: </b>
 							<spring:message code="event.user.email" var="emailHeader" />
