@@ -22,9 +22,11 @@
 
 <spring:message code="tournament.title" var="title"></spring:message>
 <spring:message code="tournament.matches" var="matches"></spring:message>
+<spring:message code="tournament.state" var="state"></spring:message>
 <spring:message code="tournament.admin" var="admin"></spring:message>
 <spring:message code="tournament.play" var="play"></spring:message>
 <spring:message code="tournament.noPlay" var="noPlay"></spring:message>
+<spring:message code="tournament.finished" var="finished"></spring:message>
 
 
 
@@ -46,7 +48,7 @@ pagesize="5" class="table table-bordered table-hover" >
 	
 	</display:column>
 	
-	<display:column title="${matches }">
+	<display:column title="${state }">
 		
 		<jstl:if test="${row.matches.size()==0 }">
 				
@@ -54,9 +56,15 @@ pagesize="5" class="table table-bordered table-hover" >
 		
 		</jstl:if>
 		
-		<jstl:if test="${row.matches.size()!=0 }">
+		<jstl:if test="${row.matches.size()!=0 && row.winner == null}">
 				
 				<jstl:out value="${play }"></jstl:out>
+		
+		</jstl:if>
+		
+		<jstl:if test="${row.winner != null}">
+				
+				<jstl:out value="${finished }"></jstl:out>
 		
 		</jstl:if>
 	
@@ -65,10 +73,12 @@ pagesize="5" class="table table-bordered table-hover" >
 	</display:column>
 	
 	<display:column title="${manage }">
+	
+		<jstl:if test="${row.startMoment<actualDate}">
 		
-		<a href="tournament/user/rounds/manageTournament.do?id=${row.id }"><jstl:out value="${admin }" ></jstl:out></a>
+			<a href="tournament/user/rounds/manageTournament.do?id=${row.id }"><jstl:out value="${admin }" ></jstl:out></a>
 	
-	
+		</jstl:if>
 	
 	</display:column>
 

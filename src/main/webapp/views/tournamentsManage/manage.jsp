@@ -118,6 +118,13 @@ pagesize="5" class="table table-bordered table-hover" >
 
 	</display:column>
 	
+	<jstl:if test="${row.winner != null }">
+	
+	<display:column title="${Winner }">	
+		<jstl:out value="${row.winner.name }"></jstl:out>
+	</display:column>
+	
+	</jstl:if>
 	
 </display:table>
 </div>

@@ -68,10 +68,6 @@
 		</div>
 	</div>
 	
-	<security:authorize access="hasRole('USER')">
-		<acme:textbox code="event.otherSportCenter" path="otherSportCenter" />		
-	</security:authorize>
-	
 	<security:authorize access="hasRole('CUSTOMER')">
 		<acme:textbox code="event.address" path="address" readonly="true" />
 	</security:authorize>	

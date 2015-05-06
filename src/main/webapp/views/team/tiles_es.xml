@@ -27,7 +27,7 @@
 	</definition>
 	
 	<definition name="team/edit" extends="master.page">	
-		<put-attribute name="title" value="Modificar equipo" />
+		<put-attribute name="title" value="Equipo" />
 		<put-attribute name="body" value="/views/team/edit.jsp" />
 	</definition>
 	
@@ -35,5 +35,6 @@
 		<put-attribute name="title" value="Todos los equipos" />
 		<put-attribute name="body" value="/views/team/list.jsp" />
 	</definition>
+	
 	
 </tiles-definitions>

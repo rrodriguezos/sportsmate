@@ -289,20 +289,13 @@ public class EventUserController extends AbstractController {
 		ModelAndView result;
 		Event event;
 		EventForm eventForm;
-		Collection<String> places;
 		Collection<User> users;
 		Date currentDate;
 
-		places = eventService.places();
 		event = eventService.findOneToEdit(eventId);
 		users = userService.findAllUsersByEventId(eventId);
 		eventForm = eventService.construct(event);
 		currentDate = new Date();
-		
-		if (!places.contains(event.getPlace())) {
-
-			eventForm.setOtherSportCenter(event.getPlace());
-		}
 
 		result = createEditModelAndView(eventForm);
 

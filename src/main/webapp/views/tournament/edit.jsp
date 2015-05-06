@@ -52,6 +52,12 @@
 		<div class="col-xs-12">
 			<br>
 		</div>
+		
+		<acme:textbox code="tournament.prize" path="prize" />
+		<br />
+		<div class="col-xs-12">
+			<br>
+		</div>
 
 		<acme:textarea code="tournament.description" path="description" />
 		<br />
