@@ -38,7 +38,7 @@ pagesize="5" class="" >
 				<span class="glyphicon glyphicon-credit-card"></span>
 			</div>
 		
-			<div class="col-xs-12 col-sm-5">
+			<div class="col-xs-12 col-sm-5 col-md-4">
 				<div>
 					<b><spring:message code="customer.invoice.deadLine" />: </b>
 					<spring:message code="customer.invoice.deadLine" var="deadLine"></spring:message>

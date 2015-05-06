@@ -444,6 +444,26 @@ span.pagelinks {
 	font-size: 18px;
 }
 
+.spm-unpaid-warning{
+	display: inline;
+	border-radius: 5px;
+	border: thin solid #9E7700;
+	color: #9E7700;
+	padding: 5px 15px;
+}
+
+.spm-paid-label{
+	display: inline;
+	border-radius: 5px;
+	border: thin solid green;
+	color: green;
+	padding: 5px 15px;	
+}
+
+.spm-invoices-fix-top-margin{
+	margin-top: 8px;
+}
+
 /* Provisional & inherit from DP project*/
 
 .error {
@@ -486,6 +506,15 @@ span.pagelinks {
 	
 	.spm-button-nopaddingleft{
 		padding-left: 15px;
+	}
+	
+	.spm-unpaid-warning{
+		display: block;
+	
+	}
+
+	.spm-paid-label{
+		display: block;
 	}
 	
 } 
