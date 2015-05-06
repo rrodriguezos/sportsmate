@@ -144,7 +144,7 @@
 			
 								<div class="col-xs-12 col-sm-3">
 									<jstl:if test="${row.teams.size() == row.numberOfTeams }">
-										<span class="col-xs-12 bg-danger spm-event-full text-center">
+										<span class="col-xs-12 bg-danger spm-event-full text-center spm-events-button">
 											<spring:message code="tournament.full" var="full" />
 											<jstl:out value="${full }"></jstl:out>
 										</span>
@@ -171,7 +171,7 @@
 										</jstl:if>
 			
 										<jstl:if test="${contains == true}">
-											<span class="col-xs-12 bg-success spm-event-joined text-center">
+											<span class="col-xs-12 bg-success spm-event-joined text-center spm-events-button">
 												<spring:message code="tournament.joined" var="joined" />
 												<jstl:out value="${joined }"></jstl:out>
 											</span>

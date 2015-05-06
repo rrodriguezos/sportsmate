@@ -17,9 +17,6 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
-
-
-
 <spring:message code="tournament.title" var="title"></spring:message>
 <spring:message code="tournament.matches" var="matches"></spring:message>
 <spring:message code="tournament.state" var="state"></spring:message>
@@ -29,60 +26,48 @@
 <spring:message code="tournament.finished" var="finished"></spring:message>
 
 
-
-
-
-
 <div class="table table-responsive">
 
 <display:table name="tournaments" id="row"
 
 requestURI="/tournament/user/rounds/list.do"
-pagesize="5" class="table table-bordered table-hover" >
-	
-	<display:column title="${title }">
-		
-		<jstl:out value="${row.title }"></jstl:out>
-	
-	
-	
-	</display:column>
-	
-	<display:column title="${state }">
-		
-		<jstl:if test="${row.matches.size()==0 }">
+pagesize="5" class="">
+	<display:column>
+		<div class="col-xs-12 spm-search-row">
+			<div class="spm-search-glyphicon col-sm-1 hidden-xs">
+				<span class="glyphicon glyphicon-screenshot"></span>
+			</div>
+			
+			<div class="col-xs-12 col-sm-4 spm-invoices-fix-top-margin">
+				<b><spring:message code="tournament.title" />: </b>
+				<spring:message code="tournament.title" var="title"></spring:message>
+				<jstl:out value="${row.title}"></jstl:out>
+			</div>
+			
+			<div class="col-xs-12 col-sm-4 spm-invoices-fix-top-margin">
+				<b><spring:message code="tournament.state" />: </b>
+				<jstl:if test="${row.matches.size()==0 }">
+					<jstl:out value="${noPlay }"></jstl:out>
+				</jstl:if>
 				
-				<jstl:out value="${noPlay }"></jstl:out>
-		
-		</jstl:if>
-		
-		<jstl:if test="${row.matches.size()!=0 && row.winner == null}">
+				<jstl:if test="${row.matches.size()!=0 && row.winner == null}">
+					<jstl:out value="${play }"></jstl:out>
+				</jstl:if>
 				
-				<jstl:out value="${play }"></jstl:out>
+				<jstl:if test="${row.winner != null}">
+					<jstl:out value="${finished }"></jstl:out>
+				</jstl:if>
+			</div>
+			
+			<div class="col-xs-12 col-sm-3 spm-invoices-fix-top-margin">
+				<jstl:if test="${row.startMoment<actualDate}">
+					<a href="tournament/user/rounds/manageTournament.do?id=${row.id }">
+						<jstl:out value="${admin }" ></jstl:out>
+					</a>
+				</jstl:if>	
+			</div>
 		
-		</jstl:if>
-		
-		<jstl:if test="${row.winner != null}">
-				
-				<jstl:out value="${finished }"></jstl:out>
-		
-		</jstl:if>
-	
-	
-	
+		</div>	
 	</display:column>
-	
-	<display:column title="${manage }">
-	
-		<jstl:if test="${row.startMoment<actualDate}">
-		
-			<a href="tournament/user/rounds/manageTournament.do?id=${row.id }"><jstl:out value="${admin }" ></jstl:out></a>
-	
-		</jstl:if>
-	
-	</display:column>
-
-
-
 </display:table>
 </div>

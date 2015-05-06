@@ -129,32 +129,55 @@
 		</display:table>
 	</div>
 
+
 	<h3>
 		<spring:message code="tournament.matches" />
 	</h3>
 
 	<div class="table-responsive">
 		<display:table name="matches" id="row" pagesize="5"
-			class="table table-bordered table-hover">
-			<spring:message code="tournament.match.title" var="titleHeader" />
-			<display:column property="title" title="${titleHeader}" />
+			class="">
+		
+		<display:column>
+			<div class="col-xs-12 spm-search-row">
+				<div class="col-xs-12 col-sm-5">
+					<div>
+						<b><spring:message code="tournament.match.title" />: </b>
+						<spring:message code="tournament.match.title" var="titleHeader" />
+						<jstl:out value="${row.title}"></jstl:out>
+					</div>
+					
+					<div>
+						<b><spring:message code="tournament.match.creationMoment" />: </b>
+						<spring:message code="tournament.match.creationMoment" var="creationMomentHeader" />
+						<fmt:formatDate value="${row.creationMoment}" pattern="dd/MM/yyyy HH:mm" />
+					</div>
+				</div>
+				
+				<div class="col-xs-12 col-sm-4">
+					<div>
+						<b><spring:message code="tournament.match.startMoment" />: </b>
+						<spring:message code="tournament.match.startMoment" var="startMomentHeader" />
+						<fmt:formatDate value="${row.startMoment}" pattern="dd/MM/yyyy HH:mm" />
+					</div>
+					
+					<div>
+						<b><spring:message code="tournament.match.finishMoment" />: </b>
+						<spring:message code="tournament.match.finishMoment" var="finishMomentHeader" />
+						<fmt:formatDate value="${row.finishMoment}" pattern="dd/MM/yyyy HH:mm" />
+					</div>
+				</div>
+				
+				<div class="col-xs-12 col-sm-3">
+					<div>
+						<b><spring:message code="tournament.match.description" />: </b>
+						<spring:message code="tournament.match.description" var="descriptionHeader" />
+						<jstl:out value="${row.description}"></jstl:out>
+					</div>
+				</div>
+			</div>
+		</display:column>
 
-			<spring:message code="tournament.match.description"
-				var="descriptionHeader" />
-			<display:column property="description" title="${descriptionHeader}" />
-
-			<spring:message code="tournament.match.creationMoment"
-				var="creationMomentHeader" />
-			<display:column property="creationMoment"
-				title="${creationMomentHeader}" />
-
-			<spring:message code="tournament.match.startMoment"
-				var="startMomentHeader" />
-			<display:column property="startMoment" title="${startMomentHeader}" />
-
-			<spring:message code="tournament.match.finishMoment"
-				var="finishMomentHeader" />
-			<display:column property="finishMoment" title="${finishMomentHeader}" />
 		</display:table>
 	</div>
 
