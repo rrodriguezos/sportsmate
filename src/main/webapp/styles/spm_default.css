@@ -368,6 +368,11 @@ span.pagelinks {
 	padding-top: 10px;
 }
 
+.spm-3-row-glyphicon .glyphicon{
+	font-size: 18px;
+	padding-top: 20px;
+}
+
 .spm-xs-separator{
 	height: 6px;
 }

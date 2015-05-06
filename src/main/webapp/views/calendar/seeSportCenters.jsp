@@ -35,7 +35,7 @@
 		<div class="col-xs-12 spm-search-row">
 			
 			<div class="spm-search-glyphicon col-sm-1 hidden-xs hidden-sm">
-				<span class="glyphicon glyphicon-calendar"></span>
+				<span class="glyphicon glyphicon-home"></span>
 			</div>		
 		
 			<div class="col-xs-12 col-sm-4 col-md-3">
