@@ -104,7 +104,7 @@ public class EventService {
 		event.setCreationMoment(creationMoment);
 		event.setNumberMaxParticipant(2);
 		event.setUsers(users);
-		event.setPrice(0.0);
+		event.setPrice(0);
 
 		return event;
 
@@ -115,16 +115,9 @@ public class EventService {
 		User owner;
 		Customer customer;
 		Event aux;
-		Date startMoment;
+		Date startMoment;			
 		
-		long miliOfDay;
-		long miliseconds;
-		long total;
-		
-		miliseconds = System.currentTimeMillis();
-		miliOfDay = 86400000;
-		total = miliseconds+miliOfDay;
-		startMoment = new Date(total);		
+		startMoment = new Date();		
 
 		Assert.notNull(event);		
 		

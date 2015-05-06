@@ -140,7 +140,8 @@
 		<security:intercept-url pattern="/upload/imageUser.do" access="hasRole('USER')" /> 	
 			
 		<security:intercept-url pattern="/customer/display.do" access="hasRole('CUSTOMER')" />	
-		<security:intercept-url pattern="/customer/edit.do" access="isAnonymous() or hasRole('CUSTOMER')" /> 	
+		<security:intercept-url pattern="/customer/edit.do" access="isAnonymous() or hasRole('CUSTOMER')" /> 
+		<security:intercept-url pattern="/upload/imageCustomer.do" access="hasRole('CUSTOMER')" /> 	
 		
 		<security:intercept-url pattern="/user/create.do" access="isAnonymous()" /> 
 		<security:intercept-url pattern="/customer/create.do" access="isAnonymous()" /> 

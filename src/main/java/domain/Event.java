@@ -11,6 +11,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.Valid;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 
@@ -37,7 +38,7 @@ public class Event extends DomainEntity{
 	private String sport;
 	private String place;
 	private String address;
-	private double price;
+	private int price;
 	
 	@NotBlank
 	public String getTitle() 
@@ -135,13 +136,15 @@ public class Event extends DomainEntity{
 		
 	}	
 
-	public double getPrice() 
+	
+	@Min(0)
+	public int getPrice() 
 	{
 		
 		return price;
 		
 	}
-	public void setPrice(double price) 
+	public void setPrice(int price) 
 	{
 		
 		this.price = price;

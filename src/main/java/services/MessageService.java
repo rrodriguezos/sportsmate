@@ -32,9 +32,6 @@ public class MessageService {
 	@Autowired
 	private FolderService folderService;
 	
-	@Autowired
-	private CustomerService customerService;
-	
 	// Constructors-----------------------------------------------------------
 	public MessageService()
 	{
@@ -126,12 +123,12 @@ public class MessageService {
 			}
 		}		
 		
-		if(message.getRecipient() instanceof Customer){
+		if(message.getRecipient() instanceof User){
 			if(aux1 == aux2){
 				messageRepository.save(message);
 			}
 			
-		}else if(message.getRecipient() instanceof User){
+		}else if(message.getRecipient() instanceof Customer){
 			messageRepository.save(message);
 		}		
 	}

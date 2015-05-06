@@ -8,6 +8,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.TransactionSystemException;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -300,8 +301,15 @@ public class EventCustomerController extends AbstractController{
 				result = new ModelAndView("redirect:list.do");				
 				
 			} catch (Throwable oops) {
-
-				result = createEditModelAndView(eventForm, "event.commit.error");
+				System.out.println(oops);
+				if(oops instanceof TransactionSystemException){
+					result = createEditModelAndView(eventForm, "event.price.error");
+				}else if(oops instanceof IllegalArgumentException){
+					result = createEditModelAndView(eventForm, "event.date.error");
+				}else{
+					
+					result = createEditModelAndView(eventForm, "event.commit.error");	
+				}				
 			}
 		}
 		return result;

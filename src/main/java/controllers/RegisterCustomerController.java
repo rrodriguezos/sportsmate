@@ -42,12 +42,13 @@ public class RegisterCustomerController extends AbstractController {
 		ModelAndView result;
 		Customer customer;
 
-		customer = customerService.findByPrincipal();
+		customer = customerService.findByPrincipal();		
 
 		result = new ModelAndView("customer/display");
 
 		result.addObject("customerImagen", customer.isErrorImagen());
 		result.addObject("customer", customer);
+		result.addObject("principal", customer);
 		result.addObject("rating", customer.getRating());
 
 		return result;
@@ -89,8 +90,7 @@ public class RegisterCustomerController extends AbstractController {
 
 	// Save-----------------------------------------------------------------
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
-	public ModelAndView save(@Valid CustomerForm customerForm,
-			BindingResult bindingResult) {
+	public ModelAndView save(@Valid CustomerForm customerForm, BindingResult bindingResult) {
 		ModelAndView result;
 		Customer customer;
 

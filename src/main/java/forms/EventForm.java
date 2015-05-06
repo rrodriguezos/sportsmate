@@ -5,6 +5,7 @@ import java.util.Date;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.Valid;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotBlank;
@@ -25,7 +26,7 @@ public class EventForm {
 	private String sport;
 	private String place;	
 	private String address;
-	private double price;
+	private int price;
 	
 	private String otherSportCenter;	
 	private Customer customer;
@@ -166,13 +167,15 @@ public class EventForm {
 		this.address = address;
 		
 	}
-	public double getPrice() 
+	
+	@Min(0)
+	public int getPrice() 
 	{
 		
 		return price;
 		
 	}
-	public void setPrice(double price) 
+	public void setPrice(int price) 
 	{
 		
 		this.price = price;

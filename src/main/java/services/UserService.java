@@ -138,8 +138,7 @@ public class UserService {
 		
 		if(user.getId() == 0){
 
-			folders = new ArrayList<Folder>();
-	
+			folders = new ArrayList<Folder>();	
 			
 			password = user.getUserAccount().getPassword();
 			passwordCoded = HashPassword.encode(password);

@@ -70,7 +70,7 @@
 	<div class="col-xs-12">
 		<div class="row">
 			<div class='spm-profile-picture-div text-left'> 
-				<img src="images/default_profile.jpg" alt="Default profile" class="img-thumbnail spm-profile-picture-static" />
+				<img src="images/default_customer.jpg" alt="Default profile" class="img-thumbnail spm-profile-picture-static" />
 					<br><br>
 				<form:input type="file" id="imagen" path="imagen" class="col-xs-12"/> 
 			</div>

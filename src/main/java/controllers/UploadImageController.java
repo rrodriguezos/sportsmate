@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -33,7 +34,7 @@ public class UploadImageController {
 		
 	// Showing ----------------------------------------------------------------
 	
-	@RequestMapping(value = "/imageUser")
+	@RequestMapping(value = "/imageUser", method =RequestMethod.GET)
 	public ModelAndView fileUser(HttpServletResponse response, @RequestParam int userId) throws IOException 
 	{	
 		
@@ -43,7 +44,7 @@ public class UploadImageController {
 		
 		user = userService.findOne(userId);
 
-		response.setContentType(MediaType.IMAGE_PNG_VALUE);	
+		response.setContentType("image/jpeg");	
 		
 		imagen = user.getImagen();
 		inputStream = new ByteArrayInputStream(imagen);
@@ -54,7 +55,7 @@ public class UploadImageController {
 		
 	}
 	
-	@RequestMapping(value = "/imageCustomer")
+	@RequestMapping(value = "/imageCustomer", method =RequestMethod.GET)
 	public ModelAndView fileCustomer(HttpServletResponse response, @RequestParam int customerId) throws IOException 
 	{	
 		
@@ -64,7 +65,7 @@ public class UploadImageController {
 		
 		customer = customerService.findOne(customerId);
 
-		response.setContentType(MediaType.IMAGE_PNG_VALUE);	
+		response.setContentType("image/jpeg");	
 		
 		imagen = customer.getImagen();
 		inputStream = new ByteArrayInputStream(imagen);

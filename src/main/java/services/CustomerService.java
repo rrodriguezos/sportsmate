@@ -291,28 +291,34 @@ public class CustomerService {
 	public Customer reconstruct(CustomerForm customerForm) {
 		
 		Customer customer;
+		String password;
 		Collection<Invoice> invoices;
 		Invoice invoice;
 		
 		if(customerForm.getId()!= 0){
+			
 			customer = findByPrincipal();
+			customer.getUserAccount().setUsername(customerForm.getUsername());
+			password = HashPassword.encode(customerForm.getPassword());
+			customerForm.setPassword2(password);
+			customer.getUserAccount().setPassword(password);
+			customerForm.setTerms(true);
+			
 		}else{
+			
 			customer = create();
-		}
-		
+			customer.getUserAccount().setUsername(customerForm.getUsername());
+			customer.getUserAccount().setPassword(customerForm.getPassword());
+			
+		}		
 		
 		invoices = new ArrayList<Invoice>();
-		invoice = new Invoice();
-		
+		invoice = new Invoice();		
 		
 		customer.setName(customerForm.getName());
 		customer.setSurname(customerForm.getSurname());
 		customer.setEmail(customerForm.getEmail());
-		customer.setPhone(customerForm.getPhone());
-		customer.setImagen(customerForm.getImagen());
-		
-		if (customer.getId() != 0 && !(customerForm.getImagen().equals(null) || customerForm.getImagen().length==0))
-			customer.setImagen(customerForm.getImagen());
+		customer.setPhone(customerForm.getPhone());		
 		
 		customer.setCif(customerForm.getCif());
 		customer.setStreet(customerForm.getStreet());
@@ -331,8 +337,10 @@ public class CustomerService {
 		invoices.add(invoice);
 		customer.setInvoices(invoices);
 		
-		customer.getUserAccount().setUsername(customerForm.getUsername());
-		customer.getUserAccount().setPassword(customerForm.getPassword());
+		customer.setImagen(customerForm.getImagen());
+		
+		if (customer.getId() != 0 && !(customerForm.getImagen().equals(null) || customerForm.getImagen().length==0))
+			customer.setImagen(customerForm.getImagen());
 		
 		Assert.isTrue(customerForm.getTerms());
 		Assert.isTrue(customer.getUserAccount().getPassword().equals(customerForm.getPassword2()));
