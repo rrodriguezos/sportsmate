@@ -26,7 +26,7 @@
 				<img src="images/default_profile.jpg" alt="Default profile" class="img-thumbnail .spm-profile-picture" />
 			</jstl:if>			
 	
-			<jstl:if test="${userImagen == false}">					
+			<jstl:if test="${userImagen == false}">		
 					<img alt="Default profile" class="img-thumbnail .spm-profile-picture" src="upload/imageUser.do?userId=${user.id}"/>
 			</jstl:if>			
 			<br><br>
