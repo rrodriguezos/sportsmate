@@ -309,7 +309,7 @@ public class EventService {
 			
 		}
 		
-		all.add("Other center");
+		all.add("Other");
 
 		return all;
 
@@ -364,9 +364,9 @@ public class EventService {
 
 		if (event.getOwner() instanceof User) {					
 			
-			if (eventForm.getOtherSportCenter() != "") {
+			if (eventForm.getPlace().equals("Other")) {
 				
-				event.setPlace(eventForm.getOtherSportCenter());
+				event.setPlace(eventForm.getPlace());
 				event.setAddress(eventForm.getAddress());
 				
 			} else {

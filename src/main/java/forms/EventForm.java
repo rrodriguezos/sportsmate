@@ -28,7 +28,6 @@ public class EventForm {
 	private String address;
 	private int price;
 	
-	private String otherSportCenter;	
 	private Customer customer;
 	private User owner;
 	
@@ -111,19 +110,6 @@ public class EventForm {
 	public void setPlace(String place) 
 	{
 		this.place = place;
-	}
-	
-	public String getOtherSportCenter() 
-	{
-		
-		return otherSportCenter;
-		
-	}
-	public void setOtherSportCenter(String otherSportCenter) 
-	{
-		
-		this.otherSportCenter = otherSportCenter;
-		
 	}
 	
 	@Valid

@@ -133,6 +133,41 @@ public class TournamentService {
 		}
 
 	}
+	
+	public void saveRounds(Tournament tournament) {
+		System.out.println("entra en el save");
+		User owner;
+		Customer customer = customerService.findOneFromPlaceString(tournament
+				.getPlace());
+		Tournament result;
+		tournament.setCustomer(customer);
+		Date now = new Date(System.currentTimeMillis());
+		Assert.isTrue(tournament.getStartMoment().before(now));
+		Assert.isTrue(tournament.getFinishMoment().after(now));
+		Assert.isTrue(tournament.getStartMoment().compareTo(
+				tournament.getFinishMoment()) < 0);
+		tournament.setCreationMoment(new Date(
+				System.currentTimeMillis() - 10000));
+		result = tournamentRepository.saveAndFlush(tournament);
+
+		if (actorService.findByPrincipal() instanceof User) {
+
+			owner = userService.findByPrincipal();
+			if (tournament.getId() == 0) {
+				owner.getTournamentsCreated().add(result);
+				owner.getTournaments().add(result);
+			}
+			userService.save(owner);
+
+		} else if (actorService.findByPrincipal() instanceof Customer) {
+
+			customer = customerService.findByPrincipal();
+			customer.getTournaments().add(result);
+
+			customerService.save(customer);
+		}
+
+	}
 
 	public Tournament saveJoin(Tournament tournament) {
 
@@ -337,6 +372,7 @@ public class TournamentService {
 		tournament.setNumberOfTeams(tournamentForm.getNumberOfTeams());
 		tournament.setSport(tournamentForm.getSport());
 		tournament.setUserFee(tournamentForm.getUserFee());
+		tournament.setPrize(tournamentForm.getPrize());
 		if (tournament.getUser() instanceof User) {
 			if (tournamentForm.getOtherSportCenter() != "") {
 				tournament.setPlace(tournamentForm.getOtherSportCenter());

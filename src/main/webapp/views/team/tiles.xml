@@ -27,13 +27,18 @@
 	</definition>
 	
 	<definition name="team/edit" extends="master.page">	
-		<put-attribute name="title" value="Edit team" />
+		<put-attribute name="title" value="Team" />
 		<put-attribute name="body" value="/views/team/edit.jsp" />
 	</definition>
 	
 	<definition name="team/ListAllTeams" extends="master.page">	
 		<put-attribute name="title" value="All teams" />
 		<put-attribute name="body" value="/views/team/list.jsp" />
+	</definition>
+	
+	<definition name="team/create" extends="master.page">	
+		<put-attribute name="title" value="Create team" />
+		<put-attribute name="body" value="/views/team/edit.jsp" />
 	</definition>
 	
 </tiles-definitions>

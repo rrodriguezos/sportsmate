@@ -101,7 +101,7 @@ public class TournamentUserRoundsController
 		
 		tournament.setTeams(teams);
 		//teamService.save(team);
-		tournamentService.save(tournament);
+		tournamentService.saveRounds(tournament);
 		
 		return null;
 	}
@@ -150,12 +150,12 @@ public class TournamentUserRoundsController
 				match.setPlayed(false);
 				matchs.add(match);
 				
-				match.setTitle("Match "+ i+1 + " "+ teams.get(i).getName()+ "vs "+ teams.get(i+1).getName());
+				match.setTitle("Match "+ i+1 + "--> ( "+ teams.get(i).getName()+ " vs "+ teams.get(i+1).getName()+ ")");
 				
 				tournament.setMatches(matchs);
 				
 				
-				tournamentService.save(tournament);
+				tournamentService.saveRounds(tournament);
 				//teamService.save(team1);
 				//teamService.save(team2);
 				matchService.save(match);
@@ -207,7 +207,7 @@ public class TournamentUserRoundsController
 				
 				
 				tournament.setMatches(matchs);
-				tournamentService.save(tournament);
+				tournamentService.saveRounds(tournament);
 				teamService.save(team1);
 				teamService.save(team2);
 				matchService.save(match);
@@ -279,6 +279,8 @@ public class TournamentUserRoundsController
 		ModelAndView result=new ModelAndView("tournament/user/rounds/list");
 		
 		result.addObject("tournaments", tournaments);
+		result.addObject("actualDate", new Date());
+		
 		
 		
 		return result;
@@ -443,7 +445,7 @@ public class TournamentUserRoundsController
 		team2.setDefeats(defeats);
 		
 		
-		tournamentService.save(tournament);
+		tournamentService.saveRounds(tournament);
 		matchService.save(match);
 		//teamService.save(team);
 		//teamService.save(team2);
@@ -549,7 +551,7 @@ public class TournamentUserRoundsController
 				tournament.setMatches(matchs);
 				
 				
-				tournamentService.save(tournament);
+				tournamentService.saveRounds(tournament);
 				teamService.save(team1);
 				teamService.save(team2);
 				matchService.save(match);
@@ -600,7 +602,7 @@ public class TournamentUserRoundsController
 				
 				
 				tournament.setMatches(matchs);
-				tournamentService.save(tournament);
+				tournamentService.saveRounds(tournament);
 				teamService.save(team1);
 				teamService.save(team2);
 				matchService.save(match);
@@ -661,7 +663,7 @@ public class TournamentUserRoundsController
 		}
 		System.out.println("el winner es: "+winner.getName());
 		tournament.setWinner(winner);
-		tournamentService.save(tournament);
+		tournamentService.saveRounds(tournament);
 		
 		return list();
 		
