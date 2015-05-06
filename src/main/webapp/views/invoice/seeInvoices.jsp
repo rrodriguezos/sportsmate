@@ -95,3 +95,9 @@
 
 	</display:table>
 </div>
+<br>
+<!-- REDIRECT INFO -->
+<div class="col-xs-12 bg-info spm-invoices-redirect-span">
+	<span class="glyphicon glyphicon-info-sign"></span>
+	<spring:message code="customer.invoice.redirect" />
+</div>
