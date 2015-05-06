@@ -118,32 +118,59 @@
 
 	<div class='table-responsive'>
 		<display:table name="users" id="row" pagesize="5"
-			class="table table-bordered table-hover">
+			class="">
 
-			<spring:message code="event.user.name" var="nameHeader" />
-			<display:column property="name" title="${nameHeader}" />
-
-			<spring:message code="event.user.surname" var="surnameHeader" />
-			<display:column property="surname" title="${surnameHeader}" />
-
-			<spring:message code="event.user.email" var="emailHeader" />
-			<display:column property="email" title="${nameHeader}" />
-
-			<spring:message code="event.user.phone" var="phoneHeader" />
-			<display:column property="phone" title="${phoneHeader}" />
-
-			<security:authorize access="hasRole('USER')">
-				<display:column>
-					<jstl:if
-						test="${today.after(finish) and estoyApuntado==true and miId!=row.id}">
-
-						<a href="event/user/vote.do?eventId=${eventForm.id}&userId=${row.id}">
-							<spring:message	code="event.vote" />
-						</a>
-
-					</jstl:if>
-				</display:column>
-			</security:authorize>
+			<display:column>
+				<div class="col-xs-12 spm-search-row">
+					<div class="spm-search-glyphicon col-sm-1 hidden-xs">
+						<span class="glyphicon glyphicon-user"></span>
+					</div>
+					
+					<div class="col-xs-12 col-sm-4 col-md-3">
+						<div>
+							<b><spring:message code="team.user.name" />: </b>
+							<spring:message code="team.user.name" var="nameHeader" />
+							<jstl:out value="${row.name}"></jstl:out>
+						</div>
+						
+						<div>
+							<b><spring:message code="team.user.surname" />: </b>
+							<spring:message code="event.user.surname" var="surnameHeader" />
+							<jstl:out value="${row.surname}"></jstl:out>
+						</div>
+					</div>
+					
+					<div class="col-xs-12 col-sm-4 col-md-3">
+						<div>
+							<b><spring:message code="team.user.email" />: </b>
+							<spring:message code="event.user.email" var="emailHeader" />
+							<jstl:out value="${row.email}"></jstl:out>
+						</div>
+						
+						<div>
+							<b><spring:message code="team.user.phone" />: </b>
+							<spring:message code="event.user.phone" var="phoneHeader" />
+							<jstl:out value="${row.phone}"></jstl:out>
+						</div>
+					</div>
+					
+					<div class="col-xs-12 hidden-sm hidden-md hidden-lg spm-xs-separator"></div>
+					
+					<security:authorize access="hasRole('USER')">
+						<div class="col-xs-12 col-sm-3 pull-right text-center">
+							<jstl:if test="${today.after(finish) and estoyApuntado==true and miId!=row.id}">
+								<a href="event/user/vote.do?eventId=${eventForm.id}&userId=${row.id}">
+									<button type="button" class="btn btn-md btn-default col-xs-12">
+										<span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+										<spring:message	code="event.vote" />
+									</button>
+								</a>
+							</jstl:if>
+						</div>
+					</security:authorize>		
+				</div>
+				
+			</display:column>
 
 		</display:table>
 	</div>
