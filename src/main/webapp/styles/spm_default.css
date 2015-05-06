@@ -434,6 +434,16 @@ span.pagelinks {
 	height: 14px;
 }
 
+.spm-invoice-payed{
+	width: 228px;
+	height: 44px;
+	border: thin solid green;
+	color: green;
+	border-radius: 5px;
+	padding: 10px 0px;
+	font-size: 18px;
+}
+
 /* Provisional & inherit from DP project*/
 
 .error {

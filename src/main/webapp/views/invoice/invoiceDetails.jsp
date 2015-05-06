@@ -16,7 +16,7 @@
 <%@taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags"%>
-
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 
 <spring:message code="customer.invoice.fee" var="fee"></spring:message>
@@ -30,25 +30,58 @@
 <display:table name="invoice" id="row"
 
 requestURI="customer/invoiceDetails.do"
-pagesize="5" class="table table-bordered table-hover" >
+pagesize="5" class="" >
 
-	<display:column title="${fee}" >${row.fee}</display:column>
-	<display:column title="${datePay}">${row.datePay}</display:column>
-	<display:column title="${deadLine}">${row.deadLine }</display:column>>
-	
+	<display:column>
+		<div class="col-xs-12 spm-search-row">
+			<div class="spm-search-glyphicon col-sm-1 hidden-xs hidden-sm">
+				<span class="glyphicon glyphicon-credit-card"></span>
+			</div>
+		
+			<div class="col-xs-12 col-sm-5">
+				<div>
+					<b><spring:message code="customer.invoice.deadLine" />: </b>
+					<spring:message code="customer.invoice.deadLine" var="deadLine"></spring:message>
+					<fmt:formatDate value="${row.deadLine}" pattern="dd/MM/yyyy HH:mm" />
+				</div>
+				
+				<div>
+					<b><spring:message code="customer.invoice.datePay" />: </b>
+					<spring:message code="customer.invoice.datePay" var="datePay"></spring:message>
+					<fmt:formatDate value="${row.datePay}" pattern="dd/MM/yyyy HH:mm" />
+				</div>
+			</div>
+			
+			<div class="col-xs-12 col-sm-2">
+				<div>
+					<b><spring:message code="customer.invoice.fee" />: </b>
+					<spring:message code="customer.invoice.fee" var="fee"></spring:message>
+					<jstl:out value="${row.fee}"></jstl:out>
+				</div>
+			</div>
+			
+			<div class="col-xs-12 hidden-sm hidden-md hidden-lg spm-xs-separator"></div>
+			
+			<div class="col-xs-12 col-sm-4 pull-right">
+				<jstl:if test="${row.datePay == null}">
+					<a href="customer/makePayPaypal.do?id=${row.id}">
+						<img src="images/paypal.png" alt="Pay with paypal button" class="pull-right">
+					</a>
+				</jstl:if>
 
-<display:column title="${makePay}"> 
-	
-	<jstl:if test="${row.datePay == null}">
-		<a href="customer/makePayPaypal.do?id=${row.id}">
-		<jstl:out value="${makePay}"></jstl:out>
-		</a>
-	</jstl:if>
-
-	<jstl:if test="${row.datePay != null}">
-		<jstl:out value="${payMaked}"></jstl:out>
-	
-	</jstl:if>
+				<jstl:if test="${row.datePay != null}">
+					<div class="spm-invoice-payed pull-right text-center bg-success">
+						<span class="glyphicon glyphicon-ok-circle"></span>
+						<jstl:out value="${payMaked}"></jstl:out>
+					</div>
+					
+				
+				</jstl:if>
+			</div>
+		
+		
+		
+		</div>
 
 </display:column>
 
