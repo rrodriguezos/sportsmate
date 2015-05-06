@@ -66,7 +66,7 @@
 					</jstl:if>
 				</div>
 				
-				<div class="col-xs-12 hidden-sm hidden-md hidden-lg"><br></div>
+				<div class="col-xs-12 hidden-sm hidden-md hidden-lg spm-xs-separator"></div>
 				
 				<div class="col-sm-2 col-md-2 col-xs-12 pull-right spm-button-nopaddingleft">	
 					<spring:message code="user.profile" var="profileHeader" />

@@ -21,7 +21,7 @@
 			
 	<div class="row">
 		<div class='col-md-3 spm-profile-picture-div text-center'> 
-			<img src="images/default_customer.jpg" alt="Default profile" class="img-thumbnail .spm-profile-picture" />
+			<img src="images/default_customer.jpg" alt="Default profile" class="img-thumbnail spm-profile-picture" />
 				<br><br>
 				<div>		
 						<spring:message code="customer.rating" />
