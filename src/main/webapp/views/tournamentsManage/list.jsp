@@ -38,13 +38,13 @@ pagesize="5" class="">
 				<span class="glyphicon glyphicon-screenshot"></span>
 			</div>
 			
-			<div class="col-xs-12 col-sm-4 spm-invoices-fix-top-margin">
+			<div class="col-xs-12 col-sm-5 col-md-4 spm-invoices-fix-top-margin">
 				<b><spring:message code="tournament.title" />: </b>
 				<spring:message code="tournament.title" var="title"></spring:message>
 				<jstl:out value="${row.title}"></jstl:out>
 			</div>
 			
-			<div class="col-xs-12 col-sm-4 spm-invoices-fix-top-margin">
+			<div class="col-xs-12 col-sm-3 spm-invoices-fix-top-margin">
 				<b><spring:message code="tournament.state" />: </b>
 				<jstl:if test="${row.matches.size()==0 }">
 					<jstl:out value="${noPlay }"></jstl:out>
@@ -59,10 +59,14 @@ pagesize="5" class="">
 				</jstl:if>
 			</div>
 			
-			<div class="col-xs-12 col-sm-3 spm-invoices-fix-top-margin">
+			<div class="col-xs-12 hidden-sm hidden-md hidden-lg spm-xs-separator"></div>
+			
+			<div class="col-xs-12 col-sm-3 pull-right">
 				<jstl:if test="${row.startMoment<actualDate}">
 					<a href="tournament/user/rounds/manageTournament.do?id=${row.id }">
+					<button type="button" class="btn btn-md btn-default col-xs-12">
 						<jstl:out value="${admin }" ></jstl:out>
+					</button>
 					</a>
 				</jstl:if>	
 			</div>
