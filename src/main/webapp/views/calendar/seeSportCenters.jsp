@@ -19,35 +19,68 @@
 
 
 
-<spring:message code="sportCenter.name" var="name"/>
+
 <spring:message code="sportCenter.seeCalendar" var="seeCalendar"/>
-<spring:message code="sportCenter.city" var="city"/>
-<spring:message code="sportCenter.street" var="street"/>
+
+
 <spring:message code="sportCenter.CalendarOfEvents" var="calendarOfEvents"/>
-<spring:message code="sportCenter.perfil" var="perfil"/>
+
 
 
 <div class="table-responsive">
-<display:table name="centers" id="row"
+<display:table name="centers" id="row" requestURI="event/user/calendar/seeSportCenters.do" pagesize="5" class="">
 
-requestURI="event/user/calendar/seeSportCenters.do"
-pagesize="5" class="table table-bordered table-hover" >
-
-
-
-
-	<display:column title="${name }">  <jstl:out value="${row.nameCenter }"></jstl:out> </display:column>
-	<display:column title="${city }"> <jstl:out value="${row.city }"></jstl:out> </display:column>
-	<display:column title="${street }"> <jstl:out value="${row.street }"></jstl:out> </display:column>
-	<display:column title="${perfil }"> <a href="event/user/calendar/seePerfilOfCustomer.do?id=${row.id }"> 
-		<jstl:out value="${perfil}"></jstl:out></a></display:column>
-	<display:column title="${seeCalendar }"> <a href="event/user/calendar/seeSportCenterCalendar.do?id=${row.id }">
-		<jstl:out value="${calendarOfEvents}"></jstl:out>
-	</a></display:column>
-
-
-
-
-
+ 
+	<display:column>
+		<div class="col-xs-12 spm-search-row">
+			
+			<div class="spm-search-glyphicon col-sm-1 hidden-xs hidden-sm">
+				<span class="glyphicon glyphicon-calendar"></span>
+			</div>		
+		
+			<div class="col-xs-12 col-sm-4 col-md-3">
+				<div>
+					<b><spring:message code="sportCenter.name" />: </b>
+					<spring:message code="sportCenter.name" var="name"/>
+					<jstl:out value="${row.nameCenter}"></jstl:out>
+				</div>
+				
+				<div>
+					<b><spring:message code="sportCenter.city" />: </b>
+					<spring:message code="sportCenter.city" var="city"/>
+					<jstl:out value="${row.city}"></jstl:out>	
+				</div>
+			</div>
+			
+			<div class="col-xs-12 col-sm-3">
+				<div>
+					<b><spring:message code="sportCenter.street" />: </b>
+					<spring:message code="sportCenter.street" var="street"/>
+					<jstl:out value="${row.street}"></jstl:out>		
+				</div>
+				<br>
+			</div>
+			
+			<div class="col-xs-12 col-sm-2 pull-right spm-button-nopaddingleft">
+				<a href="event/user/calendar/seePerfilOfCustomer.do?id=${row.id }">
+					<button type="button" class="btn btn-md btn-default col-xs-12">
+						<spring:message code="sportCenter.perfil" var="perfil"/>
+						<jstl:out value="${perfil}"></jstl:out>
+					</button>
+				</a>
+			</div>
+			
+			<div class="col-xs-12 hidden-sm hidden-md hidden-lg spm-xs-separator"></div>
+			
+			<div class="col-xs-12 col-sm-3 pull-right">
+				<a href="event/user/calendar/seeSportCenterCalendar.do?id=${row.id }">
+					<button type="button" class="btn btn-md btn-default col-xs-12">
+						<spring:message code="sportCenter.CalendarOfEvents" var="seeCalendar"/>
+						<jstl:out value="${calendarOfEvents}"></jstl:out>
+					</button>
+				</a>
+			</div>	
+		</div>		
+	</display:column>
 </display:table>
 </div>

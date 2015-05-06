@@ -368,6 +368,10 @@ span.pagelinks {
 	padding-top: 10px;
 }
 
+.spm-xs-separator{
+	height: 6px;
+}
+
 .spm-football-event{
 	background-color: #058032;
 	color: white;

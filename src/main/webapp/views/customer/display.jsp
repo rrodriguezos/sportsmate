@@ -27,7 +27,7 @@
 			</jstl:if>			
 				
 			<jstl:if test="${customerImagen == false}">					
-					<img style="position: relative; width: 250px; height: 250px;" src="upload/imageCustomer.do?customerId=${customer.id}"/>
+				<img src="upload/imageCustomer.do?customerId=${customer.id}" alt="Profile" class="img-thumbnail .spm-profile-picture"/>
 			</jstl:if>			
 			<br><br>
 			

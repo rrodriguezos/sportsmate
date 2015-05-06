@@ -27,7 +27,7 @@
 			</jstl:if>			
 	
 			<jstl:if test="${userImagen == false}">					
-					<img style="position: relative; width: 250px; height: 250px;" src="upload/imageUser.do?userId=${user.id}"/>
+				<img src="upload/imageUser.do?userId=${user.id}" alt="Profile" class="img-thumbnail .spm-profile-picture"/>
 			</jstl:if>			
 			<br><br>
 			
