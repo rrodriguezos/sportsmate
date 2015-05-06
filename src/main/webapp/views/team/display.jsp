@@ -29,17 +29,17 @@
 	
 	<div class="row">
 		<div class="col-xs-12">
-			<div class="col-xs-12 col-sm-8 well well-sm spm-message-field-spacing">
+			<div class="col-xs-12 col-sm-9 well well-sm spm-message-field-spacing">
 				<b><spring:message code="team.name" />: </b>
 				<form:input path="name" readonly="true" class="spm-message-moment" />
 			</div>
 			
-			<div class="col-xs-12 col-sm-8 well well-sm spm-message-field-spacing">
+			<div class="col-xs-12 col-sm-9 well well-sm spm-message-field-spacing">
 				<b><spring:message code="team.captain" />: </b>
 				<form:input path="captain.email" readonly="true" class="spm-message-moment" />
 			</div>
 			
-			<div class="col-xs-12 col-sm-8 well well-sm spm-message-field-spacing">
+			<div class="col-xs-12 col-sm-9 well well-sm spm-message-field-spacing">
 				<b><spring:message code="team.maxNumber" />: </b>
 				<form:input path="maxNumber" readonly="true" class="spm-message-moment spm-mini-input" />
 			</div>
@@ -51,19 +51,43 @@
 	</h2>
 	
 	<div class="table-responsive">
-	<display:table name="users" id="row" pagesize="5" class="table table-bordered table-hover">
+	<display:table name="users" id="row" pagesize="5" class="">
+		<display:column>
+			<div class="col-xs-12 spm-search-row">
+				<div class="spm-search-glyphicon col-sm-1 hidden-xs">
+					<span class="glyphicon glyphicon-user"></span>
+				</div>
+				
+				<div class="col-xs-12 col-sm-4 col-md-3">
+					<div>
+						<b><spring:message code="team.user.name" />: </b>
+						<spring:message code="team.user.name" var="nameHeader" />
+						<jstl:out value="${row.name}"></jstl:out>
+					</div>
+					
+					<div>
+						<b><spring:message code="team.user.surname" />: </b>
+						<spring:message code="team.user.surname" var="surnameHeader" />
+						<jstl:out value="${row.surname}"></jstl:out>	
+					</div>	
+				</div>
+				
+				<div class="col-xs-12 col-sm-4 col-md-3">
+					<div>
+						<b><spring:message code="team.user.email" />: </b>
+						<spring:message code="team.user.email" var="emailHeader" />
+						<jstl:out value="${row.email}"></jstl:out>
+					</div>
+					
+					<div>
+						<b><spring:message code="team.user.phone" />: </b>
+						<spring:message code="team.user.phone" var="phoneHeader" />
+						<jstl:out value="${row.phone}"></jstl:out>
+					</div>		
+				</div>
+			</div>
+		</display:column>
 
-		<spring:message code="team.user.name" var="nameHeader" />
-		<display:column property="name" title="${nameHeader}" />
-
-		<spring:message code="team.user.surname" var="surnameHeader" />
-		<display:column property="surname" title="${surnameHeader}" />
-
-		<spring:message code="team.user.email" var="emailHeader" />
-		<display:column property="email" title="${nameHeader}" />
-
-		<spring:message code="team.user.phone" var="phoneHeader" />
-		<display:column property="phone" title="${phoneHeader}" />
 
 	</display:table>
 	</div>
