@@ -56,12 +56,14 @@ public class EventCustomerController extends AbstractController{
 
 		ModelAndView result;
 		Collection<Event> events;
+		boolean my = true;
 
 		events = eventService.findAllEventsCreatedByCustomerId();
 
 		result = new ModelAndView("event/list");
 
 		result.addObject("events", events);
+		result.addObject("my", my);
 		result.addObject("requestURI", "event/customer/list.do");
 
 		return result;
@@ -76,6 +78,7 @@ public class EventCustomerController extends AbstractController{
 		Collection<Event> events;
 		Date actualDate;
 		Collection<Event> eventsToRemove;
+		boolean remnant = true;
 
 		actualDate = new Date();
 		eventsToRemove = new ArrayList<Event>();
@@ -92,6 +95,7 @@ public class EventCustomerController extends AbstractController{
 		result = new ModelAndView("event/list");
 
 		result.addObject("events", events);
+		result.addObject("remnant", remnant);
 		result.addObject("requestURI", "event/customer/listOthersEvents.do");
 
 		return result;
@@ -105,7 +109,8 @@ public class EventCustomerController extends AbstractController{
 		Collection<Event> events;
 		Date actualDate;
 		Collection<Event> eventsToRemove;
-
+		boolean football = true;
+		
 		actualDate = new Date();
 		eventsToRemove = new ArrayList<Event>();
 		events = eventService.findAllFootballEvents();
@@ -121,6 +126,7 @@ public class EventCustomerController extends AbstractController{
 		result = new ModelAndView("event/list");
 
 		result.addObject("events", events);
+		result.addObject("football", football);
 		result.addObject("requestURI", "event/customer/listFootballEvents.do");
 
 		return result;
@@ -134,6 +140,7 @@ public class EventCustomerController extends AbstractController{
 		Collection<Event> events;
 		Date actualDate;
 		Collection<Event> eventsToRemove;
+		boolean tennis = true;
 
 		actualDate = new Date();
 		eventsToRemove = new ArrayList<Event>();
@@ -150,6 +157,7 @@ public class EventCustomerController extends AbstractController{
 		result = new ModelAndView("event/list");
 
 		result.addObject("events", events);
+		result.addObject("tennis", tennis);
 		result.addObject("requestURI", "event/customer/listTennisEvents.do");
 
 		return result;
@@ -163,6 +171,7 @@ public class EventCustomerController extends AbstractController{
 		Collection<Event> events;
 		Date actualDate;
 		Collection<Event> eventsToRemove;
+		boolean paddle = true;
 
 		actualDate = new Date();
 		eventsToRemove = new ArrayList<Event>();
@@ -179,6 +188,7 @@ public class EventCustomerController extends AbstractController{
 		result = new ModelAndView("event/list");
 
 		result.addObject("events", events);
+		result.addObject("paddle", paddle);
 		result.addObject("requestURI", "event/customer/listPaddleEvents.do");
 
 		return result;

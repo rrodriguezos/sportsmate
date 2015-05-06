@@ -464,6 +464,13 @@ span.pagelinks {
 	margin-top: 8px;
 }
 
+.spm-invoices-redirect-span{
+	color: #0066CC;
+	padding: 6px 15px;
+	border: thin dashed #0066CC;
+	border-radius: 5px;
+}
+
 /* Provisional & inherit from DP project*/
 
 .error {
