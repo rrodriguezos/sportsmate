@@ -47,7 +47,7 @@ pagesize="20" class="" defaultsort="1" defaultorder="ascending" >
 				<span class="glyphicon glyphicon-calendar"></span>
 		</div>
 		
-		<div class="col-xs-12 col-sm-4 col-md-3">
+		<div class="col-xs-12 col-sm-4">
 			<div>
 				<b><spring:message code="sportCenter.startMoment" />: </b>
 				<spring:message code="sportCenter.startMoment" var="startMoment"/>
@@ -165,7 +165,7 @@ pagesize="5" class="">
 					<span class="glyphicon glyphicon-calendar"></span>
 			</div>
 							
-			<div class="col-xs-12 col-sm-5 col-md-3">
+			<div class="col-xs-12 col-sm-5 col-md-4">
 				<div>
 					<b><spring:message code="sportCenter.startMoment" />: </b>
 					<spring:message code="sportCenter.startMoment" var="startMoment"/>
