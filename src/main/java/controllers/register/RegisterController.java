@@ -54,7 +54,7 @@ public class RegisterController extends AbstractController {
 			result.addObject("customerForm", customerForm);
 			result.addObject("actor", "customer");
 			if (customerForm.getUsername().length() <= 3) {
-				result.addObject("message", "register.commit.penemuychico");
+				result.addObject("message", "register.commit.tam");
 			}
 
 		} else {
@@ -75,7 +75,7 @@ public class RegisterController extends AbstractController {
 						|| userService.userRegistered(customerForm
 								.getUsername()));
 				if (customerForm.getUsername().length() <= 3) {
-					result.addObject("message", "register.commit.penemuychico");
+					result.addObject("message", "register.commit.tam");
 				} else if (customerService.userRegistered(customerForm
 						.getUsername())
 						|| userService.userRegistered(customerForm
@@ -119,7 +119,7 @@ public class RegisterController extends AbstractController {
 			if (!contraseña) {
 				result.addObject("message", "register.commit.password");
 			} else if (userForm.getUsername().length() <= 3) {
-				result.addObject("message", "register.commit.penemuychico");
+				result.addObject("message", "register.commit.tam");
 			}
 
 		} else {
@@ -135,7 +135,7 @@ public class RegisterController extends AbstractController {
 				result.addObject("userForm", userForm);
 				result.addObject("actor", "user");
 				if (userForm.getUsername().length() <= 3) {
-					result.addObject("message", "register.commit.penemuychico");
+					result.addObject("message", "register.commit.tam");
 				}
 				if (customerService.userRegistered(userForm.getUsername())
 						|| userService.userRegistered(userForm.getUsername())) {
