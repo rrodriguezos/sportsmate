@@ -44,7 +44,7 @@
 	
 	<div class="col-xs-12 col-md-9">
 	<div class="input-group input-group-md">	
-		<jstl:if test="${messageForm.recipient == null }">
+		<jstl:if test="${show && distinto == null}">
 		<form:label class="input-group-addon" path="recipient"><spring:message code="message.recipient"/></form:label>
 			<form:select class="form-control" path="recipient" >
 				<form:options items="${actors}" itemLabel="cadena" />

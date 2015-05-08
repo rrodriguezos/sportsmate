@@ -190,6 +190,7 @@ public class MessageActorController extends AbstractController{
 		ModelAndView result;
 		Collection<Actor> actors;
 		Actor sender;
+		boolean show = true;
 		
 		actors = actorService.findAll();
 		sender = actorService.findByPrincipal();
@@ -200,6 +201,7 @@ public class MessageActorController extends AbstractController{
 		
 		result.addObject("messageForm", messageForm);
 		result.addObject("actors", actors);
+		result.addObject("show", show);
 		result.addObject("sender", sender.getName()+"-"+sender.getSurname()+" ("+sender.getEmail()+")");
 		result.addObject("message",message);
 
