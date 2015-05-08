@@ -163,6 +163,8 @@ public class EventService {
 			owner = (User) actorService.findByPrincipal();
 
 			owner.getEventsCreated().remove(event);
+			
+			owner.getEvents().remove(event);
 
 			eventRepository.delete(event);
 
