@@ -149,6 +149,7 @@
 
 						<jstl:if test="${showDisjoin == true}">
 							<jstl:if test="${show == true}">
+								<jstl:if test="${row.startMoment > actualDate}">
 								<security:authorize access="hasRole('USER')">
 									<div class="col-xs-12 col-sm-5 col-md-4">
 										<spring:message code="tournament.disjoin" var="Disjoin" />
@@ -162,6 +163,7 @@
 									</div>
 								</security:authorize>
 							</jstl:if>
+						</jstl:if>
 						</jstl:if>
 
 					</div>

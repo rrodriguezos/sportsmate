@@ -59,6 +59,7 @@ public class TournamentUserController extends AbstractController {
 		result.addObject("tournaments", tournaments);
 		result.addObject("showDisjoin", showDisjoin);
 		result.addObject("principal", principal);
+		result.addObject("actualDate", new Date());
 		result.addObject("requestURI", "tournament/user/list.do");
 
 		return result;

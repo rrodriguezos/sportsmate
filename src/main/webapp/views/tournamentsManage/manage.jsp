@@ -27,6 +27,7 @@
 <spring:message code="tournament.noTeams" var="noTeams"></spring:message>
 <spring:message code="tournament.setWinner" var="setWinner"></spring:message>
 <spring:message code="tournament.Winner" var="Winner"></spring:message>
+<spring:message code="tournament.tournamentWinner" var="tournamentWinner"></spring:message>
 <spring:message code="tournament.createMatches2" var="createMatches2"></spring:message>
 <spring:message code="tournament.option" var="option"></spring:message>
 <spring:message code="setWinnerOfTournament" var="setWinnerOfTournament"></spring:message>
@@ -74,28 +75,6 @@ pagesize="5" class="" >
 						<jstl:out value="${noTeams }"></jstl:out>
 					</div>
 				</jstl:if>		
-			</jstl:if>
-			
-			<jstl:if test="${row.matches.size() != 0}">
-				<jstl:forEach items="${row.matches }" var="a">
-					<jstl:if test="${a.winner ==null }">
-					<div class="col-xs-12 spm-match-row">
-						<jstl:out value="${a.title }"></jstl:out>
-							<a href="tournament/user/rounds/declareWinnerOfMatch.do?id=${a.id }">
-								<button type="button" class="btn btn-sm btn-default pull-right col-xs-12 col-sm-3">
-									<jstl:out value="${setWinner }"></jstl:out>
-								</button>
-							</a> 
-						<br>
-					</div>
-					</jstl:if>
-					
-					<jstl:if test="${a.winner != null }">
-						<div class="col-xs-12 spm-match-row">
-							<jstl:out value="${a.title} : ${Winner } ---> ${a.winner.name }"></jstl:out>
-						</div>
-					</jstl:if>
-				</jstl:forEach>
 			</jstl:if>
 		
 			<jstl:if test="${row.matches.size() != 0}">
@@ -171,14 +150,17 @@ pagesize="5" class="" >
 			</jstl:if>
 		</div>
 		
-		<div>
+		
+	</div>
+	
+	<div>
 			<jstl:if test="${row.winner != null }">
 				<div class="col-xs-12 spm-match-row">
+				<jstl:out value="${tournamentWinner }"></jstl:out>
 						<jstl:out value="${row.winner.name }"></jstl:out>
 				</div>
 			</jstl:if>
 		</div>
-	</div>
 
 </div>
 </display:column>
