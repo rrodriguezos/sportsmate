@@ -24,7 +24,7 @@
 		</property>
 	</bean>
 
-	<bean id="userAccount2" class="security.UserAccount">
+	<!-- <bean id="userAccount2" class="security.UserAccount">
 		<property name="username" value="customer1" />
 		<property name="password" value="ffbc4675f864e0e9aab8bdf7a0437010" />
 		<property name="authorities">
@@ -70,7 +70,7 @@
 				</bean>
 			</list>
 		</property>
-	</bean>
+	</bean> -->
 
 	<!-- Other domain beans come here -->
 	<!-- ADMINISTRATOR -->
@@ -89,7 +89,7 @@
 		</property>
 	</bean>
 
-	<!-- CUSTOMER -->
+	<!--  CUSTOMER 
 
 	<bean id="customer1" class="domain.Customer">
 		<property name="userAccount" ref="userAccount2" />
@@ -184,7 +184,7 @@
 		</property>
 	</bean>
 
-	<!-- USER -->
+	USER
 
 	<bean id="user1" class="domain.User">
 		<property name="userAccount" ref="userAccount4" />
@@ -305,7 +305,7 @@
 		</property>
 		
 		
-	</bean>
+	</bean> -->
 
 	<!-- FOLDER -->
 	<bean id="folder1" class="domain.Folder">
@@ -328,7 +328,7 @@
 		<property name="actor" ref="admin" />
 	</bean>
 
-	<bean id="folder3" class="domain.Folder">
+	<!-- <bean id="folder3" class="domain.Folder">
 		<property name="name" value="Inbox" />
 		<property name="messages">
 			<list>
@@ -411,18 +411,18 @@
 
 	</bean>
 
-	<!-- MESSAGE -->
+	MESSAGE
 	
 
-	<!-- FRIENDSHIP -->
-	<!-- <bean id="friendship1" class="domain.Friendship">
+	FRIENDSHIP
+	<bean id="friendship1" class="domain.Friendship">
 		<property name="date" value="10/10/2013 09:00" />
 		<property name="user" ref="user1" />
 		<property name="user" ref="user1" />
 		<property name="userFriend" ref="user2" />
-	</bean> -->
+	</bean>
 
-	<!-- EVENT -->
+	EVENT
 	<bean id="event1" class="domain.Event">
 		<property name="title" value="Padel en IndorClub" />
 		<property name="creationMoment" value="01/03/2015 09:00" />
@@ -575,7 +575,7 @@
 		</property>
 	</bean>
 
-	<!-- TEAM -->
+	TEAM
 	<bean id="team1" class="domain.Team">
 		<property name="name" value="Team user1" />
 		<property name="maxNumber" value="20" />
@@ -656,7 +656,7 @@
 		</property>
 	</bean>
 
-	<!-- TOURNAMENT -->
+	TOURNAMENT
 	<bean id="tournament1" class="domain.Tournament">
 		<property name="title" value="The amazing tournament1 " />
 		<property name="creationMoment" value="01/02/2014 09:00" />
@@ -729,9 +729,9 @@
 		</property>
 	</bean>
 
-	<!-- MATCH -->
+	MATCH
 
-	<!-- <bean id="match1" class="domain.Match">
+	<bean id="match1" class="domain.Match">
 		<property name="title" value="The incredible match1 " />
 		<property name="creationMoment" value="01/02/2014 09:00" />
 		<property name="startMoment" value="10/04/2014 20:00" />
@@ -825,11 +825,11 @@
 				<ref bean="team2" />
 			</list>
 		</property>
-	</bean> -->
+	</bean>
 
 
 
-	<!-- INVOICE -->
+	INVOICE
 
 	<bean id="invoice1" class="domain.Invoice">
 		<property name="fee" value="15" />
@@ -842,6 +842,6 @@
 		<property name="fee" value="15" />
 		<property name="deadLine" value="04/04/2016 16:00" />
 		<property name="customer" ref="customer2" />
-	</bean>
+	</bean> -->
 
 </beans>
