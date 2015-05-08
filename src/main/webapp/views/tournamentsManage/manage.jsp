@@ -158,7 +158,7 @@ pagesize="5" class="" >
 	<div class="col-xs-12">
 			<jstl:if test="${row.winner != null }">
 				<div>
-					<jstl:out value="${tournamentWinner }"></jstl:out>
+					<b><jstl:out value="${tournamentWinner }"></jstl:out></b>
 				</div>
 				
 				<div class="col-xs-12"><br></div>	
