@@ -107,30 +107,35 @@ public class MessageService {
 		actor = actorService.findByPrincipal();	
 		folders = (List<Folder>) actor.getFolders();
 		inbox = folders.get(0);
-		outbox = folders.get(1);
+		outbox = folders.get(1);				
 		
-		int aux1 = 0;
-		for(Message itero : inbox.getMessages()){
-			if(itero.getSender().getId()==(message.getSender().getId())){
-				aux1 = aux1 + 1;
+		if(message.getSender() instanceof Customer && message.getRecipient() instanceof User){
+			
+			int aux1 = 0;
+			for(Message itero : inbox.getMessages()){
+				if(itero.getSender().getId()==(message.getRecipient().getId())){
+					aux1 = aux1 + 1;
+				}
 			}
-		}
-		
-		int aux2 = 0;
-		for(Message itero : outbox.getMessages()){
-			if(itero.getRecipient().getId()==(message.getRecipient().getId())){
-				aux2 = aux2 + 1;
+			
+			int aux2 = 0;
+			for(Message itero : outbox.getMessages()){
+				if(itero.getRecipient().getId()==(message.getRecipient().getId())){
+					aux2 = aux2 + 1;
+				}
 			}
-		}		
-		
-		if(message.getRecipient() instanceof User){
+			
 			if(aux1 == aux2){
 				messageRepository.save(message);
 			}
 			
-		}else if(message.getRecipient() instanceof Customer){
+		}else if(message.getSender() instanceof User && message.getRecipient() instanceof Customer){
 			messageRepository.save(message);
-		}		
+		}else if(message.getSender() instanceof User && message.getRecipient() instanceof User)	{
+			messageRepository.save(message);
+		}else if(message.getSender() instanceof Customer && message.getRecipient() instanceof Customer){
+			messageRepository.save(message);
+		}
 	}
 	
 	//Other business methods ------------------------------------------------
