@@ -153,14 +153,21 @@ pagesize="5" class="" >
 		
 	</div>
 	
-	<div>
+	<div class="col-xs-12 hidden-sm hidden-md hidden-lg spm-xs-separator"></div>
+	
+	<div class="col-xs-12">
 			<jstl:if test="${row.winner != null }">
-				<div class="col-xs-12 spm-match-row">
-				<jstl:out value="${tournamentWinner }"></jstl:out>
-						<jstl:out value="${row.winner.name }"></jstl:out>
+				<div>
+					<jstl:out value="${tournamentWinner }"></jstl:out>
 				</div>
-			</jstl:if>
-		</div>
+				
+				<div class="col-xs-12"><br></div>	
+				
+				<div class="alert alert-success col-xs-12 col-sm-4">
+					<jstl:out value="${row.winner.name }"></jstl:out>
+				</div>
+			</jstl:if>	
+	</div>
 
 </div>
 </display:column>

@@ -140,7 +140,7 @@
 						</div>
 					</div>
 					
-					<div class="col-xs-12 col-sm-5 col-md-4">
+					<div class="col-xs-12 col-sm-5">
 						<div>
 							<b><spring:message code="team.user.email" />: </b>
 							<spring:message code="event.user.email" var="emailHeader" />
@@ -157,7 +157,7 @@
 					<div class="col-xs-12 hidden-sm hidden-md hidden-lg spm-xs-separator"></div>
 					
 					<security:authorize access="hasRole('USER')">
-						<div class="col-xs-12 col-sm-3 pull-right text-center">
+						<div class="col-xs-12 col-sm-2 pull-right text-center">
 							<jstl:if test="${today.after(finish) and estoyApuntado==true and miId!=row.id}">
 								<a href="event/user/vote.do?eventId=${eventForm.id}&userId=${row.id}">
 									<button type="button" class="btn btn-md btn-default col-xs-12">

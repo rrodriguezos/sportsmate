@@ -88,6 +88,7 @@
 </div>
 
 
+<%-- DISABLED TABLE BY @JUANJE 
 <div class='table-responsive'>
 	<display:table name="items" id="row"
 		requestURI="customer/ownItemList.do" pagesize="5"
@@ -95,6 +96,8 @@
 
 	</display:table>
 </div>
+--%>
+
 <br>
 <!-- REDIRECT INFO -->
 <div class="col-xs-12 bg-info spm-invoices-redirect-span">
