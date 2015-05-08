@@ -114,7 +114,7 @@
 
 
 	<h3>
-		<spring:message code="tournament.teams" />
+		<spring:message code="tournament.teamsPlaying" />
 	</h3>
 
 	<div class="table-responsive">
@@ -147,11 +147,6 @@
 						<jstl:out value="${row.title}"></jstl:out>
 					</div>
 					
-					<div>
-						<b><spring:message code="tournament.match.creationMoment" />: </b>
-						<spring:message code="tournament.match.creationMoment" var="creationMomentHeader" />
-						<fmt:formatDate value="${row.creationMoment}" pattern="dd/MM/yyyy HH:mm" />
-					</div>
 				</div>
 				
 				<div class="col-xs-12 col-sm-4">
@@ -170,9 +165,9 @@
 				
 				<div class="col-xs-12 col-sm-3">
 					<div>
-						<b><spring:message code="tournament.match.description" />: </b>
-						<spring:message code="tournament.match.description" var="descriptionHeader" />
-						<jstl:out value="${row.description}"></jstl:out>
+						<b><spring:message code="tournament.match.winner" />: </b>
+						<spring:message code="tournament.match.winner" var="winnerHeader" />
+						<jstl:out value="${row.winner.name}"></jstl:out>
 					</div>
 				</div>
 			</div>
